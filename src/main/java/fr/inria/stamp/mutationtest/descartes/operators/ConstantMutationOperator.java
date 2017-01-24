@@ -1,5 +1,6 @@
 package fr.inria.stamp.mutationtest.descartes.operators;
 
+import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.commons.Method;
 
 /**
@@ -34,10 +35,28 @@ public class ConstantMutationOperator<T> implements MutationOperator {
      * @return A boolean value indicating if the return type and the constant value type are the same
      */
     public boolean canMutate(Method method) {
+
         return method.getReturnType().getInternalName().equals(constant.getClass().getName());
     }
 
-    public void generateCode() {
+    public void generateCode(MethodVisitor mv) {
 
     }
 }
+
+//TODO: Deal with primitives and wrappers. There are important differences on their handling when code is being generated.
+
+/*
+ public static int get3();
+    Code:
+       0: iconst_3
+       1: ireturn
+
+  public static java.lang.Integer getThree();
+    Code:
+       0: iconst_3
+       1: invokestatic  #5                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       4: areturn
+
+ */
+//TODO: Check also Type.getType(Class<?>) in order to implement type comparison. Sadly there is no method that works the other way around.

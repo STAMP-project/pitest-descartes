@@ -1,12 +1,14 @@
 package fr.inria.stamp.mutationtest.descartes.operators;
 
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.Method;
 
 /**
- * A class whose instances are able to mutate void methods
+ * A class whose instances are able to mutate void methods and constructors
  */
-public class VoidMutationOperator  implements MutationOperator {
+public final class VoidMutationOperator  implements MutationOperator {
 
     /**
      * Returns a value indicating whether the operator can transform the given method.
@@ -16,10 +18,19 @@ public class VoidMutationOperator  implements MutationOperator {
      * @return True if the given method is void, false otherwise
      */
     public boolean canMutate(Method method) {
+        //TODO: Detect methods that contains only calls to logging classes or System.out
         return method.getReturnType().equals(Type.VOID_TYPE);
     }
 
-    public void generateCode() {
-
+    public void generateCode(MethodVisitor mv) {
+        mv.visitInsn(Opcodes.RETURN);
     }
+
+    //Singleton pattern implementation
+    private static final VoidMutationOperator instance = new VoidMutationOperator();
+
+    public static VoidMutationOperator get() { return instance; }
+
+    private VoidMutationOperator() {}
+
 }

@@ -1,5 +1,6 @@
 package fr.inria.stamp.mutationtest.descartes.operators;
 
+import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.commons.Method;
 import org.pitest.util.Log;
 import java.util.logging.Level;
@@ -27,7 +28,7 @@ public class NullMutantOperator implements MutationOperator{
         }
     }
 
-    public void generateCode() {
+    public void generateCode(MethodVisitor mv) {
 
     }
 }
