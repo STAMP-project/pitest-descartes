@@ -1,23 +1,67 @@
 
 package fr.inria.stamp.mutationtest.descartes;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
+import fr.inria.stamp.mutationtest.descartes.operators.MutationOperator;
+import fr.inria.stamp.mutationtest.descartes.operators.VoidMutationOperator;
 import org.apache.commons.lang.NotImplementedException;
 import org.pitest.classinfo.ClassByteArraySource;
+import org.pitest.functional.FCollection;
 import org.pitest.mutationtest.engine.MutationEngine;
 import org.pitest.mutationtest.engine.Mutater;
+import org.pitest.functional.predicate.Predicate;
 
 import java.util.Collection;
+import java.util.Set;
+
+import org.objectweb.asm.commons.Method;
 
 public class DescartesMutationEngine implements  MutationEngine {
 
+    private final Predicate<Method> methodFilter;
+
+    private final Set<String> logginClasses;
+
+    //TODO: Handle operator creation and selection
+    private final Collection<MutationOperator> availableOperators =Arrays.asList(new MutationOperator[] {VoidMutationOperator.get()});
+
+
+    public DescartesMutationEngine(Predicate<Method> methodFilter, Set<String> logginClasses) {
+        this.methodFilter = methodFilter;
+        this.logginClasses = logginClasses;
+    }
+
     public Mutater createMutator(final ClassByteArraySource byteSource) {
-        throw new NotImplementedException();
+        return new DescartesMutater(byteSource, this);
     }
 
     public Collection<String> getMutatorNames() {
-        throw new NotImplementedException();
+        return Arrays.asList(new String[]{"void"}); //TODO: Operator handling by identifier
+    }
+
+    public boolean mayMutateClass(final String className) {
+        return !FCollection.contains(logginClasses, new Predicate<String>() {
+            public Boolean apply(String prefix) {
+                return className.startsWith(prefix);
+            }
+        });
+    }
+
+//    public boolean mayMutateMethod(Method method) {
+//        return !methodFilter.apply(method);
+//    }
+
+    public Collection<MutationOperator> getOperatorsFor(final Method method) {
+        if(methodFilter.apply(method))
+            return new ArrayList<MutationOperator>(0);
+        return FCollection.filter(availableOperators, new Predicate<MutationOperator>() {
+            public Boolean apply(MutationOperator operator) {
+                return operator.canMutate(method);
+            }
+        });
     }
 
     @Override
