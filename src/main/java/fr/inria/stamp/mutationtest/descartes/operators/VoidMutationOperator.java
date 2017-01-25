@@ -6,7 +6,8 @@ import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.Method;
 
 /**
- * A class whose instances are able to mutate void methods and constructors
+ * A class whose instances are able to mutate void methods and static initializers
+ * (Constructors should call super constructors and so they aren't considered here)
  */
 public final class VoidMutationOperator  implements MutationOperator {
 
@@ -19,7 +20,7 @@ public final class VoidMutationOperator  implements MutationOperator {
      */
     public boolean canMutate(Method method) {
         //TODO: Detect methods that contains only calls to logging classes or System.out
-        return method.getReturnType().equals(Type.VOID_TYPE);
+        return !method.getName().equals("<init>") && method.getReturnType().equals(Type.VOID_TYPE);
     }
 
     public void generateCode(MethodVisitor mv) {
