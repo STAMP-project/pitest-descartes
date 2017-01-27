@@ -1,23 +1,21 @@
-
 package fr.inria.stamp.mutationtest.descartes;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
 import fr.inria.stamp.mutationtest.descartes.operators.MutationOperator;
 import fr.inria.stamp.mutationtest.descartes.operators.VoidMutationOperator;
-import org.apache.commons.lang.NotImplementedException;
+
 import org.pitest.classinfo.ClassByteArraySource;
 import org.pitest.functional.FCollection;
 import org.pitest.mutationtest.engine.MutationEngine;
 import org.pitest.mutationtest.engine.Mutater;
 import org.pitest.functional.predicate.Predicate;
 
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.Set;
 
-import org.objectweb.asm.commons.Method;
+import org.pitest.reloc.asm.commons.Method;
 
 public class DescartesMutationEngine implements  MutationEngine {
 

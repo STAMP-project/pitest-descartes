@@ -1,11 +1,13 @@
 package fr.inria.stamp.mutationtest.descartes;
 
 import fr.inria.stamp.mutationtest.descartes.operators.MutationOperator;
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.Label;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.commons.Method;
+
+import org.pitest.reloc.asm.ClassVisitor;
+import org.pitest.reloc.asm.Label;
+import org.pitest.reloc.asm.MethodVisitor;
+import org.pitest.reloc.asm.Opcodes;
+import org.pitest.reloc.asm.commons.Method;
+
 import org.pitest.classinfo.ClassName;
 import org.pitest.mutationtest.engine.Location;
 import org.pitest.mutationtest.engine.MethodName;
@@ -45,10 +47,11 @@ class MutationPointFinder extends ClassVisitor {
     public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
         lastMethod = new Method(name, desc); //TODO: Check abstract and interface methods
         operatorsForLastMethod = engine.getOperatorsFor(lastMethod);
-        if(operatorsForLastMethod.size() == 0)
-            return null;
-        return new LineCounterMethodAdapter(this);
 
+        if(operatorsForLastMethod.size() != 0/* && name.equals("printHelp")*/)
+            return new LineCounterMethodAdapter(this);
+
+        return null;
     }
 
 

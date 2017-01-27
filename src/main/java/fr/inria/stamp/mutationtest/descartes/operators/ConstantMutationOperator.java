@@ -1,7 +1,7 @@
 package fr.inria.stamp.mutationtest.descartes.operators;
 
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.commons.Method;
+import org.pitest.reloc.asm.MethodVisitor;
+import org.pitest.reloc.asm.commons.Method;
 
 /**
  * A mutation operator that replaces the method body by a return instruction whose result is the given constant

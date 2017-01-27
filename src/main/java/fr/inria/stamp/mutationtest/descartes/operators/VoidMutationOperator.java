@@ -1,9 +1,9 @@
 package fr.inria.stamp.mutationtest.descartes.operators;
 
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.Type;
-import org.objectweb.asm.commons.Method;
+import org.pitest.reloc.asm.MethodVisitor;
+import org.pitest.reloc.asm.Opcodes;
+import org.pitest.reloc.asm.Type;
+import org.pitest.reloc.asm.commons.Method;
 
 /**
  * A class whose instances are able to mutate void methods and static initializers

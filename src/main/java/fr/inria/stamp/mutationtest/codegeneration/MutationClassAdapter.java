@@ -1,9 +1,11 @@
 package fr.inria.stamp.mutationtest.codegeneration;
 
 import fr.inria.stamp.mutationtest.descartes.operators.VoidMutationOperator;
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
+
+import org.pitest.reloc.asm.ClassVisitor;
+import org.pitest.reloc.asm.MethodVisitor;
+import org.pitest.reloc.asm.Opcodes;
+
 import org.pitest.mutationtest.engine.Location;
 import org.pitest.mutationtest.engine.MutationIdentifier;
 

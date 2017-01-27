@@ -1,22 +1,15 @@
-
-
 package fr.inria.stamp.mutationtest.descartes;
 
-import org.apache.commons.lang.NotImplementedException;
-import org.objectweb.asm.commons.Method;
-import org.pitest.classinfo.ClassByteArraySource;
+import org.pitest.reloc.asm.commons.Method;
 import org.pitest.functional.predicate.Predicate;
 import org.pitest.mutationtest.MutationEngineFactory;
-import org.pitest.mutationtest.engine.Mutater;
 import org.pitest.mutationtest.engine.MutationEngine;
-
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 public class DescartesEngineFactory implements MutationEngineFactory{
-
 
     /**
      * Creates the engine instance from the given configuration
@@ -32,7 +25,7 @@ public class DescartesEngineFactory implements MutationEngineFactory{
                                        final Collection<String> loggingClasses,
                                        final Collection<String> mutators,
                                        boolean detectInLinedCode) {
-        return new DescartesMutationEngine(getMethodFilter(mutateStaticInitializers, excludedMethods), getLogginClassesSet(loggingClasses));
+        return new DescartesMutationEngine(getMethodFilter(mutateStaticInitializers, excludedMethods), getLoggingClassesSet(loggingClasses));
     }
 
     private static Predicate<Method> getMethodFilter(final boolean mutateStaticInitializers, final Predicate<String> excludedMethods) {
@@ -50,13 +43,9 @@ public class DescartesEngineFactory implements MutationEngineFactory{
         };
     }
 
-    private static Set<String> getLogginClassesSet(Collection<String> logginClasses) {
-        return new HashSet<String>(logginClasses);
+    private static Set<String> getLoggingClassesSet(Collection<String> loggingClasses) {
+        return new HashSet<String>(loggingClasses);
     }
-
-
-
-
 
     public String name() {
         return "descartes";

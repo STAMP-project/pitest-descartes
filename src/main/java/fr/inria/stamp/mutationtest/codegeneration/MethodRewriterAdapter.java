@@ -1,12 +1,12 @@
 package fr.inria.stamp.mutationtest.codegeneration;
 
-import org.objectweb.asm.AnnotationVisitor;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
+import org.pitest.reloc.asm.AnnotationVisitor;
+import org.pitest.reloc.asm.MethodVisitor;
+import org.pitest.reloc.asm.Opcodes;
 
-import org.objectweb.asm.TypePath;
-import org.objectweb.asm.Label;
-import org.objectweb.asm.Handle;
+import org.pitest.reloc.asm.TypePath;
+import org.pitest.reloc.asm.Label;
+import org.pitest.reloc.asm.Handle;
 
 /**
  * Provides a base class for method rewriting adapters.

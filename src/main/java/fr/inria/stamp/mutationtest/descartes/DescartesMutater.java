@@ -2,23 +2,17 @@
 package fr.inria.stamp.mutationtest.descartes;
 
 import fr.inria.stamp.mutationtest.codegeneration.MutationClassAdapter;
-import fr.inria.stamp.mutationtest.descartes.operators.MutationOperator;
-import fr.inria.stamp.mutationtest.descartes.operators.NullMutantOperator;
-import fr.inria.stamp.mutationtest.descartes.operators.VoidMutationOperator;
-import org.apache.commons.lang.NotImplementedException; //?
 
+import org.pitest.reloc.asm.ClassReader;
+import org.pitest.reloc.asm.ClassWriter;
 
-import org.objectweb.asm.*;
 import org.pitest.classinfo.ClassByteArraySource;
 import org.pitest.classinfo.ClassName;
 import org.pitest.functional.Option;
 import org.pitest.functional.F;
 import org.pitest.mutationtest.engine.*;
 
-import org.objectweb.asm.commons.Method;
-
-import java.util.*;
-
+import java.util.List;
 
 public class DescartesMutater implements Mutater {
 

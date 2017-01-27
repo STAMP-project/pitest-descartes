@@ -1,8 +1,7 @@
 package fr.inria.stamp.mutationtest.descartes.operators;
 
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.commons.Method;
-import org.pitest.util.Log;
+import org.pitest.reloc.asm.MethodVisitor;
+import org.pitest.reloc.asm.commons.Method;
 import java.util.logging.Level;
 
 /**
