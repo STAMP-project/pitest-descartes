@@ -45,7 +45,11 @@ public class MutationPointFinder extends ClassVisitor {
 
     @Override
     public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
-        lastMethod = new Method(name, desc); //TODO: Check abstract and interface methods
+        //Discard abstract methods
+        if( (access & Opcodes.ACC_ABSTRACT) == Opcodes.ACC_ABSTRACT )
+            return null;
+
+        lastMethod = new Method(name, desc);
         operatorsForLastMethod = engine.getOperatorsFor(lastMethod);
 
         if(operatorsForLastMethod.size() != 0)
