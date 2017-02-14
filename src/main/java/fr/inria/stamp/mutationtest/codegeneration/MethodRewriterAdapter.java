@@ -70,9 +70,9 @@ public abstract class MethodRewriterAdapter extends MethodVisitor {
     public void	visitMaxs(int maxStack, int maxLocals) //TODO: Change their values???
     {}
 
-//Deprecated
-//@Override
-//public void	visitMethodInsn(int opcode, String owner, String name, String desc) {}
+    //Deprecated
+    //@Override
+    //public void	visitMethodInsn(int opcode, String owner, String name, String desc) {}
 
     @Override
     public void	visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) { /*Do nothing*/ }
@@ -84,7 +84,7 @@ public abstract class MethodRewriterAdapter extends MethodVisitor {
     public void	visitTableSwitchInsn(int min, int max, Label dflt, Label... labels){ /*Do nothing*/ }
 
     @Override
-    public AnnotationVisitor	visitTryCatchAnnotation(int typeRef, TypePath typePath, String desc, boolean visible) {
+    public AnnotationVisitor visitTryCatchAnnotation(int typeRef, TypePath typePath, String desc, boolean visible) {
         return null;
     }
 

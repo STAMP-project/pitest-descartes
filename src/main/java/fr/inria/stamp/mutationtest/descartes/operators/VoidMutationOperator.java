@@ -19,7 +19,7 @@ public final class VoidMutationOperator  implements MutationOperator {
      * @return True if the given method is void, false otherwise
      */
     public boolean canMutate(Method method) {
-        //TODO: Detect methods that contains only calls to logging classes or System.out
+        //TODO: Detect methods that contain only calls to logging classes or System.out
         return !method.getName().equals("<init>") && method.getReturnType().equals(Type.VOID_TYPE);
     }
 

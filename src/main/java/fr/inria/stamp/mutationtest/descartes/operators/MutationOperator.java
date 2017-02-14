@@ -4,7 +4,7 @@ import org.pitest.reloc.asm.MethodVisitor;
 import org.pitest.reloc.asm.commons.Method;
 
 /**
- * Mutantion operator definition
+ * Mutation operator definition
  */
 public interface MutationOperator {
 

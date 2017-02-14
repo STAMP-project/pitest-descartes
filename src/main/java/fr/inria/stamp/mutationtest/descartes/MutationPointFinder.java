@@ -48,7 +48,7 @@ class MutationPointFinder extends ClassVisitor {
         lastMethod = new Method(name, desc); //TODO: Check abstract and interface methods
         operatorsForLastMethod = engine.getOperatorsFor(lastMethod);
 
-        if(operatorsForLastMethod.size() != 0/* && name.equals("printHelp")*/)
+        if(operatorsForLastMethod.size() != 0)
             return new LineCounterMethodAdapter(this);
 
         return null;
@@ -69,19 +69,9 @@ class MutationPointFinder extends ClassVisitor {
 
     private MutationDetails getMutationDetails(MutationOperator operator, int start, int end) {
         Location location = new Location(className, MethodName.fromString(lastMethod.getName()), lastMethod.getDescriptor());
+        //TODO: Add code to deal with specific operators for ID and description, not just void operator
         MutationIdentifier id = new MutationIdentifier(location, getRange(start, end), "void");
-        return new MutationDetails(id, source, "Fake description", start, 1);
-    }
-
-    private MutationDetails getMutationDetails(Method method, MutationOperator operator) {
-        Location location = new Location(className, MethodName.fromString(method.getName()), method.getDescriptor());
-        //TODO: ID from operator
-        //TODO: Get the actual indexes for the whole body of the method. Can be done with a method visitor that counts all instructions
-        // index 0 seems to be OK. Its the first index of the method's body
-        MutationIdentifier id = new MutationIdentifier(location, 7, "void");
-        //TODO: Fill the mutation details
-        MutationDetails details = new MutationDetails(id, source, "This is a false description", 8, 9);
-        return details;
+        return new MutationDetails(id, source, "All method body instructions removed", start, 1);
     }
 
     public List<MutationDetails> getMutationPoints() {
