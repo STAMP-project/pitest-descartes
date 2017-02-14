@@ -3,9 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+    <!--TODO: Change to the real name once the pull request at PIT is accepted-->
     <organization><name>fr.inria.stamp</name></organization>
-    <groupId>fr.inria.stamp.mutationtest</groupId>
+    <groupId>fr.inria.stamp</groupId>
     <artifactId>descartes</artifactId>
     <version>0.1-SNAPSHOT</version>
     <description>Mutation engine for extreme mutation operators</description>
