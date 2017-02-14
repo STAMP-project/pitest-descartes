@@ -11,7 +11,9 @@ import org.pitest.functional.FCollection;
 import org.pitest.mutationtest.engine.MutationEngine;
 import org.pitest.mutationtest.engine.Mutater;
 import org.pitest.functional.predicate.Predicate;
+import org.pitest.functional.predicate.False;
 
+import java.util.Collections;
 import java.util.Arrays;
 import java.util.Set;
 
@@ -19,16 +21,19 @@ import org.pitest.reloc.asm.commons.Method;
 
 public class DescartesMutationEngine implements  MutationEngine {
 
-    private final Predicate<Method> methodFilter;
+    private final Predicate<Method> excludedMethods;
 
     private final Set<String> logginClasses;
 
     //TODO: Handle operator creation and selection
     private final Collection<MutationOperator> availableOperators =Arrays.asList(new MutationOperator[] {VoidMutationOperator.get()});
 
+    public DescartesMutationEngine() {
+        this(False.<Method>instance(), Collections.<String>emptySet());
+    }
 
-    public DescartesMutationEngine(Predicate<Method> methodFilter, Set<String> logginClasses) {
-        this.methodFilter = methodFilter;
+    public DescartesMutationEngine(Predicate<Method> excludedMethods, Set<String> logginClasses) {
+        this.excludedMethods = excludedMethods;
         this.logginClasses = logginClasses;
     }
 
@@ -53,7 +58,7 @@ public class DescartesMutationEngine implements  MutationEngine {
 //    }
 
     public Collection<MutationOperator> getOperatorsFor(final Method method) {
-        if(methodFilter.apply(method))
+        if(excludedMethods.apply(method))
             return new ArrayList<MutationOperator>(0);
         return FCollection.filter(availableOperators, new Predicate<MutationOperator>() {
             public Boolean apply(MutationOperator operator) {
