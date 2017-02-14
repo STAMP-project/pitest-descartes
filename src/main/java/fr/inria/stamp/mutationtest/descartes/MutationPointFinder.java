@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-class MutationPointFinder extends ClassVisitor {
+public class MutationPointFinder extends ClassVisitor {
 
     private final ClassName className;
     private String source = null;
@@ -53,7 +53,6 @@ class MutationPointFinder extends ClassVisitor {
 
         return null;
     }
-
 
     /**
      *
@@ -89,34 +88,3 @@ class MutationPointFinder extends ClassVisitor {
 
 }
 
-
-class LineCounterMethodAdapter extends MethodVisitor {
-
-    private boolean started = false; //Flag :(
-
-    private int firstLine;
-    private int lastLine;
-    private int currentLine;
-
-    private MutationPointFinder finder;
-
-    public LineCounterMethodAdapter(MutationPointFinder finder) {
-        super(Opcodes.ASM5);
-        this.finder = finder;
-    }
-
-    @Override
-    public void visitLineNumber(int line, Label start) {
-        if(!started) {
-            firstLine = line;
-            started = true;
-        }
-        currentLine = line;
-    }
-
-    @Override
-    public void visitEnd() {
-        lastLine = currentLine;
-        finder.registerMutations(firstLine, lastLine);
-    }
-}
