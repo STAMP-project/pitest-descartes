@@ -12,6 +12,34 @@ The authors of [Will my tests tell me if I break this code?](http://dl.acm.org/c
 
 The goal of Descartes is to bring an effective implementation of this kind of mutation operator into the world of PIT and check its performance in real world projects.
 
+### Mutation operators
+The goal of *extreme mutation operators* is to replace the body of a method by one simple return instruction or just remove all instructions if is possible. Right now, only a `void` mutation operator is included in the tool.
+
+### `void` mutation operator
+This operator accepts a `void` method and removes all the instructions on its body. For example, with the following class as input:
+
+``` java
+class A {
+
+  int field = 3;
+
+  public void Method(int inc) {
+    field += 3;
+  }
+
+}
+```
+the mutation operator will generate:
+
+``` java
+class A {
+
+  int field = 3;
+
+  public void Method(int inc) { }
+
+}
+```
 ## Compiling the code
 
 In a terminal clone the repository and switch to the cloned folder
