@@ -44,7 +44,7 @@ class A {
 
 In a terminal clone the repository and switch to the cloned folder
 ```
-git clone https://github.com/STAMP-project/pitest.git
+git clone https://github.com/STAMP-project/pitest-descartes.git
 cd  pitest-descartes
 ```
 the code can be compiled and tested using the usual [Apache Maven](https://maven.apache.org) commands:
@@ -146,3 +146,6 @@ At last, run the `pitest` task for the project under test.
 ```
 gradle pitest
 ```
+## Running from the command line
+
+Descartes can be used when invoking PIT from the command line. To do this, follow [the instructions](http://pitest.org/quickstart/commandline/) for running PIT, include Descartes in the classpath specification and add `--mutationEngine=descartes`.
