@@ -1,7 +1,7 @@
 
 package fr.inria.stamp.mutationtest.descartes;
 
-import fr.inria.stamp.mutationtest.codegeneration.MutationClassAdapter;
+import fr.inria.stamp.mutationtest.descartes.codegeneration.MutationClassAdapter;
 
 import org.pitest.reloc.asm.ClassReader;
 import org.pitest.reloc.asm.ClassWriter;

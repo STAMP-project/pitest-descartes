@@ -1,6 +1,4 @@
-package fr.inria.stamp.mutationtest.codegeneration;
-
-import fr.inria.stamp.mutationtest.descartes.operators.VoidMutationOperator;
+package fr.inria.stamp.mutationtest.descartes.codegeneration;
 
 import org.pitest.reloc.asm.ClassVisitor;
 import org.pitest.reloc.asm.MethodVisitor;
@@ -8,6 +6,8 @@ import org.pitest.reloc.asm.Opcodes;
 
 import org.pitest.mutationtest.engine.Location;
 import org.pitest.mutationtest.engine.MutationIdentifier;
+
+import fr.inria.stamp.mutationtest.descartes.operators.VoidMutationOperator;
 
 public class MutationClassAdapter extends ClassVisitor {
 

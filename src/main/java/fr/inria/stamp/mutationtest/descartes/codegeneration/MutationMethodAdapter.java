@@ -1,7 +1,7 @@
-package fr.inria.stamp.mutationtest.codegeneration;
+package fr.inria.stamp.mutationtest.descartes.codegeneration;
 
-import fr.inria.stamp.mutationtest.descartes.operators.MutationOperator;
 import org.pitest.reloc.asm.MethodVisitor;
+import fr.inria.stamp.mutationtest.descartes.operators.MutationOperator;
 
 
 public class MutationMethodAdapter extends MethodRewriterAdapter {

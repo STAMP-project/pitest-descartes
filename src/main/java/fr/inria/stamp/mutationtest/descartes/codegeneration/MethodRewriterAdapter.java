@@ -1,4 +1,4 @@
-package fr.inria.stamp.mutationtest.codegeneration;
+package fr.inria.stamp.mutationtest.descartes.codegeneration;
 
 import org.pitest.reloc.asm.AnnotationVisitor;
 import org.pitest.reloc.asm.MethodVisitor;
