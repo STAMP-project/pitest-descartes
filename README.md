@@ -115,7 +115,7 @@ The mutation engine could be also specified when invoking the goal from the comm
 ```
 mvn org.pitest:pitest-maven:mutationCoverage -DmutationEngine=descartes
 ```
-Thi will still require to specify Descartes as a dependency for PIT in the `pom.xml` file.
+This will still require to specify Descartes as a dependency for PIT in the `pom.xml` file.
 
 The rest of the goals defined by the `pitest-maven` plugin should run in the same way without any issues.
 
