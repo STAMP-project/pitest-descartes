@@ -1,4 +1,4 @@
-package fr.inria.mutationtest.descartes.test;
+package fr.inria.stamp.mutationtest.test;
 
 
 public interface Interface {

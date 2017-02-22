@@ -32,9 +32,9 @@ public class MutationOperatorTest {
     @Parameters(name="{index}: {0}")
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {"fr.inria.mutationtest.descartes.test.Calculator", new String[] {"clear"} },
-                {"fr.inria.mutationtest.descartes.test.AbstractClass", new String[] {"voidMethodWithoutParameters"} },
-                {"fr.inria.mutationtest.descartes.test.Interface", new String[0]},
+                {"fr.inria.stamp.mutationtest.test.Calculator", new String[] {"clear"} },
+                {"fr.inria.stamp.mutationtest.test.AbstractClass", new String[] {"voidMethodWithoutParameters"} },
+                {"fr.inria.stamp.mutationtest.test.Interface", new String[0]},
         });
     }
 

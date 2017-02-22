@@ -1,4 +1,4 @@
-package fr.inria.mutationtest.descartes.test;
+package fr.inria.stamp.mutationtest.test;
 
 /**
  * Meaningless target class for mutation
