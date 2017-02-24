@@ -7,7 +7,7 @@ import java.util.logging.Level;
 /**
  * Replaces the method body with a <code>return null<code/> statement
  */
-public class NullMutantOperator implements MutationOperator{
+public class NullMutationOperator implements MutationOperator{
 
     /**
      * Returns a value indicating whether the operator can transform the given method.
@@ -28,6 +28,14 @@ public class NullMutantOperator implements MutationOperator{
     }
 
     public void generateCode(MethodVisitor mv) {
+        //TODO: Fill in the blanks
+    }
 
+    public String getID() {
+        return "null";
+    }
+
+    public String getDescription(){
+        return "All methods instructions replaced by: return null;";
     }
 }
