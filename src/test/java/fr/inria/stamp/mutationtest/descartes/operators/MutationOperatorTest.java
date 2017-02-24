@@ -24,32 +24,39 @@ public class MutationOperatorTest {
     private static DescartesMutationEngine engine = new DescartesMutationEngine();
 
     @Parameter
-    public String className;
+    public String operatorID;
 
     @Parameter(1)
+    public String className;
+
+    @Parameter(2)
     public String[] actualMethods;
 
-    @Parameters(name="{index}: {0}")
+    @Parameters(name="{index}: Applying {0} to {1}")
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {"fr.inria.stamp.mutationtest.test.Calculator", new String[] {"clear"} },
-                {"fr.inria.stamp.mutationtest.test.AbstractClass", new String[] {"voidMethodWithoutParameters"} },
-                {"fr.inria.stamp.mutationtest.test.Interface", new String[0]},
+                {"void", "fr.inria.stamp.mutationtest.test.Calculator", new String[] {"clear"} },
+                {"void", "fr.inria.stamp.mutationtest.test.AbstractClass", new String[] {"voidMethodWithoutParameters"} },
+                {"void", "fr.inria.stamp.mutationtest.test.Interface", new String[0]},
+                {"1", "fr.inria.stamp.mutationtest.test.Calculator", new String[] {"getCeiling"} },
+                {"2", "fr.inria.stamp.mutationtest.test.AbstractClass", new String[0]},
+                {"3", "fr.inria.stamp.mutationtest.test.Interface", new String[0]},
         });
     }
 
-    @Test
-    public void shouldFindMutationPoints() {
-
-        try{
+    @Test()
+    public void shouldFindVoidMutationPoints() {
+        try {
+            DescartesMutationEngine engine = new DescartesMutationEngine(MutationOperatorFactory.fromID(operatorID));
             ClassReader reader = new ClassReader(className);
             MutationPointFinder finder = new MutationPointFinder(new ClassName(className), engine);
             reader.accept(finder, 0);
             assertAfterSorting(getDescriptions(finder.getMutationPoints()), actualMethods);
-        } catch(java.io.IOException exc) {
-            fail("Exception thrown: " + exc.getMessage());
+        }catch(java.io.IOException exc) {
+            fail("Unexpected error: " + exc.getMessage());
         }
     }
+
 
     private static String[] getDescriptions(Collection<MutationDetails> points) {
         //Need lambda expressions asap :)

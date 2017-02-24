@@ -11,6 +11,7 @@
     <description>Mutation engine for extreme mutation operators</description>
 
     <dependencies>
+
         <dependency>
             <groupId>org.pitest</groupId>
             <artifactId>pitest-maven</artifactId>
@@ -23,6 +24,14 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -53,9 +62,6 @@
                         <goals><goal>generate</goal></goals>
                         <configuration>
                             <outputDirectory>gen/</outputDirectory>
-                            <lexDefinitions>
-                                <lexDefinition>src/main/java/</lexDefinition>
-                            </lexDefinitions>
                         </configuration>
                     </execution>
                 </executions>
