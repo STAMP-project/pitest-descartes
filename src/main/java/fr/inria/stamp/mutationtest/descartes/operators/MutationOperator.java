@@ -18,4 +18,8 @@ public interface MutationOperator {
 
     public void generateCode(MethodVisitor mv);
 
+    public String getID();
+
+    public String getDescription();
+
 }

@@ -16,5 +16,6 @@ public class MutationMethodAdapter extends MethodRewriterAdapter {
     @Override
     public void visitCode() {
         operator.generateCode(mv);
+        mv.visitMaxs(0, 0);
     }
 }

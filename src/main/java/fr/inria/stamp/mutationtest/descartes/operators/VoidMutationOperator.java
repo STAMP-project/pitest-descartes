@@ -27,6 +27,14 @@ public final class VoidMutationOperator  implements MutationOperator {
         mv.visitInsn(Opcodes.RETURN);
     }
 
+    public String getID() {
+        return "void";
+    }
+
+    public String getDescription() {
+        return "All method instructions removed";
+    }
+
     //Singleton pattern implementation
     private static final VoidMutationOperator instance = new VoidMutationOperator();
 

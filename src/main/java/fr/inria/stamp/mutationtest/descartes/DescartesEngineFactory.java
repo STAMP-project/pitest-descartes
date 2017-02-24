@@ -1,5 +1,9 @@
 package fr.inria.stamp.mutationtest.descartes;
 
+import fr.inria.stamp.mutationtest.descartes.operators.MutationOperator;
+import fr.inria.stamp.mutationtest.descartes.operators.MutationOperatorFactory;
+import fr.inria.stamp.mutationtest.descartes.operators.WrongOperatorException;
+import org.omg.PortableServer.POAPackage.WrongAdapter;
 import org.pitest.reloc.asm.commons.Method;
 import org.pitest.functional.predicate.Predicate;
 import org.pitest.mutationtest.MutationEngineFactory;
@@ -7,7 +11,9 @@ import org.pitest.mutationtest.engine.MutationEngine;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Set;
+import java.util.logging.Level;
 
 public class DescartesEngineFactory implements MutationEngineFactory{
 
@@ -25,7 +31,8 @@ public class DescartesEngineFactory implements MutationEngineFactory{
                                        final Collection<String> loggingClasses,
                                        final Collection<String> mutators,
                                        boolean detectInLinedCode) {
-        return new DescartesMutationEngine(getMethodFilter(mutateStaticInitializers, excludedMethods), getLoggingClassesSet(loggingClasses));
+        return new DescartesMutationEngine(getMethodFilter(mutateStaticInitializers, excludedMethods),
+                getLoggingClassesSet(loggingClasses), getMutationOperators(mutators));
     }
 
     private static Predicate<Method> getMethodFilter(final boolean mutateStaticInitializers, final Predicate<String> excludedMethods) {
@@ -45,6 +52,19 @@ public class DescartesEngineFactory implements MutationEngineFactory{
 
     private static Set<String> getLoggingClassesSet(Collection<String> loggingClasses) {
         return new HashSet<String>(loggingClasses);
+    }
+
+    private static Collection<MutationOperator> getMutationOperators(Collection<String> mutators) {
+        LinkedList<MutationOperator> result = new LinkedList<MutationOperator>();
+        for (String id :
+                mutators) {
+            try {
+                result.add(MutationOperatorFactory.fromID(id));
+            }catch (WrongOperatorException exc) {
+                org.pitest.util.Log.getLogger().log(Level.WARNING, "Illegal ID value. Details: " + exc.getMessage());
+            }
+        }
+        return result;
     }
 
     public String name() {
