@@ -1,9 +1,10 @@
 package fr.inria.stamp.mutationtest.descartes.operators.parsing;
 
+import java.util.LinkedHashMap;
 import fr.inria.stamp.utils.Converter;
 %%
 
-%class LiteralsLexer
+%class OperatorLexer
 
 %unicode
 
@@ -12,72 +13,92 @@ import fr.inria.stamp.utils.Converter;
 
 %state STRING CHAR
 
+
 %type Token
 %function nextToken
 
 %{
 
-StringBuffer string = new StringBuffer();
+private static enum Literal {
 
-private void error(String message, Object... args) {
-    throw new RuntimeException(String.format(message, args));
+    INT(TokenType.INT_LITERAL, Integer.class, 0),
+    LONG(TokenType.LONG_LITERAL, Long.class, 1),
+    FLOAT(TokenType.FLOAT_LITERAL, Float.class, 1),
+    DOUBLE(TokenType.DOUBLE_LITERAL, Double.class, 0);
+
+    TokenType token;
+    Class<? extends Number> type;
+    int end;
+
+    Literal(TokenType token, Class<? extends Number> type, int end) {
+        this.token = token;
+        this.type = type;
+        this.end = end;
+    }
 }
+
+private static enum Base {
+
+    BINARY(2, 2),
+    OCTAL(8, 1),
+    DECIMAL(10, 0),
+    HEXADECIMAL(16, 2);
+
+    int ten;
+    int start;
+
+    Base(int ten, int start) {
+        this.ten = ten;
+        this.start = start;
+    }
+}
+
+/*  Error handling */
+
+private void error(String message) {
+    String fullMessage = String.format("%1$s %1$s at %2$d:%3$d", message, yyline, yycolumn);
+    throw new RuntimeException(fullMessage);
+}
+
+/* String and char literal */
+
+private StringBuffer string = new StringBuffer();
 
 private Token charLiteral() {
     return charLiteral(yycharat(0));
 }
+
 private Token charLiteral(char value) {
     yybegin(YYINITIAL);
     return new Token(TokenType.CHAR_LITERAL, Character.toString(value));
 }
 
 private char fromOctal() {
-    return (char)Integer.parseInt(yytext().subSequence(1, yylength()-1).toString(), 8);
+    return (char)Integer.parseInt(yytext().subSequence(1, yylength()).toString(), 8);
 }
 
 private char fromHex() {
-    return (char)Integer.parseInt(yytext().subSequence(1, yylength()).toString(), 16);
+    return (char)Integer.parseInt(yytext().subSequence(2, yylength()).toString(), 16);
 }
 
 /* Numeric literal handling */
-private Token getLiteralToken(Object value, TokenType expectedToken) {
-    String lexeme = yytext().toString();
-    if(value == null) error("Invalid literal value: %0$s at %1$d:%2$d", lexeme, yyline, yycolumn);
-    return new Token(expectedToken, value.toString());
+
+private Token parse(Literal literal, Base system) {
+    String lexeme = new String(zzBuffer, zzStartRead + system.start, yylength() - (system.start + literal.end));
+    Object value = Converter.valueOf(literal.type, lexeme, system.ten);
+    return tokenOrError(value, literal.token, lexeme);
 }
 
-private Token fromLiteral(Class<? extends Number> type, TokenType expectedToken) {
-    return getLiteralToken(Converter.valueOf(type, yytext().toString()), expectedToken);
+private Token parse(Literal literal) {
+    String lexeme = new String(zzBuffer, zzStartRead, yylength() - literal.end);
+    Object value = Converter. valueOf(literal.type, lexeme);
+    return tokenOrError(value, literal.token, lexeme);
 }
 
-private Token fromLiteral(Class<? extends Number> type, TokenType expectedToken, int radix) {
-    return getLiteralToken(Converter.valueOf(type, yytext().toString(), radix), expectedToken);
+private Token tokenOrError(Object value,TokenType token, String lexeme) {
+    if(value == null) error("Invalid literal: " + lexeme);
+    return new Token(token, value.toString());
 }
-
-private Token integerLiteral(int radix) {
-    return fromLiteral(Integer.class, TokenType.INT_LITERAL, radix);
-}
-
-private Token integerLiteral() {
-    return fromLiteral(Integer.class, TokenType.INT_LITERAL);
-}
-
-private Token longLiteral() {
-    return fromLiteral(Long.class, TokenType.LONG_LITERAL);
-}
-
-private Token longLiteral(int radix) {
-    return fromLiteral(Long.class, TokenType.LONG_LITERAL, radix);
-}
-
-private Token floatLiteral() {
-    return fromLiteral(Float.class, TokenType.FLOAT_LITERAL);
-}
-
-private Token doubleLiteral() {
-    return fromLiteral(Double.class, TokenType.DOUBLE_LITERAL);
-}
-
 
 %}
 
@@ -90,7 +111,7 @@ HexLongLiteral    = {HexIntegerLiteral} [lL]
 
 OctIntegerLiteral = 0 [_0-7]* {OctDigit} /*At least two digits to consider it an octal literal and this could disambiguate 0*/
 OctLongLiteral    = {OctIntegerLiteral} [lL]
-OctDigit = [0-7];
+OctDigit = [0-7]
 
 BinIntegerLiteral = 0 [bB] [01] ([_01]* [01])?
 BinLongLiteral    = {BinIntegerLiteral} [lL]
@@ -117,19 +138,26 @@ Exponent = [eE] [+-]? \d+
     short { return Token.SHORT; }
     -     {return Token.MINUS; }
 
-    {DecIntegerLiteral} { return integerLiteral(); }
-    {DecLongLiteral}    { return longLiteral(); }
-    {OctIntegerLiteral} { return integerLiteral(8); }
-    {OctLongLiteral}    { return longLiteral(8); }
-    {BinIntegerLiteral} {return integerLiteral(2); }
-    {BinLongLiteral}    { return longLiteral(2); }
-    {FloatLiteral}      { return floatLiteral(); }
-    {DoubleLiteral}     { return doubleLiteral(); }
+    {OctLongLiteral}    { return parse(Literal.LONG, Base.OCTAL); }
+    {OctIntegerLiteral} { return parse(Literal.INT, Base.OCTAL); }
+
+    {DecLongLiteral}    { return parse(Literal.LONG); }
+    {DecIntegerLiteral} { return parse(Literal.INT); }
+
+
+    {BinLongLiteral}    { return parse(Literal.LONG, Base.BINARY); }
+    {BinIntegerLiteral} { return parse(Literal.INT, Base.BINARY);  }
+
+    {HexLongLiteral}    { return parse(Literal.LONG, Base.HEXADECIMAL); }
+    {HexIntegerLiteral} { return parse(Literal.INT, Base.HEXADECIMAL); }
+
+    {FloatLiteral}      { return parse(Literal.FLOAT); }
+    {DoubleLiteral}     { return parse(Literal.DOUBLE); }
 
     \'  { yybegin(CHAR); }
     \"  { yybegin(STRING); string.setLength(0); }
 
-    [\b\t\n\r]+ {/* Skip */}
+    [ \b\t\n\r]+ {/* Skip */}
 }
 
 <STRING> {
@@ -165,4 +193,4 @@ Exponent = [eE] [+-]? \d+
 
 /* Error fallback */
 
-[ˆ] { error("Unexpected character at %0$d:%1$d", yyline, yycolumn); }
+[ˆ] { error("Unexpected character"); }

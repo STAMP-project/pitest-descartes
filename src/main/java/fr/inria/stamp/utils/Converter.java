@@ -2,6 +2,7 @@
 package fr.inria.stamp.utils;
 
 import java.lang.Number;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 
@@ -15,8 +16,11 @@ public abstract class Converter {
      * @return Returns an instance of the given type resulted from the conversion. If conversion did not succeed returns null.
      */
     public static <T extends Number> T valueOf(Class<T> type, String number) {
-        return valueOf(type, new Object[]{ number });
-
+        try {
+            return valueOf(type, type.getDeclaredMethod("valueOf", String.class), new Object[]{number});
+        }catch(NoSuchMethodException exc) {
+            throw new RuntimeException(exc);
+        }
     }
 
     /**
@@ -28,29 +32,34 @@ public abstract class Converter {
      * @return Returns an instance of the given type resulted form the conversion. If conversion did not succedd returns null.
      */
     public static <T extends Number> T valueOf(Class<T> type, String number, int radix) {
-        return valueOf(type, new Object[] { number,  radix });
+        try {
+            return valueOf(type, type.getDeclaredMethod("valueOf", String.class, int.class), new Object[]{number, radix});
+        }catch (NoSuchMethodException exc) {
+            throw new RuntimeException(exc);
+        }
     }
 
-    private static <T extends Number> T valueOf(Class<T> type, Object... args) {
+    private static <T extends Number> T valueOf(Class<T> type, Method method, Object... args) {
         T result;
         try {
             args[0] = args[0].toString().replace("_", "");
-            Method method = type.getDeclaredMethod("valueOf", getTypes(args));
-            result = type.cast(method.invoke(args));
+            result = type.cast(method.invoke(null, args));
         }
-        catch(Exception exc) { //If for whatever reason the number could not be parsed return null
+        catch(InvocationTargetException exc) {
+            //Parsing error
             result = null;
         }
+        catch(Exception exc) {
+            //This should not happen
+            throw new RuntimeException(exc.getMessage(), exc);
+        }
         return result;
-
-    }
-
-    private static Class<?>[] getTypes(Object... items) {
-        if(items == null) return null;
-        Class<?>[] result = new Class<?>[items.length];
-        for(int i=0; i < items.length; i++)
-            result[i] = items[i].getClass();
-        return result;
+        /* /NOTE:
+        *  I have tried to encapsulate the code for obtaining the valueOf method
+        *  by getting the type of actual parameters in args.
+        *  But when you assign an int value to an Object then it becomes an Integer.
+        *  So getDeclaredMethod is not able to find the requested method.
+        * */
     }
 
 }

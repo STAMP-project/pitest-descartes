@@ -14,8 +14,8 @@ public class Token {
     public static final Token MINUS = new Token(TokenType.MINUS, "-");
     public static final Token EOF = new Token(TokenType.EOF, null);
 
-    TokenType type;
-    String lexeme;
+    private final TokenType type;
+    private final String lexeme;
 
 
     public Token(TokenType type, String lexeme) {
