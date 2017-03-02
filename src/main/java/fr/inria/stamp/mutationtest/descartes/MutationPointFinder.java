@@ -72,9 +72,8 @@ public class MutationPointFinder extends ClassVisitor {
 
     private MutationDetails getMutationDetails(MutationOperator operator, int start, int end) {
         Location location = new Location(className, MethodName.fromString(lastMethod.getName()), lastMethod.getDescriptor());
-        //TODO: Add code to deal with specific operators for ID and description, not just void operator
-        MutationIdentifier id = new MutationIdentifier(location, getRange(start, end), "void");
-        return new MutationDetails(id, source, "All method body instructions removed", start, 1);
+        MutationIdentifier id = new MutationIdentifier(location, getRange(start, end), operator.getID());
+        return new MutationDetails(id, source, operator.getDescription(), start, 1);
     }
 
     public List<MutationDetails> getMutationPoints() {

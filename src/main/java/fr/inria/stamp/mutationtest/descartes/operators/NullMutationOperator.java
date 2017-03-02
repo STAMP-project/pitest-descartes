@@ -27,7 +27,7 @@ public class NullMutationOperator implements MutationOperator{
         }
     }
 
-    public void generateCode(MethodVisitor mv) {
+    public void generateCode(Method method, MethodVisitor mv) {
         //TODO: Fill in the blanks
     }
 

@@ -24,7 +24,6 @@ public class ConstantMutationOperator implements MutationOperator {
             throw new IllegalArgumentException();
         this.constant = constant;
         this.id = id;
-
         //TODO: When the parser is finished this constructor should only take the literal string value, to ensure that always the literal value matches the object value
     }
 
@@ -57,10 +56,17 @@ public class ConstantMutationOperator implements MutationOperator {
                 methodType.equals(Type.getType(TypeHelper.unwrap(constant.getClass())));
     }
 
-    public void generateCode(MethodVisitor mv) {
+    /**
+     * Generates the code associated with the mutation.
+     * @param method Method to which the mutation should be applied
+     * @param mv MethodVisitor in charge of code generation.
+     */
+    public void generateCode(Method method, MethodVisitor mv) {
         mv.visitLdcInsn(constant);
-        Type type = Type.getType(constant.getClass());
-        mv.visitInsn(type.getOpcode(Opcodes.IRETURN));
+        Type methodType = method.getReturnType();
+        assert canMutate(method);
+        mv.visitLdcInsn(constant);
+        mv.visitInsn(methodType.getOpcode(Opcodes.IRETURN));
     }
 
     public String getID() {
@@ -72,20 +78,3 @@ public class ConstantMutationOperator implements MutationOperator {
     }
 
 }
-
-//TODO: Deal with primitives and wrappers. There are important differences on their handling when code is being generated.
-
-/*
- public static int get3();
-    Code:
-       0: iconst_3
-       1: ireturn
-
-  public static java.lang.Integer getThree();
-    Code:
-       0: iconst_3
-       1: invokestatic  #5                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
-       4: areturn
-
- */
-//TODO: Check also Type.getType(Class<?>) in order to implement type comparison. Sadly there is no method that works the other way around.

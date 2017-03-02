@@ -67,8 +67,7 @@ public abstract class MethodRewriterAdapter extends MethodVisitor {
     public void	visitLookupSwitchInsn(Label dflt, int[] keys, Label[] labels) { /*Do nothing*/ }
 
     @Override
-    public void	visitMaxs(int maxStack, int maxLocals) //TODO: Change their values???
-    {}
+    public void	visitMaxs(int maxStack, int maxLocals) { /*Do nothing*/ }
 
     //Deprecated
     //@Override

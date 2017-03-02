@@ -16,7 +16,7 @@ public interface MutationOperator {
      */
     public boolean canMutate(Method method);
 
-    public void generateCode(MethodVisitor mv);
+    public void generateCode(Method method, MethodVisitor mv);
 
     public String getID();
 

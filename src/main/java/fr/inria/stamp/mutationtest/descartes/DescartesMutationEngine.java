@@ -24,7 +24,6 @@ public class DescartesMutationEngine implements  MutationEngine {
 
     private final Set<String> logginClasses;
 
-    //TODO: Handle operator creation and selection
     private final Collection<MutationOperator> operators;
 
     public DescartesMutationEngine(Collection<MutationOperator> operators) {

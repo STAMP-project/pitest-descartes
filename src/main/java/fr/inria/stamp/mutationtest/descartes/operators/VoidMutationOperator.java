@@ -23,7 +23,7 @@ public final class VoidMutationOperator  implements MutationOperator {
         return !method.getName().equals("<init>") && method.getReturnType().equals(Type.VOID_TYPE);
     }
 
-    public void generateCode(MethodVisitor mv) {
+    public void generateCode(Method method, MethodVisitor mv) {
         mv.visitInsn(Opcodes.RETURN);
     }
 

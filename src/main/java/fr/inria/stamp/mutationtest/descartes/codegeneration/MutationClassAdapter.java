@@ -1,8 +1,9 @@
 package fr.inria.stamp.mutationtest.descartes.codegeneration;
 
+import org.pitest.reloc.asm.Opcodes;
 import org.pitest.reloc.asm.ClassVisitor;
 import org.pitest.reloc.asm.MethodVisitor;
-import org.pitest.reloc.asm.Opcodes;
+import org.pitest.reloc.asm.commons.Method;
 
 import org.pitest.mutationtest.engine.Location;
 import org.pitest.mutationtest.engine.MutationIdentifier;
@@ -23,7 +24,10 @@ public class MutationClassAdapter extends ClassVisitor {
         MethodVisitor methodVisitor = cv.visitMethod(access, name, desc, signature, exceptions);
         Location location = mID.getLocation();
         if(location.getMethodDesc().equals(desc) && location.getMethodName().name().equals(name)) {
-            return new MutationMethodAdapter(MutationOperatorFactory.fromID(mID.getMutator()), methodVisitor);
+            return new MutationMethodAdapter(
+                    MutationOperatorFactory.fromID(mID.getMutator()),
+                    new Method(location.getMethodName().name(), location.getMethodDesc()),
+                    methodVisitor);
         }
         return methodVisitor;
     }
