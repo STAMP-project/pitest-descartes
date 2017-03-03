@@ -43,7 +43,7 @@ public class OperatorLexerTest {
             for(int i=0; i < values.length; i++) {
                 Token token = lexer.nextToken();
                 assertEquals(token.getType(), TokenType.INT_LITERAL);
-                assertEquals(Integer.parseInt(token.getLexeme()), values[i]);
+                assertEquals(token.getData(), values[i]);
             }
         }catch(IOException exc) {
             fail("Unexpected exception: " + exc.getMessage());
@@ -59,7 +59,7 @@ public class OperatorLexerTest {
             Token lookahed = lexer.nextToken();
             while (lookahed.getType() != TokenType.EOF) {
                 assertEquals(lookahed.getType(), TokenType.LONG_LITERAL);
-                assertEquals(Long.parseLong(lookahed.getLexeme()), value);
+                assertEquals(lookahed.getData(), value);
                 lookahed = lexer.nextToken();
             }
         }catch(IOException exc) {
@@ -85,9 +85,9 @@ public class OperatorLexerTest {
                 OperatorLexer lexer = new OperatorLexer(new StringReader(inputs[i]));
                 Token token = lexer.nextToken();
                 assertEquals(token.getType(), TokenType.STRING_LITERAL);
-                assertEquals(token.getLexeme(), values[i]);
+                assertEquals(token.getData(), values[i]);
             } catch (IOException exc) {
-                fail("Unexcpected expection: " + exc.getMessage());
+                fail("Unexpected exception: " + exc.getMessage());
             }
         }
 

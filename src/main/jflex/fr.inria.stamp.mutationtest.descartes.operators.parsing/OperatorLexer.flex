@@ -70,7 +70,7 @@ private Token charLiteral() {
 
 private Token charLiteral(char value) {
     yybegin(YYINITIAL);
-    return new Token(TokenType.CHAR_LITERAL, Character.toString(value));
+    return new Token(TokenType.CHAR_LITERAL, value);
 }
 
 private char fromOctal() {
@@ -95,9 +95,9 @@ private Token parse(Literal literal) {
     return tokenOrError(value, literal.token, lexeme);
 }
 
-private Token tokenOrError(Object value,TokenType token, String lexeme) {
+private Token tokenOrError(Object value, TokenType token, String lexeme) {
     if(value == null) error("Invalid literal: " + lexeme);
-    return new Token(token, value.toString());
+    return new Token(token, value);
 }
 
 %}
