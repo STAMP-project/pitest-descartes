@@ -9,15 +9,15 @@ public class MutationOperatorFactoryTest {
 
     @Test
     public void shouldCreateVoidMutator() {
-        MutationOperator operator = MutationOperatorFactory.fromID("void");
-        assertThat(operator, is((MutationOperator) VoidMutationOperator.get()));
+        MutationOperator operator = MutationOperator.fromID("void");
+        assertThat(operator, is((MutationOperator) VoidMutationOperator.getInstance()));
     }
 
     @Test
     public void shouldGetIntegerMutator() {
         int value = 3;
         String id = String.valueOf(value);
-        MutationOperator operator = MutationOperatorFactory.fromID(id);
+        MutationOperator operator = MutationOperator.fromID(id);
         assertTrue(operator.getClass().equals(ConstantMutationOperator.class));
         assertThat(operator.getID(), is(id));
         Object constant = ((ConstantMutationOperator)operator).getConstant();

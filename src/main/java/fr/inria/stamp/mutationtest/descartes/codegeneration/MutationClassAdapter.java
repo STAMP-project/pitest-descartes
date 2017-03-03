@@ -8,7 +8,7 @@ import org.pitest.reloc.asm.commons.Method;
 import org.pitest.mutationtest.engine.Location;
 import org.pitest.mutationtest.engine.MutationIdentifier;
 
-import fr.inria.stamp.mutationtest.descartes.operators.MutationOperatorFactory;
+import fr.inria.stamp.mutationtest.descartes.operators.MutationOperator;
 
 public class MutationClassAdapter extends ClassVisitor {
 
@@ -25,7 +25,7 @@ public class MutationClassAdapter extends ClassVisitor {
         Location location = mID.getLocation();
         if(location.getMethodDesc().equals(desc) && location.getMethodName().name().equals(name)) {
             return new MutationMethodAdapter(
-                    MutationOperatorFactory.fromID(mID.getMutator()),
+                    MutationOperator.fromID(mID.getMutator()),
                     new Method(location.getMethodName().name(), location.getMethodDesc()),
                     methodVisitor);
         }

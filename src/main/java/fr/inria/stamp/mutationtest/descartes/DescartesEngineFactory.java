@@ -1,7 +1,7 @@
 package fr.inria.stamp.mutationtest.descartes;
 
 import fr.inria.stamp.mutationtest.descartes.operators.MutationOperator;
-import fr.inria.stamp.mutationtest.descartes.operators.MutationOperatorFactory;
+import fr.inria.stamp.mutationtest.descartes.operators.MutationOperator;
 import fr.inria.stamp.mutationtest.descartes.operators.WrongOperatorException;
 import org.omg.PortableServer.POAPackage.WrongAdapter;
 import org.pitest.reloc.asm.commons.Method;
@@ -59,7 +59,7 @@ public class DescartesEngineFactory implements MutationEngineFactory{
         for (String id :
                 mutators) {
             try {
-                result.add(MutationOperatorFactory.fromID(id));
+                result.add(MutationOperator.fromID(id));
             }catch (WrongOperatorException exc) {
                 org.pitest.util.Log.getLogger().log(Level.WARNING, "Illegal ID value. Details: " + exc.getMessage());
             }

@@ -7,7 +7,7 @@ import java.util.logging.Level;
 /**
  * Replaces the method body with a <code>return null<code/> statement
  */
-public class NullMutationOperator implements MutationOperator{
+public class NullMutationOperator extends MutationOperator{
 
     /**
      * Returns a value indicating whether the operator can transform the given method.
@@ -16,6 +16,7 @@ public class NullMutationOperator implements MutationOperator{
      * @param method Method to be tested by the operator
      * @return A boolean value indicating if null can be assigned to the return type
      */
+    @Override
     public boolean canMutate(Method method) {
         String className = method.getReturnType().getClassName();
         try {
@@ -27,15 +28,25 @@ public class NullMutationOperator implements MutationOperator{
         }
     }
 
+    @Override
     public void generateCode(Method method, MethodVisitor mv) {
         //TODO: Fill in the blanks
     }
 
+    @Override
     public String getID() {
         return "null";
     }
 
+    @Override
     public String getDescription(){
         return "All methods instructions replaced by: return null;";
     }
+
+    //Singleton pattern implementation
+    private static final NullMutationOperator instance = new NullMutationOperator();
+
+    public static NullMutationOperator getInstance() { return instance; }
+
+    private NullMutationOperator() {}
 }

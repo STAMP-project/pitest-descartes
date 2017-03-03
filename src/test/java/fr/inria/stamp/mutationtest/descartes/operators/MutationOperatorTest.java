@@ -47,7 +47,7 @@ public class MutationOperatorTest {
     @Test()
     public void shouldFindVoidMutationPoints() {
         try {
-            DescartesMutationEngine engine = new DescartesMutationEngine(MutationOperatorFactory.fromID(operatorID));
+            DescartesMutationEngine engine = new DescartesMutationEngine(MutationOperator.fromID(operatorID));
             ClassReader reader = new ClassReader(className);
             MutationPointFinder finder = new MutationPointFinder(new ClassName(className), engine);
             reader.accept(finder, 0);
