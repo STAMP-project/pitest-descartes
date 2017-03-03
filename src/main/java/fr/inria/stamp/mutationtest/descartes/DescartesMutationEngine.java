@@ -1,11 +1,9 @@
 package fr.inria.stamp.mutationtest.descartes;
 
-import java.util.Set;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 import edu.emory.mathcs.backport.java.util.Arrays;
+import fr.inria.stamp.mutationtest.descartes.operators.VoidMutationOperator;
 import org.pitest.classinfo.ClassByteArraySource;
 import org.pitest.functional.F;
 import org.pitest.functional.predicate.False;
@@ -24,18 +22,22 @@ public class DescartesMutationEngine implements  MutationEngine {
 
     private final Set<String> logginClasses;
 
+
     private final Collection<MutationOperator> operators;
+
 
     public DescartesMutationEngine(Collection<MutationOperator> operators) {
         this(False.<Method>instance(), Collections.<String>emptySet(), operators);
     }
 
+    @SuppressWarnings("unchecked")
     public DescartesMutationEngine(MutationOperator... operators) {
-        this(Arrays.asList(operators));
+        this(Arrays.<MutationOperator>asList(operators));
     }
 
+    @SuppressWarnings("unchecked")
     public DescartesMutationEngine(Predicate<Method> excludedMethods, Set<String> logginClasses, MutationOperator...operators) {
-        this(excludedMethods, logginClasses, Arrays.asList(operators));
+        this(excludedMethods, logginClasses, Arrays.<MutationOperator>asList(operators));
     }
 
     public DescartesMutationEngine(Predicate<Method> excludedMethods, Set<String> logginClasses, Collection<MutationOperator> operators) {
