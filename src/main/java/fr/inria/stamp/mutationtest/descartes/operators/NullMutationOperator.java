@@ -20,20 +20,13 @@ public class NullMutationOperator extends MutationOperator{
      */
     @Override
     public boolean canMutate(Method method) {
-        String className = method.getReturnType().getClassName();
-        try {
-            return !Class.forName(className).isPrimitive();
-        }
-        catch(ClassNotFoundException exc) {
-            org.pitest.util.Log.getLogger().log(Level.WARNING, "Could not find suitable class: " + className);
-            return false;
-        }
+        return method.getReturnType().getSort() == Type.OBJECT;
     }
 
     @Override
     public void generateCode(Method method, MethodVisitor mv) {
-        mv.visitInsn(Opcodes.ACONST_NULL);
         assert canMutate(method);
+        mv.visitInsn(Opcodes.ACONST_NULL);
         mv.visitInsn(method.getReturnType().getOpcode(Opcodes.IRETURN));
     }
 
