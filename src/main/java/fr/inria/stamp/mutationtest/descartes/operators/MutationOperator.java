@@ -28,10 +28,11 @@ public abstract class MutationOperator {
         Object value = parser.parse();
         if(parser.hasErrors())
             throw new WrongOperatorException("Invalid operator id: " + parser.getErrors().get(0));
-        if(value.equals(Void.class))
-            return VoidMutationOperator.getInstance();
         if(value == null)
             return NullMutationOperator.getInstance();
+        if(value.equals(Void.class)) {
+            return VoidMutationOperator.getInstance();
+        }
         try {
             return new ConstantMutationOperator(id, value);
         }catch (IllegalArgumentException exc) {
