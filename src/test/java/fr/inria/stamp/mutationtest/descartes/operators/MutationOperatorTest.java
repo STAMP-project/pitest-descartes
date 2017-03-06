@@ -72,7 +72,7 @@ public class MutationOperatorTest {
     }
 
     @Test()
-    public void shouldFindVoidMutationPoints() {
+    public void shouldFindMutationPoints() {
         try {
             DescartesMutationEngine engine = new DescartesMutationEngine(MutationOperator.fromID(operatorID));
             ClassReader reader = new ClassReader(className);
