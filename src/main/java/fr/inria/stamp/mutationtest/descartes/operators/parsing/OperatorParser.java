@@ -102,7 +102,9 @@ public class OperatorParser {
         result = null;
     }
 
+
     private void parseNegatedNumber() throws IOException{
+        //TODO: Find a way to refactor this method
 
         if (match(TokenType.MINUS)) {
             if(lookaheadIs(TokenType.INT_LITERAL)) {
@@ -125,6 +127,7 @@ public class OperatorParser {
     }
 
     private void parseCastedInteger () throws IOException{
+        //TODO: Find a way to refactor this method
         if(match(TokenType.LPAR)) {
             if(lookaheadIs(TokenType.BYTE_KWD)) {
                 next();
@@ -133,9 +136,9 @@ public class OperatorParser {
                     if(negate = lookaheadIs(TokenType.MINUS)){ next(); }
 
                     if(lookaheadIs(TokenType.INT_LITERAL)) {
-                        result = (Byte) lookahead.getData();
+                        result = ((Integer)lookahead.getData()).byteValue();
                         if(negate)
-                            result = - (Byte) result;
+                            result = - (Byte)result;
                     }
                     else
                         unexpectedTokenError();
@@ -150,9 +153,9 @@ public class OperatorParser {
                     if(negate = lookaheadIs(TokenType.MINUS)) { next(); }
 
                     if(lookaheadIs(TokenType.INT_LITERAL)) {
-                        result = (Short) lookahead.getData();
+                        result = ((Integer)lookahead.getData()).shortValue();
                         if(negate)
-                            result = - (Short) result;
+                            result = - (Short)result;
                     }
                     else
                         unexpectedTokenError();
