@@ -64,9 +64,9 @@ public class ConstantMutationOperator extends MutationOperator {
      */
     @Override
     public void generateCode(Method method, MethodVisitor mv) {
+        assert canMutate(method);
         mv.visitLdcInsn(constant);
         Type methodType = method.getReturnType();
-        assert canMutate(method);
         mv.visitLdcInsn(constant);
         mv.visitInsn(methodType.getOpcode(Opcodes.IRETURN));
     }
