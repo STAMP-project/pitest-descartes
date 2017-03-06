@@ -14,6 +14,12 @@ public class MutationOperatorFactoryTest {
     }
 
     @Test
+    public void shouldCreateNullMutator() {
+        MutationOperator operator = MutationOperator.fromID("null");
+        assertThat(operator, is((MutationOperator) NullMutationOperator.getInstance()));
+    }
+
+    @Test
     public void shouldGetIntegerMutator() {
         int value = 3;
         String id = String.valueOf(value);

@@ -3,7 +3,7 @@ package fr.inria.stamp.mutationtest.test;
 /**
  * Meaningless target class for mutation
  */
-class Calculator {
+public class Calculator {
 
 
     private double registry;

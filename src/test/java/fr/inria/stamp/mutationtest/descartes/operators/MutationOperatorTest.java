@@ -18,6 +18,9 @@ import java.util.Collection;
 
 import fr.inria.stamp.mutationtest.descartes.MutationPointFinder;
 
+import fr.inria.stamp.mutationtest.test.*;
+import sun.util.resources.uk.CalendarData_uk;
+
 @RunWith(Parameterized.class)
 public class MutationOperatorTest {
 
@@ -32,15 +35,39 @@ public class MutationOperatorTest {
     @Parameter(2)
     public String[] actualMethods;
 
+    private static String[] shouldFind(String... names) {
+        return names;
+    }
+
+    private final static String[] NOTHING = new String[0];
+
+    private static String in(Class<?> type) {
+        return type.getName();
+    }
+
+
+
     @Parameters(name="{index}: Applying {0} to {1}")
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {"void", "fr.inria.stamp.mutationtest.test.Calculator", new String[] {"clear"} },
-                {"void", "fr.inria.stamp.mutationtest.test.AbstractClass", new String[] {"voidMethodWithoutParameters"} },
-                {"void", "fr.inria.stamp.mutationtest.test.Interface", new String[0]},
-                {"1", "fr.inria.stamp.mutationtest.test.Calculator", new String[] {"getCeiling"} },
-                {"2", "fr.inria.stamp.mutationtest.test.AbstractClass", new String[0]},
-                {"3", "fr.inria.stamp.mutationtest.test.Interface", new String[0]},
+                //Calculator
+                {"void", in(Calculator.class), shouldFind("clear") },
+                {"1", in(Calculator.class), shouldFind("getCeiling") },
+                //{"(byte)2", in(Calculator.class), shouldFind("getByte")},
+                //{"(short)3", in(Calculator.class), shouldFind("getShort")},
+                {"null", in(Calculator.class), shouldFind("getScreen", "getClone")},
+                {"23456L", in(Calculator.class), shouldFind("getSquare")},
+                {"'c'", in(Calculator.class), shouldFind("getLastOperatorSymbol")},
+                {"3.14", in(Calculator.class), shouldFind("add")},
+                {"1.2f", in(Calculator.class), shouldFind("getSomething")},
+                {"true", in(Calculator.class), shouldFind("isOdd")},
+                {"\"string\"", in(Calculator.class), shouldFind("getScreen")},
+                //Abstract class
+                {"void", in(AbstractClass.class), shouldFind("voidMethodWithoutParameters") },
+                {"2", in(AbstractClass.class), NOTHING},
+                //Interface
+                {"void", in(Interface.class), NOTHING},
+                {"3", in(Interface.class), NOTHING},
         });
     }
 

@@ -17,7 +17,7 @@ public class DescartesEngineFactoryTest {
 
     @Test
     public void shouldCreateEngineWithMutators() throws Exception {
-        String[] operators = {"void", "3"};
+        String[] operators = {"void", "3", "null", "\"string\"", "'a'"};
         DescartesEngineFactory factory = new DescartesEngineFactory();
         MutationEngine engine = factory.createEngine(
                 false,
@@ -27,7 +27,7 @@ public class DescartesEngineFactoryTest {
                 false);
         Collection<String> collectedOperators = engine.getMutatorNames();
 
-        assertThat(collectedOperators,  hasSize(operators.length));
+        assertThat(collectedOperators, hasSize(operators.length));
         assertThat(collectedOperators, contains(operators));
     }
 

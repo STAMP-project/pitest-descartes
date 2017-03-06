@@ -21,8 +21,16 @@ public class OperatorParserTest {
                 {"void", Void.class},
                 {"null", null},
                 {"3", 3},
+                {"3L", 3L},
+                {"(byte)3", (byte)3},
+                {"(short)3", (short)3},
+                {"3.0", 3.0},
+                {"3.0f", 3.0f},
+                {"true", true},
+                {"false", false},
                 {"'a'", 'a'},
-                {"\"string\"", "string"}
+                {"\"string\"", "string"},
+
         });
     }
 
