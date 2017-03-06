@@ -1,6 +1,8 @@
 package fr.inria.stamp.mutationtest.descartes.operators;
 
 import org.pitest.reloc.asm.MethodVisitor;
+import org.pitest.reloc.asm.Opcodes;
+import org.pitest.reloc.asm.Type;
 import org.pitest.reloc.asm.commons.Method;
 import java.util.logging.Level;
 
@@ -30,7 +32,9 @@ public class NullMutationOperator extends MutationOperator{
 
     @Override
     public void generateCode(Method method, MethodVisitor mv) {
-        //TODO: Fill in the blanks
+        mv.visitInsn(Opcodes.ACONST_NULL);
+        assert canMutate(method);
+        mv.visitInsn(method.getReturnType().getOpcode(Opcodes.IRETURN));
     }
 
     @Override
