@@ -8,13 +8,12 @@ Unit test suites need to be verified to see if they can detect possible bugs. Mu
 [PIT](http://pitest.org) is a mutation testing system for Java. It is actively developed, scalable and targets real world projects. It also provides a framework to extend its core functionality using plugins. PIT integrates with majors test and build tools such as [Maven](https://maven.apache.org), [Ant](http://apache.ant.org) and [Gradle](https://gradle.org). A list of built-in mutation operators can be found in the [tool's web page](http://pitest.org/quickstart/mutators/).
 
 ## Descartes
-The authors of [Will my tests tell me if I break this code?](http://dl.acm.org/citation.cfm?doid=2896941.2896944) proposed an *extreme mutation* strategy in which the whole logic of a method under test is eliminated. All statements in a void method are removed. In other case the body is replaced by a return statement. With this approach, a smaller number of mutants is generated. Code from the authors can be found in [their GitHub repository](https://github.com/cqse/test-analyzer).
+The authors of [Will my tests tell me if I break this code?](http://dl.acm.org/citation.cfm?doid=2896941.2896944) proposed an *extreme mutation* strategy in which the whole logic of a method under test is eliminated. All statements in a `void` method are removed. In other case the body is replaced by a return statement. With this approach, a smaller number of mutants is generated. Code from the authors can be found in [their GitHub repository](https://github.com/cqse/test-analyzer).
 
 The goal of Descartes is to bring an effective implementation of this kind of mutation operator into the world of PIT and check its performance in real world projects.
 
 ### Mutation operators
-The goal of *extreme mutation operators* is to replace the body of a method by one simple return instruction or just remove all instructions if is possible. Right now, only a `void` mutation operator is included in the tool.
-
+The goal of *extreme mutation operators* is to replace the body of a method by one simple return instruction or just remove all instructions if is possible. The tool supports the following mutation operators:
 ### `void` mutation operator
 This operator accepts a `void` method and removes all the instructions on its body. For example, with the following class as input:
 
@@ -40,6 +39,78 @@ class A {
 
 }
 ```
+
+### `null` mutation operator
+This operator accepts a method with a reference return type and replaces all instructions with `return null`. For example, using the following class as input:
+``` java
+class A {
+    public A clone() {
+        return new A();
+    }
+}
+```
+this operator will generate:
+
+``` java
+class A {
+    public A clone() {
+        return null;
+    }
+}
+```
+
+### Constant mutation operator:
+This operator accepts any method with primitive or `String` return type. It replaces the method body with a single instruction returning a defined constant.
+For example, if the integer constant `3` is specified, then for the following class:
+
+``` java
+class A {
+    int field;
+
+    public int getAbsField() {
+        if(field >= 0)
+            return field;
+        return -field;
+    }
+```
+this operator will generate:
+
+``` java
+class A {
+    int field;
+
+    public int getAbsField() {
+        return 3;
+    }
+}
+```
+
+## Specifying operators
+
+The operators to be used must be specified in the `pom.xml`. Each operator identifier should be added to the `mutators` element inside the `configuration` element. `void` and `null` operators are identified by `void` and `null` respectively.
+For the constant mutation operator, the values can be specified using the regular literal notation used in a Java program. For example `true`, `1`, `2L`, `3.0f`, `4.0`, `'a'`, `"literal"`, represent `boolean`, `int`, `long`, `float`, `double`, `char`, `string` constants.
+Negative values and binary, octal and hexadecimal bases for integer constants are also supported as stated by the [language specification](https://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.10).
+In order to specify a `byte` or `short` value, a cast-like notation can be used: `(short) -1`, `(byte)0x1A`.
+
+The following configuration:
+``` xml
+<mutators>
+    <mutator>void</mutator>
+    <mutator>4</mutator>
+    <mutator>"some string"</mutator>
+    <mutator>false</mutator>
+</mutators>
+```
+will instruct the tool to use the `void` operator and the constant operator will replace the body of every `int` returning method with `return 4;` and will use `"some string"` and `false` for every `string` and `boolean` method.
+If no operator is specified, the tool will use `void` and `null` by default. Which is equivalent to:
+
+```
+<mutators>
+    <mutator>void</mutator>
+    <mutator>null</mutator>
+</mutators>
+```
+
 ## Compiling the code
 
 In a terminal clone the repository and switch to the cloned folder
@@ -47,7 +118,7 @@ In a terminal clone the repository and switch to the cloned folder
 git clone https://github.com/STAMP-project/pitest-descartes.git
 cd  pitest-descartes
 ```
-the code can be compiled and tested using the usual [Apache Maven](https://maven.apache.org) commands:
+the code can be compiled and tested using the regular [Apache Maven](https://maven.apache.org) commands:
 ```
 mvn compile
 mvn test
@@ -95,7 +166,13 @@ An example of final configuration could be:
   <artifactId>pitest-maven</artifactId>
   <version>1.1.11</version>  
   <configuration>
-    <mutationEngine>descartes</mutationEngine>  
+    <mutationEngine>descartes</mutationEngine>
+    <mutators>
+       <mutator>null</mutator>
+       <mutator>void</mutator>
+       <mutator>0</mutator>
+       <mutator>false</mutator>
+    </mutators>
   </configuration>
   <dependencies>
     <dependency>
