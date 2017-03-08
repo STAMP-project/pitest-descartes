@@ -7,6 +7,8 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 
+import fr.inria.stamp.mutationtest.descartes.operators.NullMutationOperator;
+import fr.inria.stamp.mutationtest.descartes.operators.VoidMutationOperator;
 import org.pitest.reloc.asm.commons.Method;
 
 import org.pitest.functional.predicate.*;
@@ -55,6 +57,12 @@ public class DescartesEngineFactory implements MutationEngineFactory{
 
     private static Collection<MutationOperator> getMutationOperators(Collection<String> mutators) {
         LinkedList<MutationOperator> result = new LinkedList<MutationOperator>();
+        if(mutators.size() == 0) {
+            //Default operators. //TODO: If the list grows put in a separated method
+            result.add(VoidMutationOperator.getInstance());
+            result.add(NullMutationOperator.getInstance());
+            return result;
+        }
         for (String id :
                 mutators) {
             try {
