@@ -1,19 +1,21 @@
 package fr.inria.stamp.mutationtest.descartes;
 
-import fr.inria.stamp.mutationtest.descartes.operators.MutationOperator;
-import fr.inria.stamp.mutationtest.descartes.operators.MutationOperator;
-import fr.inria.stamp.mutationtest.descartes.operators.WrongOperatorException;
-import org.omg.PortableServer.POAPackage.WrongAdapter;
-import org.pitest.reloc.asm.commons.Method;
-import org.pitest.functional.predicate.Predicate;
-import org.pitest.mutationtest.MutationEngineFactory;
-import org.pitest.mutationtest.engine.MutationEngine;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 import java.util.logging.Level;
+import java.util.regex.Pattern;
+
+import org.pitest.reloc.asm.commons.Method;
+
+import org.pitest.functional.predicate.*;
+
+import org.pitest.mutationtest.MutationEngineFactory;
+import org.pitest.mutationtest.engine.MutationEngine;
+
+import fr.inria.stamp.mutationtest.descartes.operators.MutationOperator;
+import fr.inria.stamp.mutationtest.descartes.operators.WrongOperatorException;
 
 public class DescartesEngineFactory implements MutationEngineFactory{
 
@@ -36,16 +38,13 @@ public class DescartesEngineFactory implements MutationEngineFactory{
     }
 
     private static Predicate<Method> getMethodFilter(final boolean mutateStaticInitializers, final Predicate<String> excludedMethods) {
-        if(mutateStaticInitializers)
-            return new Predicate<Method>() {
-                public Boolean apply(Method method) {
-                    return excludedMethods.apply(method.getName());
-                }
-            };
 
         return new Predicate<Method>() {
             public Boolean apply(Method method) {
-                return method.getName().equals("<clinit>") || excludedMethods.apply(method.getName());
+                String name = method.getName();
+                return Pattern.matches("access\\$\\d+", name)
+                       || (name.equals("<clinit>") && !mutateStaticInitializers)
+                       || excludedMethods.apply(name);
             }
         };
     }
