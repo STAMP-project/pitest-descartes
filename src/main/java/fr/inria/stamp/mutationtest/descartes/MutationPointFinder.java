@@ -74,6 +74,14 @@ public class MutationPointFinder extends ClassVisitor {
         Location location = new Location(className, MethodName.fromString(lastMethod.getName()), lastMethod.getDescriptor());
         MutationIdentifier id = new MutationIdentifier(location, getRange(start, end), operator.getID());
         return new MutationDetails(id, source, operator.getDescription(), start, 1);
+        //TODO: Reduce the number of equivalent mutants created
+        // For example, do not mutate empty void methods. This particular checking is not that easy.
+        // The visitLineNumber method of MethodVisitor gives the actual lines in the original code.
+        // So a method can be empty but can have several empty lines.
+        // This detection will require to check the method body and verify that there is only a return instruction.
+        // In the case of constant operators maybe we'll need to look for every possible stack top
+        // when a return instruction is reached.
+        // To implement this operator definition should contain a MethodVisitor that reports the mutation.
     }
 
     public List<MutationDetails> getMutationPoints() {

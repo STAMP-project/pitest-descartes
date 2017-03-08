@@ -4,6 +4,7 @@ import org.pitest.reloc.asm.Label;
 import org.pitest.reloc.asm.MethodVisitor;
 import org.pitest.reloc.asm.Opcodes;
 
+//TODO: Remove this class. PIT is using only the first line.
 class LineCounterMethodAdapter extends MethodVisitor {
 
     private boolean started = false; //Flag :(
