@@ -53,8 +53,8 @@ public class MutationOperatorTest {
                 //Calculator
                 {"void", in(Calculator.class), shouldFind("clear") },
                 {"1", in(Calculator.class), shouldFind("getCeiling") },
-                //{"(byte)2", in(Calculator.class), shouldFind("getByte")},
-                //{"(short)3", in(Calculator.class), shouldFind("getShort")},
+                {"(byte)2", in(Calculator.class), shouldFind("getByte")},
+                {"(short)3", in(Calculator.class), shouldFind("getShort")},
                 {"null", in(Calculator.class), shouldFind("getScreen", "getClone")},
                 {"23456L", in(Calculator.class), shouldFind("getSquare")},
                 {"'c'", in(Calculator.class), shouldFind("getLastOperatorSymbol")},
