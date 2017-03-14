@@ -42,6 +42,8 @@ Also, empty `void` methods were ignored.
 ## Results
 A mutation consists in transforming the program at one single point to produce a mutant. We generated **60** mutants for this case study. Then, we ran the test suite on each mutant and we classified each mutant as follows: a mutant is said *NON-COVERED* if the code is not covered in any test case (coverage is evaluated by PIT); a covered mutant is said *KILLED* if at least one test fails when the test suite runs on the mutant; otherwise the mutant is classified as *SURVIVED*. A method is said **pseudo-tested** if the corresponding mutant *SURVIVED*. On the other hand, *KILLED* mutants are considered as **detected**. The number of mutants by category is shown below.  
 
+The whole analysis process (mutant generation + test case execution) took less than 3 minutes.
+
 Out of the **60**  mutants, **45%** are not covered by the test suite. **14** mutants *SURVIVED* which represents around **42%** of methods which are covered by the test suite and around **23%** of all `void` methods.
 
 Category      | Count  
