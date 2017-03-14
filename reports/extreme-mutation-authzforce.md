@@ -1,5 +1,5 @@
 # Mutation testing applied to Authzforce Core project
-We applied mutation testing to evaluate an specific type of mutation inspired by [this article](http://dl.acm.org/citation.cfm?doid=2896941.2896944). This mutation consists in removing the body of `void` methods. If such modified method is not detected by the test suite it is considered as **pseudo-tested**. For this matter, we extended [PIT](http://pitest.org) with a new mutation engine that performs only this kind of mutation. The effective implementation can be found [here](https://github.com/STAMP-project/pitest-descartes).
+We applied [mutation testing](https://en.wikipedia.org/wiki/Mutation_testing) to evaluate an specific type of mutation inspired by [this article](http://dl.acm.org/citation.cfm?doid=2896941.2896944). This mutation consists in removing the body of `void` methods. If such modified method is not detected by the test suite it is considered as **pseudo-tested**. For this matter, we extended [PIT](http://pitest.org) with a new mutation engine that performs only this kind of mutation. The effective implementation can be found [here](https://github.com/STAMP-project/pitest-descartes).
 
 The nature of this mutation is simple. Given a `void` method all instructions from its body are removed. For example, with the following class as input:
 
