@@ -7,7 +7,7 @@
     <organization><name>fr.inria.stamp</name></organization>
     <groupId>fr.inria.stamp</groupId>
     <artifactId>descartes</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
     <description>Mutation engine for extreme mutation operators</description>
 
     <properties>
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>org.pitest</groupId>
             <artifactId>pitest-maven</artifactId>
-            <version>1.1.11</version>
+            <version>1.2.0</version>
         </dependency>
 
         <dependency>

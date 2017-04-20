@@ -40,12 +40,12 @@ public class DescartesEngineFactory implements MutationEngineFactory{
     }
 
     private static Predicate<Method> getMethodFilter(final boolean mutateStaticInitializers, final Predicate<String> excludedMethods) {
-
+        //Only filters defined by the user. Other filters are applied in code.
         return new Predicate<Method>() {
             public Boolean apply(Method method) {
                 String name = method.getName();
-                return Pattern.matches("access\\$\\d+", name)
-                       || (name.equals("<clinit>") && !mutateStaticInitializers)
+                return
+                       (name.equals("<clinit>") && !mutateStaticInitializers)
                        || excludedMethods.apply(name);
             }
         };
