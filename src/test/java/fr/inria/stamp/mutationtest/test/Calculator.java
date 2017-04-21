@@ -37,8 +37,10 @@ public class Calculator {
         return value * value;
     }
 
-    public char getLastOperatorSymbol() {
-        return lastOperatorSymbol;
+    public char getRandomOperatorSymbol() {
+        //Non sense code to avoid creating a getter
+        char[] symbols = {'+', '-', '*', '/'};
+        return symbols[getCeiling()%symbols.length];
     }
 
     //Floating point types
