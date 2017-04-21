@@ -1,6 +1,6 @@
 package fr.inria.stamp.mutationtest.descartes.bodyanalysis;
 
-import jdk.internal.org.objectweb.asm.Opcodes;
+import org.pitest.reloc.asm.Opcodes;
 import org.pitest.functional.predicate.Predicate;
 
 public abstract class Transition {
@@ -39,7 +39,7 @@ public abstract class Transition {
         return new Transition() {
             @Override
             public boolean accepts(int opcode) {
-                return opcode > 20; //TODO: Verify this
+                return opcode > 0 && opcode <= 20;
             }
         };
     }

@@ -2,6 +2,7 @@ package fr.inria.stamp.mutationtest.descartes.operators;
 
 import fr.inria.stamp.mutationtest.descartes.DescartesMutationEngine;
 import org.junit.Test;
+import org.junit.Before;
 import static org.junit.Assert.*;
 
 import org.junit.runner.RunWith;
@@ -13,92 +14,63 @@ import org.pitest.classinfo.ClassName;
 import org.pitest.mutationtest.engine.MutationDetails;
 
 import org.pitest.reloc.asm.*;
+
+
+
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 import fr.inria.stamp.mutationtest.descartes.MutationPointFinder;
 
 import fr.inria.stamp.mutationtest.test.*;
-import sun.util.resources.uk.CalendarData_uk;
+import org.pitest.reloc.asm.tree.ClassNode;
+import org.pitest.reloc.asm.tree.MethodNode;
+import org.pitest.reloc.asm.commons.Method;
 
 @RunWith(Parameterized.class)
 public class MutationOperatorTest {
 
-    private static DescartesMutationEngine engine = new DescartesMutationEngine();
+    Collection<Method> targets;
+
+    @Before
+    public void initialize() {
+        targets = TestUtils.getMethods(Calculator.class);
+    }
 
     @Parameter
     public String operatorID;
 
     @Parameter(1)
-    public String className;
+    public String expectedMethod;
 
-    @Parameter(2)
-    public String[] actualMethods;
-
-    private static String[] shouldFind(String... names) {
-        return names;
-    }
-
-    private final static String[] NOTHING = new String[0];
-
-    private static String in(Class<?> type) {
-        return type.getName();
-    }
-
-
-
-    @Parameters(name="{index}: Applying {0} to {1}")
-    public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][] {
-                //Calculator
-                {"void", in(Calculator.class), shouldFind("clear") },
-                {"1", in(Calculator.class), shouldFind("getCeiling") },
-                {"(byte)2", in(Calculator.class), shouldFind("getByte")},
-                {"(short)3", in(Calculator.class), shouldFind("getShort")},
-                {"null", in(Calculator.class), shouldFind("getScreen", "getClone")},
-                {"23456L", in(Calculator.class), shouldFind("getSquare")},
-                {"'c'", in(Calculator.class), shouldFind("getLastOperatorSymbol")},
-                {"3.14", in(Calculator.class), shouldFind("add")},
-                {"1.2f", in(Calculator.class), shouldFind("getSomething")},
-                {"true", in(Calculator.class), shouldFind("isOdd")},
-                {"\"string\"", in(Calculator.class), shouldFind("getScreen")},
-                //Abstract class
-                {"void", in(AbstractClass.class), shouldFind("voidMethodWithoutParameters") },
-                {"2", in(AbstractClass.class), NOTHING},
-                //Interface
-                {"void", in(Interface.class), NOTHING},
-                {"3", in(Interface.class), NOTHING},
+    @Parameters(name="{index}: Searching methods with operator: {0}")
+    public static Collection<Object[]> parameters() {
+        return Arrays.asList( new Object[][]{
+                {"void"       , "clear"},
+                {"1"          , "getCeiling"},
+                {"(byte)2"    , "getByte"},
+                {"(short)3"   , "getShort"},
+                {"23456L"     , "getSquare"},
+                {"'c'"        , "getRandomOperatorSymbol"},
+                {"3.14"       , "add"},
+                {"1.2f"       , "getSomething"},
+                {"true"       , "isOdd"},
+                {"\"string\"" , "getScreen"},
         });
     }
 
-    @Test()
-    public void shouldFindMutationPoints() {
-        try {
-            DescartesMutationEngine engine = new DescartesMutationEngine(MutationOperator.fromID(operatorID));
-            ClassReader reader = new ClassReader(className);
-            MutationPointFinder finder = new MutationPointFinder(new ClassName(className), engine);
-            reader.accept(finder, 0);
-            assertAfterSorting(getDescriptions(finder.getMutationPoints()), actualMethods);
-        }catch(java.io.IOException exc) {
-            fail("Unexpected error: " + exc.getMessage());
+    @Test
+    public void shouldFilterMethods() {
+        MutationOperator operator = MutationOperator.fromID(operatorID);
+        for (Method method: targets) {
+            if(operator.canMutate(method))
+                assertEquals("Wrong method accepted", expectedMethod, method.getName());
         }
     }
 
 
-    private static String[] getDescriptions(Collection<MutationDetails> points) {
-        //Need lambda expressions asap :)
-        String[] methods = new String[points.size()];
-        int index = 0;
-        for (MutationDetails details :
-                points) {
-            methods[index++] = details.getMethod().name();
-        }
-        return methods;
-    }
 
-    private static void assertAfterSorting(String[] obtained, String[] expected) {
-        Arrays.sort(obtained);
-        Arrays.sort(expected);
-        assertArrayEquals(obtained, expected);
-    }
 }

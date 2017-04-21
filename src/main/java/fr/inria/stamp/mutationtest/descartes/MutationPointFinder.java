@@ -2,22 +2,21 @@ package fr.inria.stamp.mutationtest.descartes;
 
 import fr.inria.stamp.mutationtest.descartes.bodyanalysis.MethodInspector;
 import fr.inria.stamp.mutationtest.descartes.operators.MutationOperator;
-
-import org.pitest.reloc.asm.ClassVisitor;
-import org.pitest.reloc.asm.MethodVisitor;
-import org.pitest.reloc.asm.Opcodes;
-import org.pitest.reloc.asm.commons.Method;
-
 import org.pitest.classinfo.ClassName;
 import org.pitest.mutationtest.engine.Location;
 import org.pitest.mutationtest.engine.MethodName;
 import org.pitest.mutationtest.engine.MutationDetails;
 import org.pitest.mutationtest.engine.MutationIdentifier;
+import org.pitest.reloc.asm.ClassVisitor;
+import org.pitest.reloc.asm.MethodVisitor;
+import org.pitest.reloc.asm.Opcodes;
+import org.pitest.reloc.asm.commons.Method;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static fr.inria.stamp.utils.Utils.*;
+import static fr.inria.stamp.utils.Utils.getZeroRange;
+import static fr.inria.stamp.utils.Utils.hasFlag;
 
 public class MutationPointFinder extends ClassVisitor {
 
@@ -46,7 +45,7 @@ public class MutationPointFinder extends ClassVisitor {
 
     @Override
     public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
-        //Discard abstract and synhtetic methods. Access level method filter.
+        //Discard abstract and synthetic methods. Access level method filter.
         if(hasFlag(access, Opcodes.ACC_ABSTRACT) || hasFlag(access, Opcodes.ACC_SYNTHETIC))
             return null;
 

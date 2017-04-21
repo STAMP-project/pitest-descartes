@@ -15,6 +15,8 @@ public class MethodInspector extends MethodVisitor {
     public MethodInspector(Method method, MutationPointFinder finder) {
         super(Opcodes.ASM5);
 
+        this.method = method; //TODO: Verify is not null
+        this.finder = finder; //TODO: Verify is not null
         lineCounter = new LineCounter();
         recognizer = new StopMethodRecognizer();
     }
@@ -104,7 +106,7 @@ public class MethodInspector extends MethodVisitor {
 
     @Override
     public void	visitTryCatchBlock(Label start, Label end, Label handler, String type){
-        recognizer.dontRecognize();
+        recognizer.doNotRecognize();
         //TODO: Are ew always interested if there is a catch block? Should we ignore this?
     }
 
