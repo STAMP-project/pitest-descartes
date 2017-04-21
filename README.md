@@ -154,7 +154,7 @@ after this, add the artifact information as a dependency to PIT:
 <dependency>
   <groupId>fr.inria.stamp</groupId>
   <artifactId>descartes</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>0.2-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -178,7 +178,7 @@ An example of final configuration could be:
     <dependency>
       <groupId>fr.inria.stamp</groupId>
       <artifactId>descartes</artifactId>
-      <version>0.1-SNAPSHOT</version>
+      <version>0.2-SNAPSHOT</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -201,7 +201,7 @@ The rest of the goals defined by the `pitest-maven` plugin should run in the sam
 Follow the [instructions](http://gradle-pitest-plugin.solidsoft.info/) to set up PIT for a project that uses [Gradle](https://gradle.org/).
 In the `build.gradle` file add the local Maven repository to the `buildscript` block and set a `pitest` configuration element inside the same block. In the `dependencies` block put the artifact information:
 ```
-pitest 'fr.inria.stamp:descartes:0.1-SNAPSHOT'
+pitest 'fr.inria.stamp:descartes:0.2-SNAPSHOT'
 ```
 then specify `descartes` in the `mutationEngine` option inside the plugin configuration.
 An example of the final configuration could be:
@@ -216,7 +216,7 @@ buildscript {
 
   dependencies {
     classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.11'
-    pitest 'fr.inria.stamp:descartes:0.1-SNAPSHOT'
+    pitest 'fr.inria.stamp:descartes:0.2-SNAPSHOT'
   }
 }
 
@@ -233,3 +233,7 @@ gradle pitest
 ## Running from the command line
 
 Descartes can be used when invoking PIT from the command line. To do this, follow [the instructions](http://pitest.org/quickstart/commandline/) for running PIT, include Descartes in the classpath specification and add `--mutationEngine=descartes`.
+
+## Maven repository
+
+Compiled modules are available from [a custom Maven repository](https://stamp-project.github.io/stamp-maven-repository/). Detailed instructions can be found [here](https://github.com/STAMP-project/stamp-maven-repository).
