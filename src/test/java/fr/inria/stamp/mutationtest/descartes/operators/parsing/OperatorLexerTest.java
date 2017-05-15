@@ -42,8 +42,8 @@ public class OperatorLexerTest {
         try{
             for(int i=0; i < values.length; i++) {
                 Token token = lexer.nextToken();
-                assertEquals(token.getType(), TokenType.INT_LITERAL);
-                assertEquals(token.getData(), values[i]);
+                assertEquals(TokenType.INT_LITERAL, token.getType());
+                assertEquals(values[i], token.getData());
             }
         }catch(IOException exc) {
             fail("Unexpected exception: " + exc.getMessage());
@@ -58,8 +58,8 @@ public class OperatorLexerTest {
         try {
             Token lookahed = lexer.nextToken();
             while (lookahed.getType() != TokenType.EOF) {
-                assertEquals(lookahed.getType(), TokenType.LONG_LITERAL);
-                assertEquals(lookahed.getData(), value);
+                assertEquals(TokenType.LONG_LITERAL, lookahed.getType());
+                assertEquals(value, lookahed.getData());
                 lookahed = lexer.nextToken();
             }
         }catch(IOException exc) {
@@ -84,8 +84,8 @@ public class OperatorLexerTest {
             try {
                 OperatorLexer lexer = new OperatorLexer(new StringReader(inputs[i]));
                 Token token = lexer.nextToken();
-                assertEquals(token.getType(), TokenType.STRING_LITERAL);
-                assertEquals(token.getData(), values[i]);
+                assertEquals(TokenType.STRING_LITERAL, token.getType());
+                assertEquals(values[i], token.getData());
             } catch (IOException exc) {
                 fail("Unexpected exception: " + exc.getMessage());
             }
@@ -93,6 +93,24 @@ public class OperatorLexerTest {
 
     }
 
+    @Test
+    public void shouldMatchCharLiterals() {
+        String input    = "'a'  '\\r' '\\n' '\\t' '\\b' '\\f' '\\'' '\\\\' '\\7' '\\67' '\\354' '\\u1234'";
+        char[] expected = {'a', '\r', '\n', '\t', '\b', '\f', '\'', '\\',  '\7', '\67', '\354' ,'\u1234'};
 
+
+        try {
+            OperatorLexer lexer = new OperatorLexer(new StringReader(input));
+            for (int i = 0; i < expected.length; i++) {
+                Token token = lexer.nextToken();
+                assertEquals(TokenType.CHAR_LITERAL, token.getType());
+                assertEquals("Failed matching literal in " + i, expected[i], token.getData());
+            }
+            assertEquals(TokenType.EOF, lexer.nextToken().getType());
+        }catch(IOException exc) {
+            fail("Unexpected exception: " + exc.getMessage());
+        }
+
+    }
 
 }

@@ -73,8 +73,20 @@ private Token charLiteral(char value) {
     return new Token(TokenType.CHAR_LITERAL, value);
 }
 
+private String slice(int start, int end) {
+    return yytext().subSequence(start, yylength() + end).toString();
+}
+
 private char fromOctal() {
-    return (char)Integer.parseInt(yytext().subSequence(1, yylength()).toString(), 8);
+    return fromOctal(yytext().subSequence(1, yylength()).toString());
+}
+
+private char fromOctal(String value) {
+    return (char)Integer.parseInt(value, 8);
+}
+
+private char fromHex(String value) {
+    return (char)Integer.parseInt(value, 16);
 }
 
 private char fromHex() {
@@ -169,7 +181,7 @@ Exponent = [eE] [+-]? \d+
     \\r     { string.append('\r'); }
     \\\\    { string.append('\\'); }
     \\\"    { string.append('"'); }
-    \\\'    { string.append('\''); }
+    \\'     { string.append('\''); }
 
     \\[0-3]? {OctDigit}? {OctDigit} { string.append(fromOctal()); }
     \\u \p{hex} {4} { string.append(fromHex()); }
@@ -177,16 +189,16 @@ Exponent = [eE] [+-]? \d+
 }
 
 <CHAR> {
-    \\b\'  { return charLiteral(); }
-    \\t\'  { return charLiteral(); }
-    \\n\'  { return charLiteral(); }
-    \\f\'  { return charLiteral(); }
-    \\r\'  { return charLiteral(); }
-    \\\\\' { return charLiteral(); }
-    \\\'\' { return charLiteral(); }
-    \\ ([1-3]? {OctDigit})? {OctDigit} \' { return charLiteral(fromOctal()); }
-    \\u \p{hex} {4} \' { return charLiteral(fromHex()); }
-    [^\r\n\'\\] { return charLiteral(yytext().charAt(0)); }
+    \\b'  { return charLiteral('\b'); }
+    \\t'  { return charLiteral('\t'); }
+    \\n'  { return charLiteral('\n'); }
+    \\f'  { return charLiteral('\f'); }
+    \\r'  { return charLiteral('\r'); }
+    \\\\' { return charLiteral('\\'); }
+    \\'' { return charLiteral('\''); }
+    \\ ([1-3]? {OctDigit})? {OctDigit} '  { return charLiteral(fromOctal(slice(1,-1))); }
+    \\u \p{hex} {4} ' { return charLiteral(fromHex(slice(2,-1))); }
+    [^\b\t\n\r\\']' { return charLiteral(); }
 }
 
 <<EOF>> { return Token.EOF; }
