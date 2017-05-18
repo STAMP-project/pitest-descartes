@@ -1,6 +1,6 @@
 package fr.inria.stamp.mutationtest.descartes;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
+import java.util.Arrays;
 import org.junit.Test;
 import org.pitest.functional.predicate.False;
 import org.pitest.mutationtest.engine.MutationEngine;

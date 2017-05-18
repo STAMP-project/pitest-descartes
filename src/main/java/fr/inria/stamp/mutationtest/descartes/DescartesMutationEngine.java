@@ -2,7 +2,7 @@ package fr.inria.stamp.mutationtest.descartes;
 
 import java.util.*;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
+import java.util.Arrays;
 import fr.inria.stamp.mutationtest.descartes.operators.VoidMutationOperator;
 import org.pitest.classinfo.ClassByteArraySource;
 import org.pitest.functional.F;
