@@ -20,7 +20,8 @@ public class NullMutationOperator extends MutationOperator{
      */
     @Override
     public boolean canMutate(Method method) {
-        return method.getReturnType().getSort() == Type.OBJECT;
+        int target = method.getReturnType().getSort();
+        return  target == Type.OBJECT || target == Type.ARRAY;
     }
 
     @Override

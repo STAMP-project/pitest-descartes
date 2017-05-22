@@ -11,6 +11,7 @@ public enum TokenType {
     TRUE_KWD,
     BYTE_KWD,
     SHORT_KWD,
+    EMPTY_KWD,
     INT_LITERAL,
     LONG_LITERAL,
     FLOAT_LITERAL,

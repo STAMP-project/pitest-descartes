@@ -17,7 +17,7 @@ public class NullMutationOperatorTest {
 
         for (Method method : TestUtils.getMethods(Calculator.class)) {
             if(NullMutationOperator.getInstance().canMutate(method))
-                assertThat(method.getName(), isOneOf("getScreen", "getClone"));
+                assertThat(method.getName(), isOneOf("getScreen", "getClone", "getSomeCalculators", "getSomeMore", "getRange"));
 
         }
 

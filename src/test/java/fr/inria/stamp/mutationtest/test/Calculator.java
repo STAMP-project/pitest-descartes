@@ -77,4 +77,30 @@ public class Calculator {
         return result;
     }
 
+    public Calculator[] getSomeCalculators(int number) {
+        Calculator[] result = new Calculator[number];
+        for(int i=0; i< number; i++) {
+            result[i] = getClone();
+        }
+        return result;
+    }
+
+    public Calculator[][] getSomeMore(int number) {
+        Calculator [][] result = new Calculator[number][number];
+        for (int i = 0; i < number; i++) {
+            for (int j = 0; j < number; j++) {
+                result[i][j] = getClone();
+            }
+        }
+        return result;
+    }
+
+    public int[] getRange(int top) {
+        int[] result = new int[top];
+        for(int i=0; i< top; i++) {
+            result[i] = i;
+        }
+        return result;
+    }
+
 }

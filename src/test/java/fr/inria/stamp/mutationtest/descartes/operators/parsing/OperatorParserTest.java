@@ -20,6 +20,7 @@ public class OperatorParserTest {
         return Arrays.asList(new Object[][] {
                 {"void", Void.class},
                 {"null", null},
+                {"empty", "empty"},
                 {"3", 3},
                 {"3L", 3L},
                 {"(byte)3", (byte)3},

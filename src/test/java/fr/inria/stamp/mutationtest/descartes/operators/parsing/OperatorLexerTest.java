@@ -15,13 +15,14 @@ public class OperatorLexerTest {
                                 TokenType.NULL_KWD,
                                 TokenType.TRUE_KWD,
                                 TokenType.FALSE_KWD,
+                                TokenType.EMPTY_KWD,
                                 TokenType.LPAR,
                                 TokenType.BYTE_KWD,
                                 TokenType.RPAR,
                                 TokenType.SHORT_KWD,
                                 TokenType.EOF
                             };
-        String input = "void null true false ( byte ) short";
+        String input = "void null true false empty ( byte ) short";
         OperatorLexer lexer = new OperatorLexer(new StringReader(input));
 
         try {

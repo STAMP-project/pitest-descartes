@@ -68,6 +68,7 @@ public class OperatorParser {
                     TokenType.VOID_KWD,
                     TokenType.TRUE_KWD,
                     TokenType.FALSE_KWD,
+                    TokenType.EMPTY_KWD,
                     TokenType.CHAR_LITERAL,
                     TokenType.STRING_LITERAL,
                     TokenType.INT_LITERAL,

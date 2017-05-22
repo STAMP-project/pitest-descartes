@@ -33,6 +33,9 @@ public abstract class MutationOperator {
         if(value.equals(Void.class)) {
             return VoidMutationOperator.getInstance();
         }
+        if(value.equals(EmptyArrayMutationOperator.getInstance().getID())) {
+            return EmptyArrayMutationOperator.getInstance();
+        }
         try {
             return new ConstantMutationOperator(id, value);
         }catch (IllegalArgumentException exc) {

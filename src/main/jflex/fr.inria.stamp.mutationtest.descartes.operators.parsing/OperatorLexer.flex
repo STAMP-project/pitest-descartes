@@ -143,7 +143,8 @@ Exponent = [eE] [+-]? \d+
     null  { return Token.NULL; }
     void  { return Token.VOID; }
     false { return Token.FALSE; }
-    true  { return  Token.TRUE; }
+    true  { return Token.TRUE; }
+    empty { return Token.EMPTY; }
     "("   { return Token.LPAR; }
     ")"   { return Token.RPAR; }
     byte  { return Token.BYTE; }
