@@ -58,6 +58,31 @@ class A {
     }
 }
 ```
+### `empty` mutation operator
+
+This is a special operator which targets methods that return arrays. It replaces the entire body with a `return` statement that produces an empty array of the corresponding type.
+For example, te following class:
+
+``` java
+class A {
+  public int[] getRange(int count) {
+    int[] result = new int[count];
+    for(int i=0; i < count; i++) {
+      result[i] = i;
+    }
+    return result;
+  }
+}
+```
+will become:
+
+``` java
+class A {
+  public int[] getRange(int count) {
+    return new int[];
+  }
+}
+```
 
 ### Constant mutation operator:
 This operator accepts any method with primitive or `String` return type. It replaces the method body with a single instruction returning a defined constant.
@@ -136,11 +161,11 @@ After installing the package, PIT should be configured to use Descartes. This st
 ### Maven
 Follow the [instructions](http://pitest.org/quickstart/maven/) to configure PIT for the project. Then specify `descartes` as the engine inside a `mutationEgine` tag in the `pom.xml` file:
 
-```xml
+``` xml
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.1.11</version>  
+  <version>1.2.0</version>  
   <configuration>
     ...
     <mutationEngine>descartes</mutationEngine>  
@@ -150,7 +175,7 @@ Follow the [instructions](http://pitest.org/quickstart/maven/) to configure PIT 
 </plugin>
 ```
 after this, add the artifact information as a dependency to PIT:
-```xml
+``` xml
 <dependency>
   <groupId>fr.inria.stamp</groupId>
   <artifactId>descartes</artifactId>
@@ -158,30 +183,47 @@ after this, add the artifact information as a dependency to PIT:
 </dependency>
 ```
 
-An example of final configuration could be:
+An example of a working configuration that uses all operators could be:
 
-```xml
+``` xml
 <plugin>
-  <groupId>org.pitest</groupId>
-  <artifactId>pitest-maven</artifactId>
-  <version>1.1.11</version>  
-  <configuration>
-    <mutationEngine>descartes</mutationEngine>
-    <mutators>
-       <mutator>null</mutator>
-       <mutator>void</mutator>
-       <mutator>0</mutator>
-       <mutator>false</mutator>
-    </mutators>
-  </configuration>
-  <dependencies>
-    <dependency>
-      <groupId>fr.inria.stamp</groupId>
-      <artifactId>descartes</artifactId>
-      <version>0.2-SNAPSHOT</version>
-    </dependency>
-  </dependencies>
-</plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <version>1.2.0</version>
+        <configuration>
+          <mutationEngine>descartes</mutationEngine>
+          <mutators>
+            <mutator>void</mutator>
+            <mutator>null</mutator>
+            <mutator>true</mutator>
+            <mutator>false</mutator>
+            <mutator>empty</mutator>
+            <mutator>0</mutator>
+            <mutator>1</mutator>
+            <mutator>(byte)0</mutator>
+            <mutator>(byte)1</mutator>
+            <mutator>(short)1</mutator>
+            <mutator>(short)2</mutator>
+            <mutator>0L</mutator>
+            <mutator>1L</mutator>
+            <mutator>0.0</mutator>
+            <mutator>1.0</mutator>
+            <mutator>0.0f</mutator>
+            <mutator>1.0f</mutator>
+            <mutator>'\40'</mutator>
+            <mutator>'A'</mutator>
+            <mutator>""</mutator>
+            <mutator>"A"</mutator>
+          </mutators>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>fr.inria.stamp</groupId>
+            <artifactId>descartes</artifactId>
+            <version>0.2-SNAPSHOT</version>
+          </dependency>
+        </dependencies>
+      </plugin>
 ```
 With PIT and Descartes configured, just run the regular mutation coverage goal in the folder of the project under test:
 
@@ -215,7 +257,7 @@ buildscript {
   configurations.maybeCreate("pitest")
 
   dependencies {
-    classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.11'
+    classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.2.0'
     pitest 'fr.inria.stamp:descartes:0.2-SNAPSHOT'
   }
 }
