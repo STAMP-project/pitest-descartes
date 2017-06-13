@@ -257,7 +257,7 @@ buildscript {
   configurations.maybeCreate("pitest")
 
   dependencies {
-    classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.2.0'
+    classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.9'
     pitest 'fr.inria.stamp:descartes:0.2-SNAPSHOT'
   }
 }
