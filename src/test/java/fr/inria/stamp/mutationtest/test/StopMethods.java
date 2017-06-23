@@ -4,6 +4,36 @@ public class StopMethods {
 
     public void emptyVoidMethod() {}
 
+    public boolean returnTrue () { return true; }
+
+    public byte returnByte() { return (byte)11; }
+
+    public short returnShort() { return (short)12; }
+
+    public int returnNegativeInt() { return -11; }
+
+    public int returnPositiveInt() { return  11; }
+
+    public long returnPositiveLong() { return 1234567890L; }
+
+    public long returnNegativeLong() { return -1234567890L; }
+
+    public float returnPositiveFloat() { return 3.14f; }
+
+    public float returnNegativeFloat() { return -3.14f; }
+
+    public double returnPositiveDouble() { return 6.28; }
+
+    public double returnNegativeDouble() { return -6.28; }
+
+    public char returnChar() { return 'A'; }
+
+    public String returnString() {  return "A"; }
+
+    public Object returnNull() { return null; }
+
+    public int[] retrunEmptyArray() { return new int[0]; }
+
     boolean aBoolean;
     byte aByte;
     short aShort;
@@ -90,4 +120,6 @@ public class StopMethods {
     public Object getAnObject() {
         return anObject;
     }
+
+
 }
