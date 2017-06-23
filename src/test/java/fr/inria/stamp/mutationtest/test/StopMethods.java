@@ -32,7 +32,12 @@ public class StopMethods {
 
     public Object returnNull() { return null; }
 
-    public int[] retrunEmptyArray() { return new int[0]; }
+    /* TODO: MRecognize the following method bodies
+    public int[] retrunEmptyArray() {
+        //return new int[0];
+        //return new int[]{};
+    }
+    */
 
     boolean aBoolean;
     byte aByte;
