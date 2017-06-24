@@ -14,6 +14,8 @@ public class StopMethods {
 
     public int returnPositiveInt() { return  11; }
 
+    public int returnOne() { return 1; }
+
     public long returnPositiveLong() { return 1234567890L; }
 
     public long returnNegativeLong() { return -1234567890L; }

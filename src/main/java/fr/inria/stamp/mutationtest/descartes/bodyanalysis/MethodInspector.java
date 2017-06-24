@@ -85,8 +85,7 @@ public class MethodInspector extends MethodVisitor {
 
     @Override
     public void	visitLdcInsn(Object cst) {
-        recognizer.advance(Type.getType(cst.getClass()).getOpcode(Opcodes.LDC));
-        //TODO: Which opcode should we pass to the recognizer here?
+        recognizer.advance(Opcodes.LDC);
     }
 
     @Override
