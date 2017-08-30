@@ -61,7 +61,7 @@ class A {
 ### `empty` mutation operator
 
 This is a special operator which targets methods that return arrays. It replaces the entire body with a `return` statement that produces an empty array of the corresponding type.
-For example, te following class:
+For example, the following class:
 
 ``` java
 class A {
@@ -129,7 +129,7 @@ The following configuration:
 will instruct the tool to use the `void` operator and the constant operator will replace the body of every `int` returning method with `return 4;` and will use `"some string"` and `false` for every `string` and `boolean` method.
 If no operator is specified, the tool will use `void` and `null` by default. Which is equivalent to:
 
-```
+``` xml
 <mutators>
     <mutator>void</mutator>
     <mutator>null</mutator>
@@ -159,7 +159,7 @@ mvn install
 After installing the package, PIT should be configured to use Descartes. This step depends on which build system is being used for the project under test.
 
 ### Maven
-Follow the [instructions](http://pitest.org/quickstart/maven/) to configure PIT for the project. Then specify `descartes` as the engine inside a `mutationEgine` tag in the `pom.xml` file:
+Follow the [instructions](http://pitest.org/quickstart/maven/) to configure PIT for the project. Then specify `descartes` as the engine inside a `mutationEngine` tag in the `pom.xml` file:
 
 ``` xml
 <plugin>
@@ -187,43 +187,43 @@ An example of a working configuration that uses all operators could be:
 
 ``` xml
 <plugin>
-        <groupId>org.pitest</groupId>
-        <artifactId>pitest-maven</artifactId>
-        <version>1.2.0</version>
-        <configuration>
-          <mutationEngine>descartes</mutationEngine>
-          <mutators>
-            <mutator>void</mutator>
-            <mutator>null</mutator>
-            <mutator>true</mutator>
-            <mutator>false</mutator>
-            <mutator>empty</mutator>
-            <mutator>0</mutator>
-            <mutator>1</mutator>
-            <mutator>(byte)0</mutator>
-            <mutator>(byte)1</mutator>
-            <mutator>(short)1</mutator>
-            <mutator>(short)2</mutator>
-            <mutator>0L</mutator>
-            <mutator>1L</mutator>
-            <mutator>0.0</mutator>
-            <mutator>1.0</mutator>
-            <mutator>0.0f</mutator>
-            <mutator>1.0f</mutator>
-            <mutator>'\40'</mutator>
-            <mutator>'A'</mutator>
-            <mutator>""</mutator>
-            <mutator>"A"</mutator>
-          </mutators>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>fr.inria.stamp</groupId>
-            <artifactId>descartes</artifactId>
-            <version>0.2-SNAPSHOT</version>
-          </dependency>
-        </dependencies>
-      </plugin>
+  <groupId>org.pitest</groupId>
+  <artifactId>pitest-maven</artifactId>
+  <version>1.2.0</version>
+  <configuration>
+    <mutationEngine>descartes</mutationEngine>
+    <mutators>
+      <mutator>void</mutator>
+      <mutator>null</mutator>
+      <mutator>true</mutator>
+      <mutator>false</mutator>
+      <mutator>empty</mutator>
+      <mutator>0</mutator>
+      <mutator>1</mutator>
+      <mutator>(byte)0</mutator>
+      <mutator>(byte)1</mutator>
+      <mutator>(short)1</mutator>
+      <mutator>(short)2</mutator>
+      <mutator>0L</mutator>
+      <mutator>1L</mutator>
+      <mutator>0.0</mutator>
+      <mutator>1.0</mutator>
+      <mutator>0.0f</mutator>
+      <mutator>1.0f</mutator>
+      <mutator>'\40'</mutator>
+      <mutator>'A'</mutator>
+      <mutator>""</mutator>
+      <mutator>"A"</mutator>
+    </mutators>
+  </configuration>
+  <dependencies>
+    <dependency>
+      <groupId>fr.inria.stamp</groupId>
+      <artifactId>descartes</artifactId>
+      <version>0.2-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+</plugin>
 ```
 With PIT and Descartes configured, just run the regular mutation coverage goal in the folder of the project under test:
 
