@@ -106,6 +106,8 @@ mvn clean package
 cd dhell
 mvn test org.pitest:pitest-maven:mutationCoverage
 ```
+3. Check the report
+PIT will output an html report to target/pit-reports/YYYYMMDDHHMI folder.
 
 ### Conclusion
 We hope this quick overview has increased your interest in Descardes usage. Note that this is a very truncated quick-start guide. Now you are ready for more comprehensive details concerning the actions you have just performed. Check out the Descardes Readme Guide.
