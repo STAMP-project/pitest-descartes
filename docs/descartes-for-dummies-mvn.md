@@ -43,7 +43,6 @@ mvn clean package
 
 1. Descartes is a plugin for PIT so they have to be used together. To configure PIT to use Descartes modify the pom.xml of the project adding this configurazion.
 
-From the root folder copy the configuration to the file dhell/dspot.properties
 ```xml
 <project>
   ...
@@ -62,6 +61,7 @@ From the root folder copy the configuration to the file dhell/dspot.properties
           <targetTests>
             <param>myWorld.*</param>
           </targetTests>
+          <mutationEngine>descartes</mutationEngine>
           <mutators>
             <mutator>void</mutator>
             <mutator>null</mutator>
@@ -85,7 +85,13 @@ From the root folder copy the configuration to the file dhell/dspot.properties
             <mutator>"A"</mutator>
           </mutators>
         </configuration>
-        ...
+        <dependencies>
+          <dependency>
+            <groupId>fr.inria.stamp</groupId>
+            <artifactId>descartes</artifactId>
+            <version>0.2-SNAPSHOT</version>
+          </dependency>
+        </dependencies>
       </plugin>
       ...
     </plugins>
@@ -95,27 +101,11 @@ From the root folder copy the configuration to the file dhell/dspot.properties
 </project>
 ```
 
-2. Execute Descartes
+2. Execute PIT using Descartesas mutationEngine
 ```
-cd dspot
-java -jar target/dspot-1.0.0-jar-with-dependencies.jar  -p ../dhell/dspot.properties -i 1 -t myWorld.HelloAppTest
+cd dhell
+mvn test org.pitest:pitest-maven:mutationCoverage
 ```
-The execution uses these parameters:
-* p: [mandatory] specify the path to the configuration file.
-* i: specify the number of amplification iteration.
-* t: fully qualified names of test classes to be amplified.
-
-3. Check the Output
-```
-======= REPORT =======
-PitMutantScoreSelector: 
-The original test suite kill 106 mutants
-The amplification results with 33 new tests
-it kill 18 more mutants
-```
-
-4. Check the amplified test
-Open dspot/dspot-out/myWorld/AmplHelloAppTest.java
 
 ### Conclusion
-We hope this quick overview has increased your interest in DSpot usage. Note that this is a very truncated quick-start guide. Now you are ready for more comprehensive details concerning the actions you have just performed. Check out the DSpot Readme Guide.
+We hope this quick overview has increased your interest in Descardes usage. Note that this is a very truncated quick-start guide. Now you are ready for more comprehensive details concerning the actions you have just performed. Check out the Descardes Readme Guide.
