@@ -25,7 +25,7 @@ cd  pitest-descartes
 mvn install
 ```
 ### Execute an analysis with Descartes
-#### Clone and Compile Maven Project (DHEG)
+#### Clone and Compile Gradle Project (DHEG)
 
 1. From the root folder, clone the project
 ```
@@ -74,19 +74,40 @@ gradle init
 
 ```
 5. Build the project
-
+```
+gradle build
+```
 
 #### Execute Descartes
 
-1. Descartes is a plugin for PIT so they have to be used together. To configure PIT to use Descartes modify the pom.xml of the project adding this configurazion (or copy [this file](dhell-pom.xml) to dhell folder and rename it to pom.xml)
+1. Descartes is a plugin for PIT so they have to be used together. To configure PIT to use Descartes modify build.gradle file of the project adding this configurazion (or copy [this file](dheg-build.gradle) to dheg folder and rename it to build.gradle)
 
-```xml
+```groovy
+buildscript {
+  repositories {
+    mavenCentral()
+    mavenLocal()
+  }
 
+//  configurations.maybeCreate("pitest")
+
+  dependencies {
+    classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.9'
+//    pitest 'fr.inria.stamp:descartes:0.2-SNAPSHOT'
+  }
+}
+
+apply plugin: "info.solidsoft.pitest"
+
+pitest {
+  targetClasses = ['myWorld*']
+//  mutationEngine = "descartes"
+}
 ```
 
 2. Execute PIT using Descartesas mutationEngine
 ```
-cd dhell
+cd dheg
 gradle pitest
 ```
 3. Check the report
