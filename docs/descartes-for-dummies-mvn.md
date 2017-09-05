@@ -21,7 +21,7 @@ cd  pitest-descartes
 ```
 3. Create descartes jar and install in local maven repository
 ```
-mvn package
+mvn install
 ```
 ### Execute an analysis with Descartes
 #### Clone and Compile Maven Project (DHELL)
@@ -41,7 +41,7 @@ mvn clean package
 
 #### Execute Descartes
 
-1. Descartes is a plugin for PIT so they have to be used together. To configure PIT to use Descartes modify the pom.xml of the project adding this configurazion.
+1. Descartes is a plugin for PIT so they have to be used together. To configure PIT to use Descartes modify the pom.xml of the project adding this configurazion (or copy the file to dhell folder and rename it to pom.xml)
 
 ```xml
 <project>
