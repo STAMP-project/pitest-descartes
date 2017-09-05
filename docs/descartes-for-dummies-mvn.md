@@ -41,7 +41,7 @@ mvn clean package
 
 #### Execute Descartes
 
-1. Descartes is a plugin for PIT so they have to be used together. To configure PIT to use Descartes modify the pom.xml of the project adding this configurazion (or copy the file to dhell folder and rename it to pom.xml)
+1. Descartes is a plugin for PIT so they have to be used together. To configure PIT to use Descartes modify the pom.xml of the project adding this configurazion (or copy [this file](dhell-pom.xml) to dhell folder and rename it to pom.xml)
 
 ```xml
 <project>
