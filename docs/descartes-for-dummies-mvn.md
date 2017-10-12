@@ -41,7 +41,7 @@ mvn clean package
 
 #### Execute Descartes
 
-1. Descartes is a plugin for PIT so they have to be used together. To configure PIT to use Descartes modify the pom.xml of the project adding this configurazion (or copy [this file](dhell-pom.xml) to dhell folder and rename it to pom.xml)
+1. Descartes is a plugin for PIT so they have to be used together. To configure PIT to use Descartes modify the pom.xml of the project adding this configuration (or copy [this file](dhell-pom.xml) to dhell folder and rename it to pom.xml)
 
 ```xml
 <project>
@@ -55,12 +55,6 @@ mvn clean package
         <artifactId>pitest-maven</artifactId>
         <version>1.2.0</version>  
         <configuration>
-          <targetClasses>
-            <param>myWorld.*</param>
-          </targetClasses>
-          <targetTests>
-            <param>myWorld.*</param>
-          </targetTests>
           <mutationEngine>descartes</mutationEngine>
           <mutators>
             <mutator>void</mutator>
