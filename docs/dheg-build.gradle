@@ -34,8 +34,7 @@ buildscript {
 apply plugin: "info.solidsoft.pitest"
 
 pitest {
-  targetClasses = ['myWorld*']
-//  mutationEngine = "descartes"
+  mutationEngine = "descartes"
 }
 
 // In this section you declare the dependencies for your production and test code
