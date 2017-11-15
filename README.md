@@ -151,39 +151,19 @@ mvn test
 
 ## Usage
 
-Descartes is a plugin for PIT so they have to be used together. The easiest setup is to install the compiled package in the local Apache Maven repository. In a terminal switch to the `pitest-descartes` folder as before and run:
+Descartes is a plugin for PIT so they have to be used together. 
+
+First install the Descartes in the local Apache Maven repository. In a terminal switch to the `pitest-descartes` folder as before and run:
 
 ```
+git clone https://github.com/STAMP-project/pitest-descartes/
+cd pitest-descartes/
 mvn install
 ```
-After installing the package, PIT should be configured to use Descartes. This step depends on which build system is being used for the project under test.
+After installing the package, PIT should be able to find the Descartes mutation engine. This step depends on which build system is being used for the project under test.
 
 ### Maven
-Follow the [instructions](http://pitest.org/quickstart/maven/) to configure PIT for the project. Then specify `descartes` as the engine inside a `mutationEngine` tag in the `pom.xml` file:
-
-``` xml
-<plugin>
-  <groupId>org.pitest</groupId>
-  <artifactId>pitest-maven</artifactId>
-  <version>1.2.0</version>  
-  <configuration>
-    ...
-    <mutationEngine>descartes</mutationEngine>  
-    ...
-  </configuration>
-  ...
-</plugin>
-```
-after this, add the artifact information as a dependency to PIT:
-``` xml
-<dependency>
-  <groupId>fr.inria.stamp</groupId>
-  <artifactId>descartes</artifactId>
-  <version>0.2-SNAPSHOT</version>
-</dependency>
-```
-
-An example of a working configuration that uses all operators could be:
+Then, configure PIT for the project and specify `descartes` as the engine inside a `mutationEngine` tag in the `pom.xml` file.
 
 ``` xml
 <plugin>
@@ -228,15 +208,12 @@ An example of a working configuration that uses all operators could be:
 With PIT and Descartes configured, just run the regular mutation coverage goal in the folder of the project under test:
 
 ```
-mvn org.pitest:pitest-maven:mutationCoverage
-```
-The mutation engine could be also specified when invoking the goal from the command line. To achieve this just add `-DmutationEngine=descartes` to the invocation line:
-```
+cd my-project-under-test
+mvn clean package # ensures clean state
 mvn org.pitest:pitest-maven:mutationCoverage -DmutationEngine=descartes
 ```
-This will still require to specify Descartes as a dependency for PIT in the `pom.xml` file.
 
-The rest of the goals defined by the `pitest-maven` plugin should run in the same way without any issues.
+The rest of the goals defined by the `pitest-maven` plugin should run in the same way without any issues, see <http://pitest.org/quickstart/maven/>.
 
 ### Gradle
 
