@@ -47,15 +47,18 @@ gradle build
 ```groovy
 buildscript {
   repositories {
+    maven {
+      url "https://plugins.gradle.org.m2/"
+    }
     mavenCentral()
     mavenLocal()
   }
 
-//  configurations.maybeCreate("pitest")
+  configurations.maybeCreate("pitest")
 
   dependencies {
-    classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.9'
-//    pitest 'fr.inria.stamp:descartes:0.2-SNAPSHOT'
+    classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.11'
+    pitest 'fr.inria.stamp:descartes:0.1-SNAPSHOT'
   }
 }
 
@@ -63,7 +66,7 @@ apply plugin: "info.solidsoft.pitest"
 
 pitest {
   targetClasses = ['myWorld*']
-//  mutationEngine = "descartes"
+  mutationEngine = "descartes"
 }
 ```
 
