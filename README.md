@@ -256,3 +256,10 @@ Descartes can be used when invoking PIT from the command line. To do this, follo
 ## Maven repository
 
 Compiled modules are available from [a custom Maven repository](https://stamp-project.github.io/stamp-maven-repository/). Detailed instructions can be found [here](https://github.com/STAMP-project/stamp-maven-repository).
+
+## External Links
+
+Articles mentioning Descartes:
+
+* [Mutation testing with PIT and Descartes](http://massol.myxwiki.org/xwiki/bin/view/Blog/MutationTestingDescartes)
+* [Controlling Test Quality](http://massol.myxwiki.org/xwiki/bin/view/Blog/ControllingTestQuality)
