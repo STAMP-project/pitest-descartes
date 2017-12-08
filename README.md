@@ -263,3 +263,9 @@ Articles mentioning Descartes:
 
 * [Mutation testing with PIT and Descartes](http://massol.myxwiki.org/xwiki/bin/view/Blog/MutationTestingDescartes)
 * [Controlling Test Quality](http://massol.myxwiki.org/xwiki/bin/view/Blog/ControllingTestQuality)
+
+
+### Funding
+
+Dspot is partially funded by research project STAMP (European Commission - H2020)
+![STAMP - European Commission - H2020](docs/logo_readme_md.png)
