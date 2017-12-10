@@ -267,5 +267,5 @@ Articles mentioning Descartes:
 
 ### Funding
 
-Dspot is partially funded by research project STAMP (European Commission - H2020)
+Descartes is partially funded by research project STAMP (European Commission - H2020)
 ![STAMP - European Commission - H2020](docs/logo_readme_md.png)
