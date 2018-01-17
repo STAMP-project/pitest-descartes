@@ -1,7 +1,6 @@
 package fr.inria.stamp.mutationtest.descartes.reporting;
 
 import org.pitest.coverage.TestInfo;
-import org.pitest.functional.Option;
 import org.pitest.mutationtest.*;
 import org.pitest.mutationtest.engine.MutationDetails;
 import org.pitest.util.Unchecked;
@@ -141,10 +140,12 @@ public class MethodTestingListener implements MutationResultListener {
 
             if(notDetected.size() > 0) {
                 classification = MethodClassification.PSEUDO_TESTED;
+
+                if(detected.size() > 0) {
+                    classification = MethodClassification.PARTIALLY_TESTED;
+                }
             }
-            if(detected.size() > 0) {
-                classification = MethodClassification.PARTIALLY_TESTED;
-            }
+
         }
 
         report.writeStringListAttribute("detected", detected);
