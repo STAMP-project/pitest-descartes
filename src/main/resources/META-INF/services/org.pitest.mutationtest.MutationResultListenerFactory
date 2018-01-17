@@ -1,1 +1,2 @@
 fr.inria.stamp.mutationtest.descartes.reporting.JSONReportFactory
+fr.inria.stamp.mutationtest.descartes.reporting.MethodTestingFactory

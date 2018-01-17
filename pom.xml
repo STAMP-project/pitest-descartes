@@ -7,7 +7,7 @@
     <organization><name>fr.inria.stamp</name></organization>
     <groupId>fr.inria.stamp</groupId>
     <artifactId>descartes</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.2-R-SNAPSHOT</version>
     <description>Mutation engine for extreme mutation operators</description>
 
     <properties>

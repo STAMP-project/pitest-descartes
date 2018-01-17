@@ -4,6 +4,8 @@ package fr.inria.stamp.mutationtest.descartes.reporting;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.Collection;
+import java.util.List;
 import java.util.Stack;
 import java.util.EnumSet;
 
@@ -86,6 +88,20 @@ public class JSONWriter {
         endStructure();
     }
 
+    public void writeStringList(Collection<String> values) throws IOException {
+        beginList();
+
+        for(String value : values) {
+            write(value);
+        }
+
+        endList();
+    }
+
+    public void writeStringListAttribute(String key, Collection<String> values) throws IOException {
+        beginAttribute(key); writeStringList(values);
+    }
+
     public void beginAttribute(String key) throws IOException {
         if(state != WriterState.Object && state != WriterState.EmptyObject)
             throw new IllegalStateException("Attributes can only be added to objects");
@@ -125,7 +141,12 @@ public class JSONWriter {
     }
 
     public void write(String value) throws IOException {
-        writeValue(String.format("\"%1$s\"", escapeString(value)));
+        if(value == null) {
+            writeValue("null");
+        }
+        else {
+            writeValue(String.format("\"%1$s\"", escapeString(value)));
+        }
     }
 
     public void write(int value) throws IOException {
