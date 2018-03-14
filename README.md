@@ -2,6 +2,7 @@
   - [What is Descartes?](#what-is-descartes)
   - [Quick start with Maven](#quick-start-with-maven)
   - [How does Descartes work?](#how-does-descartes-work)
+  - [Descartes Output](#descartes-output)
   - [Running Descartes on your project](#running-descartes-on-your-project)
   - [More...](#more...)
 
