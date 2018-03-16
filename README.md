@@ -4,7 +4,8 @@
   - [How does Descartes work?](#how-does-descartes-work)
   - [Descartes Output](#descartes-output)
   - [Running Descartes on your project](#running-descartes-on-your-project)
-  - [More...](#more...)
+  - [Releases](#releases)
+  - [More...](#more)
 
 ## What is Descartes?
 Descartes evaluates the capability of your test suite to detect bugs using extreme mutation testing.
@@ -375,6 +376,9 @@ include Descartes in the classpath specification and add `--mutationEngine=desca
 ### Maven repository
 Compiled modules are available from [a custom Maven repository](https://stamp-project.github.io/stamp-maven-repository/).
 Detailed instructions can be found [here](https://github.com/STAMP-project/stamp-maven-repository).
+
+## Releases
+* [Stable release candidate 0.2](https://github.com/STAMP-project/pitest-descartes/releases/tag/0.2-D1.2)
 
 ## More...
 ### External Links
