@@ -1,3 +1,5 @@
+# Descartes: A Mutation Engine for PIT [![Build Status](https://travis-ci.org/STAMP-project/pitest-descartes.svg?branch=master)](https://travis-ci.org/STAMP-project/pitest-descartes) [![Coverage Status](https://coveralls.io/repos/github/STAMP-project/pitest-descartes/badge.svg?branch=master)](https://coveralls.io/github/STAMP-project/pitest-descartes?branch=master)
+
 ## Table of contents
   - [What is Descartes?](#what-is-descartes)
   - [Quick start with Maven](#quick-start-with-maven)
