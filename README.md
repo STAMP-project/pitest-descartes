@@ -1,3 +1,5 @@
+# Descartes: A Mutation Engine for PIT [![Build Status](https://travis-ci.org/STAMP-project/pitest-descartes.svg?branch=master)](https://travis-ci.org/STAMP-project/pitest-descartes) [![Coverage Status](https://coveralls.io/repos/github/STAMP-project/pitest-descartes/badge.svg?branch=master)](https://coveralls.io/github/STAMP-project/pitest-descartes?branch=master)
+
 ## Table of contents
   - [What is Descartes?](#what-is-descartes)
   - [Quick start with Maven](#quick-start-with-maven)
@@ -215,15 +217,14 @@ class A {
 ```
 
 ## Descartes Output
-As Descartes is a PIT plugin, the results provided are the same than PIT:  
-![PIT inputs and outputs](docs/readme_pit_output_01.png)  
-The PIT reporting includes:
+The PIT-Descartes reporting includes:
   - a summary report with line coverage and mutation coverage scores  
    ![PIT inputs and outputs](docs/readme_pit_output_03.png)  
   - a detailed report on line coverage and mutation coverage for each source file  
    ![PIT inputs and outputs](docs/readme_pit_output_02.png)  
     Light green shows line coverage, dark green shows mutation coverage.  
     Light pink show lack of line coverage, dark pink shows lack of mutation coverage.
+  - the mutation testing data in JSON in file `target/pit-report/mutations.json` (can be configured to any file)
 
 ## Running Descartes on your project
 ### Installing Descartes
