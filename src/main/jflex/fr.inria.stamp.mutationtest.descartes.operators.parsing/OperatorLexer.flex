@@ -1,7 +1,7 @@
-package fr.inria.stamp.mutationtest.descartes.operators.parsing;
+package eu.stamp_project.mutationtest.descartes.operators.parsing;
 
 import java.util.LinkedHashMap;
-import fr.inria.stamp.utils.Converter;
+import eu.stamp_project.utils.Converter;
 %%
 
 %class OperatorLexer
