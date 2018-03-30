@@ -217,14 +217,17 @@ class A {
 ```
 
 ## Descartes Output
-The PIT-Descartes reporting includes:
+
+PIT reporting extensions work with Descartes and include:
   - a summary report with line coverage and mutation coverage scores  
    ![PIT inputs and outputs](docs/readme_pit_output_03.png)  
   - a detailed report on line coverage and mutation coverage for each source file  
    ![PIT inputs and outputs](docs/readme_pit_output_02.png)  
     Light green shows line coverage, dark green shows mutation coverage.  
     Light pink show lack of line coverage, dark pink shows lack of mutation coverage.
-  - the mutation testing data in JSON in file `target/pit-report/mutations.json` (can be configured to any file)
+Descartes also provides two new reporting extensions:
+  - a general reporting extension supporting JSON files. It works also with **Gregor**, the default mutation engine for PIT. To use just set `JSON` as report format for PIT.
+  - a reporting extension desgined for Descartes that generates a JSON file with information about pseudo and partially tested methods. To use just set `METHOD` as report format for PIT.
 
 ## Running Descartes on your project
 ### Installing Descartes
