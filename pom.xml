@@ -4,12 +4,13 @@
 
     <groupId>eu.stamp-project</groupId>
     <artifactId>descartes</artifactId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <!-- Name must match artifactId so PIT can find the plugin -->
     <!--<name>${project.groupId}:${project.artifactId}</name>-->
 
+    <name>descartes</name>
     <description>Mutation engine for PITest implementing extreme mutation operators</description>
     <url>https://github.com/STAMP-project/pitest-descartes.git</url>
 
@@ -46,7 +47,7 @@
         <connection>scm:git:git://github.com:STAMP-project/pitest-descartes.git</connection>
         <developerConnection>scm:git:git@github.com:STAMP-project/pitest-descartes.git</developerConnection>
         <url>https://github.com/STAMP-project/pitest-descartes</url>
-        <tag>1.0</tag>
+        <tag>descartes-1.0</tag>
     </scm>
 
     <repositories>
