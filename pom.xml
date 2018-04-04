@@ -10,6 +10,7 @@
     <!-- Name must match artifactId so PIT can find the plugin -->
     <!--<name>${project.groupId}:${project.artifactId}</name>-->
 
+    <name>${project.groupId}:${project.artifactId}</name>
     <description>Mutation engine for PITest implementing extreme mutation operators</description>
     <url>https://github.com/STAMP-project/pitest-descartes.git</url>
 
