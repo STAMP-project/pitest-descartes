@@ -80,9 +80,9 @@ Then, configure PIT for the project and specify `descartes` as the engine inside
   </configuration>
   <dependencies>
     <dependency>
-      <groupId>fr.inria.stamp</groupId>
+      <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>0.2-SNAPSHOT</version>
+      <version>1.1</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -290,9 +290,9 @@ Then, configure PIT for the project and specify `descartes` as the engine inside
   </configuration>
   <dependencies>
     <dependency>
-      <groupId>fr.inria.stamp</groupId>
+      <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>0.2-SNAPSHOT</version>
+      <version>1.1</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -343,7 +343,7 @@ for a project that uses [Gradle](https://gradle.org/).
 In the `build.gradle` file add the local Maven repository to the `buildscript` block and set
 a `pitest` configuration element inside the same block. In the `dependencies` block put the artifact information:
 ```
-pitest 'fr.inria.stamp:descartes:0.2-SNAPSHOT'
+pitest 'eu.stamp-project:descartes:1.1'
 ```
 then specify `descartes` in the `mutationEngine` option inside the plugin configuration.
 An example of the final configuration could be:
@@ -358,7 +358,7 @@ buildscript {
 
   dependencies {
     classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.9'
-    pitest 'fr.inria.stamp:descartes:0.2-SNAPSHOT'
+    pitest 'eu.stamp-project:descartes:1.1'
   }
 }
 
