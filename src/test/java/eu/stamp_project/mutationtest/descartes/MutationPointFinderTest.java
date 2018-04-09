@@ -92,7 +92,7 @@ public class MutationPointFinderTest {
         try {
 
             ClassReader reader = new ClassReader(className);
-            MutationPointFinder finder = new MutationPointFinder(new ClassName(className), engine);
+            MutationPointFinder finder = new MutationPointFinder(ClassName.fromString(className), engine);
             reader.accept(finder, 0);
             assertAfterSorting(expectedMethods, getDescriptions(finder.getMutationPoints()));
         }catch(java.io.IOException exc) {

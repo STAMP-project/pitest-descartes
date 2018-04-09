@@ -19,14 +19,11 @@ public class DescartesMutationEngine implements  MutationEngine {
 
     private final Predicate<Method> excludedMethods;
 
-    private final Set<String> logginClasses;
-
-
     private final Collection<MutationOperator> operators;
 
 
     public DescartesMutationEngine(Collection<MutationOperator> operators) {
-        this(False.<Method>instance(), Collections.<String>emptySet(), operators);
+        this(False.<Method>instance(), operators);
     }
 
     @SuppressWarnings("unchecked")
@@ -35,17 +32,15 @@ public class DescartesMutationEngine implements  MutationEngine {
     }
 
     @SuppressWarnings("unchecked")
-    public DescartesMutationEngine(Predicate<Method> excludedMethods, Set<String> logginClasses, MutationOperator...operators) {
-        this(excludedMethods, logginClasses, Arrays.<MutationOperator>asList(operators));
+    public DescartesMutationEngine(Predicate<Method> excludedMethods, MutationOperator...operators) {
+        this(excludedMethods, Arrays.<MutationOperator>asList(operators));
     }
 
-    public DescartesMutationEngine(Predicate<Method> excludedMethods, Set<String> logginClasses, Collection<MutationOperator> operators) {
+    public DescartesMutationEngine(Predicate<Method> excludedMethods, Collection<MutationOperator> operators) {
         if(excludedMethods == null) throw new IllegalArgumentException("excludedMethod argument can not be null");
-        if(logginClasses == null) throw  new IllegalArgumentException("logginClasses argument can not be null");
         if(operators == null) throw new IllegalArgumentException("operators argument can not be null");
 
         this.excludedMethods = excludedMethods;
-        this.logginClasses = logginClasses;
         this.operators = operators;
 
     }
@@ -62,17 +57,9 @@ public class DescartesMutationEngine implements  MutationEngine {
         });
     }
 
-    public boolean mayMutateClass(final String className) {
-        return !FCollection.contains(logginClasses, new Predicate<String>() {
-            public Boolean apply(String prefix) {
-                return className.startsWith(prefix);
-            }
-        });
-    }
-
     public Collection<MutationOperator> getOperatorsFor(final Method method) {
         if(excludedMethods.apply(method))
-            return new ArrayList<MutationOperator>(0);
+            Collections.<MutationOperator>emptyList();
         return FCollection.filter(operators, new Predicate<MutationOperator>() {
             public Boolean apply(MutationOperator operator) {
                 return operator.canMutate(method);
@@ -85,4 +72,6 @@ public class DescartesMutationEngine implements  MutationEngine {
         return "DescartesMutationEngine"; //TODO: Add more details here
     }
 
+    @Override
+    public String getName() { return "descartes"; }
 }
