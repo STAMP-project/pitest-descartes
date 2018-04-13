@@ -15,7 +15,7 @@
 ## What is Descartes?
 Descartes evaluates the capability of your test suite to detect bugs using extreme mutation testing.
 
-Descartes is a mutation engine plugin for [PIT](http://pitest.org) which implements extreme mutation operators.
+Descartes is a mutation engine plugin for [PIT](http://pitest.org) which implements extreme mutation operators as proposed in the paper [Will my tests tell me if I break this code?](http://dl.acm.org/citation.cfm?doid=2896941.2896944).  
 [PIT](http://pitest.org) is a mutation testing system for Java that provides a framework to extend its core functionality using plugins.
 A list of PIT built-in mutation operators can be found in the [tool's web page](http://pitest.org/quickstart/mutators/).
 
@@ -388,6 +388,11 @@ Detailed instructions can be found [here](https://github.com/STAMP-project/stamp
 * [Stable release candidate 0.2](https://github.com/STAMP-project/pitest-descartes/releases/tag/0.2-D1.2)
 
 ## More...
+
+### Performance
+
+A comparison on the number of mutants created and execution time between Descartes and Gregor, the default mutation engine for PITest is available [here](docs/performance-comparison.md).
+
 ### External Links
 
 Articles mentioning Descartes:
