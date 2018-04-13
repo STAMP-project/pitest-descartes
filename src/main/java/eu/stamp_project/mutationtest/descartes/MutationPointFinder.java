@@ -14,8 +14,9 @@ import org.pitest.reloc.asm.commons.Method;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-import static eu.stamp_project.utils.Utils.getZeroRange;
 import static eu.stamp_project.utils.Utils.hasFlag;
 
 public class MutationPointFinder extends ClassVisitor {
@@ -71,8 +72,13 @@ public class MutationPointFinder extends ClassVisitor {
     }
 
     private MutationDetails getMutationDetails(Method method, MutationOperator operator, int start, int end) {
+
+
         Location location = new Location(className, MethodName.fromString(method.getName()), method.getDescriptor());
-        MutationIdentifier id = new MutationIdentifier(location, getZeroRange(start, end), operator.getID());
+        MutationIdentifier id = new MutationIdentifier(
+                location,
+                IntStream.rangeClosed(1, end - start + 1).boxed().collect(Collectors.toList()),
+                operator.getID());
         return new MutationDetails(id, source, operator.getDescription(), start, 1); //TODO: check if this start can be changed by 0
     }
 
