@@ -391,7 +391,7 @@ Detailed instructions can be found [here](https://github.com/STAMP-project/stamp
 
 ### Performance
 
-A comparison on the number of mutants created and execution time between Descartes and Gregor, the default mutation engine for PITest is available [here](docs/performance-comaprison.md).
+A comparison on the number of mutants created and execution time between Descartes and Gregor, the default mutation engine for PITest is available [here](docs/performance-comparison.md).
 
 ### External Links
 
