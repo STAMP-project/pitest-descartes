@@ -47,7 +47,7 @@ public class DescartesEngineFactory implements MutationEngineFactory{
                 "0.0", "1.0",
                 "0.0f", "1.0f",
                 "'\\40'", "'A'",
-                "", "A");
+                "\"\"", "\"A\"");
     }
 
 
