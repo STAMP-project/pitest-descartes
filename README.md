@@ -388,6 +388,11 @@ Detailed instructions can be found [here](https://github.com/STAMP-project/stamp
 * [Stable release candidate 0.2](https://github.com/STAMP-project/pitest-descartes/releases/tag/0.2-D1.2)
 
 ## More...
+
+### Performance
+
+A comparison on the number of mutants created and execution time between Descartes and Gregor, the default mutation engine for PITest is available [here](docs/performance-comaprison.md).
+
 ### External Links
 
 Articles mentioning Descartes:
