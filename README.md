@@ -385,7 +385,9 @@ Compiled modules are available from [a custom Maven repository](https://stamp-pr
 Detailed instructions can be found [here](https://github.com/STAMP-project/stamp-maven-repository).
 
 ## Releases
+* [Descartes 1.1](https://github.com/STAMP-project/pitest-descartes/releases/tag/descartes-1.1)
 * [Stable release candidate 0.2](https://github.com/STAMP-project/pitest-descartes/releases/tag/0.2-D1.2)
+
 
 ## More...
 
