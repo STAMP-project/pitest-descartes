@@ -3,6 +3,8 @@ package eu.stamp_project.mutationtest.descartes;
 import java.util.*;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import org.pitest.classinfo.ClassByteArraySource;
 import org.pitest.functional.F;
 import org.pitest.functional.predicate.False;
@@ -50,21 +52,13 @@ public class DescartesMutationEngine implements  MutationEngine {
     }
 
     public Collection<String> getMutatorNames() {
-        return FCollection.map(operators, new F<MutationOperator, String>() {
-            public String apply(MutationOperator operator) {
-                return operator.getID();
-            }
-        });
+       return operators.stream().map(op -> op.getID()).collect(Collectors.toList());
     }
 
     public Collection<MutationOperator> getOperatorsFor(final Method method) {
         if(excludedMethods.apply(method))
-            Collections.<MutationOperator>emptyList();
-        return FCollection.filter(operators, new Predicate<MutationOperator>() {
-            public Boolean apply(MutationOperator operator) {
-                return operator.canMutate(method);
-            }
-        });
+            return Collections.<MutationOperator>emptyList();
+        return operators.stream().filter(op -> op.canMutate(method)).collect(Collectors.toList());
     }
 
     @Override

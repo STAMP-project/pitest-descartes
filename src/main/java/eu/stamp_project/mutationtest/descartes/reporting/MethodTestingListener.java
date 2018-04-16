@@ -30,8 +30,6 @@ public class MethodTestingListener implements MutationResultListener {
         }catch(IOException exc) {
             throw Unchecked.translateCheckedException(exc);
         }
-
-
     }
 
     private String getMethodKey(MutationResult result) {
