@@ -21,12 +21,14 @@ public class DescartesEngineFactory implements MutationEngineFactory{
     public MutationEngine createEngine(EngineArguments engineArguments) {
 
         Collection<String> operators = engineArguments.mutators();
-        if(operators.size() == 0)
+        if(operators.isEmpty())
             operators = getDefaultOperators();
 
         return createEngine(
                 globsToPredicate(engineArguments.excludedMethods()),
-                operators.stream().map(MutationOperator::fromID).collect(Collectors.toList()));
+                operators.stream()
+                        .map(MutationOperator::fromID)
+                        .collect(Collectors.toList()));
     }
 
     public MutationEngine createEngine(Predicate<Method> excludedMethods,

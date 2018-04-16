@@ -52,7 +52,7 @@ public class MutationPointFinder extends ClassVisitor {
 
         Method method = new Method(name, desc);
         //Check if there are available operators for this method
-        if(engine.getOperatorsFor(method).size() == 0)
+        if(engine.getOperatorsFor(method).isEmpty())
             return null;
 
         return new MethodInspector(method, this);
@@ -72,7 +72,6 @@ public class MutationPointFinder extends ClassVisitor {
     }
 
     private MutationDetails getMutationDetails(Method method, MutationOperator operator, int start, int end) {
-
 
         Location location = new Location(className, MethodName.fromString(method.getName()), method.getDescriptor());
         MutationIdentifier id = new MutationIdentifier(
