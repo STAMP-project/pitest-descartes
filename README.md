@@ -219,6 +219,13 @@ class A {
 }
 ```
 
+### Stop Methods
+
+Descartes avoids some methods that are generally not interesting and may
+introduce false positives such as simple getters, simple setters, empty
+void methods or methods returning constant values. Those methods are automatically detected by inspecting their code.
+A complete list of examples can be found [here](src/test/java/eu/stamp_project/mutationtest/test/StopMethods.java).
+
 ## Descartes Output
 
 PIT reporting extensions work with Descartes and include:
