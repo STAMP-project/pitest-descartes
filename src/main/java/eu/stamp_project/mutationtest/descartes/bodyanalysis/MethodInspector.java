@@ -33,6 +33,7 @@ public class MethodInspector extends MethodVisitor {
         }
     }
 
+    /*
     @Override
     public void	visitLineNumber(int line, Label start) {
         lineCounter.registerLine(line);
@@ -108,5 +109,6 @@ public class MethodInspector extends MethodVisitor {
         recognizer.doNotRecognize();
         //TODO: Are ew always interested if there is a catch block? Should we ignore this?
     }
+    */
 
 }

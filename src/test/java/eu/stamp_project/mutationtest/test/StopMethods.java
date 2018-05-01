@@ -128,5 +128,14 @@ public class StopMethods {
         return anObject;
     }
 
+    @Deprecated
+    public boolean isDeprecated() { return  Boolean.valueOf("tr " + "ue"); }
+
+    static int staticField;
+
+    public int getStaticField() { return staticField; }
+
+    public void setStaticField(int value) { staticField = value; }
+
 
 }

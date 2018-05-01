@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static eu.stamp_project.utils.Utils.hasFlag;
+import static eu.stamp_project.utils.Utils.*;
 
 public class MutationPointFinder extends ClassVisitor {
 
@@ -46,8 +46,10 @@ public class MutationPointFinder extends ClassVisitor {
 
     @Override
     public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
-        //Discard abstract and synthetic methods. Access level method filter.
-        if(hasFlag(access, Opcodes.ACC_ABSTRACT) || hasFlag(access, Opcodes.ACC_SYNTHETIC))
+
+        // Abstract methods and constructors are not a target.
+        // All optional targets has been implemented in the for of features.
+        if(hasFlag(access, Opcodes.ACC_ABSTRACT) || isConstructor(name))
             return null;
 
         Method method = new Method(name, desc);

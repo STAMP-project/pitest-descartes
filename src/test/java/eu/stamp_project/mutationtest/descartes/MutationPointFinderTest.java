@@ -1,5 +1,6 @@
 package eu.stamp_project.mutationtest.descartes;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Arrays;
@@ -83,21 +84,16 @@ public class MutationPointFinderTest {
                 },
                 { in(AbstractClass.class), shouldFind("voidMethodWithoutParameters") },
                 { in(Interface.class), NOTHING },
-                { in(StopMethods.class), NOTHING }
+               // { in(StopMethods.class), NOTHING }
         });
     }
 
     @Test()
-    public void shouldFindMutationPoints() {
-        try {
-
-            ClassReader reader = new ClassReader(className);
-            MutationPointFinder finder = new MutationPointFinder(ClassName.fromString(className), engine);
-            reader.accept(finder, 0);
-            assertAfterSorting(expectedMethods, getDescriptions(finder.getMutationPoints()));
-        }catch(java.io.IOException exc) {
-            fail("Unexpected error: " + exc.getMessage());
-        }
+    public void shouldFindMutationPoints() throws IOException {
+        ClassReader reader = new ClassReader(className);
+        MutationPointFinder finder = new MutationPointFinder(ClassName.fromString(className), engine);
+        reader.accept(finder, 0);
+        assertAfterSorting(expectedMethods, getDescriptions(finder.getMutationPoints()));
     }
 
     private static String[] getDescriptions(Collection<MutationDetails> points) {
