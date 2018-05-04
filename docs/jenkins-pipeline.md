@@ -14,7 +14,7 @@ From *Global Tool Configuration* configure:
 * a Maven installation named *MVN3*
 ![Maven installation](jenkins-mvn-config.png)
 
-## DHELL pipeline Job deinition
+## DHELL pipeline Job definition
 Create a Jenkins pipeline job:
 * "Pipeline name": dhell-pipeline
 * "GitHub project": true and set "Project url" to https://github.com/STAMP-project/dhell/
