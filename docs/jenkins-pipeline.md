@@ -8,7 +8,9 @@
 ## Jenkins Configuration:
 From *Global Tool Configuration* configure:
 * a JDK installation named *JDK8*
+![JDK installation](jenkins-jdk-config.png)
 * a Maven installation named *MVN3*
+![Maven installation](jenkins-mvn-config.png)
 
 ## DHELL pipeline Job deinition
 Create a Jenkins pipeline job:
@@ -19,6 +21,7 @@ Create a Jenkins pipeline job:
 	* "SCM": git
 	* "Repositories">"Repository URL":https://github.com/STAMP-project/dhell/
 	* "Script Path": Jenkinsfile
+![Pipeline Job configuration](jenkins-job-config.png)
 
 ## Execute the pipeline
 * Execute "dhell-pipeline" job
