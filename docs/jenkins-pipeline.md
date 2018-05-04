@@ -1,4 +1,6 @@
 # Execute PIT Descartes in a Jenkins pipeline
+In [this file](https://github.com/STAMP-project/dhell/blob/master/Jenkinsfile) is defined a simple Jenkins pipeline job that build and execute pit descartes  on a maven project.
+In the next sections are described the steps to install Jenkins, configure and run the pipeline job.
 
 ## Jenkins Intallation
 * Install Jenkins (as descibed [on this page](https://jenkins.io/doc/book/installing/))
