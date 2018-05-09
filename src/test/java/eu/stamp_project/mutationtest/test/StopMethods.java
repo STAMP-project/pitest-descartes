@@ -137,5 +137,11 @@ public class StopMethods {
 
     public void setStaticField(int value) { staticField = value; }
 
+    @Override
+    public int hashCode() { return 0; }
+
+    @Override
+    public String toString() { return "This is the stop methods class"; }
+
 
 }

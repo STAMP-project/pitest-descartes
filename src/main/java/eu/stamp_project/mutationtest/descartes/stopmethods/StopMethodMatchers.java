@@ -4,7 +4,9 @@ package eu.stamp_project.mutationtest.descartes.stopmethods;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode; //These two may have to be relocated
 import org.objectweb.asm.tree.MethodNode;
-import org.objectweb.asm.Opcodes;
+import static org.objectweb.asm.Opcodes.*;
+
+import org.pitest.bytecode.analysis.InstructionMatchers;
 import org.pitest.sequence.*;
 
 import static org.pitest.sequence.QueryStart.match;
@@ -23,7 +25,7 @@ public interface StopMethodMatchers {
                 return false;
             //Static
             MethodNode methodNode = methodTree.rawNode();
-            if((methodNode.access & Opcodes.ACC_STATIC) != 0)
+            if((methodNode.access & ACC_STATIC) != 0)
                 return false;
             String returnTypeDescription = "L" + classNode.name + ";";
             // Class valueOf(String) or  Class[] values()
@@ -34,7 +36,7 @@ public interface StopMethodMatchers {
     }
 
     static  StopMethodMatcher isToString() {
-        return forNameDesc("toString", "()Ljava/lang/String");
+        return forNameDesc("toString", "()Ljava/lang/String;");
     }
 
     static StopMethodMatcher isHashCode() {
@@ -42,28 +44,46 @@ public interface StopMethodMatchers {
     }
 
     static StopMethodMatcher isDeprecated() {
-        return forAccess(Opcodes.ACC_DEPRECATED);
+        return forAccess(ACC_DEPRECATED);
     }
 
     static StopMethodMatcher isEmptyVoid() {
-        return forBody(QueryStart.match(opCode(Opcodes.RETURN)));
+        return forBody(QueryStart.match(opCode(RETURN)));
     }
 
     static StopMethodMatcher isSynthetic() {
         return (classTree, methodTree) -> methodTree.isSynthetic();
     }
 
+    static Match<AbstractInsnNode> opCodeBetween(int lower, int upper) {
+        return new Match<AbstractInsnNode>() {
+            @Override
+            public boolean test(Context<AbstractInsnNode> c, AbstractInsnNode abstractInsnNode) {
+                int opcode = abstractInsnNode.getOpcode();
+                return opcode >= lower && opcode <= upper;
+            }
+        };
+    }
+
     static StopMethodMatcher isSimpleGetter() {
         return forBody(
-                (match(opCode(Opcodes.GETSTATIC))
-                        .or(match(opCode(Opcodes.ALOAD)).then(opCode(Opcodes.GETFIELD))))
-                    .then(new Match<AbstractInsnNode>() {
-                        @Override
-                        public boolean test(Context<AbstractInsnNode> context, AbstractInsnNode abstractInsnNode) {
-                            int opcode =  abstractInsnNode.getOpcode();
-                            return opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN;
-                        }
-                    }));
+                (match(opCode(GETSTATIC))
+                        .or(match(opCode(ALOAD)).then(opCode(GETFIELD))))
+                    .then(opCodeBetween(IRETURN, RETURN))
+        );
+    }
+
+    static StopMethodMatcher isSimpleSetter() {
+        return forBody(
+                ((match(opCode(ALOAD)).then(opCodeBetween(ILOAD, ALOAD)).then(opCode(PUTFIELD)))
+                        .or(match(opCode(ILOAD)).then(opCode(PUTSTATIC)))
+                ).then(opCode(RETURN))
+        );
+
+    }
+
+    static StopMethodMatcher returnsAConstant() {
+        return forBody(match(opCodeBetween(1, 20)).then(opCodeBetween(IRETURN, RETURN)));
     }
 
 

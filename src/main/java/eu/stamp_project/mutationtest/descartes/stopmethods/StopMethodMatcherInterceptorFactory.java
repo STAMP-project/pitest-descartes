@@ -30,6 +30,7 @@ public class StopMethodMatcherInterceptorFactory implements MutationInterceptorF
         availabeMatchers.put("deprecated", isDeprecated());
         availabeMatchers.put("synthetic", isSynthetic());
         availabeMatchers.put("getter", isSimpleGetter());
+        availabeMatchers.put("setter", isSimpleSetter());
 
         String description = "Allows to reinsert some stop methods to the analysis. Possible values are: ";
         description += availabeMatchers.keySet().stream().collect(Collectors.joining(", "));
@@ -39,7 +40,9 @@ public class StopMethodMatcherInterceptorFactory implements MutationInterceptorF
     @Override
     public MutationInterceptor createInterceptor(InterceptorParameters interceptorParameters) {
         Set<String> matchers = availabeMatchers.keySet();
-        matchers.removeAll(interceptorParameters.getList(EXCEPT));
+        List<String> exclusions = interceptorParameters.getList(EXCEPT);
+        if(exclusions != null)
+            matchers.removeAll(exclusions);
 
         return new StopMethodInterceptor(
                 StopMethodMatcher.any(

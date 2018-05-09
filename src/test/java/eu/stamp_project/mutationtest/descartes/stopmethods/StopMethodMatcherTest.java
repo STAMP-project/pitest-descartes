@@ -47,9 +47,10 @@ public class StopMethodMatcherTest {
         return Arrays.asList(new Object[][]{
                 {StopMethodMatchers.isEmptyVoid(),  "emptyVoidMethod"},
                 {StopMethodMatchers.isDeprecated(), "isDeprecated"},
-                {StopMethodMatchers.isSimpleGetter(), "getStaticField"},
-                {StopMethodMatchers.isSimpleGetter(), "getaString"},
+                {StopMethodMatchers.isToString(), "toString"},
+                {StopMethodMatchers.isHashCode(), "hashCode"}
         });
+
     }
 
     @Parameter
