@@ -33,12 +33,13 @@ public class MethodInspector extends MethodVisitor {
         }
     }
 
-    /*
+
     @Override
     public void	visitLineNumber(int line, Label start) {
         lineCounter.registerLine(line);
     }
 
+    /*
     @Override
     public void	visitInsn(int opcode) {
         recognizer.advance(opcode);
