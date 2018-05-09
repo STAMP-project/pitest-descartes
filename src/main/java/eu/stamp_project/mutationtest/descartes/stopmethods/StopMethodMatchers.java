@@ -25,7 +25,7 @@ public interface StopMethodMatchers {
                 return false;
             //Static
             MethodNode methodNode = methodTree.rawNode();
-            if((methodNode.access & ACC_STATIC) != 0)
+            if((methodNode.access & ACC_STATIC) == 0) //Both methods are static, if it is not an static method, then false
                 return false;
             String returnTypeDescription = "L" + classNode.name + ";";
             // Class valueOf(String) or  Class[] values()

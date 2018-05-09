@@ -14,21 +14,34 @@ import static org.junit.Assert.assertTrue;
 
 public abstract class BaseMethodMatcherTest {
 
-    public static ClassTree getStopMethodClass() throws IOException {
-        ClassReader reader = new ClassReader(StopMethods.class.getName());
+    public static ClassTree getClassTree(String name) throws IOException {
+        ClassReader reader = new ClassReader(name);
         ClassNode classNode = new ClassNode();
         ClassTree classTree = new ClassTree(classNode);
         reader.accept(classNode, 0);
         return classTree;
     }
 
+    public static ClassTree getClassTree(Class<?> target) throws IOException {
+        return getClassTree(target.getName());
+    }
+
+    public static ClassTree getStopMethodClass() throws IOException {
+        return getClassTree(StopMethods.class);
+    }
+
     public abstract boolean criterion(MethodTree method);
 
     public abstract StopMethodMatcher getMatcher();
 
+    public Class<?> getTargetClass() {
+        return StopMethods.class;
+    }
+
     @Test
     public void shouldMatchMethods() throws IOException {
-        ClassTree classTree = getStopMethodClass();
+
+        ClassTree classTree = getClassTree(getTargetClass());
         StopMethodMatcher matcher = getMatcher();
         classTree.methods()
                 .filter( method -> criterion(method))
