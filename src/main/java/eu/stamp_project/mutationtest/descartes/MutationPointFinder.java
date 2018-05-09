@@ -13,11 +13,12 @@ import org.pitest.reloc.asm.Opcodes;
 import org.pitest.reloc.asm.commons.Method;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static eu.stamp_project.utils.Utils.hasFlag;
+import static eu.stamp_project.utils.Utils.*;
 
 public class MutationPointFinder extends ClassVisitor {
 
@@ -46,8 +47,10 @@ public class MutationPointFinder extends ClassVisitor {
 
     @Override
     public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
-        //Discard abstract and synthetic methods. Access level method filter.
-        if(hasFlag(access, Opcodes.ACC_ABSTRACT) || hasFlag(access, Opcodes.ACC_SYNTHETIC))
+
+        // Abstract methods and constructors are not a target.
+        // All optional targets has been implemented in the for of features.
+        if(hasFlag(access, Opcodes.ACC_ABSTRACT) || isConstructor(name))
             return null;
 
         Method method = new Method(name, desc);
@@ -76,9 +79,13 @@ public class MutationPointFinder extends ClassVisitor {
         Location location = new Location(className, MethodName.fromString(method.getName()), method.getDescriptor());
         MutationIdentifier id = new MutationIdentifier(
                 location,
-                IntStream.rangeClosed(1, end - start + 1).boxed().collect(Collectors.toList()),
+                getIndexes(start, end),
                 operator.getID());
-        return new MutationDetails(id, source, operator.getDescription(), start, 1); //TODO: check if this start can be changed by 0
+        return new MutationDetails(id, source, operator.getDescription(), start, 1);
+    }
+
+    private Collection<Integer> getIndexes(int start, int end) {
+        return IntStream.rangeClosed(1, end - start + 1).boxed().collect(Collectors.toList());
     }
 
     public List<MutationDetails> getMutationPoints() {

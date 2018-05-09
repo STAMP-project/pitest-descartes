@@ -128,5 +128,43 @@ public class StopMethods {
         return anObject;
     }
 
+    @Deprecated
+    public boolean isDeprecated() { return  Boolean.valueOf("tr " + "ue"); }
+
+    static int staticField;
+
+    public int getStaticField() { return staticField; }
+
+    public void setStaticField(int value) { staticField = value; }
+
+    @Override
+    public int hashCode() { return "1234".length() << 2; }
+
+    @Override
+    public String toString() { return this.getClass().getName(); }
+
+    public void delegateSelfStaticVoid(int value) {
+        this.setStaticField(value);
+    }
+
+    public void delegateSelfVoid(int value) {
+        this.setAnInt(value);
+    }
+
+    public String delegateSelfValue(String that, int start, int end) {
+        return this.delegateParameterValue(that, start, end);
+    }
+
+    public String delegateParameterValue(String that, int start, int end) {
+        return that.substring(start, end);
+    }
+
+    public String delegateFieldValue(int start, int end) {
+        return aString.substring(start, end);
+    }
+
+
+
+
 
 }

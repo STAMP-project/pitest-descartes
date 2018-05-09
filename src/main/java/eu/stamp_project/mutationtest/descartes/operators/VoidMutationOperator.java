@@ -5,6 +5,8 @@ import org.pitest.reloc.asm.Opcodes;
 import org.pitest.reloc.asm.Type;
 import org.pitest.reloc.asm.commons.Method;
 
+import static eu.stamp_project.utils.Utils.isConstructor;
+
 /**
  * A class whose instances are able to mutate void methods and static initializers
  * (Constructors should call super constructors and so they aren't considered here)
@@ -21,7 +23,7 @@ public final class VoidMutationOperator extends MutationOperator {
     @Override
     public boolean canMutate(Method method) {
         //TODO: Detect methods that contain only calls to logging classes or System.out
-        return !method.getName().equals("<init>") && method.getReturnType().equals(Type.VOID_TYPE);
+        return !isConstructor(method.getName()) && method.getReturnType().equals(Type.VOID_TYPE);
     }
 
     @Override
