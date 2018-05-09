@@ -31,6 +31,8 @@ public class StopMethodMatcherInterceptorFactory implements MutationInterceptorF
         availabeMatchers.put("synthetic", isSynthetic());
         availabeMatchers.put("getter", isSimpleGetter());
         availabeMatchers.put("setter", isSimpleSetter());
+        availabeMatchers.put("constant", returnsAConstant());
+        availabeMatchers.put("delegate", isDelegate());
 
         String description = "Allows to reinsert some stop methods to the analysis. Possible values are: ";
         description += availabeMatchers.keySet().stream().collect(Collectors.joining(", "));

@@ -86,6 +86,23 @@ public interface StopMethodMatchers {
         return forBody(match(opCodeBetween(1, 20)).then(opCodeBetween(IRETURN, RETURN)));
     }
 
+    static StopMethodMatcher isDelegate() {
+        return forBody(
+
+                match(opCode(ALOAD).or(opCode(GETSTATIC))).or(match(opCode(ALOAD)).then(opCode(GETFIELD))) //Target on the stack
+                .zeroOrMore(match(opCodeBetween(21, 45))) //Param loop
+                .then(new Match<AbstractInsnNode>() {
+                    @Override
+                    public boolean test(Context<AbstractInsnNode> c, AbstractInsnNode abstractInsnNode) {
+                        int opcode = abstractInsnNode.getOpcode();
+                        return opcode == INVOKEVIRTUAL || opcode == INVOKESPECIAL || opcode == INVOKEINTERFACE;
+                    }
+                })
+                .then(opCodeBetween(IRETURN, RETURN))
+
+        );
+    }
+
 
 
 

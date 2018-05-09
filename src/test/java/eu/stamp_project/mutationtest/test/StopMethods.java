@@ -138,10 +138,33 @@ public class StopMethods {
     public void setStaticField(int value) { staticField = value; }
 
     @Override
-    public int hashCode() { return 0; }
+    public int hashCode() { return "1234".length() << 2; }
 
     @Override
-    public String toString() { return "This is the stop methods class"; }
+    public String toString() { return this.getClass().getName(); }
+
+    public void delegateSelfStaticVoid(int value) {
+        this.setStaticField(value);
+    }
+
+    public void delegateSelfVoid(int value) {
+        this.setAnInt(value);
+    }
+
+    public String delegateSelfValue(String that, int start, int end) {
+        return this.delegateParameterValue(that, start, end);
+    }
+
+    public String delegateParameterValue(String that, int start, int end) {
+        return that.substring(start, end);
+    }
+
+    public String delegateFieldValue(int start, int end) {
+        return aString.substring(start, end);
+    }
+
+
+
 
 
 }

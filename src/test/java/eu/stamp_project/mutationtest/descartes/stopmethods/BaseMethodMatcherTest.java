@@ -11,6 +11,7 @@ import org.pitest.bytecode.analysis.ClassTree;
 import org.pitest.bytecode.analysis.MethodTree;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 public abstract class BaseMethodMatcherTest {
 
@@ -32,6 +33,7 @@ public abstract class BaseMethodMatcherTest {
 
     public abstract boolean criterion(MethodTree method);
 
+
     public abstract StopMethodMatcher getMatcher();
 
     public Class<?> getTargetClass() {
@@ -44,9 +46,19 @@ public abstract class BaseMethodMatcherTest {
         ClassTree classTree = getClassTree(getTargetClass());
         StopMethodMatcher matcher = getMatcher();
         classTree.methods()
-                .filter( method -> criterion(method))
+                .filter(this::criterion)
                 .forEach((Consumer<? super MethodTree>) /*Disambiguation*/
                         (method -> assertTrue("Could not match method: " + method.rawNode().name, matcher.matches(classTree, method))));
+    }
+
+    @Test
+    public void shouldNotMatch() throws IOException {
+        ClassTree classTree = getClassTree(getTargetClass());
+        StopMethodMatcher matcher = getMatcher();
+        classTree.methods()
+                .filter( method -> !criterion(method))
+                .forEach((Consumer<? super MethodTree>) /*Disambiguation*/
+                        (method -> assertFalse("Incorrectly matched: " + method.rawNode().name, matcher.matches(classTree, method))));
     }
 
 }
