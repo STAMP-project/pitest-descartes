@@ -10,7 +10,6 @@ public class MethodInspector extends MethodVisitor {
     private Method method;
     private MutationPointFinder finder;
     private LineCounter lineCounter;
-    private StopMethodRecognizer recognizer;
 
     public MethodInspector(Method method, MutationPointFinder finder) {
         super(Opcodes.ASM5);
@@ -18,21 +17,13 @@ public class MethodInspector extends MethodVisitor {
         this.method = method; //TODO: Verify is not null
         this.finder = finder; //TODO: Verify is not null
         lineCounter = new LineCounter();
-        recognizer = new StopMethodRecognizer();
-    }
-
-    @Override
-    public void visitCode() {
 
     }
 
     @Override
     public void visitEnd() {
-        if(!recognizer.isOnFinalState()) {
-            finder.registerMutations(method, lineCounter.getFirstLine(), lineCounter.getLine());
-        }
+        finder.registerMutations(method, lineCounter.getFirstLine(), lineCounter.getLine());
     }
-
 
     @Override
     public void	visitLineNumber(int line, Label start) {
