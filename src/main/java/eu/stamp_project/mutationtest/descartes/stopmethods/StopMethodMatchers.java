@@ -2,18 +2,16 @@ package eu.stamp_project.mutationtest.descartes.stopmethods;
 
 
 import org.objectweb.asm.tree.AbstractInsnNode;
-import org.objectweb.asm.tree.ClassNode; //These two may have to be relocated
+import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
-import static org.objectweb.asm.Opcodes.*;
-
-import org.pitest.bytecode.analysis.InstructionMatchers;
-import org.pitest.sequence.*;
-
-import static org.pitest.sequence.QueryStart.match;
+import org.pitest.sequence.Context;
+import org.pitest.sequence.Match;
+import org.pitest.sequence.QueryStart;
 
 import static eu.stamp_project.mutationtest.descartes.stopmethods.StopMethodMatcher.*;
-
+import static org.objectweb.asm.Opcodes.*;
 import static org.pitest.bytecode.analysis.InstructionMatchers.opCode;
+import static org.pitest.sequence.QueryStart.match;
 
 public interface StopMethodMatchers {
 

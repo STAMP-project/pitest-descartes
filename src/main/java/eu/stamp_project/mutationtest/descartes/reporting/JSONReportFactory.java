@@ -1,6 +1,5 @@
 package eu.stamp_project.mutationtest.descartes.reporting;
 
-import org.pitest.coverage.CoverageDatabase;
 import org.pitest.mutationtest.ListenerArguments;
 import org.pitest.mutationtest.MutationResultListener;
 import org.pitest.mutationtest.MutationResultListenerFactory;

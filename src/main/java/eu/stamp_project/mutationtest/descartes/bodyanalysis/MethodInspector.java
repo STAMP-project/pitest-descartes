@@ -1,9 +1,10 @@
 package eu.stamp_project.mutationtest.descartes.bodyanalysis;
 
-import org.pitest.reloc.asm.*;
-import org.pitest.reloc.asm.commons.Method;
-
 import eu.stamp_project.mutationtest.descartes.MutationPointFinder;
+import org.pitest.reloc.asm.Label;
+import org.pitest.reloc.asm.MethodVisitor;
+import org.pitest.reloc.asm.Opcodes;
+import org.pitest.reloc.asm.commons.Method;
 
 public class MethodInspector extends MethodVisitor {
 

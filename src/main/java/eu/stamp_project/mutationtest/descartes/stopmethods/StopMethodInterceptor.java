@@ -34,7 +34,7 @@ public class StopMethodInterceptor implements MutationInterceptor {
     public Collection<MutationDetails> intercept(Collection<MutationDetails> collection, Mutater mutater) {
         return collection.stream().filter(
                 details -> {
-                    MethodTree methodTree = classTree.method(details.getId().getLocation()).getOrElse(null);
+                    MethodTree methodTree = classTree.method(details.getId().getLocation()).orElse(null);
                     return methodTree != null && !matcher.matches(classTree, methodTree);
                 })
                 .collect(Collectors.toList());

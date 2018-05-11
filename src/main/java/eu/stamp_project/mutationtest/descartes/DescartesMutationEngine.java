@@ -1,21 +1,17 @@
 package eu.stamp_project.mutationtest.descartes;
 
-import java.util.*;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
+import eu.stamp_project.mutationtest.descartes.operators.MutationOperator;
 import org.pitest.classinfo.ClassByteArraySource;
-import org.pitest.functional.F;
-import org.pitest.functional.predicate.False;
-import org.pitest.functional.predicate.Predicate;
-import org.pitest.functional.FCollection;
-import org.pitest.mutationtest.engine.MutationEngine;
 import org.pitest.mutationtest.engine.Mutater;
-
+import org.pitest.mutationtest.engine.MutationEngine;
 import org.pitest.reloc.asm.commons.Method;
 
-import eu.stamp_project.mutationtest.descartes.operators.MutationOperator;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.stream.Collectors;
+import java.util.function.Predicate;
+
 
 public class DescartesMutationEngine implements  MutationEngine {
 
@@ -25,7 +21,8 @@ public class DescartesMutationEngine implements  MutationEngine {
 
 
     public DescartesMutationEngine(Collection<MutationOperator> operators) {
-        this(False.<Method>instance(), operators);
+
+        this(m -> false, operators);
     }
 
     @SuppressWarnings("unchecked")
@@ -57,7 +54,7 @@ public class DescartesMutationEngine implements  MutationEngine {
     }
 
     public Collection<MutationOperator> getOperatorsFor(final Method method) {
-        if(excludedMethods.apply(method))
+        if(excludedMethods.test(method))
             return Collections.<MutationOperator>emptyList();
         return operators.stream().filter(op -> op.canMutate(method)).collect(Collectors.toList());
     }

@@ -1,7 +1,6 @@
 package eu.stamp_project.mutationtest.descartes.stopmethods;
 
 import eu.stamp_project.mutationtest.test.StopMethods;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,18 +9,14 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.tree.ClassNode;
-
 import org.pitest.bytecode.analysis.ClassTree;
 import org.pitest.bytecode.analysis.MethodTree;
-
-
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 
 @RunWith(Parameterized.class)
@@ -38,7 +33,10 @@ public class StopMethodMatcherTest {
     }
 
     private MethodTree getMethod(String name) {
-        return classTree.methods().findFirst( method -> name.equals(method.rawNode().name)).getOrElse(null);
+        return classTree.methods().stream()
+                .filter( methodTree -> name.equals(methodTree.rawNode().name))
+                .findFirst()
+                .orElse(null);
     }
 
     @Parameters(name = "{index}: Should match {1}")

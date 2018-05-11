@@ -1,17 +1,17 @@
 package eu.stamp_project.mutationtest.descartes.stopmethods;
 
-import java.io.IOException;
-import java.util.function.Consumer;
 import eu.stamp_project.mutationtest.test.StopMethods;
-
 import org.junit.Test;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.tree.ClassNode;
 import org.pitest.bytecode.analysis.ClassTree;
 import org.pitest.bytecode.analysis.MethodTree;
 
-import static org.junit.Assert.assertTrue;
+import java.io.IOException;
+import java.util.function.Consumer;
+
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public abstract class BaseMethodMatcherTest {
 
@@ -45,20 +45,20 @@ public abstract class BaseMethodMatcherTest {
 
         ClassTree classTree = getClassTree(getTargetClass());
         StopMethodMatcher matcher = getMatcher();
-        classTree.methods()
+        classTree.methods().stream()
                 .filter(this::criterion)
-                .forEach((Consumer<? super MethodTree>) /*Disambiguation*/
-                        (method -> assertTrue("Could not match method: " + method.rawNode().name, matcher.matches(classTree, method))));
+                .forEach(
+                        method -> assertTrue("Could not match method: " + method.rawNode().name, matcher.matches(classTree, method)));
     }
 
     @Test
     public void shouldNotMatch() throws IOException {
         ClassTree classTree = getClassTree(getTargetClass());
         StopMethodMatcher matcher = getMatcher();
-        classTree.methods()
+        classTree.methods().stream()
                 .filter( method -> !criterion(method))
-                .forEach((Consumer<? super MethodTree>) /*Disambiguation*/
-                        (method -> assertFalse("Incorrectly matched: " + method.rawNode().name, matcher.matches(classTree, method))));
+                .forEach(
+                        method -> assertFalse("Incorrectly matched: " + method.rawNode().name, matcher.matches(classTree, method)));
     }
 
 }

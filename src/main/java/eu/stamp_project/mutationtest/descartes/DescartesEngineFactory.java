@@ -1,17 +1,17 @@
 package eu.stamp_project.mutationtest.descartes;
 
-import java.util.*;
-import java.util.stream.Collectors;
 import eu.stamp_project.mutationtest.descartes.operators.MutationOperator;
 import org.pitest.functional.prelude.Prelude;
 import org.pitest.mutationtest.EngineArguments;
-import org.pitest.reloc.asm.commons.Method;
-
-import org.pitest.functional.predicate.*;
-
 import org.pitest.mutationtest.MutationEngineFactory;
 import org.pitest.mutationtest.engine.MutationEngine;
+import org.pitest.reloc.asm.commons.Method;
 import org.pitest.util.Glob;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 
 public class DescartesEngineFactory implements MutationEngineFactory{
@@ -54,16 +54,8 @@ public class DescartesEngineFactory implements MutationEngineFactory{
 
 
     public static Predicate<Method> globsToPredicate(Collection<String> globs) {
-
         Predicate<String> excludedNames = Prelude.or(Glob.toGlobPredicates(globs));
-
-        return new Predicate<Method>() {
-            @Override
-            public Boolean apply(Method method) {
-                return excludedNames.apply(method.getName());
-            }
-        };
-
+        return (method) -> excludedNames.test(method.getName());
     }
 
     public String name() {

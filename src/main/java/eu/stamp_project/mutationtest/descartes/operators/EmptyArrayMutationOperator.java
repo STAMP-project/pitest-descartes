@@ -1,7 +1,7 @@
 package eu.stamp_project.mutationtest.descartes.operators;
 
-import org.pitest.reloc.asm.Opcodes;
 import org.pitest.reloc.asm.MethodVisitor;
+import org.pitest.reloc.asm.Opcodes;
 import org.pitest.reloc.asm.Type;
 import org.pitest.reloc.asm.commons.Method;
 

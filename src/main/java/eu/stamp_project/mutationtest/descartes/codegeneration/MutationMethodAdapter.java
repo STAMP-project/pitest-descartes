@@ -1,8 +1,8 @@
 package eu.stamp_project.mutationtest.descartes.codegeneration;
 
+import eu.stamp_project.mutationtest.descartes.operators.MutationOperator;
 import org.pitest.reloc.asm.MethodVisitor;
 import org.pitest.reloc.asm.commons.Method;
-import eu.stamp_project.mutationtest.descartes.operators.MutationOperator;
 
 
 public class MutationMethodAdapter extends MethodRewriterAdapter {

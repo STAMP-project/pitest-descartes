@@ -1,14 +1,12 @@
 package eu.stamp_project.mutationtest.descartes.codegeneration;
 
-import org.pitest.reloc.asm.Opcodes;
-import org.pitest.reloc.asm.ClassVisitor;
-import org.pitest.reloc.asm.MethodVisitor;
-import org.pitest.reloc.asm.commons.Method;
-
+import eu.stamp_project.mutationtest.descartes.operators.MutationOperator;
 import org.pitest.mutationtest.engine.Location;
 import org.pitest.mutationtest.engine.MutationIdentifier;
-
-import eu.stamp_project.mutationtest.descartes.operators.MutationOperator;
+import org.pitest.reloc.asm.ClassVisitor;
+import org.pitest.reloc.asm.MethodVisitor;
+import org.pitest.reloc.asm.Opcodes;
+import org.pitest.reloc.asm.commons.Method;
 
 public class MutationClassAdapter extends ClassVisitor {
 

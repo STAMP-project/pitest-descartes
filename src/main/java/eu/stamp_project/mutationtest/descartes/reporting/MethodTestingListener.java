@@ -166,7 +166,7 @@ public class MethodTestingListener implements MutationResultListener {
             report.writeAttribute("status", result.getStatus().name());
             report.writeAttribute("mutator", result.getDetails().getMutator());
             report.writeAttribute("tests-run", result.getNumberOfTestsRun());
-            report.writeAttribute("detected-by", result.getKillingTest().getOrElse(null));
+            report.writeAttribute("detected-by", result.getKillingTest().orElse(""));
             report.beginListAttribute("tests");
             for(TestInfo test : result.getDetails().getTestsInOrder())
                 report.write(test.getName());

@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Collection;
-import java.util.List;
 import java.util.Stack;
-import java.util.EnumSet;
 
 enum WriterState {
     Initial, EmptyObject, Object, EmptyList, List, Value, Final

@@ -4,7 +4,6 @@ import org.pitest.reloc.asm.MethodVisitor;
 import org.pitest.reloc.asm.Opcodes;
 import org.pitest.reloc.asm.Type;
 import org.pitest.reloc.asm.commons.Method;
-import java.util.logging.Level;
 
 /**
  * Replaces the method body with a <code>return null<code/> statement

@@ -1,24 +1,24 @@
 package eu.stamp_project.mutationtest.test;
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Collections;
-import org.pitest.functional.F;
 import org.pitest.functional.FCollection;
 import org.pitest.reloc.asm.ClassReader;
 import org.pitest.reloc.asm.commons.Method;
 import org.pitest.reloc.asm.tree.ClassNode;
 import org.pitest.reloc.asm.tree.MethodNode;
 
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
 
 public class TestUtils {
 
     public static Collection<Method> getMethods(Class<?> klass) {
-        return FCollection.map(getMethodNodes(klass), new F<MethodNode, Method>() {
-            public Method apply(MethodNode node) {
-                return new Method(node.name, node.desc);
-            }
-        });
+        return getMethodNodes(klass)
+                .stream()
+                .map( methodNode -> new Method(methodNode.name, methodNode.desc))
+                .collect(Collectors.toList());
     }
 
     public static Collection<MethodNode> getMethodNodes(Class<?> klass) {

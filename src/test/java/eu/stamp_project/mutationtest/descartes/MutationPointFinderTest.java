@@ -1,30 +1,26 @@
 package eu.stamp_project.mutationtest.descartes;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Arrays;
-
-
+import eu.stamp_project.mutationtest.descartes.operators.MutationOperator;
+import eu.stamp_project.mutationtest.test.AbstractClass;
+import eu.stamp_project.mutationtest.test.Calculator;
+import eu.stamp_project.mutationtest.test.Interface;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
-import static org.junit.Assert.*;
-
-import eu.stamp_project.mutationtest.test.*;
-import eu.stamp_project.mutationtest.descartes.operators.MutationOperator;
-
-import org.pitest.reloc.asm.ClassReader;
 import org.pitest.classinfo.ClassName;
+
 import org.pitest.mutationtest.engine.MutationDetails;
+import org.pitest.reloc.asm.ClassReader;
 
-import org.pitest.functional.FCollection;
-import org.pitest.functional.F;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
-import java.util.List;
+import static org.junit.Assert.assertArrayEquals;
 
 
 @RunWith(Parameterized.class)
@@ -34,14 +30,10 @@ public class MutationPointFinderTest {
 
     @Before
     public void initialize() {
-        Iterable<String> operators = Arrays.asList("void", "11", "(byte)2", "(short)3", "null", "23456L", "'c'", "3.14", "1.2f", "true", "\"string\"");
-        engine = new DescartesMutationEngine(FCollection.map(operators, new F<String, MutationOperator>()
-        {
-            public MutationOperator apply(String id) {
-                return MutationOperator.fromID(id);
-            }
-
-        }));
+        Collection<String> operators = Arrays.asList("void", "11", "(byte)2", "(short)3", "null", "23456L", "'c'", "3.14", "1.2f", "true", "\"string\"");
+        engine = new DescartesMutationEngine(
+                operators.stream().map(MutationOperator::fromID)
+                        .collect(Collectors.toList()));
     }
 
     @Parameter
@@ -83,8 +75,7 @@ public class MutationPointFinderTest {
                             "getRange")
                 },
                 { in(AbstractClass.class), shouldFind("voidMethodWithoutParameters") },
-                { in(Interface.class), NOTHING },
-               // { in(StopMethods.class), NOTHING }
+                { in(Interface.class), NOTHING }
         });
     }
 

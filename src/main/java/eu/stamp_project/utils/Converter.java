@@ -1,7 +1,6 @@
 
 package eu.stamp_project.utils;
 
-import java.lang.Number;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 

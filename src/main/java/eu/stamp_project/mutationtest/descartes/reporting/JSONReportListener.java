@@ -1,16 +1,15 @@
 package eu.stamp_project.mutationtest.descartes.reporting;
 
-import java.io.IOException;
-import java.util.Collection;
+import org.pitest.coverage.TestInfo;
 
 import org.pitest.mutationtest.*;
-
-import org.pitest.functional.Option;
-import org.pitest.coverage.TestInfo;
 import org.pitest.mutationtest.engine.MutationDetails;
 import org.pitest.util.ResultOutputStrategy;
 import org.pitest.util.Unchecked;
 
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Optional;
 
 
 public class JSONReportListener implements MutationResultListener{
@@ -54,7 +53,9 @@ public class JSONReportListener implements MutationResultListener{
 
                 MutationDetails details = result.getDetails();
                 DetectionStatus status = result.getStatus();
-                Option<String> killer = result.getKillingTest();
+
+
+                Optional<String> killer = result.getKillingTest();
                 MutationStatusTestPair pair = result.getStatusTestPair();
                 String method = details.getMethod().name();
                 String methodDescription = details.getId().getLocation().getMethodDesc();
@@ -73,7 +74,7 @@ public class JSONReportListener implements MutationResultListener{
                 report.endObject();
 
                 report.beginObjectAttribute("tests");
-                report.writeAttribute("killer", killer.hasSome() ? killer.value() : "");
+                report.writeAttribute("killer", killer.orElse(""));
                 report.writeAttribute("run", result.getNumberOfTestsRun());
 
                 report.beginListAttribute("ordered");

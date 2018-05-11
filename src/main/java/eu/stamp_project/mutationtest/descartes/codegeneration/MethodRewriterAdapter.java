@@ -1,12 +1,6 @@
 package eu.stamp_project.mutationtest.descartes.codegeneration;
 
-import org.pitest.reloc.asm.AnnotationVisitor;
-import org.pitest.reloc.asm.MethodVisitor;
-import org.pitest.reloc.asm.Opcodes;
-
-import org.pitest.reloc.asm.TypePath;
-import org.pitest.reloc.asm.Label;
-import org.pitest.reloc.asm.Handle;
+import org.pitest.reloc.asm.*;
 
 /**
  * Provides a base class for method rewriting adapters.

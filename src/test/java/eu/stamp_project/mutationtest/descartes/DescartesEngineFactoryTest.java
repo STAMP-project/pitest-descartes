@@ -1,23 +1,24 @@
 package eu.stamp_project.mutationtest.descartes;
 
-import java.util.*;
-
 import eu.stamp_project.mutationtest.test.Calculator;
 import eu.stamp_project.mutationtest.test.TestUtils;
 import org.junit.Test;
-import org.pitest.classinfo.ClassByteArraySource;
 import org.pitest.classinfo.ClassName;
 import org.pitest.classpath.ClassloaderByteArraySource;
-import org.pitest.functional.predicate.False;
 import org.pitest.mutationtest.EngineArguments;
 import org.pitest.mutationtest.engine.Mutater;
 import org.pitest.mutationtest.engine.MutationDetails;
 import org.pitest.mutationtest.engine.MutationEngine;
-import org.pitest.mutationtest.engine.MutationIdentifier;
 import org.pitest.reloc.asm.commons.Method;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
 
 
 

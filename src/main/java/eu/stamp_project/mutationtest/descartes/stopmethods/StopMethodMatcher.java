@@ -1,7 +1,5 @@
 package eu.stamp_project.mutationtest.descartes.stopmethods;
 
-import static  org.pitest.bytecode.analysis.InstructionMatchers.isA;
-
 import org.objectweb.asm.tree.*;
 import org.pitest.bytecode.analysis.ClassTree;
 import org.pitest.bytecode.analysis.MethodTree;
@@ -12,6 +10,8 @@ import org.pitest.sequence.SequenceQuery;
 
 import java.util.Collection;
 import java.util.List;
+
+import static org.pitest.bytecode.analysis.InstructionMatchers.isA;
 
 @FunctionalInterface
 public interface StopMethodMatcher {

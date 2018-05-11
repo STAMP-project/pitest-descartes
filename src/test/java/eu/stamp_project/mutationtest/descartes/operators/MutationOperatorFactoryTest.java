@@ -2,8 +2,9 @@ package eu.stamp_project.mutationtest.descartes.operators;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class MutationOperatorFactoryTest {
 

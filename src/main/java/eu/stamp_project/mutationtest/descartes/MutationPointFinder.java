@@ -18,7 +18,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static eu.stamp_project.utils.Utils.*;
+import static eu.stamp_project.utils.Utils.hasFlag;
+import static eu.stamp_project.utils.Utils.isConstructor;
 
 public class MutationPointFinder extends ClassVisitor {
 
