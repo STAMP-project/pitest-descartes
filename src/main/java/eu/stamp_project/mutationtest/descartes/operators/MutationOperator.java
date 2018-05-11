@@ -1,6 +1,8 @@
 package eu.stamp_project.mutationtest.descartes.operators;
 
 import eu.stamp_project.mutationtest.descartes.operators.parsing.OperatorParser;
+import org.pitest.mutationtest.engine.MethodName;
+import org.pitest.mutationtest.engine.MutationDetails;
 import org.pitest.reloc.asm.MethodVisitor;
 import org.pitest.reloc.asm.commons.Method;
 

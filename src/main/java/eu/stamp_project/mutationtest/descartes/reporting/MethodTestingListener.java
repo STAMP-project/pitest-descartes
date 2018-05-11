@@ -1,12 +1,14 @@
 package eu.stamp_project.mutationtest.descartes.reporting;
 
+import eu.stamp_project.mutationtest.descartes.reporting.models.MethodRecord;
 import org.pitest.coverage.TestInfo;
 import org.pitest.mutationtest.*;
-import org.pitest.mutationtest.engine.MutationDetails;
+
 import org.pitest.util.Unchecked;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MethodTestingListener implements MutationResultListener {
 
@@ -22,7 +24,7 @@ public class MethodTestingListener implements MutationResultListener {
 
     public void runStart() {
         try {
-            report = new JSONWriter(args.getOutputStrategy().createWriterForFile("mutations.json"));
+            report = new JSONWriter(args.getOutputStrategy().createWriterForFile("methods.json"));
             report.beginObject();
 
             report.beginListAttribute("methods");
@@ -40,145 +42,70 @@ public class MethodTestingListener implements MutationResultListener {
         return className + "." + methodName + methodDescription;
     }
 
-    private HashMap<String, List<MutationResult>> aggregateMethods(ClassMutationResults results) {
-
-        HashMap<String, List<MutationResult>> methodMap = new HashMap<String, List<MutationResult>>();
-
-        for(MutationResult result: results.getMutations()) {
-            String key = getMethodKey(result);
-            if(methodMap.containsKey(key)) {
-                methodMap.get(key).add(result);
-            }
-            else {
-                List<MutationResult> mutationResults = new LinkedList<MutationResult>();
-                mutationResults.add(result);
-                methodMap.put(key, mutationResults);
-            }
-        }
-
-        return methodMap;
-    }
 
     public void handleMutationResult(ClassMutationResults results) {
+            results.getMutations().stream()
+                    .collect(Collectors.groupingBy(this::getMethodKey))
+                    .values().stream().map( MethodRecord::new)
+                    .forEach(this::writeMethod);
+    }
+
+    private Collection<String> getMutators(Collection<MutationResult> mutations) {
+        return mutations.stream().map(mutation -> mutation.getDetails().getMutator()).collect(Collectors.toList());
+    }
+
+    private void writeMethod(MethodRecord method) {
         try {
-            for (List<MutationResult> methodResults : aggregateMethods(results).values()) {
-                writeMethod(methodResults);
-            }
-        }
-        catch(IOException exc) {
-            throw Unchecked.translateCheckedException(exc);
-        }
-    }
 
-
-    private void writeMethod(List<MutationResult> methodResults) throws IOException {
-        assert methodResults.size() > 0;
-
-        MutationResult first = methodResults.get(0);
-
-        report.beginObject();
-
-        MutationDetails details = first.getDetails();
-
-        report.writeAttribute("name", details.getMethod().name());
-        report.writeAttribute("description", details.getId().getLocation().getMethodDesc());
-        report.writeAttribute("class", details.getClassName().getNameWithoutPackage().asInternalName());
-        report.writeAttribute("package", details.getClassName().getPackage().asInternalName());
-        report.writeStringListAttribute("tests", getAllTest(methodResults));
-
-        classifyMethod(methodResults);
-
-        writeMutations(methodResults);
-
-        report.endObject();
-    }
-
-
-    private Set<String> getAllTest(List<MutationResult> methodResults) {
-        Set<String> tests = new HashSet<String>();
-
-        for(MutationResult result: methodResults) {
-            for(TestInfo test: result.getDetails().getTestsInOrder()) {
-                tests.add(test.getName());
-            }
-        }
-
-        return tests;
-    }
-
-    private void classifyMethod(List<MutationResult> methodResults) throws IOException {
-        List<String> detected = new LinkedList<String>();
-        List<String> notDetected = new LinkedList<String>();
-        List<String> notCovered = new LinkedList<String>();
-
-        for(MutationResult result: methodResults) {
-            DetectionStatus status = result.getStatus();
-            String mutator = result.getDetails().getMutator();
-            if(status.isDetected()) {
-                detected.add(mutator);
-            }
-            else if(status.equals(DetectionStatus.NO_COVERAGE)) {
-                notCovered.add(mutator);
-            }
-            else {
-                notDetected.add(mutator);
-            }
-        }
-
-        MethodClassification classification = MethodClassification.TESTED;
-
-        if(notCovered.size() > 0) {
-            assert detected.size() == 0; //This only makes sense in descartes but not in gregor.
-            assert notDetected.size() == 0;
-
-            classification = MethodClassification.NOT_COVERED;
-        }
-        else {
-            assert notDetected.size() > 0 || detected.size() > 0;
-
-            if(notDetected.size() > 0) {
-                classification = MethodClassification.PSEUDO_TESTED;
-
-                if(detected.size() > 0) {
-                    classification = MethodClassification.PARTIALLY_TESTED;
-                }
-            }
-
-        }
-
-        report.writeStringListAttribute("detected", detected);
-        if(classification == MethodClassification.NOT_COVERED) {
-            report.writeStringListAttribute("not-detected", notCovered);
-        }
-        else {
-            report.writeStringListAttribute("not-detected", notDetected);
-        }
-
-        report.writeAttribute("classification", classification.toString());
-    }
-
-    private void writeMutations(List<MutationResult> methodResults) throws IOException {
-        report.beginListAttribute("mutations");
-
-        for(MutationResult result: methodResults) {
             report.beginObject();
 
-            report.writeAttribute("status", result.getStatus().name());
-            report.writeAttribute("mutator", result.getDetails().getMutator());
-            report.writeAttribute("tests-run", result.getNumberOfTestsRun());
-            report.writeAttribute("detected-by", result.getKillingTest().orElse(""));
+            report.writeAttribute("name", method.name());
+            report.writeAttribute("description", method.desc());
+            report.writeAttribute("class", method.className());
+            report.writeAttribute("package", method.packageName());
+
+            report.writeAttribute("classification", method.getClassification().toString());
+            report.writeStringListAttribute("detected", getMutators(method.getDetectedMutations()));
+            report.writeStringListAttribute("not-detected", getMutators(method.getUndetectedMutations()));
+
+
+            report.writeStringListAttribute(
+                    "tests",
+                    method.getTests().stream()
+                            .map(TestInfo::getName).collect(Collectors.toList()));
+
+            report.beginListAttribute("mutations");
+            method.getMutations().stream().forEach(this::writeMutationDetails);
+            report.endList();
+
+            report.endObject();
+        }
+        catch (IOException exc) {
+            throw Unchecked.translateCheckedException(exc);
+        }
+
+    }
+
+    private void writeMutationDetails(MutationResult mutation) {
+        try {
+
+            report.beginObject();
+
+            report.writeAttribute("status", mutation.getStatus().name());
+            report.writeAttribute("mutator", mutation.getDetails().getMutator());
+            report.writeAttribute("tests-run", mutation.getNumberOfTestsRun());
+            report.writeAttribute("detected-by", mutation.getKillingTest().orElse(""));
             report.beginListAttribute("tests");
-            for(TestInfo test : result.getDetails().getTestsInOrder())
+            for (TestInfo test : mutation.getDetails().getTestsInOrder())
                 report.write(test.getName());
             report.endList();
 
             report.endObject();
         }
-
-        report.endList();
+        catch (IOException exc) {
+            throw Unchecked.translateCheckedException(exc);
+        }
     }
-
-
 
     public void runEnd() {
         try {
