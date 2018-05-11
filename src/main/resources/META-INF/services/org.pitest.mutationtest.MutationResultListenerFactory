@@ -1,2 +1,3 @@
 eu.stamp_project.mutationtest.descartes.reporting.JSONReportFactory
 eu.stamp_project.mutationtest.descartes.reporting.MethodTestingFactory
+eu.stamp_project.mutationtest.descartes.reporting.IssuesReportFactory

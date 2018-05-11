@@ -1,4 +1,4 @@
-package eu.stamp_project.mutationtest.descartes.reporting;
+package eu.stamp_project.mutationtest.descartes.reporting.models;
 
 public enum MethodClassification {
     TESTED("tested"),

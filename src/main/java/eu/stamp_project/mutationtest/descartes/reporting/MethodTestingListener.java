@@ -34,20 +34,8 @@ public class MethodTestingListener implements MutationResultListener {
         }
     }
 
-    private String getMethodKey(MutationResult result) {
-        String className = result.getDetails().getClassName().asJavaName();
-        String methodName = result.getDetails().getMethod().name();
-        String methodDescription = result.getDetails().getId().getLocation().getMethodDesc();
-
-        return className + "." + methodName + methodDescription;
-    }
-
-
     public void handleMutationResult(ClassMutationResults results) {
-            results.getMutations().stream()
-                    .collect(Collectors.groupingBy(this::getMethodKey))
-                    .values().stream().map( MethodRecord::new)
-                    .forEach(this::writeMethod);
+            MethodRecord.getRecords(results).forEach(this::writeMethod);
     }
 
     private Collection<String> getMutators(Collection<MutationResult> mutations) {

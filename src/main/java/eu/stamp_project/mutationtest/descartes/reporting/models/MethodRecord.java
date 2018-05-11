@@ -1,7 +1,10 @@
 package eu.stamp_project.mutationtest.descartes.reporting.models;
 
-import org.pitest.classinfo.ClassName;
+
+import org.objectweb.asm.signature.SignatureReader;
+import org.objectweb.asm.util.TraceSignatureVisitor;
 import org.pitest.coverage.TestInfo;
+import org.pitest.mutationtest.ClassMutationResults;
 import org.pitest.mutationtest.DetectionStatus;
 import org.pitest.mutationtest.MutationResult;
 import org.pitest.mutationtest.engine.Location;
@@ -10,11 +13,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
-import eu.stamp_project.mutationtest.descartes.reporting.MethodClassification;
-import static eu.stamp_project.mutationtest.descartes.reporting.MethodClassification.*;
+import static eu.stamp_project.mutationtest.descartes.reporting.models.MethodClassification.*;
 import static java.util.stream.Collectors.toSet;
 
 public class MethodRecord {
@@ -126,4 +129,33 @@ public class MethodRecord {
         return location.getClassName().getPackage().asInternalName();
     }
 
+
+    public String declaration() {
+
+        TraceSignatureVisitor visitor = new TraceSignatureVisitor(0);
+        new SignatureReader(desc()).accept(visitor);
+        return name() + visitor.getDeclaration();
+    }
+
+    public boolean hasIssues() {
+        return classification == PSEUDO_TESTED || classification == PARTIALLY_TESTED;
+    }
+
+    public boolean isVoid() {
+        return desc().endsWith(")V");
+    }
+
+    public static String methodKey(MutationResult mutation) {
+        String className = mutation.getDetails().getClassName().asJavaName();
+        String methodName = mutation.getDetails().getMethod().name();
+        String methodDescription = mutation.getDetails().getId().getLocation().getMethodDesc();
+
+        return className + "." + methodName + methodDescription;
+    }
+
+    public static Stream<MethodRecord> getRecords(ClassMutationResults results) {
+        return results.getMutations().stream()
+                .collect(Collectors.groupingBy(MethodRecord::methodKey))
+                .values().stream().map(MethodRecord::new);
+    }
 }

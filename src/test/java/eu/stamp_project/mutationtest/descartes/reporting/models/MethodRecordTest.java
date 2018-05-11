@@ -1,7 +1,6 @@
 package eu.stamp_project.mutationtest.descartes.reporting.models;
 
-import eu.stamp_project.mutationtest.descartes.reporting.MethodClassification;
-import static eu.stamp_project.mutationtest.descartes.reporting.MethodClassification.*;
+import static eu.stamp_project.mutationtest.descartes.reporting.models.MethodClassification.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
