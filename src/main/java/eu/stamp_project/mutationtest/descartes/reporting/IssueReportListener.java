@@ -7,8 +7,8 @@ import org.pitest.mutationtest.ClassMutationResults;
 import org.pitest.mutationtest.ListenerArguments;
 import org.pitest.mutationtest.MutationResultListener;
 import org.pitest.util.Unchecked;
-import java.io.IOException;
-import java.io.Writer;
+
+import java.io.*;
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.stream.Collectors;
@@ -31,21 +31,46 @@ public class IssueReportListener implements MutationResultListener {
     public void runStart() {
         classList = ul();
         totalIssues = 0;
+        transferCSS();
     }
 
     private Writer createFile(String path) {
-        return arguments.getOutputStrategy().createWriterForFile(path);
+        String filePath = Paths.get("issues", path).toString();
+        return arguments.getOutputStrategy().createWriterForFile(filePath);
+    }
+
+    private void transferCSS() {
+        try (Writer writer = createFile("style.css")) {
+            InputStream originalCss = getClass().getClassLoader().getResourceAsStream("files/style.css");
+            InputStreamReader reader = new InputStreamReader(originalCss);
+
+            char[] buffer = new char[originalCss.available()];
+            int read;
+            while((read = reader.read(buffer)) >= 0) {
+                writer.write(buffer, 0, read);
+            }
+            reader.close();
+            writer.close();
+        }
+        catch (IOException exc) {
+            throw Unchecked.translateCheckedException(exc);
+        }
     }
 
     public void handleMethod(MethodRecord method) {
         try(Writer writer = createFile(getFilePath(method))) {
             String declaration = method.declaration();
+            ContainerTag backLink = a("[Back]").withHref("../index.html");
 
             ContainerTag document = body(
                     h1(declaration),
-                    p(b("Class:"), text(method.className())),
-                    p(b("Package:"), text(method.packageName())),
-                    p(text("This method is "), b(method.getClassification().toString())));
+                    backLink,
+                    dl(
+                            dt("Class"), dd(method.className()),
+                            dt("Package"), dd(method.packageName())
+
+                    ),
+                    p(text("This method is "), strong(method.getClassification().toString())));
 
             document.with(h2("Transformations"));
 
@@ -80,9 +105,9 @@ public class IssueReportListener implements MutationResultListener {
                     h2("Tests"),
                     p("The method is covered by the following test cases:"),
                     ul( each(method.getTests(), test -> li(test.getName()))))
-            .with(a("Back").withHref("../issues.html"));
+            .with(backLink);
 
-            html(head(title(declaration))).with(document).render(writer);
+            html(head(title(declaration)), link().withHref("../style.css").withRel("stylesheet")).with(document).render(writer);
 
         }
         catch (IOException exc) {
@@ -102,13 +127,19 @@ public class IssueReportListener implements MutationResultListener {
                     methodList.with(
                             li(
                                     a(method.declaration()).withHref(getFilePath(method)),
+                                    text(" "),
                                     b(method.getClassification().toString())));
                 })
                 .count();
         totalIssues += issues;
         if(issues == 0) return; //Write only classes wiht issues
 
-        classList.with(li(classMutationResults.getMutatedClass().asJavaName()).with(methodList));
+        classList.with(
+                li(text(classMutationResults.getMutatedClass().asJavaName()),
+                        text(" ("),
+                        strong("Issues: "),
+                        text(Long.toString(issues) + ")"))
+                        .with(methodList));
     }
 
     private String getFilePath(MethodRecord method) {
@@ -134,14 +165,17 @@ public class IssueReportListener implements MutationResultListener {
     @Override
     public void runEnd() {
 
-        try (Writer writer = createFile("issues.html")){
+        try (Writer writer = createFile("index.html")){
 
             html(
-                    head(title("Testing issues report")),
+                    head(title("Testing issues report"), link().withHref("style.css").withRel("stylesheet")),
                     body(
-                            p(b("Duration:"), text(getStringTime())),
-                            p(b("Issues:"), text(Long.toString(totalIssues))),
-                            h1("Classes"), classList))
+                            h1("Issues Report"),
+                            dl(
+                                    dt("Duration"), dd(getStringTime()),
+                                    dt("Issues"), dd(Long.toString(totalIssues))
+                            ),
+                            h2("Classes"), classList))
                     .render(writer);
 
         }
