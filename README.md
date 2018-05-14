@@ -337,7 +337,7 @@ So, for example, if we don't want to exclude deprecated methods and mutate them 
 <features>
   <feature>
   <!-- This will allow descartes to mutate deprecated methods -->
-    +STOP_METHODS(exclude[deprecated]) 
+    +STOP_METHODS(except[deprecated])
   </feature>
 </features>
 ```
@@ -348,7 +348,7 @@ More than one group can be excluded at the same time:
 <features>
   <feature>
   <!-- This will allow descartes to mutate toString and enum generated methods -->
-    +STOP_METHODS(exclude[to_string] exlude[enum])
+    +STOP_METHODS(except[to_string] except[enum])
   </feature>
 </features>
 ```
