@@ -15,15 +15,15 @@ public class MethodInspector extends MethodVisitor {
     public MethodInspector(Method method, MutationPointFinder finder) {
         super(Opcodes.ASM5);
 
-        this.method = method; //TODO: Verify is not null
-        this.finder = finder; //TODO: Verify is not null
+        this.method = method;
+        this.finder = finder;
         lineCounter = new LineCounter();
 
     }
 
     @Override
     public void visitEnd() {
-        finder.registerMutations(method, lineCounter.getFirstLine(), lineCounter.getLine());
+        finder.registerMutations(method, lineCounter.getFirstLine(), lineCounter.getLastLine());
     }
 
     @Override
