@@ -50,7 +50,7 @@ public class DescartesMutater implements Mutater {
         MutationClassAdapter adapter = new MutationClassAdapter(mID, writer);
         reader.accept(adapter, 0);
 
-        //TODO: Mutation details again here, why ins't the parameter MutationIdentifier instead of MutationDetails?
+        //TODO: Mutation details again here, why isn't the parameter MutationIdentifier instead of MutationDetails?
         // do details may change from discovering to mutation?
         // store the mutation details so they can be recovered here instead of recomputing all?
         return new Mutant(new MutationDetails(mID, "", "", 0, 0), writer.toByteArray());

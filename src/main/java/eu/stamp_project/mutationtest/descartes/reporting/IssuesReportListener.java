@@ -15,14 +15,14 @@ import java.util.stream.Collectors;
 
 import static j2html.TagCreator.*;
 
-public class IssueReportListener implements MutationResultListener {
+public class IssuesReportListener implements MutationResultListener {
 
     private ListenerArguments arguments;
     private long totalIssues = 0;
 
     ContainerTag classList;
 
-    public IssueReportListener(final ListenerArguments arguments) {
+    public IssuesReportListener(final ListenerArguments arguments) {
         this.arguments = arguments;
     }
 
@@ -76,7 +76,7 @@ public class IssueReportListener implements MutationResultListener {
 
             if(method.getClassification() == MethodClassification.PARTIALLY_TESTED)
                 document.with(
-                        p("It seems that this method has been tested to return only the following value(s): "),
+                        p(text("It seems that this method has been tested to return only the following value(s): "),
                         text(  method.getUndetectedMutations().stream().map(
                                 mutation -> {
                                     String mutator = mutation.getDetails().getMutator();
@@ -84,10 +84,10 @@ public class IssueReportListener implements MutationResultListener {
                                         return "an empty array";
                                     return mutator;
                                 }).collect(Collectors.joining(", "))),
-                        text("."));
+                        text(".")));
 
             if(method.isVoid()) //Void method with issues is pseudo-tested
-                document.with(p("To body of this method was removed but the ttest suite was not able to detect the transformation."));
+                document.with(p("To body of this method was removed but the test suite was not able to detect the transformation."));
             else {
                 document.with(
                         p("The following transformations were applied but they were not detected by the test suite:"),

@@ -11,7 +11,7 @@ import java.util.Properties;
 public class IssuesReportFactory implements MutationResultListenerFactory {
     @Override
     public MutationResultListener getListener(Properties properties, ListenerArguments listenerArguments) {
-        return new IssueReportListener(listenerArguments);
+        return new IssuesReportListener(listenerArguments);
     }
 
     @Override
