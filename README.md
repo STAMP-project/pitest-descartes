@@ -330,7 +330,7 @@ This feature is enabled by default. The parameter `exclude` can be used to preve
 | `setter`     | Simple setters.                                                                        | `public void setAge(int value) { this.age = value; }`                  |
 | `constant`   | Methods returning a literal constant.                                                  | `public double getPI() { return 3.14; }`                               |
 | `delegate`   | Methods implementing simple delegation.                                                | `public int sum(int[] a, int i, int j) {return this.adder(a, i, j); }` |
-
+| `clinit`     | Static class initializers.                                                             |                                                                        |
 So, for example, if we don't want to exclude deprecated methods and mutate them the following snippet should be added under the `configuration` element:
 
 ``` xml

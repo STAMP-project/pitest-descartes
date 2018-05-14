@@ -46,7 +46,8 @@ public class StopMethodMatcherTest {
                 {StopMethodMatchers.isEmptyVoid(),  "emptyVoidMethod"},
                 {StopMethodMatchers.isDeprecated(), "isDeprecated"},
                 {StopMethodMatchers.isToString(), "toString"},
-                {StopMethodMatchers.isHashCode(), "hashCode"}
+                {StopMethodMatchers.isHashCode(), "hashCode"},
+                {StopMethodMatchers.isStaticInitializer(), "<clinit>"}
         });
 
     }

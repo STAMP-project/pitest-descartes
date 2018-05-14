@@ -101,6 +101,11 @@ public interface StopMethodMatchers {
         );
     }
 
+    static StopMethodMatcher isStaticInitializer() {
+        return forNameDesc("<clinit>", "()V");
+    }
+
+
 
 
 

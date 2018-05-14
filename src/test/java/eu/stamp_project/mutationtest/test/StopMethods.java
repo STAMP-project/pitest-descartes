@@ -2,6 +2,10 @@ package eu.stamp_project.mutationtest.test;
 
 public class StopMethods {
 
+    static {
+        System.out.println("Static initializer");
+    }
+
     public void emptyVoidMethod() {}
 
     public boolean returnTrue () { return true; }
