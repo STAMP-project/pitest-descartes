@@ -17,80 +17,33 @@ Descartes evaluates the capability of your test suite to detect bugs using extre
 
 Descartes is a mutation engine plugin for [PIT](http://pitest.org) which implements extreme mutation operators as proposed in the paper [Will my tests tell me if I break this code?](http://dl.acm.org/citation.cfm?doid=2896941.2896944).  
 [PIT](http://pitest.org) is a mutation testing system for Java that provides a framework to extend its core functionality using plugins.
+It integrates with major test and build tools such as [Maven](https://maven.apache.org), [Ant](http://apache.ant.org) and [Gradle](https://gradle.org).
 A list of PIT built-in mutation operators can be found in the [tool's web page](http://pitest.org/quickstart/mutators/).
 
 ## Quick start with Maven
-This section give the basic steps to install and run Descartes on your project with Maven.
-For more information and other options, see section ["Running Descartes on your project"](#running-descartes-on-your-project).
 
-### Installing Descartes
-First compile and install Descartes in the local Apache Maven repository.
-
-In a terminal clone the repository:
-```
-git clone https://github.com/STAMP-project/pitest-descartes.git
-```
-switch to the cloned folder:
-```
-cd  pitest-descartes
-```
-and install Descartes using the regular [Apache Maven](https://maven.apache.org) commands:
-```
-mvn install
-```
-After installing the package, PIT should be able to find the Descartes mutation engine.
-
-
-### Usage
-Descartes is a plugin for PIT so they have to be used together.
-PIT integrates with majors test and build tools such as [Maven](https://maven.apache.org),
-[Ant](http://apache.ant.org) and [Gradle](https://gradle.org).
-
-
-### Maven
-Then, configure PIT for the project and specify `descartes` as the engine inside a `mutationEngine` tag in the `pom.xml` file.
+To target a Maven project, PIT has to be configured and Descartes should be declared as a dependency and as the mutation engine to use.
+In the `pom.xml` file include the following:
 
 ``` xml
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.2.0</version>
+  <version>1.4.0</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
-    <mutators>
-      <mutator>void</mutator>
-      <mutator>null</mutator>
-      <mutator>true</mutator>
-      <mutator>false</mutator>
-      <mutator>empty</mutator>
-      <mutator>0</mutator>
-      <mutator>1</mutator>
-      <mutator>(byte)0</mutator>
-      <mutator>(byte)1</mutator>
-      <mutator>(short)1</mutator>
-      <mutator>(short)2</mutator>
-      <mutator>0L</mutator>
-      <mutator>1L</mutator>
-      <mutator>0.0</mutator>
-      <mutator>1.0</mutator>
-      <mutator>0.0f</mutator>
-      <mutator>1.0f</mutator>
-      <mutator>'\40'</mutator>
-      <mutator>'A'</mutator>
-      <mutator>""</mutator>
-      <mutator>"A"</mutator>
-    </mutators>
   </configuration>
   <dependencies>
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.1</version>
+      <version>1.2</version>
     </dependency>
   </dependencies>
 </plugin>
 ```
-With PIT and Descartes configured, just run the regular mutation coverage goal in the folder of the project under test:
+
+Then, execute the regular mutation coverage goal in the folder of the project under test:
 
 ```
 cd my-project-under-test
@@ -98,6 +51,7 @@ mvn clean package # ensures clean state
 mvn org.pitest:pitest-maven:mutationCoverage -DmutationEngine=descartes
 ```
 
+For more information and other options, see section ["Running Descartes on your project"](#running-descartes-on-your-project).
 
 ## How does Descartes work?
 ### Mutation testing
@@ -223,8 +177,9 @@ class A {
 
 Descartes avoids some methods that are generally not interesting and may
 introduce false positives such as simple getters, simple setters, empty
-void methods or methods returning constant values. Those methods are automatically detected by inspecting their code.
+void methods or methods returning constant values, delegation patterns as well as deprecated and compiler generated methods. Those methods are automatically detected by inspecting their code.
 A complete list of examples can be found [here](src/test/java/eu/stamp_project/mutationtest/test/StopMethods.java).
+The exclusion of stop methods can be configured. For more details see section: ["Running Descartes on your project"](#running-descartes-on-your-project).
 
 ## Descartes Output
 
@@ -237,11 +192,14 @@ PIT reporting extensions work with Descartes and include:
     Light pink show lack of line coverage, dark pink shows lack of mutation coverage.
 Descartes also provides two new reporting extensions:
   - a general reporting extension supporting JSON files. It works also with **Gregor**, the default mutation engine for PIT. To use just set `JSON` as report format for PIT.
-  - a reporting extension desgined for Descartes that generates a JSON file with information about pseudo and partially tested methods. To use just set `METHOD` as report format for PIT.
+  - a reporting extension designed for Descartes that generates a JSON file with information about pseudo and partially tested methods. To use just set `METHOD` as report format for PIT.
+  - Descartes can generate a human readable report containing only the list of methods with testing issues by using the `ISSUES` format.
 
 ## Running Descartes on your project
-### Installing Descartes
-First compile and install Descartes in the local Apache Maven repository.
+
+Stable releases of Descartes are available from Maven Central.
+
+### Installing and building from source
 
 In a terminal clone the repository:
 ```
@@ -271,38 +229,15 @@ Then, configure PIT for the project and specify `descartes` as the engine inside
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.2.0</version>
+  <version>1.4.0</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
-    <mutators>
-      <mutator>void</mutator>
-      <mutator>null</mutator>
-      <mutator>true</mutator>
-      <mutator>false</mutator>
-      <mutator>empty</mutator>
-      <mutator>0</mutator>
-      <mutator>1</mutator>
-      <mutator>(byte)0</mutator>
-      <mutator>(byte)1</mutator>
-      <mutator>(short)1</mutator>
-      <mutator>(short)2</mutator>
-      <mutator>0L</mutator>
-      <mutator>1L</mutator>
-      <mutator>0.0</mutator>
-      <mutator>1.0</mutator>
-      <mutator>0.0f</mutator>
-      <mutator>1.0f</mutator>
-      <mutator>'\40'</mutator>
-      <mutator>'A'</mutator>
-      <mutator>""</mutator>
-      <mutator>"A"</mutator>
-    </mutators>
   </configuration>
   <dependencies>
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.1</version>
+      <version>1.2</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -344,8 +279,121 @@ If no operator is specified, the tool will use `void` and `null` by default. Whi
     <mutator>null</mutator>
 </mutators>
 ```
-The rest of the goals defined by the `pitest-maven` plugin should run in the same way without any
+
+If no operator is specified Descartes will use the following configuration:
+
+``` xml
+<mutators>
+  <mutator>void</mutator>
+  <mutator>null</mutator>
+  <mutator>true</mutator>
+  <mutator>false</mutator>
+  <mutator>empty</mutator>
+  <mutator>0</mutator>
+  <mutator>1</mutator>
+  <mutator>(byte)0</mutator>
+  <mutator>(byte)1</mutator>
+  <mutator>(short)0</mutator>
+  <mutator>(short)1</mutator>
+  <mutator>0L</mutator>
+  <mutator>1L</mutator>
+  <mutator>0.0</mutator>
+  <mutator>1.0</mutator>
+  <mutator>0.0f</mutator>
+  <mutator>1.0f</mutator>
+  <mutator>'\40'</mutator>
+  <mutator>'A'</mutator>
+  <mutator>""</mutator>
+  <mutator>"A"</mutator>
+</mutators>
+
+```
+
+All the goals defined by the `pitest-maven` plugin should run in the same way without any
 issues, see <http://pitest.org/quickstart/maven/>.
+
+### Configuring stop methods
+
+To configure the stop methods under consideration Descartes provide a `STOP_METHODS` [feature](http://pitest.org/quickstart/advanced/#mutation-interceptor").
+This feature is enabled by default. The parameter `exclude` can be used to prevent certain methods to be treated as stop methods and bring them back to the analysis. This parameter can take any of the following values:
+
+
+|`exclude`     | Method description                                                                     | Example                                                                |
+|--------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| `empty`      | `void` methods with no instruction.                                                    | `public void m() {}`                                                   |
+| `enum`       | Methods generated by the compiler to support enum types (`values` and `valueOf`).      |                                                                        |
+| `to_string`  | `toString` methods.                                                                    |                                                                        |
+| `hash_code`  | `hashCode` methods.                                                                    |                                                                        |
+| `deprecated` | Methods annotated with `@Deprecated` or belonging to a class with the same annotation. | `@Deprecated public void m() {...}`                                    |  
+| `synthetic`  | Methods generated by the compiler.                                                     |                                                                        |
+| `getter`     | Simple getters.                                                                        | `public int getAge() { return this.age; }`                             |
+| `setter`     | Simple setters.                                                                        | `public void setAge(int value) { this.age = value; }`                  |
+| `constant`   | Methods returning a literal constant.                                                  | `public double getPI() { return 3.14; }`                               |
+| `delegate`   | Methods implementing simple delegation.                                                | `public int sum(int[] a, int i, int j) {return this.adder(a, i, j); }` |
+
+So, for example, if we don't want to exclude deprecated methods and mutate them the following snippet should be added under the `configuration` element:
+
+``` xml
+<features>
+  <feature>
+  <!-- This will allow descartes to mutate deprecated methods -->
+    +STOP_METHODS(exclude[deprecated]) 
+  </feature>
+</features>
+```
+
+More than one group can be excluded at the same time:
+
+``` xml
+<features>
+  <feature>
+  <!-- This will allow descartes to mutate toString and enum generated methods -->
+    +STOP_METHODS(exclude[to_string] exlude[enum])
+  </feature>
+</features>
+```
+
+The feature can be completely disabled:
+
+``` xml
+<features>
+  <feature>
+  <!--No method is considered as a stop method and therefore all of them will be mutated -->
+    -STOP_METHODS()
+  </feature>
+</features>
+```
+
+### Configuring reports
+
+As said before, there are several reporting options provided by Descartes:
+- `JSON` for a general mutation testing report using that file format. It can be used with **Gregor**.
+- `METHODS` that produces a `methods.json` file with the list of all methods analyzed and categorized according to the mutation testing result.
+- `ISSUES` a human readable report containing only the methods with testing issues.
+
+They can be configured and combined as regular PIT report formats:
+
+``` xml
+<plugin>
+  <groupId>org.pitest</groupId>
+  <artifactId>pitest-maven</artifactId>
+  <version>1.4.0</version>
+  <configuration>
+    <outputFormats>
+      <value>JSON</value>
+      <value>METHODS</value>
+      <value>ISSUES</value>
+    </outputFormats>
+  </configuration>
+    <dependencies>
+    <dependency>
+      <groupId>eu.stamp-project</groupId>
+      <artifactId>descartes</artifactId>
+      <version>1.2</version>
+    </dependency>
+  </dependencies>
+</plugin>
+```
 
 ### Gradle
 Follow the [instructions](http://gradle-pitest-plugin.solidsoft.info/) to set up PIT
@@ -353,7 +401,7 @@ for a project that uses [Gradle](https://gradle.org/).
 In the `build.gradle` file add the local Maven repository to the `buildscript` block and set
 a `pitest` configuration element inside the same block. In the `dependencies` block put the artifact information:
 ```
-pitest 'eu.stamp-project:descartes:1.1'
+pitest 'eu.stamp-project:descartes:1.2'
 ```
 then specify `descartes` in the `mutationEngine` option inside the plugin configuration.
 An example of the final configuration could be:
@@ -368,7 +416,7 @@ buildscript {
 
   dependencies {
     classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.9'
-    pitest 'eu.stamp-project:descartes:1.1'
+    pitest 'eu.stamp-project:descartes:1.2'
   }
 }
 
