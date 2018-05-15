@@ -63,7 +63,9 @@ public class MutationPointFinder extends ClassVisitor {
     }
 
     /**
+     * Registers all available mutation operators that match a given method.
      *
+     * @param method The method on which the mutations have to be registered
      * @param start Index of the first instruction of the method
      * @param end Index of the last instruction of the method
      */

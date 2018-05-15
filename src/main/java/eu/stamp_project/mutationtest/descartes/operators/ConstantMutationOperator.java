@@ -17,6 +17,7 @@ public class ConstantMutationOperator extends MutationOperator {
     /**
      * Builds an instance of the operator given a constant value to be used in the return statement.
      *
+     * @param id The identifier for the instance of the operator. It does not have to coincide with the constant value.
      * @param constant The constant value to be used
      */
     public ConstantMutationOperator(String id, Object constant) {
