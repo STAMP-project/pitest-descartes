@@ -6,7 +6,7 @@ import org.pitest.reloc.asm.Type;
 import org.pitest.reloc.asm.commons.Method;
 
 /**
- * Replaces the method body with a <code>return null<code/> statement
+ * Replaces the method body with a <code>return null</code> statement
  */
 public class NullMutationOperator extends MutationOperator{
 

@@ -62,13 +62,6 @@ public class MutationPointFinder extends ClassVisitor {
         return new MethodInspector(method, this);
     }
 
-    /**
-     * Registers all available mutation operators that match a given method.
-     *
-     * @param method The method on which the mutations have to be registered
-     * @param start Index of the first instruction of the method
-     * @param end Index of the last instruction of the method
-     */
     public void registerMutations(Method method, int start, int end) {
         //TODO: Filtering the set of available operators twice. Could this harm running time?
         for (MutationOperator operator :
