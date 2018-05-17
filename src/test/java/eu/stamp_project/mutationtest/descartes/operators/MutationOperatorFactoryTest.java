@@ -9,18 +9,6 @@ import static org.junit.Assert.assertTrue;
 public class MutationOperatorFactoryTest {
 
     @Test
-    public void shouldCreateVoidMutator() {
-        MutationOperator operator = MutationOperator.fromID("void");
-        assertThat(operator, is((MutationOperator) VoidMutationOperator.getInstance()));
-    }
-
-    @Test
-    public void shouldCreateNullMutator() {
-        MutationOperator operator = MutationOperator.fromID("null");
-        assertThat(operator, is((MutationOperator) NullMutationOperator.getInstance()));
-    }
-
-    @Test
     public void shouldGetIntegerMutator() {
         int value = 3;
         String id = String.valueOf(value);

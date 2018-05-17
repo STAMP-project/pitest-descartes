@@ -13,8 +13,9 @@ public class NullMutationOperatorTest {
     @Test
     public void shouldFilterMethods() {
 
+        MutationOperator operator = MutationOperator.fromID("null");
         for (Method method : TestUtils.getMethods(Calculator.class)) {
-            if(NullMutationOperator.getInstance().canMutate(method))
+            if(operator.canMutate(method))
                 assertThat(method.getName(), isOneOf("getScreen", "getClone", "getSomeCalculators", "getSomeMore", "getRange"));
 
         }

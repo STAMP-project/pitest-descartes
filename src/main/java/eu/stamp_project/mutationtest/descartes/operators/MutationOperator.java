@@ -31,12 +31,13 @@ public abstract class MutationOperator {
         if(parser.hasErrors())
             throw new WrongOperatorException("Invalid operator id: " + parser.getErrors().get(0));
         if(value == null)
-            return NullMutationOperator.getInstance();
+            return new NullMutationOperator();
         if(value.equals(Void.class)) {
-            return VoidMutationOperator.getInstance();
+            return new VoidMutationOperator();
         }
-        if(value.equals(EmptyArrayMutationOperator.getInstance().getID())) {
-            return EmptyArrayMutationOperator.getInstance();
+        EmptyArrayMutationOperator potentialOperator = new EmptyArrayMutationOperator();
+        if(value.equals(potentialOperator.getID())) {
+            return potentialOperator;
         }
         try {
             return new ConstantMutationOperator(id, value);

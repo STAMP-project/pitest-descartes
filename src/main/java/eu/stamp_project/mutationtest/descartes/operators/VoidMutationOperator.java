@@ -41,11 +41,4 @@ public final class VoidMutationOperator extends MutationOperator {
         return "All method instructions removed";
     }
 
-    //Singleton pattern implementation
-    private static final VoidMutationOperator instance = new VoidMutationOperator();
-
-    public static VoidMutationOperator getInstance() { return instance; }
-
-    private VoidMutationOperator() {}
-
 }

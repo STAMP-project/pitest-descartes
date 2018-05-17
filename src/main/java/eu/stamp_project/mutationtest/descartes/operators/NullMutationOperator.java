@@ -40,10 +40,4 @@ public class NullMutationOperator extends MutationOperator{
         return "All methods instructions replaced by: return null;";
     }
 
-    //Singleton pattern implementation
-    private static final NullMutationOperator instance = new NullMutationOperator();
-
-    public static NullMutationOperator getInstance() { return instance; }
-
-    private NullMutationOperator() {}
 }

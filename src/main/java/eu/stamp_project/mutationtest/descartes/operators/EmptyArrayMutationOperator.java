@@ -17,7 +17,7 @@ public class EmptyArrayMutationOperator extends MutationOperator {
         return method.getReturnType().getSort() == Type.ARRAY;
     }
 
-    private static int[] type2opcode = {0,
+    private final static int[] type2opcode = {0,
             Opcodes.T_BOOLEAN,
             Opcodes.T_CHAR,
             Opcodes.T_BYTE,
@@ -57,10 +57,4 @@ public class EmptyArrayMutationOperator extends MutationOperator {
         return "Method body replaced by instructions that returns an empty array of the corresponding type";
     }
 
-    //Singleton pattern implementation
-    private static final EmptyArrayMutationOperator instance = new EmptyArrayMutationOperator();
-
-    public static EmptyArrayMutationOperator getInstance() { return instance; }
-
-    private EmptyArrayMutationOperator() {}
 }
