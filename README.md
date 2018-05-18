@@ -16,9 +16,6 @@
 Descartes evaluates the capability of your test suite to detect bugs using extreme mutation testing.
 
 Descartes is a mutation engine plugin for [PIT](http://pitest.org) which implements extreme mutation operators as proposed in the paper [Will my tests tell me if I break this code?](http://dl.acm.org/citation.cfm?doid=2896941.2896944).  
-[PIT](http://pitest.org) is a mutation testing system for Java that provides a framework to extend its core functionality using plugins.
-It integrates with major test and build tools such as [Maven](https://maven.apache.org), [Ant](http://apache.ant.org) and [Gradle](https://gradle.org).
-A list of PIT built-in mutation operators can be found in the [tool's web page](http://pitest.org/quickstart/mutators/).
 
 ## Quick start with Maven
 
