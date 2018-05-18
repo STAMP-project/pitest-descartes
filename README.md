@@ -3,15 +3,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/STAMP-project/pitest-descartes/badge.svg?branch=master)](https://coveralls.io/github/STAMP-project/pitest-descartes?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/eu.stamp-project/descartes/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/eu.stamp-project/descartes)
 
-## Table of contents
-  - [What is Descartes?](#what-is-descartes)
-  - [Quick start with Maven](#quick-start-with-maven)
-  - [How does Descartes work?](#how-does-descartes-work)
-  - [Descartes Output](#descartes-output)
-  - [Running Descartes on your project](#running-descartes-on-your-project)
-  - [Releases](#releases)
-  - [More...](#more)
-
 ## What is Descartes?
 Descartes evaluates the capability of your test suite to detect bugs using extreme mutation testing.
 
@@ -49,6 +40,13 @@ mvn org.pitest:pitest-maven:mutationCoverage -DmutationEngine=descartes
 ```
 
 For more information and other options, see section ["Running Descartes on your project"](#running-descartes-on-your-project).
+
+## Table of contents
+  - [How does Descartes work?](#how-does-descartes-work)
+  - [Descartes Output](#descartes-output)
+  - [Running Descartes on your project](#running-descartes-on-your-project)
+  - [Releases](#releases)
+  - [More...](#more)
 
 ## How does Descartes work?
 ### Mutation testing
