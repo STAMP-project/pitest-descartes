@@ -1,6 +1,6 @@
 # Performance
 
-We have compare the performance of Descartes with Gregor, which is the
+We have compared the performance of Descartes and Gregor, which is the
 default mutation engine for PITest. The table below shows the execution
 time and number of mutants created by both engines in a set of
 open source projects. In all cases Descartes created much less mutants
