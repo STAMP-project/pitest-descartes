@@ -4,6 +4,7 @@ import eu.stamp_project.mutationtest.descartes.reporting.models.MethodRecord;
 import org.pitest.coverage.TestInfo;
 import org.pitest.mutationtest.*;
 
+import org.pitest.mutationtest.engine.MutationDetails;
 import org.pitest.util.Unchecked;
 
 import java.io.IOException;
@@ -51,6 +52,9 @@ public class MethodTestingListener implements MutationResultListener {
             report.writeAttribute("description", method.desc());
             report.writeAttribute("class", method.className());
             report.writeAttribute("package", method.packageName());
+            report.writeAttribute("file-name", method.getFileName());
+            report.writeAttribute("line-number", method.getLineNumber());
+
 
             report.writeAttribute("classification", method.getClassification().toString());
             report.writeStringListAttribute("detected", getMutators(method.getDetectedMutations()));

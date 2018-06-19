@@ -25,6 +25,8 @@ public class MethodRecord {
     private Location location;
     private MethodClassification classification;
     private Set<MutationResult> mutationResults = new HashSet<>();
+    private String fileName;
+    private int lineNumber;
 
     public MethodRecord(MutationResult mutation) {
         initialize(mutation);
@@ -65,6 +67,8 @@ public class MethodRecord {
         mutationResults.add(mutation);
         location = mutation.getDetails().getId().getLocation();
         classification = statusToClassification(mutation.getStatus());
+        fileName = mutation.getDetails().getFilename();
+        lineNumber = mutation.getDetails().getLineNumber();
     }
 
     private void updateStatus(DetectionStatus status) {
@@ -128,6 +132,10 @@ public class MethodRecord {
     public String packageName() {
         return location.getClassName().getPackage().asInternalName();
     }
+
+    public String getFileName() { return fileName; }
+
+    public int getLineNumber() { return lineNumber; }
 
 
     public String declaration() {
