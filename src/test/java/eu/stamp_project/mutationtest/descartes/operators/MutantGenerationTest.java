@@ -33,7 +33,7 @@ public class MutantGenerationTest {
     public static Collection<Object[]> parameters() {
         return Arrays.asList( new Object[][]{
                 {"null", (Predicate<Object>)(x) -> x == null},
-                {"1", (Predicate<Object>)(x) -> x.equals(1)},
+                {"-1", (Predicate<Object>)(x) -> x.equals(-1)},
                 {"empty", (Predicate<Object>)(x) -> x.getClass().isArray() && Array.getLength(x) == 0},
                 {"1.2f", (Predicate<Object>)(x) -> x.equals(1.2f)},
                 {"1.0", (Predicate<Object>)(x) -> x.equals(1.0)}

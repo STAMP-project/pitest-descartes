@@ -206,4 +206,4 @@ Exponent = [eE] [+-]? \d+
 
 /* Error fallback */
 
-[ˆ] { error("Unexpected character"); }
+. { error("Illegal character + <" + yytext() + ">"); }

@@ -35,7 +35,10 @@ public class OperatorParser {
             try{
                 next();
                 return true;
-            } catch(IOException exc) {
+            }
+
+            catch(Throwable throwable) {
+                errors.add(throwable.getMessage());
                 return false;
             }
         }
@@ -43,7 +46,7 @@ public class OperatorParser {
     }
 
 
-    private void next() throws IOException {
+    private void next() throws Throwable {
         lookahead = lexer.nextToken();
     }
 
@@ -90,7 +93,7 @@ public class OperatorParser {
             if(!match(TokenType.EOF))
                 unexpectedTokenError();
 
-        } catch(IOException exc) {
+        } catch(Throwable exc) {
             errors.add("Unexpected error: " + exc.getMessage());
             result = null;
         }
@@ -127,7 +130,7 @@ public class OperatorParser {
             unexpectedTokenError();
     }
 
-    private void parseCastedInteger () throws IOException{
+    private void parseCastedInteger () throws Throwable {
         //TODO: Find a way to refactor this method
         if(match(TokenType.LPAR)) {
             if(lookaheadIs(TokenType.BYTE_KWD)) {
