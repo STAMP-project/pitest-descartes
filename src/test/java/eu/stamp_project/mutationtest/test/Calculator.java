@@ -29,7 +29,7 @@ public class Calculator {
     }
 
     public int getCeiling() {
-        return (int)Math.ceil(registry);
+        return (int)Math.ceil(registry + 18000);
     }
 
     public long getSquare() {
