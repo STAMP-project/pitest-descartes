@@ -93,10 +93,13 @@ public class OperatorParser {
             if(!match(TokenType.EOF))
                 unexpectedTokenError();
 
+            lexer.yyclose();
+
         } catch(Throwable exc) {
             errors.add("Unexpected error: " + exc.getMessage());
             result = null;
         }
+
         return result;
     }
 
@@ -142,7 +145,7 @@ public class OperatorParser {
                     if(lookaheadIs(TokenType.INT_LITERAL)) {
                         result = ((Integer)lookahead.getData()).byteValue();
                         if(negate)
-                            result = - (Byte)result;
+                            result = (byte)(-((Byte)result));
                     }
                     else
                         unexpectedTokenError();
@@ -159,7 +162,7 @@ public class OperatorParser {
                     if(lookaheadIs(TokenType.INT_LITERAL)) {
                         result = ((Integer)lookahead.getData()).shortValue();
                         if(negate)
-                            result = - (Short)result;
+                            result = (short) (-(Short)result);
                     }
                     else
                         unexpectedTokenError();

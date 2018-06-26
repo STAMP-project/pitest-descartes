@@ -28,16 +28,20 @@ public class WrongInputTest {
                 {"-'S'"},
                 {"\"a"},
                 {"a\""},
+                {"(1)2"},
                 {"(type)8"},
-                /*{"(byte)3"},
-                {"(short)3"},
-                {"3.0"},
-                {"3.0f"},
-                {"true"},
-                {"false"},
-                {"'a'"},
-                {"\"string\""},*/
-
+                {"@"},
+                {"(short 3"},
+                {"(byte 3"},
+                {"(byte) 'A'"},
+                {"(short) 'B'"},
+                {"''"},
+                {"'a"},
+                {"'tu'"},
+                {"'\\500'"},
+                {"1\n2"},
+                {"\n"}
+                /*{"(byte)10000"}*/ //TODO: This is not failing. Ouputs (byte)16
         });
     }
 
@@ -46,7 +50,7 @@ public class WrongInputTest {
 
 
     @Test
-    public void shouldParseValue() {
+    public void shouldNotParseValue() {
         OperatorParser parser = new OperatorParser(input);
         parser.parse();
         assertTrue(parser.hasErrors());

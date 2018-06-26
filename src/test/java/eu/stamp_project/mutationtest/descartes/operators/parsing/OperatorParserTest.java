@@ -35,7 +35,9 @@ public class OperatorParserTest {
                 {"-2L", -2L},
                 {"-3.1f", -3.1f},
                 {"-4.5", -4.5},
-                /*{"(byte)-5", (byte)-5}*/ //TODO: Failing test this is returning integer instead of byte
+                {"(byte)-5", (byte)-5},
+                {"(short)-6", (short)-6},
+                {"\"\\n\"", "\n"}
         });
     }
 

@@ -19,4 +19,9 @@ public class MutationOperatorFactoryTest {
         assertTrue(constant.equals(value));
     }
 
+    @Test(expected = WrongOperatorException.class)
+    public void shouldNotCreateAnyOperator() {
+        MutationOperator.fromID("@");
+    }
+
 }
