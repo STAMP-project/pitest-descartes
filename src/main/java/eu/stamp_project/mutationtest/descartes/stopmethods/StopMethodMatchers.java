@@ -1,7 +1,5 @@
 package eu.stamp_project.mutationtest.descartes.stopmethods;
 
-
-import jdk.internal.org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
