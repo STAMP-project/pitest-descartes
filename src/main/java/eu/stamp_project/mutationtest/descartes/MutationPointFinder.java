@@ -63,7 +63,6 @@ public class MutationPointFinder extends ClassVisitor {
     }
 
     public void registerMutations(Method method, int start, int end) {
-        //TODO: Filtering the set of available operators twice. Could this harm running time?
         for (MutationOperator operator :
                 engine.getOperatorsFor(method)) {
             mutationPoints.add(getMutationDetails(method, operator, start, end));

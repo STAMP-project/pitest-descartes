@@ -32,12 +32,17 @@ public class MutantGenerationTest {
     @Parameterized.Parameters(name="{index}: Creating mutants for: {0}")
     public static Collection<Object[]> parameters() {
         return Arrays.asList( new Object[][]{
-                {"null", (Predicate<Object>)(x) -> x == null},
-                {"-1", (Predicate<Object>)(x) -> x.equals(-1)},
-                {"empty", (Predicate<Object>)(x) -> x.getClass().isArray() && Array.getLength(x) == 0},
-                {"1.2f", (Predicate<Object>)(x) -> x.equals(1.2f)},
-                {"1.0", (Predicate<Object>)(x) -> x.equals(1.0)}
+                {"null",     (Predicate<Object>)(x) -> x == null},
+                {"-1",       isEqualTo(-1)},
+                {"empty",    (Predicate<Object>)(x) -> x.getClass().isArray() && Array.getLength(x) == 0},
+                {"1.2f",     isEqualTo(1.2f)},
+                {"1.0",      isEqualTo(1.0)},
+                {"(short)1", isEqualTo((short)1)}
         });
+    }
+
+    private static Predicate<Object> isEqualTo(Object value) {
+        return (x) -> x.equals(value);
     }
 
     @Test

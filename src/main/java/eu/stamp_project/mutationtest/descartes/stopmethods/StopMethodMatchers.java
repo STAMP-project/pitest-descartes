@@ -1,6 +1,7 @@
 package eu.stamp_project.mutationtest.descartes.stopmethods;
 
 
+import jdk.internal.org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
@@ -103,6 +104,14 @@ public interface StopMethodMatchers {
 
     static StopMethodMatcher isStaticInitializer() {
         return forNameDesc("<clinit>", "()V");
+    }
+
+    static StopMethodMatcher returnsAnEmptyArray() {
+        return forBody(
+                match(opCode(ICONST_0))
+                        .then(opCode(NEWARRAY).or(opCode(ANEWARRAY)))
+                        .then(opCode(ARETURN))
+        );
     }
 
 

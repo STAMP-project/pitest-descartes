@@ -21,11 +21,13 @@ public class ConstantMutationOperator extends MutationOperator {
      * @param constant The constant value to be used
      */
     public ConstantMutationOperator(String id, Object constant) {
+        // We actually need the identifier to be able to distinguish the operator.
+        // Besides, there could be a scenario in which two different operators can produce the same constant.
         if(!TypeHelper.isConstantType(constant.getClass()))
             throw new IllegalArgumentException();
         this.constant = constant;
         this.id = id;
-        //TODO: When the parser is finished this constructor should only take the literal string value, to ensure that always the literal value matches the object value
+
     }
 
     /**

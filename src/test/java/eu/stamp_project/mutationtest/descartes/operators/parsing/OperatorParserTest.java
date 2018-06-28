@@ -14,7 +14,6 @@ import static org.junit.Assert.assertEquals;
 @RunWith(Parameterized.class)
 public class OperatorParserTest {
 
-    //TODO: Add more test cases
     @Parameters(name = "{index}: {0}")
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {

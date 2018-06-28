@@ -38,12 +38,23 @@ public class StopMethods {
 
     public Object returnNull() { return null; }
 
-    /* TODO: MRecognize the following method bodies
-    public int[] retrunEmptyArray() {
-        //return new int[0];
-        //return new int[]{};
+
+    public int[] emptyIntArray() {
+        return new int[0];
+
     }
-    */
+
+    //The actually produces the same bytecode for this method as the code produced for the previous version
+    public int[] emptyInt2Array() {
+        return new int[]{};
+    }
+
+    public int[][] emptyMatrix() { return new int[0][]; }
+
+    public String[] emptyStringArray() { return new String[0]; }
+
+    public String[][] emptyStringMatrix() { return new String[0][]; }
+
 
     boolean aBoolean;
     byte aByte;

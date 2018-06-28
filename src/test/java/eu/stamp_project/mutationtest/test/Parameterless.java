@@ -53,4 +53,8 @@ public class Parameterless {
         return x;
     }
 
+    public short workShort() {
+        return (short) (System.currentTimeMillis() % 2);
+    }
+
 }
