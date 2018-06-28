@@ -51,7 +51,7 @@ public class MutationPointFinder extends ClassVisitor {
 
         // Abstract methods and constructors are not a target.
         // All optional targets has been implemented in the for of features.
-        if(hasFlag(access, Opcodes.ACC_ABSTRACT) || isConstructor(name))
+        if(hasFlag(access, Opcodes.ACC_ABSTRACT | Opcodes.ACC_NATIVE) || isConstructor(name))
             return null;
 
         Method method = new Method(name, desc);

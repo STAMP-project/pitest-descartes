@@ -41,19 +41,19 @@ public class DescartesMutater implements Mutater {
         return finder.getMutationPoints();
     }
 
-    public Mutant getMutation(MutationIdentifier mID) {
+    private byte[] createMutant(MutationIdentifier mID) {
         Optional<byte[]> bytes = byteSource.getBytes(mID.getClassName().asJavaName()); //So does the original PIT
         ClassReader reader = new ClassReader(bytes.get());
-        //TODO: Original PIT uses specific structures for caching and thus speedup the process
         ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-        //TODO: Check if its feasible to pass only the location
         MutationClassAdapter adapter = new MutationClassAdapter(mID, writer);
         reader.accept(adapter, 0);
+        return writer.toByteArray();
+    }
 
-        //TODO: Mutation details again here, why isn't the parameter MutationIdentifier instead of MutationDetails?
-        // do details may change from discovering to mutation?
-        // store the mutation details so they can be recovered here instead of recomputing all?
-        return new Mutant(new MutationDetails(mID, "", "", 0, 0), writer.toByteArray());
+    public Mutant getMutation(MutationIdentifier mID) {
+        // We can return a default MutationDetails object as PIT uses the precomputed details for the process.
+        // Given this it would be better to have this method receive the MutationDetails instance instead of the MutationIndetifier.
+        return new Mutant(new MutationDetails(mID, "", "", 0, 0), createMutant(mID));
     }
 
 }
