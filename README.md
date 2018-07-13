@@ -178,13 +178,7 @@ The exclusion of stop methods can be configured. For more details see section: [
 
 ## Descartes Output
 
-PIT reporting extensions work with Descartes and include:
-  - a summary report with line coverage and mutation coverage scores  
-   ![PIT inputs and outputs](docs/readme_pit_output_03.png)  
-  - a detailed report on line coverage and mutation coverage for each source file  
-   ![PIT inputs and outputs](docs/readme_pit_output_02.png)  
-    Light green shows line coverage, dark green shows mutation coverage.  
-    Light pink show lack of line coverage, dark pink shows lack of mutation coverage.
+PIT reporting extensions work with Descartes and include XML, CSV and HTML format. The HTML format is rather convinient since it also shows the line coverage.
 Descartes also provides two new reporting extensions:
   - a general reporting extension supporting JSON files. It works also with **Gregor**, the default mutation engine for PIT. To use just set `JSON` as report format for PIT.
   - a reporting extension designed for Descartes that generates a JSON file with information about pseudo and partially tested methods. To use just set `METHOD` as report format for PIT.
@@ -326,6 +320,7 @@ This feature is enabled by default. The parameter `exclude` can be used to preve
 | `constant`   | Methods returning a literal constant.                                                  | `public double getPI() { return 3.14; }`                               |
 | `delegate`   | Methods implementing simple delegation.                                                | `public int sum(int[] a, int i, int j) {return this.adder(a, i, j); }` |
 | `clinit`     | Static class initializers.                                                             |                                                                        |
+
 So, for example, if we don't want to exclude deprecated methods and mutate them the following snippet should be added under the `configuration` element:
 
 ``` xml
