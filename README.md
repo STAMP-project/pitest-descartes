@@ -178,9 +178,9 @@ The exclusion of stop methods can be configured. For more details see section: [
 
 ## Descartes Output
 
-PIT reporting extensions work with Descartes and include XML, CSV and HTML format. The HTML format is rather convinient since it also shows the line coverage.
+PIT reporting extensions work with Descartes and include `XML`, `CSV` and `HTML` format. The `HTML` format is rather convinient since it also shows the line coverage.
 Descartes also provides two new reporting extensions:
-  - a general reporting extension supporting JSON files. It works also with **Gregor**, the default mutation engine for PIT. To use just set `JSON` as report format for PIT.
+  - a general reporting extension supporting `JSON` files. It works also with **Gregor**, the default mutation engine for PIT. To use just set `JSON` as report format for PIT.
   - a reporting extension designed for Descartes that generates a JSON file with information about pseudo and partially tested methods. To use just set `METHOD` as report format for PIT.
   - Descartes can generate a human readable report containing only the list of methods with testing issues by using the `ISSUES` format.
 
