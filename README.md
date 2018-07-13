@@ -25,7 +25,7 @@ In the `pom.xml` file include the following:
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.2</version>
+      <version>1.2.2</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -45,6 +45,14 @@ For more information and other options, see section ["Running Descartes on your 
   - [How does Descartes work?](#how-does-descartes-work)
   - [Descartes Output](#descartes-output)
   - [Running Descartes on your project](#running-descartes-on-your-project)
+    - [Installing and building from source](#installing-and-building-from-source)
+    - [Usage](#usage)
+      - [Maven](#maven)
+        - [Specifying operators](#specifying-operators)
+        - [Configuring stop methods](#configuring-stop-methods)
+        - [Configuring reports](#configuring-reports)
+      - [Gradle](#gradle)
+      - [Running from the command line](#running-from-the-command-line)
   - [Releases](#releases)
   - [More...](#more)
 
@@ -184,6 +192,8 @@ Descartes also provides two new reporting extensions:
   - a reporting extension designed for Descartes that generates a JSON file with information about pseudo and partially tested methods. To use just set `METHOD` as report format for PIT.
   - Descartes can generate a human readable report containing only the list of methods with testing issues by using the `ISSUES` format.
 
+For more details on how to use and configure these reporting extensions please check section: ["Running Descartes on your project"](#running-descartes-on-your-project).
+
 ## Running Descartes on your project
 
 Stable releases of Descartes are available from Maven Central.
@@ -211,7 +221,7 @@ PIT integrates with majors test and build tools such as [Maven](https://maven.ap
 [Ant](http://apache.ant.org) and [Gradle](https://gradle.org).
 
 
-### Maven
+#### Maven
 Then, configure PIT for the project and specify `descartes` as the engine inside a `mutationEngine` tag in the `pom.xml` file.
 
 ``` xml
@@ -226,7 +236,7 @@ Then, configure PIT for the project and specify `descartes` as the engine inside
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.2</version>
+      <version>1.2.2</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -238,7 +248,7 @@ cd my-project-under-test
 mvn clean package # ensures clean state
 mvn org.pitest:pitest-maven:mutationCoverage -DmutationEngine=descartes
 ```
-### Specifying operators
+##### Specifying operators
 
 The operators to be used must be specified in the `pom.xml`. Each operator identifier should be added
 to the `mutators` element inside the `configuration` element. `void` and `null` operators are
@@ -301,7 +311,7 @@ If no operator is specified Descartes will use the following configuration:
 All the goals defined by the `pitest-maven` plugin should run in the same way without any
 issues, see <http://pitest.org/quickstart/maven/>.
 
-### Configuring stop methods
+##### Configuring stop methods
 
 To configure the stop methods under consideration Descartes provide a `STOP_METHODS` [feature](http://pitest.org/quickstart/advanced/#mutation-interceptor").
 This feature is enabled by default. The parameter `exclude` can be used to prevent certain methods to be treated as stop methods and bring them back to the analysis. This parameter can take any of the following values:
@@ -354,7 +364,7 @@ The feature can be completely disabled:
 </features>
 ```
 
-### Configuring reports
+##### Configuring reports
 
 As said before, there are several reporting options provided by Descartes:
 - `JSON` for a general mutation testing report using that file format. It can be used with **Gregor**.
@@ -379,7 +389,7 @@ They can be configured and combined as regular PIT report formats:
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.2</version>
+      <version>1.2.2</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -430,6 +440,8 @@ Compiled modules are available from [a custom Maven repository](https://stamp-pr
 Detailed instructions can be found [here](https://github.com/STAMP-project/stamp-maven-repository).
 
 ## Releases
+* [Descartes 1.2.2](https://github.com/STAMP-project/pitest-descartes/releases/tag/descartes-1.2.2)
+* [Descartes 1.2.1](https://github.com/STAMP-project/pitest-descartes/releases/tag/descartes-1.2.1)
 * [Descartes 1.2](https://github.com/STAMP-project/pitest-descartes/releases/tag/descartes-1.2)
 * [Descartes 1.1](https://github.com/STAMP-project/pitest-descartes/releases/tag/descartes-1.1)
 * [Stable release candidate 0.2](https://github.com/STAMP-project/pitest-descartes/releases/tag/0.2-D1.2)
