@@ -159,6 +159,8 @@ public class IssuesReportListener implements MutationResultListener {
                 result.append("s");
             result.append(" ");
         }
+        if(result.length() == 0)
+            return "less than one second";
         return result.substring(0, result.length() - 1);
     }
 
