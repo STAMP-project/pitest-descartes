@@ -57,4 +57,27 @@ public class Parameterless {
         return (short) (System.currentTimeMillis() % 2);
     }
 
+    public byte getAByte() { return (byte)(128 << 2); }
+
+    public boolean isOdd() { return "odd".length() % 2 == 1; }
+
+    public char first() { return "first".charAt(0); }
+
+    //Wrappers
+    public Long longWrapper() { return Long.valueOf("1"); }
+
+    public Integer integerWrapper() { return Integer.getInteger("123"); }
+
+    public Short shortWrapper() { return Short.valueOf("1"); }
+
+    public Byte byteWrapper() { return Byte.valueOf("1"); }
+
+    public Double doubleWrapper() { return Double.valueOf("1.0"); }
+
+    public Float floatWrapper() { return Float.valueOf("1f"); }
+
+    public Boolean booleanWrapper() { return Boolean.getBoolean("false"); }
+
+    public Character charWrapper() { return Character.toLowerCase('C'); }
+
 }

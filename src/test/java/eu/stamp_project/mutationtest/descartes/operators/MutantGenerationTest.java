@@ -11,6 +11,7 @@ import org.pitest.classinfo.ClassName;
 import org.pitest.mutationtest.engine.MutationDetails;
 import org.pitest.reloc.asm.ClassReader;
 import org.pitest.reloc.asm.ClassWriter;
+import sun.tools.tree.BooleanExpression;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -37,7 +38,11 @@ public class MutantGenerationTest {
                 {"empty",    (Predicate<Object>)(x) -> x.getClass().isArray() && Array.getLength(x) == 0},
                 {"1.2f",     isEqualTo(1.2f)},
                 {"1.0",      isEqualTo(1.0)},
-                {"(short)1", isEqualTo((short)1)}
+                {"(short)1", isEqualTo((short)1)},
+                {"(byte)1",  isEqualTo((byte)1)},
+                {"123L",     isEqualTo(123L)},
+                {"true",     isEqualTo(true)},
+                {"'\\n'",    isEqualTo('\n')}
         });
     }
 

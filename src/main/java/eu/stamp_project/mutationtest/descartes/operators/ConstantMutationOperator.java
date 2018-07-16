@@ -57,7 +57,7 @@ public class ConstantMutationOperator extends MutationOperator {
             return constantType.equals(methodType);
 
         return methodType.equals(constantType) ||
-                methodType.equals(Type.getType(TypeHelper.unwrap(constant.getClass())));
+                methodType.equals(unwrapType(constant.getClass()));
     }
 
     /**
@@ -69,9 +69,24 @@ public class ConstantMutationOperator extends MutationOperator {
     public void generateCode(Method method, MethodVisitor mv) {
         assert canMutate(method);
         mv.visitLdcInsn(constant);
+
         Type methodType = method.getReturnType();
-        mv.visitLdcInsn(constant);
-        mv.visitInsn(methodType.getOpcode(Opcodes.IRETURN));
+        Type constantType = Type.getType(constant.getClass());
+        if(methodType.equals(constantType)) {
+            //Wrapper type, as the constant will always have the wrapper type
+            String target =  methodType.getInternalName();
+            String descriptor = String.format("(%s)L%s;", unwrapType(constant.getClass()).getInternalName(), target);
+            mv.visitMethodInsn(Opcodes.INVOKESTATIC, target, "valueOf", descriptor, false);
+            mv.visitInsn(Opcodes.ARETURN);
+        }
+        else {
+            //Primitive type
+            mv.visitInsn(methodType.getOpcode(Opcodes.IRETURN));
+        }
+    }
+
+    private Type unwrapType(Class<?> type) {
+        return Type.getType(TypeHelper.unwrap(constant.getClass()));
     }
 
     @Override
