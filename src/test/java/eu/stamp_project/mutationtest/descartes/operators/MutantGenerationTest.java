@@ -11,7 +11,6 @@ import org.pitest.classinfo.ClassName;
 import org.pitest.mutationtest.engine.MutationDetails;
 import org.pitest.reloc.asm.ClassReader;
 import org.pitest.reloc.asm.ClassWriter;
-import sun.tools.tree.BooleanExpression;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
