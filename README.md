@@ -25,7 +25,7 @@ In the `pom.xml` file include the following:
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.2.2</version>
+      <version>1.2.4</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -236,7 +236,7 @@ Then, configure PIT for the project and specify `descartes` as the engine inside
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.2.2</version>
+      <version>1.2.4</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -389,7 +389,7 @@ They can be configured and combined as regular PIT report formats:
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.2.2</version>
+      <version>1.2.4</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -438,15 +438,6 @@ include Descartes in the classpath specification and add `--mutationEngine=desca
 ### Maven repository
 Compiled modules are available from [a custom Maven repository](https://stamp-project.github.io/stamp-maven-repository/).
 Detailed instructions can be found [here](https://github.com/STAMP-project/stamp-maven-repository).
-
-## Releases
-* [Descartes 1.2.3](https://github.com/STAMP-project/pitest-descartes/releases/tag/descartes-1.2.3)
-* [Descartes 1.2.2](https://github.com/STAMP-project/pitest-descartes/releases/tag/descartes-1.2.2)
-* [Descartes 1.2.1](https://github.com/STAMP-project/pitest-descartes/releases/tag/descartes-1.2.1)
-* [Descartes 1.2](https://github.com/STAMP-project/pitest-descartes/releases/tag/descartes-1.2)
-* [Descartes 1.1](https://github.com/STAMP-project/pitest-descartes/releases/tag/descartes-1.1)
-* [Stable release candidate 0.2](https://github.com/STAMP-project/pitest-descartes/releases/tag/0.2-D1.2)
-
 
 ## More...
 
