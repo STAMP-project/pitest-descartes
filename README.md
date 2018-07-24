@@ -53,7 +53,7 @@ For more information and other options, see section ["Running Descartes on your 
         - [Configuring reports](#configuring-reports)
       - [Gradle](#gradle)
       - [Running from the command line](#running-from-the-command-line)
-  - [Releases](#releases)
+  - [Releases](https://github.com/STAMP-project/pitest-descartes/releases)
   - [More...](#more)
 
 ## How does Descartes work?
