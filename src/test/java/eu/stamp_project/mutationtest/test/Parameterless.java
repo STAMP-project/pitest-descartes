@@ -80,4 +80,5 @@ public class Parameterless {
 
     public Character charWrapper() { return Character.toLowerCase('C'); }
 
+    public String getAString() { return new Integer(123).toString();  }
 }

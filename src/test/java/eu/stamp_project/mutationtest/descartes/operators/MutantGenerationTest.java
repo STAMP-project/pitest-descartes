@@ -41,7 +41,10 @@ public class MutantGenerationTest {
                 {"(byte)1",  isEqualTo((byte)1)},
                 {"123L",     isEqualTo(123L)},
                 {"true",     isEqualTo(true)},
-                {"'\\n'",    isEqualTo('\n')}
+                {"'\\n'",    isEqualTo('\n')},
+                {"\"\"",     isEqualTo("")},
+                {"\"A\"", isEqualTo("A")}
+
         });
     }
 

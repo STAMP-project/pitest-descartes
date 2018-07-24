@@ -72,8 +72,9 @@ public class ConstantMutationOperator extends MutationOperator {
 
         Type methodType = method.getReturnType();
         Type constantType = Type.getType(constant.getClass());
-        if(methodType.equals(constantType)) {
+        if(constant.getClass() != String.class && methodType.equals(constantType)) {
             //Wrapper type, as the constant will always have the wrapper type
+
             String target =  methodType.getInternalName();
             String descriptor = String.format("(%s)L%s;", unwrapType(constant.getClass()).getInternalName(), target);
             mv.visitMethodInsn(Opcodes.INVOKESTATIC, target, "valueOf", descriptor, false);
