@@ -27,7 +27,7 @@ public class NullMutationOperator extends MutationOperator{
     public void generateCode(Method method, MethodVisitor mv) {
         assert canMutate(method);
         mv.visitInsn(Opcodes.ACONST_NULL);
-        mv.visitInsn(method.getReturnType().getOpcode(Opcodes.IRETURN));
+        mv.visitInsn(method.getReturnType().getOpcode(Opcodes.ARETURN));
     }
 
     @Override
