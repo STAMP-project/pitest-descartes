@@ -6,7 +6,7 @@ jdk:
 install: true
 
 script:
-  - mvn clean compile
+  - mvn clean test
 
 after_success:
   - mvn clean test jacoco:report coveralls:report
