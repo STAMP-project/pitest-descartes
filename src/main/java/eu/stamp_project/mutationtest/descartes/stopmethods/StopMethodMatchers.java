@@ -41,7 +41,8 @@ public interface StopMethodMatchers {
     }
 
     static StopMethodMatcher isDeprecated() {
-        return forAccess(ACC_DEPRECATED);
+        return (classTree, methodTree) ->
+                matchesAccess(classTree, ACC_DEPRECATED) || matchesAccess(methodTree, ACC_DEPRECATED);
     }
 
     static StopMethodMatcher isEmptyVoid() {

@@ -16,11 +16,17 @@ import static org.pitest.bytecode.analysis.InstructionMatchers.isA;
 @FunctionalInterface
 public interface StopMethodMatcher {
 
+    //MethodTree does not contain a reference to ClassTree.
+    //Some matchers require the class class context to classify the method
     boolean matches(ClassTree classTree, MethodTree methodTree);
 
     static boolean matchesNameDesc(MethodTree methodTree, String name, String desc) {
         MethodNode node = methodTree.rawNode();
         return node.name.equals(name) && node.desc.equals(desc);
+    }
+
+    static boolean matchesAccess(ClassTree classTree, int access) {
+        return (classTree.rawNode().access & access) != 0;
     }
 
     static boolean matchesAccess(MethodTree methodTree, int access) {
