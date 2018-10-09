@@ -15,8 +15,16 @@ hs_err_pid*
 .idea/
 *.iml
 
-#Build files
+# Build files
 target/
 
-#Generated files
+# Generated files
 gen/
+
+# VSCode
+.vscode/
+
+# Eclipse
+.settings/
+.classpath
+.project
