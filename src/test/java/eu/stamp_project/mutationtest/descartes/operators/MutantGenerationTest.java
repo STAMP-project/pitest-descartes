@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.pitest.classinfo.ClassName;
 import org.pitest.mutationtest.engine.MutationDetails;
+
 import org.pitest.reloc.asm.ClassReader;
 import org.pitest.reloc.asm.ClassWriter;
 
@@ -54,24 +55,33 @@ public class MutantGenerationTest {
 
     @Test
     public void shoultWriteMutant() throws Exception {
-        String className = "eu.stamp_project.mutationtest.test.Parameterless";
+        String classJavaName = "eu.stamp_project.mutationtest.test.Parameterless";
 
         //Finding mutation points
         DescartesMutationEngine engine = new DescartesMutationEngine(MutationOperator.fromID(operatorID));
-        MutationPointFinder finder = new MutationPointFinder(ClassName.fromString(className), engine);
-        ClassReader reader = new ClassReader(className);
+        ClassName className = ClassName.fromString(classJavaName);
+
+
+        MutationPointFinder finder = new MutationPointFinder(className, engine);
+        ClassReader reader = new ClassReader(classJavaName);
         reader.accept(finder, 0);
+
 
         //Creating mutants
         for (MutationDetails mutationDetails : finder.getMutationPoints()){
+
             ClassWriter mutantWriter = new ClassWriter(ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
             MutationClassAdapter adapter = new MutationClassAdapter(mutationDetails.getId(), mutantWriter);
             reader.accept(adapter, 0);
+
             DynamicClassLoader loader = new DynamicClassLoader();
-            Class<?>  mutant = loader.defineClass(className, mutantWriter);
+            Class<?>  mutant = loader.defineClass(classJavaName, mutantWriter);
+
             Object mutantInstance = mutant.newInstance();
             Object result = mutant.getDeclaredMethod(mutationDetails.getMethod().name(), null).invoke(mutantInstance);
+
             assertTrue("Method <" + mutationDetails.getMethod().name() + "> returned a wrong value for mutation operator: " + operatorID, check.test(result));
+
         }
     }
 

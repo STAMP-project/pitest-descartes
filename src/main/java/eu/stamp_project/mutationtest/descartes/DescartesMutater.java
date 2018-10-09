@@ -44,7 +44,7 @@ public class DescartesMutater implements Mutater {
     private byte[] createMutant(MutationIdentifier mID) {
         Optional<byte[]> bytes = byteSource.getBytes(mID.getClassName().asJavaName()); //So does the original PIT
         ClassReader reader = new ClassReader(bytes.get());
-        ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+        ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
         MutationClassAdapter adapter = new MutationClassAdapter(mID, writer);
         reader.accept(adapter, 0);
         return writer.toByteArray();

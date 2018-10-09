@@ -81,7 +81,7 @@ public class ConstantMutationOperator extends MutationOperator {
             mv.visitInsn(Opcodes.ARETURN);
         }
         else {
-            //Primitive type
+            //Primitive type or String
             mv.visitInsn(methodType.getOpcode(Opcodes.IRETURN));
         }
     }

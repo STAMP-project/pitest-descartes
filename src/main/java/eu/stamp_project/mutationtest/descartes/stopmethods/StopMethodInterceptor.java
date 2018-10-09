@@ -4,6 +4,7 @@ import org.pitest.bytecode.analysis.ClassTree;
 import org.pitest.bytecode.analysis.MethodTree;
 import org.pitest.mutationtest.build.InterceptorType;
 import org.pitest.mutationtest.build.MutationInterceptor;
+import org.pitest.mutationtest.engine.Location;
 import org.pitest.mutationtest.engine.Mutater;
 import org.pitest.mutationtest.engine.MutationDetails;
 
@@ -36,7 +37,7 @@ public class StopMethodInterceptor implements MutationInterceptor {
                 details -> {
                     MethodTree methodTree = classTree.method(details.getId().getLocation()).orElse(null);
                     return methodTree != null && !matcher.matches(classTree, methodTree);
-                })
+                    })
                 .collect(Collectors.toList());
     }
 
