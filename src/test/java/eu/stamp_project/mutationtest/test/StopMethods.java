@@ -178,8 +178,16 @@ public class StopMethods {
         return aString.substring(start, end);
     }
 
+    public static void delegateToExternalClass(String message) {
+        System.out.println(message);
+    }
 
+    public static void emptyStatic() {}
 
+    public void delegateToStatic (String message) {
+        delegateToExternalClass(message);
+    }
 
+    public void delegateToStatic() { emptyStatic(); }
 
 }

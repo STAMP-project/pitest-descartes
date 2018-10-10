@@ -1,11 +1,10 @@
 package eu.stamp_project.mutationtest.descartes.stopmethods;
 
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
-import org.pitest.sequence.Context;
-import org.pitest.sequence.Match;
-import org.pitest.sequence.QueryStart;
+import org.pitest.sequence.*;
 
 import static eu.stamp_project.mutationtest.descartes.stopmethods.StopMethodMatcher.*;
 import static org.objectweb.asm.Opcodes.*;
@@ -85,19 +84,27 @@ public interface StopMethodMatchers {
     }
 
     static StopMethodMatcher isDelegate() {
+
+        SequenceQuery<AbstractInsnNode> paramMatch = match(opCodeBetween(21, 45));
+        Match<AbstractInsnNode> returnOpcode = opCodeBetween(IRETURN, RETURN);
+
         return forBody(
 
-                match(opCode(ALOAD).or(opCode(GETSTATIC))).or(match(opCode(ALOAD)).then(opCode(GETFIELD))) //Target on the stack
-                .zeroOrMore(match(opCodeBetween(21, 45))) //Param loop
-                .then(new Match<AbstractInsnNode>() {
-                    @Override
-                    public boolean test(Context<AbstractInsnNode> c, AbstractInsnNode abstractInsnNode) {
-                        int opcode = abstractInsnNode.getOpcode();
-                        return opcode == INVOKEVIRTUAL || opcode == INVOKESPECIAL || opcode == INVOKEINTERFACE;
-                    }
-                })
-                .then(opCodeBetween(IRETURN, RETURN))
-
+                (
+                        match(opCode(ALOAD).or(opCode(GETSTATIC)))
+                        .or(match(opCode(ALOAD)).then(opCode(GETFIELD))) //Target on the stack
+                        .zeroOrMore(paramMatch) // Param loop
+                        .then(new Match<AbstractInsnNode>() {
+                            @Override
+                            public boolean test(Context<AbstractInsnNode> c, AbstractInsnNode abstractInsnNode) {
+                                int opcode = abstractInsnNode.getOpcode();
+                                return opcode == INVOKEVIRTUAL || opcode == INVOKESPECIAL || opcode == INVOKEINTERFACE;
+                            }
+                        })
+                        .then(returnOpcode)
+                )
+                .or(paramMatch.zeroOrMore(paramMatch).then(opCode(INVOKESTATIC)).then(returnOpcode))
+                .or(match(opCode(INVOKESTATIC)).then(returnOpcode)) //Not expressive enough to match zeroOrMore form the beginning
         );
     }
 
