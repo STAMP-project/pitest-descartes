@@ -63,7 +63,7 @@ public class StopMethodMatcherInterceptorFactory implements MutationInterceptorF
     public Feature provides() {
         return Feature
                 .named("STOP_METHODS")
-                .withOnByDefault(true)
+                .withOnByDefault(false)
                 .withDescription("Removes mutations in methods which are of no interest")
                 .withParameter(EXCEPT);
 
