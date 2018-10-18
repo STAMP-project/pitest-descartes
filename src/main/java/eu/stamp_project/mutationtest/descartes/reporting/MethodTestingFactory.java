@@ -18,6 +18,6 @@ public class MethodTestingFactory implements MutationResultListenerFactory {
     }
 
     public String description() {
-        return "Produces a JSON file reporting mutation results aggregated by method and each method classfied according to its mutation status";
+        return "Pseudo and partially-tested methods JSON report";
     }
 }

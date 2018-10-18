@@ -16,7 +16,7 @@ import static eu.stamp_project.mutationtest.descartes.stopmethods.StopMethodMatc
 
 public class StopMethodMatcherInterceptorFactory implements MutationInterceptorFactory {
 
-    private FeatureParameter EXCEPT = FeatureParameter.named("except");
+    private FeatureParameter EXCEPT;
 
     private Map<String, StopMethodMatcher> availabeMatchers;
 
@@ -37,9 +37,9 @@ public class StopMethodMatcherInterceptorFactory implements MutationInterceptorF
         availabeMatchers.put("empty_array", returnsAnEmptyArray());
         availabeMatchers.put("null_return", returnsNull());
 
-        String description = "Allows to reinsert some stop methods to the analysis. Possible values are: ";
+        String description = "Allows to reinsert some stop methods into the analysis. Possible values are: ";
         description += availabeMatchers.keySet().stream().collect(Collectors.joining(", "));
-        EXCEPT.withDescription(description);
+        EXCEPT = FeatureParameter.named("except").withDescription(description);
     }
 
     @Override
@@ -64,14 +64,14 @@ public class StopMethodMatcherInterceptorFactory implements MutationInterceptorF
         return Feature
                 .named("STOP_METHODS")
                 .withOnByDefault(true)
-                .withDescription("Removes mutations in methods which are of no interest")
+                .withDescription("Filters out mutations in methods that are generally of no interest")
                 .withParameter(EXCEPT);
 
     }
 
     @Override
     public String description() {
-        return "Removes mutation in methods which are of no interest";
+        return "Stop methods filter";
     }
 
 

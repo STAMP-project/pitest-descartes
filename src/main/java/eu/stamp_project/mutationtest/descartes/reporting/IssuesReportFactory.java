@@ -21,6 +21,6 @@ public class IssuesReportFactory implements MutationResultListenerFactory {
 
     @Override
     public String description() {
-        return "Generates an HTML document containing classes and methods with found testing issues";
+        return "Pseudo and partially-tested methods HTML report";
     }
 }

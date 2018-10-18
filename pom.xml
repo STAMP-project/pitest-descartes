@@ -7,20 +7,12 @@
     <version>1.2.5-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <!-- Name must match artifactId so PIT can find the plugin -->
-    <!--<name>${project.groupId}:${project.artifactId}</name>-->
-
     <name>descartes</name>
     <description>Mutation engine for PITest implementing extreme mutation operators</description>
     <url>https://github.com/STAMP-project/pitest-descartes.git</url>
 
     <organization>
-        <!--
-            Can't use the real name until the leap to 1.2.1 could be made.
-            In 1.2.1 the MutationEngineFactory interface have important changes.
-         -->
-        <!--<name>STAMP-Project</name>-->
-        <name>eu.stamp-project</name>
+        <name>STAMP-Project</name>
         <url>http://github.com/STAMP-project</url>
     </organization>
 

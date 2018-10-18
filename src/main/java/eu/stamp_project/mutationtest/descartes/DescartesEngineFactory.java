@@ -63,6 +63,6 @@ public class DescartesEngineFactory implements MutationEngineFactory{
     }
 
     public String description() {
-        return "Engine for extreme mutation operators";
+        return "Extreme mutation engine";
     }
 }
