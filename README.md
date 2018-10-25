@@ -401,7 +401,7 @@ for a project that uses [Gradle](https://gradle.org/).
 In the `build.gradle` file add the local Maven repository to the `buildscript` block and set
 a `pitest` configuration element inside the same block. In the `dependencies` block put the artifact information:
 ```
-pitest 'eu.stamp-project:descartes:1.2'
+pitest 'eu.stamp-project:descartes:1.2.4'
 ```
 then specify `descartes` in the `mutationEngine` option inside the plugin configuration.
 An example of the final configuration could be:
@@ -415,8 +415,8 @@ buildscript {
   configurations.maybeCreate("pitest")
 
   dependencies {
-    classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.9'
-    pitest 'eu.stamp-project:descartes:1.2'
+    classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.3.0'
+    pitest 'eu.stamp-project:descartes:1.2.4'
   }
 }
 
@@ -424,6 +424,7 @@ apply plugin: "info.solidsoft.pitest"
 
 pitest {
   mutationEngine = "descartes"
+  pitestVersion = "1.4.0"
 }
 ```
 At last, run the `pitest` task for the project under test.
