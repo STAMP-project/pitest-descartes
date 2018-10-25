@@ -73,19 +73,20 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <github.global.server>github</github.global.server>
+        <pitest.version>1.4.3</pitest.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.pitest</groupId>
             <artifactId>pitest</artifactId>
-            <version>1.4.3</version>
+            <version>${pitest.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.pitest</groupId>
             <artifactId>pitest-entry</artifactId>
-            <version>1.4.0</version>
+            <version>${pitest.version}</version>
         </dependency>
         <dependency>
             <groupId>com.j2html</groupId>
