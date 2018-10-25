@@ -427,6 +427,7 @@ pitest {
   pitestVersion = "1.4.0"
 }
 ```
+The `pitestVersion` property has to be specified to avoid version issues with the default version shipped with the gradle plugin.
 At last, run the `pitest` task for the project under test.
 ```
 gradle pitest
