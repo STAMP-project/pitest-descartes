@@ -1,6 +1,8 @@
 package eu.stamp_project.mutationtest.descartes.bodyanalysis;
 
 import eu.stamp_project.mutationtest.descartes.MutationPointFinder;
+
+import org.pitest.classinfo.ClassName;
 import org.pitest.reloc.asm.Label;
 import org.pitest.reloc.asm.MethodVisitor;
 import org.pitest.reloc.asm.Opcodes;
@@ -12,12 +14,12 @@ public class MethodInspector extends MethodVisitor {
     private MutationPointFinder finder;
     private LineCounter lineCounter;
 
-    public MethodInspector(Method method, MutationPointFinder finder) {
+    public MethodInspector(ClassName className, Method method, MutationPointFinder finder) {
         super(Opcodes.ASM5);
 
         this.method = method;
         this.finder = finder;
-        lineCounter = new LineCounter();
+        lineCounter = new LineCounter(className, method);
 
     }
 

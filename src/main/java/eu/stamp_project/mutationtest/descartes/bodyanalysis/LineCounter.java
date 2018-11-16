@@ -2,13 +2,20 @@ package eu.stamp_project.mutationtest.descartes.bodyanalysis;
 
 import java.util.NoSuchElementException;
 
+import org.pitest.classinfo.ClassName;
+import org.pitest.reloc.asm.commons.Method;
+
 public class LineCounter {
 
+    private final ClassName className;
+    private final Method method;
     private int firstLine;
     private int lastLine;
 
-    public LineCounter() {
-        reset();
+    public LineCounter(ClassName className, Method method) {
+        this.className = className;
+		this.method = method;
+		reset();
     }
 
     public void reset() {
@@ -30,15 +37,18 @@ public class LineCounter {
     }
 
     public int getFirstLine() {
-        if(empty())
-            throw new NoSuchElementException("Attempt to grab a line from an empty interval.");
+        ensureNotEmpty();
         return firstLine;
     }
 
     public int getLastLine() {
-        if (empty())
-            throw new NoSuchElementException("Attempt to grab a line from an empty interval.");
+        ensureNotEmpty();
         return lastLine;
+    }
 
+    private void ensureNotEmpty() {
+      if (empty()) {
+            throw new NoSuchElementException("Attempt to grab a line from an empty interval in: " + className.asJavaName() + " at " + method.getName() + " with " + method.getDescriptor());
+      }
     }
 }

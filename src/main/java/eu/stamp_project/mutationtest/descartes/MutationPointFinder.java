@@ -59,7 +59,7 @@ public class MutationPointFinder extends ClassVisitor {
         if(engine.getOperatorsFor(method).isEmpty())
             return null;
 
-        return new MethodInspector(method, this);
+        return new MethodInspector(className, method, this);
     }
 
     public void registerMutations(Method method, int start, int end) {
