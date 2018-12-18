@@ -18,5 +18,6 @@ public enum TokenType {
     DOUBLE_LITERAL,
     CHAR_LITERAL,
     STRING_LITERAL,
+    NEW,
     EOF
 }
