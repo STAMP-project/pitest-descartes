@@ -13,7 +13,7 @@ import org.pitest.reloc.asm.commons.Method;
  * <br/>
  * This is currently working for: TODO
  */
-public class ObjectMutationOperator extends MutationOperator {
+public class NewInstanceMutationOperator extends MutationOperator {
 
     /**
      * Returns a value indicating whether the operator can transform the given method.
@@ -57,7 +57,7 @@ public class ObjectMutationOperator extends MutationOperator {
 
     @Override
     public String getID() {
-        return "object";
+        return "new";
     }
 
     @Override
