@@ -2,6 +2,15 @@ package eu.stamp_project.mutationtest.descartes.operators;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
 
 import org.pitest.reloc.asm.MethodVisitor;
 import org.pitest.reloc.asm.Opcodes;
@@ -11,22 +20,30 @@ import org.pitest.reloc.asm.commons.Method;
 /**
  * Replaces the method body with a return statement, which generates an instance of the specified return type.
  * <br/>
- * This is currently working for: TODO
+ * This is currently working for classes with parameterless constructors and a few well-known Java interfaces.
  */
 public class NewInstanceMutationOperator extends MutationOperator {
 
+	private static final Map<Class<?>, Class<?>> ALTERNATIVE_RETURN_CLASS_BY_TYPE = new HashMap<>();
+	
+	static {
+		ALTERNATIVE_RETURN_CLASS_BY_TYPE.put(Collection.class, ArrayList.class);
+		ALTERNATIVE_RETURN_CLASS_BY_TYPE.put(Iterable.class, ArrayList.class);
+		ALTERNATIVE_RETURN_CLASS_BY_TYPE.put(List.class, ArrayList.class);
+		ALTERNATIVE_RETURN_CLASS_BY_TYPE.put(Queue.class, LinkedList.class);
+		ALTERNATIVE_RETURN_CLASS_BY_TYPE.put(Set.class, HashSet.class);
+		ALTERNATIVE_RETURN_CLASS_BY_TYPE.put(Map.class, HashMap.class);
+	}
+	
     /**
      * Returns a value indicating whether the operator can transform the given method.
      */
     @Override
     public boolean canMutate(Method method) {
-    	// TODO: check if this is reliable enough for most cases or if this method should already try to create an instance
-    	// TODO: manually create instances for well-known interfaces (Collection, List, Set, Map)
-    	
-        String className = method.getReturnType().getClassName();
+        // TODO: check if this is reliable enough for most cases or if this method should already try to create an instance
         
         try {
-        Class<?> returnClass = Class.forName(className);
+          Class<?> returnClass = getAppropriateReturnClass(method);
         
           if (Modifier.isAbstract(returnClass.getModifiers())) {
             return false;
@@ -45,13 +62,39 @@ public class NewInstanceMutationOperator extends MutationOperator {
         }
     }
 
+    /** Returns the specified class or a class which is assignable from this class. */
+    protected static Class<?> getAppropriateReturnClass(Method method) throws ClassNotFoundException {
+    	return getAppropriateReturnClass(method.getReturnType().getClassName());
+    }
+    
+    /** Returns the specified class or a class which is assignable from this class. */
+	protected static Class<?> getAppropriateReturnClass(String className) throws ClassNotFoundException {
+		Class<?> originalClass = Class.forName(className);
+		
+		if (ALTERNATIVE_RETURN_CLASS_BY_TYPE.containsKey(originalClass)) {
+			return ALTERNATIVE_RETURN_CLASS_BY_TYPE.get(originalClass);
+		}
+		
+		return originalClass;
+	}
+
     @Override
     public void generateCode(Method method, MethodVisitor mv) {
         assert canMutate(method);
-        Type returnType = method.getReturnType();
-        mv.visitTypeInsn(Opcodes.NEW, returnType.getInternalName());
+        
+        Class<?> appropriateReturnClass = null;
+		
+        try {
+			appropriateReturnClass = getAppropriateReturnClass(method);
+		} catch (ClassNotFoundException e) {
+			throw new IllegalStateException(e);
+		}
+		
+        Type appropriateReturnType = Type.getType(appropriateReturnClass);
+        
+        mv.visitTypeInsn(Opcodes.NEW, appropriateReturnType.getInternalName());
         mv.visitInsn(Opcodes.DUP);
-        mv.visitMethodInsn(Opcodes.INVOKESPECIAL, returnType.getInternalName(), "<init>", "()V", false);
+        mv.visitMethodInsn(Opcodes.INVOKESPECIAL, appropriateReturnType.getInternalName(), "<init>", "()V", false);
         mv.visitInsn(Opcodes.ARETURN);
     }
 
