@@ -143,6 +143,11 @@ public class StopMethods {
         return anObject;
     }
 
+    public StopMethods setFluent(int value) {
+        this.anInt = value;
+        return this;
+    }
+
     @Deprecated
     public boolean isDeprecated() { return  Boolean.valueOf("tr " + "ue"); }
 

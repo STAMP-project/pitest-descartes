@@ -70,11 +70,18 @@ public interface StopMethodMatchers {
         );
     }
 
+
+
+
     static StopMethodMatcher isSimpleSetter() {
+        // ( (ALOAD [ILOAD..ALOAD] PUTFIELD) | (ILOAD PUTSTATIC) ) (RETURN | ALOAD ARETURN)
         return forBody(
-                ((match(opCode(ALOAD)).then(opCodeBetween(ILOAD, ALOAD)).then(opCode(PUTFIELD)))
-                        .or(match(opCode(ILOAD)).then(opCode(PUTSTATIC)))
-                ).then(opCode(RETURN))
+                (
+                        (
+                                match(opCode(ALOAD)).then(opCodeBetween(ILOAD, ALOAD)).then(opCode(PUTFIELD))
+                        ).or(match(opCode(ILOAD)).then(opCode(PUTSTATIC)))
+                ).then(
+                        match(opCode(RETURN)).or(match(opCode(ALOAD)).then(opCode(ARETURN))))
         );
 
     }
