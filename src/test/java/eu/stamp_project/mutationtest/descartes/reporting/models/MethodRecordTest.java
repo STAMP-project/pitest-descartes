@@ -38,7 +38,7 @@ public class MethodRecordTest {
                         "Mutation description",
                         1,
                         0),
-                new MutationStatusTestPair(1, status));
+                new MutationStatusTestPair(1, status, null));
     }
 
     public static MutationResult detected(String mutant) {
