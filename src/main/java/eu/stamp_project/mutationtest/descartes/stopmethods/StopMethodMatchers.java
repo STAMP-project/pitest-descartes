@@ -4,11 +4,13 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm.tree.VarInsnNode;
 import org.pitest.sequence.*;
 
 import static eu.stamp_project.mutationtest.descartes.stopmethods.StopMethodMatcher.*;
 import static org.objectweb.asm.Opcodes.*;
 import static org.pitest.bytecode.analysis.InstructionMatchers.opCode;
+import static org.pitest.bytecode.analysis.InstructionMatchers.variableMatches;
 import static org.pitest.sequence.QueryStart.match;
 
 public interface StopMethodMatchers {
@@ -70,9 +72,6 @@ public interface StopMethodMatchers {
         );
     }
 
-
-
-
     static StopMethodMatcher isSimpleSetter() {
         // ( (ALOAD [ILOAD..ALOAD] PUTFIELD) | (ILOAD PUTSTATIC) ) (RETURN | ALOAD ARETURN)
         return forBody(
@@ -133,8 +132,15 @@ public interface StopMethodMatchers {
           .then(opCode(ARETURN)));
     }
 
+    static StopMethodMatcher returnsThis() {
 
+        Match<AbstractInsnNode> ALOAD_0 = (context, instruction) -> {
+            if(!(instruction instanceof VarInsnNode)) {
+                return false;
+            }
+            return ((VarInsnNode) instruction).var == 0;
+        };
 
-
-
+        return forBody(match(ALOAD_0).then(opCode(ARETURN)));
+    }
 }

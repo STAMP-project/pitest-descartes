@@ -148,6 +148,9 @@ public class StopMethods {
         return this;
     }
 
+    public StopMethods onlyReturnsThis() { return this; }
+
+
     @Deprecated
     public boolean isDeprecated() { return  Boolean.valueOf("tr " + "ue"); }
 
