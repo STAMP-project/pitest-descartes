@@ -64,6 +64,8 @@ public interface StopMethodMatchers {
         };
     }
 
+
+
     static StopMethodMatcher isSimpleGetter() {
         return forBody(
                 (match(opCode(GETSTATIC))
@@ -143,4 +145,19 @@ public interface StopMethodMatchers {
 
         return forBody(match(ALOAD_0).then(opCode(ARETURN)));
     }
+
+    static StopMethodMatcher returnsAParameter() {
+
+        // ALOAD_X (DRETURN | FRETURN | IRETURN | LRETURN | ARETURN)
+
+        Match<AbstractInsnNode> ALOAD_X = (context, instruction) -> {
+            if(!(instruction instanceof VarInsnNode)) {
+                return false;
+            }
+            return ((VarInsnNode) instruction).var > 0;
+        };
+
+        return forBody(match(ALOAD_X).then(opCodeBetween(IRETURN, ARETURN)));
+    }
+
 }

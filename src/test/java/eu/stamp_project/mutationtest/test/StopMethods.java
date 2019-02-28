@@ -150,6 +150,9 @@ public class StopMethods {
 
     public StopMethods onlyReturnsThis() { return this; }
 
+    public int onlyReturnsAPrimitiveParameter(int a, int b, int c) { return b;  }
+
+    public String onlyReturnsAReferenceParameter(int a, int b, String c) { return c; }
 
     @Deprecated
     public boolean isDeprecated() { return  Boolean.valueOf("tr " + "ue"); }

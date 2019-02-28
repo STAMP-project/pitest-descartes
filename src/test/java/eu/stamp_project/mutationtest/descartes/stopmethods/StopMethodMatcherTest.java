@@ -48,7 +48,9 @@ public class StopMethodMatcherTest {
                 {StopMethodMatchers.isToString(), "toString"},
                 {StopMethodMatchers.isHashCode(), "hashCode"},
                 {StopMethodMatchers.isStaticInitializer(), "<clinit>"},
-                {StopMethodMatchers.returnsThis(), "onlyReturnsThis"}
+                {StopMethodMatchers.returnsThis(), "onlyReturnsThis"},
+                {StopMethodMatchers.returnsAParameter(), "onlyReturnsAPrimitiveParameter"},
+                {StopMethodMatchers.returnsAParameter(), "onlyReturnsAReferenceParameter"},
         });
 
     }
