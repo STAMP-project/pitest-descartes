@@ -83,14 +83,15 @@ public class MethodTestingListener implements MutationResultListener {
 
             report.beginObject();
 
-            report.writeAttribute("status", mutation.getStatus().name());
-            report.writeAttribute("mutator", mutation.getDetails().getMutator());
-            report.writeAttribute("tests-run", mutation.getNumberOfTestsRun());
-            report.writeAttribute("detected-by", mutation.getKillingTest().orElse(""));
-            report.beginListAttribute("tests");
-            for (TestInfo test : mutation.getDetails().getTestsInOrder())
-                report.write(test.getName());
-            report.endList();
+                report.writeAttribute("status", mutation.getStatus().name());
+                report.writeAttribute("mutator", mutation.getDetails().getMutator());
+                report.writeAttribute("tests-run", mutation.getNumberOfTestsRun());
+
+                report.writeStringListAttribute("tests",
+                    mutation.getDetails().getTestsInOrder().stream().map(TestInfo::getName).collect(Collectors.toList()));
+
+                report.writeStringListAttribute("killing-tests", mutation.getKillingTests());
+                report.writeStringListAttribute("succeeding-tests", mutation.getSucceedingTests());
 
             report.endObject();
         }
