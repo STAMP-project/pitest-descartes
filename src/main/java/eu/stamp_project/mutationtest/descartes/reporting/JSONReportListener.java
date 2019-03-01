@@ -9,18 +9,16 @@ import org.pitest.util.Unchecked;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 public class JSONReportListener implements MutationResultListener{
 
-    ResultOutputStrategy strategy;
-    Collection<String> mutators;
-    long startTime;
+    private ResultOutputStrategy strategy;
+    private Collection<String> mutators;
+    private long startTime;
 
-
-
-    JSONWriter report;
+    private JSONWriter report;
 
     public JSONReportListener(final long startTime, final Collection<String> mutators, final ResultOutputStrategy strategy) {
         this.strategy = strategy;
@@ -48,46 +46,39 @@ public class JSONReportListener implements MutationResultListener{
     public void handleMutationResult(ClassMutationResults classMutationResults) {
         try {
 
-            for (MutationResult result :
-                    classMutationResults.getMutations()) {
+            for (MutationResult result : classMutationResults.getMutations()) {
 
                 MutationDetails details = result.getDetails();
                 DetectionStatus status = result.getStatus();
 
-
-                Optional<String> killer = result.getKillingTest();
                 MutationStatusTestPair pair = result.getStatusTestPair();
                 String method = details.getMethod().name();
                 String methodDescription = details.getId().getLocation().getMethodDesc();
 
-
                 report.beginObject();
-                report.writeAttribute("detected", status.isDetected());
-                report.writeAttribute("status", status.name());
-                report.writeAttribute("mutator", details.getMutator());
+                    report.writeAttribute("detected", status.isDetected());
+                    report.writeAttribute("status", status.name());
+                    report.writeAttribute("mutator", details.getMutator());
 
-                report.beginObjectAttribute("method");
-                report.writeAttribute("name", method);
-                report.writeAttribute("description", methodDescription);
-                report.writeAttribute("class", details.getClassName().getNameWithoutPackage().asJavaName());
-                report.writeAttribute("package", details.getClassName().getPackage().asJavaName());
-                report.endObject();
+                    report.beginObjectAttribute("method");
+                        report.writeAttribute("name", method);
+                        report.writeAttribute("description", methodDescription);
+                        report.writeAttribute("class", details.getClassName().getNameWithoutPackage().asJavaName());
+                        report.writeAttribute("package", details.getClassName().getPackage().asJavaName());
+                    report.endObject();
 
-                report.beginObjectAttribute("tests");
-                report.writeAttribute("killer", killer.orElse(""));
-                report.writeAttribute("run", result.getNumberOfTestsRun());
+                    report.beginObjectAttribute("tests");
+                        report.writeAttribute("run", result.getNumberOfTestsRun());
 
-                report.beginListAttribute("ordered");
-                for (TestInfo info :
-                        details.getTestsInOrder()) {
-                    report.write(info.getName());
-                }
-                report.endList();
+                        report.writeStringListAttribute("ordered",
+                            details.getTestsInOrder().stream().map(TestInfo::getName).collect(Collectors.toList()));
 
-                report.endObject();
+                        report.writeStringListAttribute("killing", pair.getKillingTests());
+                        report.writeStringListAttribute("succeeding", pair.getSucceedingTests());
+
+                    report.endObject();
 
                 report.endObject();
-
             }
         }
         catch (IOException exc) {
