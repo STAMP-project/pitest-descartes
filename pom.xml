@@ -167,35 +167,6 @@
                 <version>4.3.0</version>
             </plugin>
 
-            <!-- Handling third party dependencies -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.1.1</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <artifactSet>
-                                <includes>
-                                    <include>com.j2html:j2html</include>
-                                </includes>
-                            </artifactSet>
-                            <relocations>
-                                <relocation>
-                                    <pattern>j2html</pattern>
-                                    <shadedPattern>eu.stamp_project.reloc</shadedPattern>
-                                </relocation>
-                            </relocations>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-
             <!-- Include metadata in manifest file -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
