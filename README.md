@@ -386,6 +386,7 @@ They can be configured and combined as regular PIT report formats:
       <value>METHODS</value>
       <value>ISSUES</value>
     </outputFormats>
+    <mutationEngine>descartes</mutationEngine>
   </configuration>
     <dependencies>
     <dependency>
