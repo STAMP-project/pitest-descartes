@@ -59,6 +59,10 @@ public class JSONReportListener implements MutationResultListener{
                     report.writeAttribute("detected", status.isDetected());
                     report.writeAttribute("status", status.name());
                     report.writeAttribute("mutator", details.getMutator());
+                    report.writeAttribute("line", details.getLineNumber());
+                    report.writeAttribute("block", details.getBlock());
+                    report.writeAttribute("file", details.getFilename());
+                    report.writeAttribute("index", details.getFirstIndex()); // Saving only the first index
 
                     report.beginObjectAttribute("method");
                         report.writeAttribute("name", method);
