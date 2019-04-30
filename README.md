@@ -418,7 +418,7 @@ buildscript {
   configurations.maybeCreate("pitest")
 
   dependencies {
-    classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.3.0'
+    classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.4.0'
     pitest 'eu.stamp-project:descartes:1.2.5'
   }
 }
@@ -426,6 +426,7 @@ buildscript {
 apply plugin: "info.solidsoft.pitest"
 
 pitest {
+  targetClasses = ['my.package.*'] //Assuming all classes in the project are located in the my.package package.
   mutationEngine = "descartes"
   pitestVersion = "1.4.7"
 }
