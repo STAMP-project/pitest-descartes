@@ -4,7 +4,7 @@
 
     <groupId>eu.stamp-project</groupId>
     <artifactId>descartes</artifactId>
-    <version>1.2.5</version>
+    <version>1.2.6-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>descartes</name>
@@ -39,7 +39,7 @@
         <connection>scm:git:git://github.com:STAMP-project/pitest-descartes.git</connection>
         <developerConnection>scm:git:git@github.com:STAMP-project/pitest-descartes.git</developerConnection>
         <url>https://github.com/STAMP-project/pitest-descartes</url>
-      <tag>descartes-1.2.5</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <repositories>
