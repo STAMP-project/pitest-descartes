@@ -17,7 +17,7 @@ In the `pom.xml` file include the following:
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.4.0</version>
+  <version>1.4.7</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
   </configuration>
@@ -25,7 +25,7 @@ In the `pom.xml` file include the following:
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.2.4</version>
+      <version>1.2.5</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -228,7 +228,7 @@ Then, configure PIT for the project and specify `descartes` as the engine inside
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.4.0</version>
+  <version>1.4.7</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
   </configuration>
@@ -236,7 +236,7 @@ Then, configure PIT for the project and specify `descartes` as the engine inside
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.2.4</version>
+      <version>1.2.5</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -379,7 +379,7 @@ They can be configured and combined as regular PIT report formats:
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.4.0</version>
+  <version>1.4.7</version>
   <configuration>
     <outputFormats>
       <value>JSON</value>
@@ -392,7 +392,7 @@ They can be configured and combined as regular PIT report formats:
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.2.4</version>
+      <version>1.2.5</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -419,7 +419,7 @@ buildscript {
 
   dependencies {
     classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.3.0'
-    pitest 'eu.stamp-project:descartes:1.2.4'
+    pitest 'eu.stamp-project:descartes:1.2.5'
   }
 }
 
@@ -427,7 +427,7 @@ apply plugin: "info.solidsoft.pitest"
 
 pitest {
   mutationEngine = "descartes"
-  pitestVersion = "1.4.0"
+  pitestVersion = "1.4.7"
 }
 ```
 The `pitestVersion` property has to be specified to avoid version issues with the default version shipped with the gradle plugin.
