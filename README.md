@@ -461,6 +461,13 @@ Articles mentioning Descartes:
 ### License
 Descartes is published under LGPL-3.0 (see [LICENSE.md](LICENSE.md) for further details).
 
+### Contributing
+Contributions and pull requests are welcome.
+Please, tell us what you think and what you expect in the next release using the [STAMP Beta Testing Survey Form](https://www.stamp-project.eu/view/main/betatestingsurvey/).
+As a recognition for your useful feedback, you might receive a limited edition *STAMP Software Test Pilot* gift and be added as a STAMP contributor. 
+This offer is limited to the beta testers interacting with the STAMP project team, by 31 September 2019. 
+You will be contacted individually for a customized gift and for contribution opportunities.
+
 ### Funding
 
 Descartes is partially funded by research project STAMP (European Commission - H2020)
