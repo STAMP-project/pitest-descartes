@@ -69,6 +69,7 @@ public class MutationPointFinder extends ClassVisitor {
         }
     }
 
+
     private MutationDetails getMutationDetails(Method method, MutationOperator operator, int start, int end) {
 
         Location location = new Location(className, MethodName.fromString(method.getName()), method.getDescriptor());
@@ -78,6 +79,8 @@ public class MutationPointFinder extends ClassVisitor {
                 operator.getID());
         return new MutationDetails(id, source, operator.getDescription(), start, 1);
     }
+
+
 
     private Collection<Integer> getIndexes(int start, int end) {
         return IntStream.rangeClosed(1, end - start + 1).boxed().collect(Collectors.toList());

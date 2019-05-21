@@ -25,7 +25,11 @@ public class MethodInspector extends MethodVisitor {
 
     @Override
     public void visitEnd() {
-        finder.registerMutations(method, lineCounter.getFirstLine(), lineCounter.getLastLine());
+        if (!lineCounter.empty()) {
+            // Some methods would not include line declaration information
+            // we skip those for the moment as they can not be mapped to the original source code.
+            finder.registerMutations(method, lineCounter.getFirstLine(), lineCounter.getLastLine());
+        }
     }
 
     @Override
