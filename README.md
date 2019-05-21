@@ -404,7 +404,7 @@ for a project that uses [Gradle](https://gradle.org/).
 In the `build.gradle` file add the local Maven repository to the `buildscript` block and set
 a `pitest` configuration element inside the same block. In the `dependencies` block put the artifact information:
 ```
-pitest 'eu.stamp-project:descartes:1.2.4'
+pitest 'eu.stamp-project:descartes:1.2.5'
 ```
 then specify `descartes` in the `mutationEngine` option inside the plugin configuration.
 An example of the final configuration could be:
@@ -460,6 +460,13 @@ Articles mentioning Descartes:
 
 ### License
 Descartes is published under LGPL-3.0 (see [LICENSE.md](LICENSE.md) for further details).
+
+### Contributing
+Contributions and pull requests are welcome.
+Please, tell us what you think and what you expect in the next release using the [STAMP Beta Testing Survey Form](https://www.stamp-project.eu/view/main/betatestingsurvey/).
+As a recognition for your useful feedback, you might receive a limited edition *STAMP Software Test Pilot* gift and be added as a STAMP contributor. 
+This offer is limited to the beta testers interacting with the STAMP project team, by 31 September 2019. 
+You will be contacted individually for a customized gift and for contribution opportunities.
 
 ### Funding
 
