@@ -45,14 +45,13 @@ For more information and other options, see section ["Running Descartes on your 
   - [How does Descartes work?](#how-does-descartes-work)
   - [Descartes Output](#descartes-output)
   - [Running Descartes on your project](#running-descartes-on-your-project)
-    - [Installing and building from source](#installing-and-building-from-source)
-    - [Usage](#usage)
-      - [Maven](#maven)
+    - [Using Maven](#using-maven)
         - [Specifying operators](#specifying-operators)
         - [Configuring stop methods](#configuring-stop-methods)
         - [Configuring reports](#configuring-reports)
-      - [Gradle](#gradle)
-      - [Running from the command line](#running-from-the-command-line)
+    - [Using Gradle](#using-gradle)
+    - [Running from the command line](#running-from-the-command-line)
+    - [Installing and building from source](#installing-and-building-from-source)
   - [Releases](https://github.com/STAMP-project/pitest-descartes/releases)
   - [More...](#more)
 
@@ -197,31 +196,12 @@ For more details on how to use and configure these reporting extensions please c
 ## Running Descartes on your project
 
 Stable releases of Descartes are available from Maven Central.
-
-### Installing and building from source
-
-In a terminal clone the repository:
-```
-git clone https://github.com/STAMP-project/pitest-descartes.git
-```
-switch to the cloned folder:
-```
-cd  pitest-descartes
-```
-and install Descartes using the regular [Apache Maven](https://maven.apache.org) commands:
-```
-mvn install
-```
-After installing the package, PIT should be able to find the Descartes mutation engine.
-
-
-### Usage
 Descartes is a plugin for PIT so they have to be used together.
 PIT integrates with majors test and build tools such as [Maven](https://maven.apache.org),
 [Ant](http://apache.ant.org) and [Gradle](https://gradle.org).
 
 
-#### Maven
+### Using Maven
 Then, configure PIT for the project and specify `descartes` as the engine inside a `mutationEngine` tag in the `pom.xml` file.
 
 ``` xml
@@ -398,7 +378,7 @@ They can be configured and combined as regular PIT report formats:
 </plugin>
 ```
 
-### Gradle
+### Using Gradle
 Follow the [instructions](http://gradle-pitest-plugin.solidsoft.info/) to set up PIT
 for a project that uses [Gradle](https://gradle.org/).
 In the `build.gradle` file add the local Maven repository to the `buildscript` block and set
@@ -441,9 +421,22 @@ Descartes can be used when invoking PIT from the command line. To do this,
 follow [the instructions](http://pitest.org/quickstart/commandline/) for running PIT,
 include Descartes in the classpath specification and add `--mutationEngine=descartes`.
 
-### Maven repository
-Compiled modules are available from [a custom Maven repository](https://stamp-project.github.io/stamp-maven-repository/).
-Detailed instructions can be found [here](https://github.com/STAMP-project/stamp-maven-repository).
+### Installing and building from source
+
+In a terminal clone the repository:
+```
+git clone https://github.com/STAMP-project/pitest-descartes.git
+```
+switch to the cloned folder:
+```
+cd  pitest-descartes
+```
+and install Descartes using the regular [Apache Maven](https://maven.apache.org) commands:
+```
+mvn install
+```
+After installing the package, PIT should be able to find the Descartes mutation engine.
+
 
 ## More...
 
@@ -462,11 +455,19 @@ Articles mentioning Descartes:
 Descartes is published under LGPL-3.0 (see [LICENSE.md](LICENSE.md) for further details).
 
 ### Contributing
-Contributions and pull requests are welcome.
-Please, tell us what you think and what you expect in the next release using the [STAMP Beta Testing Survey Form](https://www.stamp-project.eu/view/main/betatestingsurvey/).
-As a recognition for your useful feedback, you might receive a limited edition *STAMP Software Test Pilot* gift and be added as a STAMP contributor. 
-This offer is limited to the beta testers interacting with the STAMP project team, by 31 September 2019. 
-You will be contacted individually for a customized gift and for contribution opportunities.
+
+<p align="center">
+    <img src="docs/feedback-banner.jpg">
+</p>
+
+Issues, pull requests and other contributions are welcome.
+
+**Give us your feedback!** Please take 5’ of your time to fill in this quick [questionnaire](https://www.stamp-project.eu/view/main/betatestingsurvey/).
+
+This is **important** for us. As a recognition for your feedback, you will receive a limited edition *STAMP Software Test Pilot* gift and be recognized as a STAMP contributor.
+
+This campaign will close on 31 September, 2019. You will be contacted individually for a customized **gift** and for contribution opportunities.
+
 
 ### Funding
 
