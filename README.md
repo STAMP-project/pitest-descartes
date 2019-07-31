@@ -189,7 +189,7 @@ PIT reporting extensions work with Descartes and include `XML`, `CSV` and `HTML`
 Descartes also provides two new reporting extensions:
   - a general reporting extension supporting `JSON` files. It works also with **Gregor**, the default mutation engine for PIT. To use just set `JSON` as report format for PIT.
   - a reporting extension designed for Descartes that generates a JSON file with information about pseudo and partially tested methods. To use just set `METHOD` as report format for PIT.
-  - Descartes can generate a human readable report containing only the list of methods with testing issues by using the `ISSUES` format.
+  - Descartes can generate a human readable containing the list of methods with testing issues. Example of report for [Apache Commons Cli](https://github.com/STAMP-project/descartes-experiments/blob/master/actionable-hints/commons-cli/index.md) and  example of detailed [report per pseudo-tested method](https://github.com/STAMP-project/descartes-experiments/blob/master/actionable-hints/commons-cli/methods/org.apache.commons.cli.AmbiguousOptionException.createMessage(java.lang.String%2Cjava.util.Collection).md)
 
 For more details on how to use and configure these reporting extensions please check section: ["Running Descartes on your project"](#running-descartes-on-your-project).
 
