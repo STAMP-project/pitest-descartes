@@ -73,7 +73,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <github.global.server>github</github.global.server>
-        <pitest.version>1.4.8</pitest.version>
+        <pitest.version>1.4.9</pitest.version>
         <java.version>1.8</java.version>
     </properties>
 
