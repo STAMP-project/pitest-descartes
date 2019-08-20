@@ -178,8 +178,12 @@ class A {
 
 #### `new` mutation operator
 
+*New in version 1.2.6*
+
 This operator accepts any method whose return type has a constructor with no parameters and belongs to a `java` package.
 It replaces the code of the method by a single instruction returning a new instance.
+
+
 
 For example
 
