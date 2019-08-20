@@ -150,6 +150,7 @@ Exponent = [eE] [+-]? \d+
     byte  { return Token.BYTE; }
     short { return Token.SHORT; }
     -     {return Token.MINUS; }
+	new	  { return Token.NEW; }
 
     {OctLongLiteral}    { return parse(Literal.LONG, Base.OCTAL); }
     {OctIntegerLiteral} { return parse(Literal.INT, Base.OCTAL); }

@@ -77,7 +77,8 @@ public class OperatorParser {
                     TokenType.INT_LITERAL,
                     TokenType.LONG_LITERAL,
                     TokenType.FLOAT_LITERAL,
-                    TokenType.DOUBLE_LITERAL)) {
+                    TokenType.DOUBLE_LITERAL,
+                    TokenType.NEW)) {
                 result = lookahead.getData();
             }
             else if(lookaheadIs(TokenType.MINUS)) {
