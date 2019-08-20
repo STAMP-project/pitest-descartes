@@ -1,10 +1,10 @@
 package eu.stamp_project.mutationtest.descartes.operators;
 
-import eu.stamp_project.mutationtest.descartes.operators.parsing.OperatorParser;
-import org.pitest.mutationtest.engine.MethodName;
-import org.pitest.mutationtest.engine.MutationDetails;
 import org.pitest.reloc.asm.MethodVisitor;
 import org.pitest.reloc.asm.commons.Method;
+
+import eu.stamp_project.mutationtest.descartes.operators.parsing.OperatorParser;
+import eu.stamp_project.mutationtest.descartes.operators.parsing.Token;
 
 /**
  * Mutation operator definition
@@ -32,6 +32,9 @@ public abstract class MutationOperator {
             throw new WrongOperatorException("Invalid operator id: " + parser.getErrors().get(0));
         if(value == null)
             return new NullMutationOperator();
+        if (value.equals(Token.NEW.getData())) {
+        	return new NewInstanceMutationOperator();
+        }
         if(value.equals(Void.class)) {
             return new VoidMutationOperator();
         }

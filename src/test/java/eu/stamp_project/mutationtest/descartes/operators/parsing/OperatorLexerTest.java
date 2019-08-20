@@ -13,20 +13,20 @@ public class OperatorLexerTest {
     @Test
     public void shouldMatchConstantTokens() {
         TokenType[] types = {
-                                TokenType.VOID_KWD,
-                                TokenType.NULL_KWD,
-                                TokenType.TRUE_KWD,
-                                TokenType.FALSE_KWD,
-                                TokenType.EMPTY_KWD,
-                                TokenType.LPAR,
-                                TokenType.BYTE_KWD,
-                                TokenType.RPAR,
-                                TokenType.SHORT_KWD,
-                                TokenType.EOF
-                            };
-        String input = "void null true false empty ( byte ) short";
+                TokenType.VOID_KWD,
+                TokenType.NULL_KWD,
+                TokenType.TRUE_KWD,
+                TokenType.FALSE_KWD,
+                TokenType.EMPTY_KWD,
+                TokenType.LPAR,
+                TokenType.BYTE_KWD,
+                TokenType.RPAR,
+                TokenType.SHORT_KWD,
+                TokenType.NEW,
+                TokenType.EOF
+        };
+        String input = "void null true false empty ( byte ) short new";
         OperatorLexer lexer = new OperatorLexer(new StringReader(input));
-
         try {
             for (TokenType token :
                     types) {

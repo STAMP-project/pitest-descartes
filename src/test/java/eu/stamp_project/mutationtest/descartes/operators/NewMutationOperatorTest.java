@@ -9,19 +9,23 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.containsInAnyOrder;
 
-public class NullMutationOperatorTest {
+public class NewMutationOperatorTest {
 
     @Test
     public void shouldFilterMethods() {
-        MutationOperator operator = MutationOperator.fromID("null");
+        java.util.List l;
+
+        MutationOperator operator = MutationOperator.fromID("new");
         Collection<String> methods = TestUtils.getMethods(Calculator.class)
                 .stream()
                 .filter(operator::canMutate)
                 .map(Method::getName)
                 .collect(Collectors.toList());
-        assertThat(methods, containsInAnyOrder("getScreen", "getClone", "getSomeCalculators", "getSomeMore", "getRange", "getMultipleCalculators"));
+        assertThat(methods, contains("getMultipleCalculators"));
     }
+
 }
+

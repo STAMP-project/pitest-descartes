@@ -14,6 +14,7 @@ public class Token {
     public static final Token MINUS = new Token(TokenType.MINUS, "-");
     public static final Token EOF = new Token(TokenType.EOF, null);
     public static final Token EMPTY = new Token(TokenType.EMPTY_KWD, "empty");
+    public static final Token NEW = new Token(TokenType.NEW, "new");
 
     private final TokenType type;
     private final Object data;
