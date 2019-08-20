@@ -13,7 +13,7 @@ Descartes is a mutation engine plugin for [PIT](http://pitest.org) which impleme
 To target a Maven project, PIT has to be configured and Descartes should be declared as a dependency and as the mutation engine to use.
 In the `pom.xml` file include the following:
 
-``` xml
+```xml
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
@@ -79,7 +79,7 @@ or just remove all instructions if is possible. The tool supports the following 
 #### `void` mutation operator
 This operator accepts a `void` method and removes all the instructions on its body. For example, with the following class as input:
 
-``` java
+```Java
 class A {
 
   int field = 3;
@@ -92,7 +92,7 @@ class A {
 ```
 the mutation operator will generate:
 
-``` java
+```Java
 class A {
 
   int field = 3;
@@ -105,7 +105,7 @@ class A {
 #### `null` mutation operator
 This operator accepts a method with a reference return type and replaces all instructions
 with `return null`. For example, using the following class as input:
-``` java
+```Java
 class A {
     public A clone() {
         return new A();
@@ -114,7 +114,7 @@ class A {
 ```
 this operator will generate:
 
-``` java
+```Java
 class A {
     public A clone() {
         return null;
@@ -127,7 +127,7 @@ This is a special operator which targets methods that return arrays. It replaces
 body with a `return` statement that produces an empty array of the corresponding type.
 For example, the following class:
 
-``` java
+```Java
 class A {
   public int[] getRange(int count) {
     int[] result = new int[count];
@@ -140,7 +140,7 @@ class A {
 ```
 will become:
 
-``` java
+```Java
 class A {
   public int[] getRange(int count) {
     return new int[];
@@ -153,7 +153,7 @@ This operator accepts any method with primitive or `String` return type. It repl
 with a single instruction returning a defined constant.
 For example, if the integer constant `3` is specified, then for the following class:
 
-``` java
+```Java
 class A {
     int field;
 
@@ -162,10 +162,11 @@ class A {
             return field;
         return -field;
     }
+}
 ```
 this operator will generate:
 
-``` java
+```Java
 class A {
     int field;
 
@@ -174,6 +175,57 @@ class A {
     }
 }
 ```
+
+#### `new` mutation operator
+
+This operator accepts any method whose return type has a constructor with no parameters and belongs to a `java` package.
+It replaces the code of the method by a single instruction returning a new instance.
+
+For example
+
+```Java
+class A {
+    int field;
+    
+    public ArrayList range(int end) {}
+        ArrayList l = new ArrayList();
+        for(int i = 0; i < size; i++) {
+            A a = new A();
+            a.field = i;
+            l.add(a);
+        }
+        return l;
+    }
+}  
+```
+ 
+is transformed to:
+
+```Java
+class A {
+    int field;
+    
+    public List range(int end) {}
+        return new ArrayList();
+    }
+}  
+```
+
+This operator handles the following special cases:
+
+| Return Type  | Replacement  |
+|--------------|--------------|
+| `Collection` | `ArrayList`  |
+| `Iterable`   | `ArrayList`  |
+| `List`       | `ArrayList`  |
+| `Queue`      | `LinkedList` |
+| `Set`        | `HashSet`    |
+| `Map`        | `HashMap`    |
+
+This means that if a is supposed to return an instance of `Collection` the code of the mutated method will be
+`return new ArrayList();`.
+
+This operator is not enabled by default.
 
 ### Stop Methods
 
@@ -204,7 +256,7 @@ PIT integrates with majors test and build tools such as [Maven](https://maven.ap
 ### Using Maven
 Then, configure PIT for the project and specify `descartes` as the engine inside a `mutationEngine` tag in the `pom.xml` file.
 
-``` xml
+```xml
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
@@ -241,7 +293,7 @@ as stated by the [language specification](https://docs.oracle.com/javase/specs/j
 In order to specify a `byte` or `short` value, a cast-like notation can be used: `(short) -1`, `(byte)0x1A`.
 
 The following configuration:
-``` xml
+```xml
 <mutators>
     <mutator>void</mutator>
     <mutator>4</mutator>
@@ -252,7 +304,7 @@ The following configuration:
 will instruct the tool to use the `void` operator and the constant operator will replace the body of
 every `int` returning method with `return 4;` and will use `"some string"` and `false` for every `string` and `boolean` method.
 If no operator is specified, the tool will use `void` and `null` by default. Which is equivalent to:
-``` xml
+```xml
 <mutators>
     <mutator>void</mutator>
     <mutator>null</mutator>
@@ -261,7 +313,7 @@ If no operator is specified, the tool will use `void` and `null` by default. Whi
 
 If no operator is specified Descartes will use the following configuration:
 
-``` xml
+```xml
 <mutators>
   <mutator>void</mutator>
   <mutator>null</mutator>
@@ -315,7 +367,7 @@ This feature is enabled by default. The parameter `exclude` can be used to preve
 
 So, for example, if we don't want to exclude deprecated methods and mutate them the following snippet should be added under the `configuration` element:
 
-``` xml
+```xml
 <features>
   <feature>
   <!-- This will allow descartes to mutate deprecated methods -->
@@ -326,7 +378,7 @@ So, for example, if we don't want to exclude deprecated methods and mutate them 
 
 More than one group can be excluded at the same time:
 
-``` xml
+```xml
 <features>
   <feature>
   <!-- This will allow descartes to mutate toString and enum generated methods -->
@@ -337,7 +389,7 @@ More than one group can be excluded at the same time:
 
 The feature can be completely disabled:
 
-``` xml
+```xml
 <features>
   <feature>
   <!--No method is considered as a stop method and therefore all of them will be mutated -->
@@ -355,7 +407,7 @@ As said before, there are several reporting options provided by Descartes:
 
 They can be configured and combined as regular PIT report formats:
 
-``` xml
+```xml
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>

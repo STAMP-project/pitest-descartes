@@ -1,5 +1,8 @@
 package eu.stamp_project.mutationtest.test;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Meaningless target class for mutation
  */
@@ -93,6 +96,10 @@ public class Calculator {
             }
         }
         return result;
+    }
+
+    public List<Calculator> getMultipleCalculators(int size) {
+        return Arrays.asList(getSomeCalculators(size));
     }
 
     public int[] getRange(int top) {
