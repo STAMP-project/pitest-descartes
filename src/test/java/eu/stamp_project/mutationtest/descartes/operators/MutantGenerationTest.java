@@ -1,13 +1,18 @@
 package eu.stamp_project.mutationtest.descartes.operators;
 
+import eu.stamp_project.mutationtest.descartes.DescartesMutater;
 import eu.stamp_project.mutationtest.descartes.DescartesMutationEngine;
 import eu.stamp_project.mutationtest.descartes.MutationPointFinder;
 import eu.stamp_project.mutationtest.descartes.codegeneration.MutationClassAdapter;
 
+import eu.stamp_project.mutationtest.test.Parameterless;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.pitest.classinfo.ClassByteArraySource;
 import org.pitest.classinfo.ClassName;
+import org.pitest.classpath.ClassloaderByteArraySource;
+import org.pitest.mutationtest.engine.Mutant;
 import org.pitest.mutationtest.engine.MutationDetails;
 
 import org.pitest.reloc.asm.ClassReader;
@@ -17,8 +22,11 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
@@ -33,7 +41,7 @@ public class MutantGenerationTest {
     @Parameterized.Parameters(name="{index}: Creating mutants for: {0}")
     public static Collection<Object[]> parameters() {
         return Arrays.asList( new Object[][]{
-                {"null",     (Predicate<Object>)(x) -> x == null},
+                {"null",     (Predicate<Object>)Objects::isNull },
                 {"-1",       isEqualTo(-1)},
                 {"empty",    (Predicate<Object>)(x) -> x.getClass().isArray() && Array.getLength(x) == 0},
                 {"1.2f",     isEqualTo(1.2f)},
@@ -44,7 +52,9 @@ public class MutantGenerationTest {
                 {"true",     isEqualTo(true)},
                 {"'\\n'",    isEqualTo('\n')},
                 {"\"\"",     isEqualTo("")},
-                {"\"A\"", isEqualTo("A")}
+                {"\"A\"",    isEqualTo("A")},
+                {"new",      (Predicate<Object>) Objects::nonNull} // Weak oracle. For the moment we test if the generation does not fail.
+
 
         });
     }
@@ -55,34 +65,41 @@ public class MutantGenerationTest {
 
     @Test
     public void shoultWriteMutant() throws Exception {
-        String classJavaName = "eu.stamp_project.mutationtest.test.Parameterless";
 
-        //Finding mutation points
-        DescartesMutationEngine engine = new DescartesMutationEngine(MutationOperator.fromID(operatorID));
-        ClassName className = ClassName.fromString(classJavaName);
+        Class<Parameterless> target = Parameterless.class;
 
+        DescartesMutater mutater = new DescartesMutater(
+                new ClassloaderByteArraySource(target.getClassLoader()),
+                new DescartesMutationEngine((MutationOperator.fromID(operatorID)))
+        );
 
-        MutationPointFinder finder = new MutationPointFinder(className, engine);
-        ClassReader reader = new ClassReader(classJavaName);
-        reader.accept(finder, 0);
+        // Find mutation points
+        List<MutationDetails> mutationPoints = mutater.findMutations(ClassName.fromClass(target));
 
+        // There must be at least one mutation point for each mutation operator
+        assertFalse("No mutation point found for mutator: " + operatorID, mutationPoints.isEmpty());
 
-        //Creating mutants
-        for (MutationDetails mutationDetails : finder.getMutationPoints()){
-
-            ClassWriter mutantWriter = new ClassWriter(ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
-            MutationClassAdapter adapter = new MutationClassAdapter(mutationDetails.getId(), mutantWriter);
-            reader.accept(adapter, 0);
-
-            DynamicClassLoader loader = new DynamicClassLoader();
-            Class<?>  mutant = loader.defineClass(classJavaName, mutantWriter);
-
-            Object mutantInstance = mutant.newInstance();
-            Object result = mutant.getDeclaredMethod(mutationDetails.getMethod().name(), null).invoke(mutantInstance);
-
+        // For each mutant
+        for(MutationDetails mutationDetails: mutationPoints) {
+            // Create the mutant
+            Mutant mutant = mutater.getMutation(mutationDetails.getId());
+            // Get the mutated code
+            Class<?> mutatedClass = loadMutant(mutant);
+            Object instance = mutatedClass.newInstance();
+            // Invoke the mutated method
+            Object result = mutatedClass.getDeclaredMethod(mutationDetails.getMethod().name()).invoke(instance);
+            // Check the result
             assertTrue("Method <" + mutationDetails.getMethod().name() + "> returned a wrong value for mutation operator: " + operatorID, check.test(result));
-
         }
+    }
+
+    public static Class<?> loadMutant(Mutant mutant) {
+        return new ClassLoader() {
+            Class<?> define(Mutant mutant) {
+                byte[] bytes = mutant.getBytes();
+                return defineClass(mutant.getDetails().getClassName().asJavaName(), bytes, 0, bytes.length);
+            }
+        }.define(mutant);
     }
 
 }
