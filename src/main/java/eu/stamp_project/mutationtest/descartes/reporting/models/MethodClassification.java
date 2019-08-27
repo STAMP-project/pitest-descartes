@@ -16,4 +16,6 @@ public enum MethodClassification {
         return name;
     }
 
+    public String getName() { return name; } // Making it compatible with Velocity
+
 }

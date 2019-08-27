@@ -117,19 +117,19 @@ public class MethodRecord {
         return location;
     }
 
-    public String name() {
+    public String getName() {
         return location.getMethodName().name();
     }
 
-    public String desc() {
+    public String getDesc() {
         return location.getMethodDesc();
     }
 
-    public String className() {
+    public String getClassName() {
         return location.getClassName().getNameWithoutPackage().asInternalName();
     }
 
-    public String packageName() {
+    public String getPackageName() {
         return location.getClassName().getPackage().asInternalName();
     }
 
@@ -138,11 +138,17 @@ public class MethodRecord {
     public int getLineNumber() { return lineNumber; }
 
 
-    public String declaration() {
+    public String getDeclaration() {
 
         TraceSignatureVisitor visitor = new TraceSignatureVisitor(0);
-        new SignatureReader(desc()).accept(visitor);
-        return name() + visitor.getDeclaration();
+        new SignatureReader(getDesc()).accept(visitor);
+        return getName() + visitor.getDeclaration();
+    }
+
+    public String getReturnType() {
+        TraceSignatureVisitor visitor = new TraceSignatureVisitor(0);
+        new SignatureReader(getDesc()).accept(visitor);
+        return visitor.getReturnType();
     }
 
     public boolean hasIssues() {
@@ -150,7 +156,7 @@ public class MethodRecord {
     }
 
     public boolean isVoid() {
-        return desc().endsWith(")V");
+        return getDesc().endsWith(")V");
     }
 
     public static String methodKey(MutationResult mutation) {

@@ -1,37 +1,49 @@
 package eu.stamp_project.mutationtest.descartes.reporting;
 
-import eu.stamp_project.mutationtest.descartes.reporting.models.MethodClassification;
 import eu.stamp_project.mutationtest.descartes.reporting.models.MethodRecord;
-import j2html.tags.ContainerTag;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.runtime.RuntimeConstants;
+import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.pitest.mutationtest.ClassMutationResults;
 import org.pitest.mutationtest.ListenerArguments;
 import org.pitest.mutationtest.MutationResultListener;
 import org.pitest.util.Unchecked;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.Writer;
 import java.nio.file.Paths;
 import java.time.Duration;
-import java.util.stream.Collectors;
-
-import static j2html.TagCreator.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class IssuesReportListener implements MutationResultListener {
 
     private ListenerArguments arguments;
-    private long totalIssues = 0;
 
-    ContainerTag classList;
+    private VelocityEngine engine;
+    private Template methodResportTemplate;
+    private Template indexTemplate;
+
+    private List<ClassIssues> findings;
+
 
     public IssuesReportListener(final ListenerArguments arguments) {
         this.arguments = arguments;
     }
 
-
     @Override
     public void runStart() {
-        classList = ul();
-        totalIssues = 0;
-        transferCSS();
+        VelocityEngine engine = new VelocityEngine();
+        engine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+        engine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+        engine.init();
+
+        methodResportTemplate = engine.getTemplate("templates/method-report.vm", "UTF-8");
+        indexTemplate = engine.getTemplate("templates/index-report.vm", "UTF-8");
+
+        findings = new ArrayList<>();
     }
 
     private Writer createFile(String path) {
@@ -39,118 +51,37 @@ public class IssuesReportListener implements MutationResultListener {
         return arguments.getOutputStrategy().createWriterForFile(filePath);
     }
 
-    private void transferCSS() {
-        try (Writer writer = createFile("style.css")) {
-            InputStream originalCss = getClass().getClassLoader().getResourceAsStream("files/style.css");
-            InputStreamReader reader = new InputStreamReader(originalCss);
-
-            char[] buffer = new char[originalCss.available()];
-            int read;
-            while((read = reader.read(buffer)) >= 0) {
-                writer.write(buffer, 0, read);
-            }
-            reader.close();
-            writer.close();
-        }
-        catch (IOException exc) {
-            throw Unchecked.translateCheckedException(exc);
-        }
-    }
-
-    public void handleMethod(MethodRecord method) {
-        try(Writer writer = createFile(getFilePath(method))) {
-            String declaration = method.declaration();
-            ContainerTag backLink = a("[Back]").withHref("../index.html");
-
-            ContainerTag document = body(
-                    h1(declaration),
-                    backLink,
-                    dl(
-                            dt("Class"), dd(method.className()),
-                            dt("Package"), dd(method.packageName())
-
-                    ),
-                    p(text("This method is "), strong(method.getClassification().toString())));
-
-            document.with(h2("Transformations"));
-
-            if(method.getClassification() == MethodClassification.PARTIALLY_TESTED)
-                document.with(
-                        p(text("It seems that this method has been tested to return only the following value(s): "),
-                        text(  method.getUndetectedMutations().stream().map(
-                                mutation -> {
-                                    String mutator = mutation.getDetails().getMutator();
-                                    if(mutator.equals("empty")) //TODO: Improve hard coded array verification
-                                        return "an empty array";
-                                    return mutator;
-                                }).collect(Collectors.joining(", "))),
-                        text(".")));
-
-            if(method.isVoid()) //Void method with issues is pseudo-tested
-                document.with(p("To body of this method was removed but the test suite was not able to detect the transformation."));
-            else {
-                document.with(
-                        p("The following transformations were applied but they were not detected by the test suite:"),
-                        ul( each(method.getUndetectedMutations(),  mutation ->
-                                li(mutation.getDetails().getDescription())))
-                );
-            }
-
-            if(method.getClassification() == MethodClassification.PARTIALLY_TESTED) {
-                document.with(p("The following transformations were detected by the test suite when applied."),
-                        ul(each(method.getDetectedMutations(), mutation ->
-                                li(mutation.getDetails().getDescription()))));
-            }
-            document.with(
-                    h2("Tests"),
-                    p("The method is covered by the following test cases:"),
-                    ul( each(method.getTests(), test -> li(test.getName()))))
-            .with(backLink);
-
-            html(head(title(declaration)), link().withHref("../style.css").withRel("stylesheet")).with(document).render(writer);
-
-        }
-        catch (IOException exc) {
-            throw Unchecked.translateCheckedException(exc);
-        }
-    }
-
     @Override
     public void handleMutationResult(ClassMutationResults classMutationResults) {
 
-        ContainerTag methodList = ul();
-
-        long issues = MethodRecord.getRecords(classMutationResults)
+        MethodRecord[] issues = MethodRecord.getRecords(classMutationResults)
                 .filter(MethodRecord::hasIssues)
-                .peek( method -> {
-                    handleMethod(method);
-                    methodList.with(
-                            li(
-                                    a(method.declaration()).withHref(getFilePath(method)),
-                                    text(" "),
-                                    b(method.getClassification().toString())));
-                })
-                .count();
-        totalIssues += issues;
-        if(issues == 0) return; //Write only classes wiht issues
+                .toArray(MethodRecord[]::new);
 
-        classList.with(
-                li(text(classMutationResults.getMutatedClass().asJavaName()),
-                        text(" ("),
-                        strong("Issues: "),
-                        text(Long.toString(issues) + ")"))
-                        .with(methodList));
-    }
+        if (issues.length == 0) {
+            return;
+        }
 
-    private String getFilePath(MethodRecord method) {
-        return Paths.get(method.getLocation().getClassName().asJavaName(), method.declaration() + ".html").toString();
+        String className = classMutationResults.getMutatedClass().asJavaName();
+        VelocityContext context = new VelocityContext();
+        context.put("className", className);
+        context.put("issues", issues);
+
+        try (Writer writer = createFile(className + ".html")) {
+            methodResportTemplate.merge(context, writer);
+        } catch (IOException exc) {
+            throw Unchecked.translateCheckedException("Could not write file for class: " + className, exc);
+        }
+
+        findings.add(new ClassIssues(className, issues.length));
     }
 
     private String getStringTime() {
+        //TODO: Is there a way to have this code in the template?
 
-        Duration ellapsed = Duration.ofMillis(System.currentTimeMillis() - arguments.getStartTime());
+        Duration elapsed = Duration.ofMillis(System.currentTimeMillis() - arguments.getStartTime());
         String[] units = {"day", "hour", "minute", "second"};
-        long[] parts = { ellapsed.toDays(), ellapsed.toHours() % 24, ellapsed.toMinutes() % 60, ellapsed.getSeconds() % 60};
+        long[] parts = { elapsed.toDays(), elapsed.toHours() % 24, elapsed.toMinutes() % 60, elapsed.getSeconds() % 60};
         StringBuilder result = new StringBuilder();
         for(int i=0; i < parts.length; i++) {
             if(parts[i] == 0) continue;
@@ -167,24 +98,36 @@ public class IssuesReportListener implements MutationResultListener {
     @Override
     public void runEnd() {
 
-        try (Writer writer = createFile("index.html")){
+        VelocityContext context = new VelocityContext();
+        context.put("duration", getStringTime());
+        context.put("total", findings.stream().mapToInt(ClassIssues::getIssues).sum()); // Is there a way to put this code into the template??
+        context.put("findings", findings);
 
-            html(
-                    head(title("Testing issues report"), link().withHref("style.css").withRel("stylesheet")),
-                    body(
-                            h1("Issues Report"),
-                            dl(
-                                    dt("Duration"), dd(getStringTime()),
-                                    dt("Issues"), dd(Long.toString(totalIssues))
-                            ),
-                            h2("Classes"), classList))
-                    .render(writer);
-
+        try (Writer writer = createFile("index.html")) {
+            indexTemplate.merge(context, writer);
         }
         catch (IOException exc) {
-           throw Unchecked.translateCheckedException(exc);
+           throw Unchecked.translateCheckedException("Could not write report index file", exc);
         }
 
+    }
+
+    public static class ClassIssues {
+        private String className;
+        private int issues;
+
+        public ClassIssues(String className, int issues) {
+            this.className = className;
+            this.issues = issues;
+        }
+
+        public String getClassName() {
+            return className;
+        }
+
+        public int getIssues() {
+            return issues;
+        }
     }
 
 }

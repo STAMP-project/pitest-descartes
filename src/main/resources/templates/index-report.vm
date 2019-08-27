@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>Testing issues report</title>
+    <style>
+      .main-report p { background-color: lightgray; padding: 0.5em; }
+      .class-list li { margin: 3px; }
+      .class-list li a { font-family: 'Courier New', Courier, monospace; font-weight: bold; margin-right: 1em; }
+    </style>
+  </head>
+  <body>
+    <div class="main-report">
+#if ($total)
+      <h1>Classes</h1>
+      <p>Issues: <strong>$total</strong></p>
+      <ul class="class-list">
+  #foreach($entry in $findings)
+        <li><a href="${entry.ClassName}.html">$entry.ClassName</a><span class="issues-report">(Issues: $entry.Issues)</span></li>
+  #end
+      </ul>
+#else
+      <p>No testing issue related to extreme mutations was found.</p>
+#end
+    </div>
+  </body>
+</html>
