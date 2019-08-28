@@ -102,6 +102,7 @@ public class IssuesReportListener implements MutationResultListener {
         context.put("duration", getStringTime());
         context.put("total", findings.stream().mapToInt(ClassIssues::getIssues).sum()); // Is there a way to put this code into the template??
         context.put("findings", findings);
+        context.put("operators", arguments.getEngine().getMutatorNames());
 
         try (Writer writer = createFile("index.html")) {
             indexTemplate.merge(context, writer);
