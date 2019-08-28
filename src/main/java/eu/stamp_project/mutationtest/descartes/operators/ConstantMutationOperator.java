@@ -97,7 +97,7 @@ public class ConstantMutationOperator extends MutationOperator {
 
     @Override
     public String getDescription() {
-        return "All method body replaced by: return " + id;
+        return "All method instructions replaced by: return " + id;
     }
 
 }

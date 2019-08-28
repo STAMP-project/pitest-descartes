@@ -37,7 +37,7 @@ public class NullMutationOperator extends MutationOperator{
 
     @Override
     public String getDescription(){
-        return "All methods instructions replaced by: return null;";
+        return "All method instructions replaced by: return null;";
     }
 
 }

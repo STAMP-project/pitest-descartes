@@ -117,6 +117,6 @@ public class NewInstanceMutationOperator extends MutationOperator {
 
     @Override
     public String getDescription() {
-        return "All methods instructions replaced by an instance of the class";
+        return "Method body replaced by instructions to return an instance of the class using a constructor with no parameters";
     }
 }
