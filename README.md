@@ -183,9 +183,7 @@ class A {
 This operator accepts any method whose return type has a constructor with no parameters and belongs to a `java` package.
 It replaces the code of the method by a single instruction returning a new instance.
 
-
-
-For example
+For example:
 
 ```Java
 class A {
@@ -209,7 +207,7 @@ is transformed to:
 class A {
     int field;
     
-    public List range(int end) {}
+    public List range(int end) {
         return new ArrayList();
     }
 }  
@@ -228,6 +226,39 @@ This operator handles the following special cases:
 
 This means that if a is supposed to return an instance of `Collection` the code of the mutated method will be
 `return new ArrayList();`.
+
+This operator is not enabled by default.
+
+#### `optional` mutation operator
+
+*New in version 1.2.6*
+
+This operator accepts any method whose return type is `java.util.Optional`.
+It replaces the code of the method by a single instruction returning an *empty* instance.
+
+For example:
+
+```Java
+class A {
+    int field;
+    
+    public Optional<Integer> getOptional() {
+        return Optional.of(field);
+    }
+}  
+```
+ 
+is transformed to:
+
+```Java
+class A {
+    int field;
+    
+   public Optional<Integer> getOptional() {
+           return Optional.empty();
+   }
+}  
+```
 
 This operator is not enabled by default.
 
