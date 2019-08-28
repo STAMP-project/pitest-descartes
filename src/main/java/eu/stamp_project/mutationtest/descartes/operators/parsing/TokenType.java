@@ -5,6 +5,7 @@ public enum TokenType {
     LPAR,
     RPAR,
     MINUS,
+    NEW_KWD,
     NULL_KWD,
     VOID_KWD,
     FALSE_KWD,
@@ -12,12 +13,12 @@ public enum TokenType {
     BYTE_KWD,
     SHORT_KWD,
     EMPTY_KWD,
+    OPTIONAL_KWD,
     INT_LITERAL,
     LONG_LITERAL,
     FLOAT_LITERAL,
     DOUBLE_LITERAL,
     CHAR_LITERAL,
     STRING_LITERAL,
-    NEW,
     EOF
 }

@@ -1,5 +1,9 @@
 package eu.stamp_project.mutationtest.test;
 
+import java.util.Optional;
+
+
+
 public class Parameterless {
 
 
@@ -80,5 +84,7 @@ public class Parameterless {
 
     public Character charWrapper() { return Character.toLowerCase('C'); }
 
-    public String getAString() { return new Integer(123).toString();  }
+    public String getAString() { return Integer.toString(123);  }
+
+    public Optional<Integer> getOptionalInt() { return Optional.of(3); }
 }

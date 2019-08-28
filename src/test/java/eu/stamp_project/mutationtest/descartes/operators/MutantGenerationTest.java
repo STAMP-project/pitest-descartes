@@ -19,11 +19,8 @@ import org.pitest.reloc.asm.ClassReader;
 import org.pitest.reloc.asm.ClassWriter;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.function.Predicate;
 
 import static org.junit.Assert.assertFalse;
@@ -53,6 +50,7 @@ public class MutantGenerationTest {
                 {"'\\n'",    isEqualTo('\n')},
                 {"\"\"",     isEqualTo("")},
                 {"\"A\"",    isEqualTo("A")},
+                {"optional", isEqualTo(Optional.empty())},
                 {"new",      (Predicate<Object>) Objects::nonNull} // Weak oracle. For the moment we test if the generation does not fail.
 
 

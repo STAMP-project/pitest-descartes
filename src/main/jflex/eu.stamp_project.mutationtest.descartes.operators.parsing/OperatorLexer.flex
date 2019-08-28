@@ -140,17 +140,18 @@ Exponent = [eE] [+-]? \d+
 %%
 /*Lexical rules*/
 <YYINITIAL> {
-    null  { return Token.NULL; }
-    void  { return Token.VOID; }
-    false { return Token.FALSE; }
-    true  { return Token.TRUE; }
-    empty { return Token.EMPTY; }
-    "("   { return Token.LPAR; }
-    ")"   { return Token.RPAR; }
-    byte  { return Token.BYTE; }
-    short { return Token.SHORT; }
-    -     {return Token.MINUS; }
-	new	  { return Token.NEW; }
+    null     { return Token.NULL; }
+    void     { return Token.VOID; }
+    false    { return Token.FALSE; }
+    true     { return Token.TRUE; }
+    empty    { return Token.EMPTY; }
+    "("      { return Token.LPAR; }
+    ")"      { return Token.RPAR; }
+    byte     { return Token.BYTE; }
+    short    { return Token.SHORT; }
+    -        { return Token.MINUS; }
+	new	     { return Token.NEW; }
+    optional { return Token.OPTIONAL; }
 
     {OctLongLiteral}    { return parse(Literal.LONG, Base.OCTAL); }
     {OctIntegerLiteral} { return parse(Literal.INT, Base.OCTAL); }

@@ -20,6 +20,7 @@ public class OperatorParserTest {
                 {"void", Void.class},
                 {"null", null},
                 {"empty", "empty"},
+                {"optional", "optional"},
                 {"3", 3},
                 {"3L", 3L},
                 {"(byte)3", (byte)3},

@@ -22,6 +22,6 @@ public class NullMutationOperatorTest {
                 .filter(operator::canMutate)
                 .map(Method::getName)
                 .collect(Collectors.toList());
-        assertThat(methods, containsInAnyOrder("getScreen", "getClone", "getSomeCalculators", "getSomeMore", "getRange", "getMultipleCalculators"));
+        assertThat(methods, containsInAnyOrder("getScreen", "getClone", "getSomeCalculators", "getSomeMore", "getRange", "getMultipleCalculators", "getOptionalCalculator"));
     }
 }

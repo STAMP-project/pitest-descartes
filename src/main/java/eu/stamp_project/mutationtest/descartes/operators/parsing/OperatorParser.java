@@ -67,18 +67,20 @@ public class OperatorParser {
         try {
             next();
             if(lookaheadIsOneOf(
+                    TokenType.NEW_KWD,
                     TokenType.NULL_KWD,
                     TokenType.VOID_KWD,
                     TokenType.TRUE_KWD,
                     TokenType.FALSE_KWD,
                     TokenType.EMPTY_KWD,
+                    TokenType.OPTIONAL_KWD,
                     TokenType.CHAR_LITERAL,
                     TokenType.STRING_LITERAL,
                     TokenType.INT_LITERAL,
                     TokenType.LONG_LITERAL,
                     TokenType.FLOAT_LITERAL,
-                    TokenType.DOUBLE_LITERAL,
-                    TokenType.NEW)) {
+                    TokenType.DOUBLE_LITERAL
+                    )) {
                 result = lookahead.getData();
             }
             else if(lookaheadIs(TokenType.MINUS)) {

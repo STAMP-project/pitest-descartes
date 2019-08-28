@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 public abstract class Converter {
 
     /**
-     * Generic call to valueOf static method of given numeric type. Ignores underscores in the process.
+     * Generic call to valueOf static method of a given numeric type. Ignores underscores in the process.
      * @param type Numeric type to which the given string representation should be converted.
      * @param number String representation of the number.
      * @param <T> A type that extends {@link Number}.

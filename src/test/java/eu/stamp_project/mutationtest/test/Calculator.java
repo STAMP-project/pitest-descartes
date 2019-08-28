@@ -2,6 +2,7 @@ package eu.stamp_project.mutationtest.test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Meaningless target class for mutation
@@ -108,6 +109,10 @@ public class Calculator {
             result[i] = i;
         }
         return result;
+    }
+
+    public Optional<Calculator> getOptionalCalculator() {
+        return Optional.of(this);
     }
 
 }

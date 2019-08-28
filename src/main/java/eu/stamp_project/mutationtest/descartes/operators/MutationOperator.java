@@ -35,6 +35,9 @@ public abstract class MutationOperator {
         if (value.equals(Token.NEW.getData())) {
         	return new NewInstanceMutationOperator();
         }
+        if(value.equals(Token.OPTIONAL.getData())) {
+            return new OptionalMutationOperator();
+        }
         if(value.equals(Void.class)) {
             return new VoidMutationOperator();
         }

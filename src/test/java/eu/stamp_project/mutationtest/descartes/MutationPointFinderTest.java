@@ -73,6 +73,7 @@ public class MutationPointFinderTest {
                             "getSomeCalculators",
                             "getSomeMore",
                             "getMultipleCalculators",
+                            "getOptionalCalculator",
                             "getRange")
                 },
                 { in(AbstractClass.class), shouldFind("voidMethodWithoutParameters") },

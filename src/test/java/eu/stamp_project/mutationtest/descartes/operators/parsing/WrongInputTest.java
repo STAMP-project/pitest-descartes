@@ -41,7 +41,7 @@ public class WrongInputTest {
                 {"'\\500'"},
                 {"1\n2"},
                 {"\n"}
-                /*{"(byte)10000"}*/ //TODO: This is not failing. Ouputs (byte)16
+                /*{"(byte)10000"}*/ //TODO: This is not failing. Outputs (byte)16
         });
     }
 

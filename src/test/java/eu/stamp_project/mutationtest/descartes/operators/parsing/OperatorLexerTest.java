@@ -22,10 +22,11 @@ public class OperatorLexerTest {
                 TokenType.BYTE_KWD,
                 TokenType.RPAR,
                 TokenType.SHORT_KWD,
-                TokenType.NEW,
+                TokenType.NEW_KWD,
+                TokenType.OPTIONAL_KWD,
                 TokenType.EOF
         };
-        String input = "void null true false empty ( byte ) short new";
+        String input = "void null true false empty ( byte ) short new optional";
         OperatorLexer lexer = new OperatorLexer(new StringReader(input));
         try {
             for (TokenType token :
