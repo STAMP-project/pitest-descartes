@@ -1,16 +1,11 @@
-package eu.stamp_project.mutationtest.descartes.stopmethods;
+package eu.stamp_project.mutationtest.descartes.interceptors.stopmethods;
 
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.tree.AbstractInsnNode;
-import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.MethodNode;
-import org.objectweb.asm.tree.VarInsnNode;
+import org.objectweb.asm.tree.*;
 import org.pitest.sequence.*;
 
-import static eu.stamp_project.mutationtest.descartes.stopmethods.StopMethodMatcher.*;
+import static eu.stamp_project.mutationtest.descartes.interceptors.stopmethods.StopMethodMatcher.*;
 import static org.objectweb.asm.Opcodes.*;
 import static org.pitest.bytecode.analysis.InstructionMatchers.opCode;
-import static org.pitest.bytecode.analysis.InstructionMatchers.variableMatches;
 import static org.pitest.sequence.QueryStart.match;
 
 public interface StopMethodMatchers {
@@ -158,6 +153,45 @@ public interface StopMethodMatchers {
         };
 
         return forBody(match(ALOAD_X).then(opCodeBetween(IRETURN, ARETURN)));
+    }
+
+    static Match<AbstractInsnNode> aload(int var) {
+        return (context, instruction) -> {
+            if(!(instruction instanceof VarInsnNode)) {
+                return false;
+            }
+            VarInsnNode node = (VarInsnNode) instruction;
+            return node.getOpcode() == ALOAD && node.var == var;
+        };
+    }
+
+    static StopMethodMatcher isKotlinGeneratedSetter() {
+
+        Match<AbstractInsnNode> ALOAD_1 = aload(1);
+
+        Match<AbstractInsnNode> INVOKE_CHECK = (context, instruction) -> {
+            if(!(instruction instanceof MethodInsnNode)) {
+                return false;
+            }
+
+            MethodInsnNode node = (MethodInsnNode) instruction;
+
+            return node.getOpcode() == INVOKESTATIC &&
+                    node.name.equals("checkParameterIsNotNull") &&
+                    node.owner.equals("kotlin/jvm/internal/Intrinsics") &&
+                    node.desc.equals("(Ljava/lang/Object;Ljava/lang/String;)V");
+
+        };
+
+        return forBody(
+                match(ALOAD_1)
+                        .then(opCode(LDC))
+                        .then(INVOKE_CHECK)
+                        .then(aload(0))
+                        .then(ALOAD_1)
+                        .then(opCode(PUTFIELD))
+                        .then(opCode(RETURN))
+        );
     }
 
 }

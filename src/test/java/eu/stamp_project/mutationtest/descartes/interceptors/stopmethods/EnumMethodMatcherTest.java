@@ -1,6 +1,6 @@
-package eu.stamp_project.mutationtest.descartes.stopmethods;
+package eu.stamp_project.mutationtest.descartes.interceptors.stopmethods;
 
-import eu.stamp_project.mutationtest.test.Numbers;
+import eu.stamp_project.mutationtest.test.input.Numbers;
 import org.pitest.bytecode.analysis.MethodTree;
 
 import java.util.Arrays;

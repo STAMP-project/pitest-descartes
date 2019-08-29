@@ -1,6 +1,6 @@
 package eu.stamp_project.mutationtest.descartes;
 
-import eu.stamp_project.mutationtest.test.Calculator;
+import eu.stamp_project.mutationtest.test.input.Calculator;
 import eu.stamp_project.mutationtest.test.TestUtils;
 import org.junit.Test;
 import org.pitest.classinfo.ClassName;
@@ -48,7 +48,7 @@ public class DescartesEngineFactoryTest {
         DescartesEngineFactory factory = new DescartesEngineFactory();
         MutationEngine engine = factory.createEngine(EngineArguments.arguments().withExcludedMethods(Arrays.asList("get*")));
         Mutater mutater = engine.createMutator(ClassloaderByteArraySource.fromContext());
-        List<MutationDetails> mutations = mutater.findMutations(ClassName.fromString("eu.stamp_project.mutationtest.test.Calculator"));
+        List<MutationDetails> mutations = mutater.findMutations(ClassName.fromString("eu.stamp_project.mutationtest.test.input.Calculator"));
         assertEquals(5, mutations.size());
     }
 

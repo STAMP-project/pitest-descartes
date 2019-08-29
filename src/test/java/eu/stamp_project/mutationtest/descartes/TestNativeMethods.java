@@ -1,27 +1,19 @@
 package eu.stamp_project.mutationtest.descartes;
 
-
-import eu.stamp_project.mutationtest.test.NativeMethodClass;
+import eu.stamp_project.mutationtest.test.input.NativeMethodClass;
 import org.junit.Test;
-import org.pitest.classinfo.ClassName;
-import org.pitest.mutationtest.EngineArguments;
-import org.pitest.mutationtest.engine.MutationEngine;
-import org.pitest.reloc.asm.ClassReader;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertTrue;
+import static eu.stamp_project.mutationtest.test.TestUtils.findMutationPoints;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.is;
 
 public class TestNativeMethods {
 
     @Test
     public void shouldNotFindNativeMethods() throws IOException  {
-        final String className = NativeMethodClass.class.getName();
-        DescartesEngineFactory factory = new DescartesEngineFactory();
-        MutationEngine engine = factory.createEngine(EngineArguments.arguments());
-        ClassReader reader = new ClassReader(className);
-        MutationPointFinder finder = new MutationPointFinder(ClassName.fromString(className), (DescartesMutationEngine) engine);
-        reader.accept(finder, 0);
-        assertTrue(finder.getMutationPoints().isEmpty());
+        assertThat(findMutationPoints(NativeMethodClass.class), is(empty()));
     }
 }

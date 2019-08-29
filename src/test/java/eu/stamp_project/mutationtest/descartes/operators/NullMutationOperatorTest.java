@@ -1,6 +1,6 @@
 package eu.stamp_project.mutationtest.descartes.operators;
 
-import eu.stamp_project.mutationtest.test.Calculator;
+import eu.stamp_project.mutationtest.test.input.Calculator;
 import eu.stamp_project.mutationtest.test.TestUtils;
 import org.junit.Test;
 import org.pitest.reloc.asm.commons.Method;

@@ -1,1 +1,2 @@
-eu.stamp_project.mutationtest.descartes.stopmethods.StopMethodMatcherInterceptorFactory
+eu.stamp_project.mutationtest.descartes.interceptors.stopmethods.StopMethodMatcherInterceptorFactory
+eu.stamp_project.mutationtest.descartes.interceptors.AvoidNullInNotNullInterceptorFactory

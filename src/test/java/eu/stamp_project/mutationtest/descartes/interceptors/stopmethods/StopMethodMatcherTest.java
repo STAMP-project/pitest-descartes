@@ -1,6 +1,6 @@
-package eu.stamp_project.mutationtest.descartes.stopmethods;
+package eu.stamp_project.mutationtest.descartes.interceptors.stopmethods;
 
-import eu.stamp_project.mutationtest.test.StopMethods;
+import eu.stamp_project.mutationtest.test.input.StopMethods;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,7 +1,7 @@
-package eu.stamp_project.mutationtest.descartes.stopmethods;
+package eu.stamp_project.mutationtest.descartes.interceptors.stopmethods;
 
 import org.pitest.bytecode.analysis.MethodTree;
-import eu.stamp_project.mutationtest.test.DeprecatedClass;
+import eu.stamp_project.mutationtest.test.input.DeprecatedClass;
 
 public class DeprecatedClassTest extends BaseMethodMatcherTest {
 

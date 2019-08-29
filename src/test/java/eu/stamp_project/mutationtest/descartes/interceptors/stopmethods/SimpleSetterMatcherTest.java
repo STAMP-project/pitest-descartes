@@ -1,4 +1,4 @@
-package eu.stamp_project.mutationtest.descartes.stopmethods;
+package eu.stamp_project.mutationtest.descartes.interceptors.stopmethods;
 
 import org.pitest.bytecode.analysis.MethodTree;
 

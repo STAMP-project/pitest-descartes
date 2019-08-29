@@ -1,4 +1,4 @@
-package eu.stamp_project.mutationtest.descartes.stopmethods;
+package eu.stamp_project.mutationtest.descartes.interceptors.stopmethods;
 
 import org.pitest.mutationtest.build.InterceptorParameters;
 import org.pitest.mutationtest.build.MutationInterceptor;
@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static eu.stamp_project.mutationtest.descartes.stopmethods.StopMethodMatchers.*;
+import static eu.stamp_project.mutationtest.descartes.interceptors.stopmethods.StopMethodMatchers.*;
 
 public class StopMethodMatcherInterceptorFactory implements MutationInterceptorFactory {
 
@@ -38,6 +38,7 @@ public class StopMethodMatcherInterceptorFactory implements MutationInterceptorF
         availabeMatchers.put("null_return", returnsNull());
         availabeMatchers.put("return_this", returnsThis());
         availabeMatchers.put("return_param", returnsAParameter());
+        availabeMatchers.put("kotlin_setter", isKotlinGeneratedSetter());
 
 
         String description = "Allows to reinsert some stop methods into the analysis. Possible values are: ";

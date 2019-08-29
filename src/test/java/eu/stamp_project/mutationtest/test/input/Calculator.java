@@ -1,4 +1,4 @@
-package eu.stamp_project.mutationtest.test;
+package eu.stamp_project.mutationtest.test.input;
 
 import java.util.Arrays;
 import java.util.List;

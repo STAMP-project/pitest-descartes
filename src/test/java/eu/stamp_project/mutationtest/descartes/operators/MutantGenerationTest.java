@@ -2,21 +2,15 @@ package eu.stamp_project.mutationtest.descartes.operators;
 
 import eu.stamp_project.mutationtest.descartes.DescartesMutater;
 import eu.stamp_project.mutationtest.descartes.DescartesMutationEngine;
-import eu.stamp_project.mutationtest.descartes.MutationPointFinder;
-import eu.stamp_project.mutationtest.descartes.codegeneration.MutationClassAdapter;
 
-import eu.stamp_project.mutationtest.test.Parameterless;
+import eu.stamp_project.mutationtest.test.input.Parameterless;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.pitest.classinfo.ClassByteArraySource;
 import org.pitest.classinfo.ClassName;
 import org.pitest.classpath.ClassloaderByteArraySource;
 import org.pitest.mutationtest.engine.Mutant;
 import org.pitest.mutationtest.engine.MutationDetails;
-
-import org.pitest.reloc.asm.ClassReader;
-import org.pitest.reloc.asm.ClassWriter;
 
 import java.lang.reflect.Array;
 import java.util.*;

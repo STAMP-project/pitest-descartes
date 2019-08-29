@@ -1,4 +1,4 @@
-package eu.stamp_project.mutationtest.test;
+package eu.stamp_project.mutationtest.test.input;
 
 public enum Numbers {
     ONE, TWO, THREE;
