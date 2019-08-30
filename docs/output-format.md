@@ -77,4 +77,4 @@ and also [here](examples/jsoup.json). These were obtained from actual
 open-source projects.
 
 The `ISSUES` output format contains this same information but it is
-rendered as an `HTML` document with human-readable descriptions. An example can be checked [here](examples/commons-cli/issues/)
+rendered as an `HTML` document with human-readable descriptions. An example can be checked [here](examples/commons-cli/issues/).
