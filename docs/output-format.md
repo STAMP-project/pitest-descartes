@@ -72,9 +72,9 @@ not-covered), which mutations were detected and which not, all tests
 covering the method and there is also a list of entries for every
 mutation performed with more information.
 
-Examples of files with this format can be checked [here](examples/commons-cli.json)
+Examples of files with this format can be checked [here](examples/commons-cli/methods.json)
 and also [here](examples/jsoup.json). These were obtained from actual
 open-source projects.
 
 The `ISSUES` output format contains this same information but it is
-rendered as an `HTML` document with human-readable descriptions.
+rendered as an `HTML` document with human-readable descriptions. An example can be checked [here](examples/commons-cli/issues/)

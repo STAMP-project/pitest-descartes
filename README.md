@@ -277,6 +277,8 @@ Descartes also provides two new reporting extensions:
   - a general reporting extension supporting `JSON` files. It works also with **Gregor**, the default mutation engine for PIT. To use just set `JSON` as report format for PIT.
   - a reporting extension designed for Descartes that generates a JSON file with information about pseudo and partially tested methods. To use just set `METHOD` as report format for PIT.
   - Descartes can generate a human readable report containing only the list of methods with testing issues by using the `ISSUES` format.
+ 
+Examples of these reporting extensions for [Apache Commons-CLI](https://github.com/apache/commons-cli/tree/b9ccc94008c78a59695f0c77ebe4ecf284370956) can be checked [here](docs/examples/commons-cli/).
 
 For more details on how to use and configure these reporting extensions please check section: ["Running Descartes on your project"](#running-descartes-on-your-project).
 
