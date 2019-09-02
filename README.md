@@ -143,7 +143,7 @@ will become:
 ```Java
 class A {
   public int[] getRange(int count) {
-    return new int[];
+    return new int[0];
   }
 }
 ```
@@ -189,7 +189,7 @@ For example:
 class A {
     int field;
     
-    public ArrayList range(int end) {}
+    public ArrayList range(int end) {
         ArrayList l = new ArrayList();
         for(int i = 0; i < size; i++) {
             A a = new A();
