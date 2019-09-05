@@ -82,12 +82,14 @@
             <groupId>org.pitest</groupId>
             <artifactId>pitest</artifactId>
             <version>${pitest.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.pitest</groupId>
             <artifactId>pitest-entry</artifactId>
             <version>${pitest.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
