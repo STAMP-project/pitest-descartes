@@ -267,7 +267,7 @@ This operator is not enabled by default.
 Descartes avoids some methods that are generally not interesting and may
 introduce false positives such as simple getters, simple setters, empty
 void methods or methods returning constant values, delegation patterns as well as deprecated and compiler generated methods. Those methods are automatically detected by inspecting their code.
-A complete list of examples can be found [here](src/test/java/eu/stamp_project/mutationtest/test/StopMethods.java).
+A complete list of examples can be found [here](src/test/java/eu/stamp_project/mutationtest/test/input/StopMethods.java).
 The exclusion of stop methods can be configured. For more details see section: ["Running Descartes on your project"](#running-descartes-on-your-project).
 
 ## Descartes Output
