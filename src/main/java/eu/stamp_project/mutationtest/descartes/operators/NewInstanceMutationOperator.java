@@ -19,7 +19,7 @@ import org.pitest.reloc.asm.commons.Method;
 
 /**
  * Replaces the method body with a return statement, which generates an instance of the specified return type.
- * <br/>
+ * <br>
  * This is currently working for classes with parameterless constructors and a few well-known Java interfaces.
  */
 public class NewInstanceMutationOperator extends MutationOperator {
