@@ -552,6 +552,8 @@ A comparison on the number of mutants created and execution time between Descart
 
 Articles mentioning Descartes:
 
+* [A Comprehensive Study of Pseudo-tested Methods](https://hal.inria.fr/hal-01867423/file/main.pdf) (Empirical Software Engineering, [doi:10.1145/3238147.3240474](https://doi.org/10.1145/3238147.3240474))
+* [Descartes: a PITest engine to detect pseudo-tested methods - Tool Demonstration](https://hal.inria.fr/hal-01870976/file/main.pdf) (Proceedings of ASE, [doi:10.1145/3238147.3240474](https://doi.org/10.1145/3238147.3240474))
 * [Mutation testing with PIT and Descartes](http://massol.myxwiki.org/xwiki/bin/view/Blog/MutationTestingDescartes)
 * [Controlling Test Quality](http://massol.myxwiki.org/xwiki/bin/view/Blog/ControllingTestQuality)
 
