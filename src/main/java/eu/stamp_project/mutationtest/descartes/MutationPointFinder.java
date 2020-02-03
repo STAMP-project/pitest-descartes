@@ -34,7 +34,7 @@ public class MutationPointFinder extends ClassVisitor {
     //private Method lastMethod;
 
     public MutationPointFinder(ClassName className, DescartesMutationEngine engine) {
-        super(Opcodes.ASM5);
+        super(Opcodes.ASM7);
         this.engine = engine;
         this.className = className;
         mutationPoints = new ArrayList<MutationDetails>();
