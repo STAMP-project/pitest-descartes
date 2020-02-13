@@ -28,6 +28,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 
@@ -73,7 +74,9 @@ public class TestUtils {
         ClassLoader parent = TestUtils.class.getClassLoader();
         return new ClassLoader(parent) {
             Class<?> load(String name, String path) throws IOException {
-                byte[] bytes = toByteArray(parent.getResourceAsStream(path));
+                InputStream input = parent.getResourceAsStream(path);
+                assertNotNull("Required " + path + " not found", input);
+                byte[] bytes = toByteArray(input);
                 return defineClass(name, bytes, 0, bytes.length);
             }
         }.load(name, path);
