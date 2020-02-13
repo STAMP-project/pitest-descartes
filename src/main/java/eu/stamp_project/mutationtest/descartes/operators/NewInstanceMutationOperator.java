@@ -50,7 +50,6 @@ public class NewInstanceMutationOperator extends MutationOperator {
             }
             for (Constructor<?> publicConstructor : returnClass.getConstructors()) {
                 if (publicConstructor.getParameters().length == 0) {
-                    System.out.println("Mutating " + returnClass.getName());
                     return true;
                 }
             }
