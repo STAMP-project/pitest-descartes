@@ -1,0 +1,17 @@
+name: Run tests on push
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 13
+    - name: Build with Maven
+      run: mvn clean test jacoco:report coveralls:report
