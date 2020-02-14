@@ -18,4 +18,4 @@ jobs:
     - name: Generate coverage report
       run: mvn jacoco:report
     - name: Report coverage to Coveralls
-      run: mvn coveralls:report -DrepoToken=${COVERALLS_TOKEN}
+      run: mvn coveralls:report -DrepoToken=${{ secrets.COVERALLS_REPOSITORY_TOKEN }}
