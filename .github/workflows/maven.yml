@@ -16,6 +16,6 @@ jobs:
     - name: Execute tests and compute coverage
       run: mvn clean test
     - name: Generate coverage report
-      run: mvn jacoco:report coveralls:report
+      run: mvn jacoco:report
     - name: Report coverage to Coveralls
       run: mvn coveralls:report -DrepoToken=${COVERALLS_TOKEN}
