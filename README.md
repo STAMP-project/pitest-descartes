@@ -17,7 +17,7 @@ In the `pom.xml` file include the following:
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.4.7</version>
+  <version>1.5.0</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
   </configuration>
@@ -25,7 +25,13 @@ In the `pom.xml` file include the following:
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.2.5</version>
+      <version>1.2.6</version>
+    </dependency>
+    <!-- to add if you use JUnit 5: -->
+    <dependency>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-junit5-plugin</artifactId>
+        <version>0.12</version>
     </dependency>
   </dependencies>
 </plugin>
