@@ -13,7 +13,7 @@ public class MutationClassAdapter extends ClassVisitor {
     private final MutationIdentifier mID;
 
     public MutationClassAdapter(MutationIdentifier mID, ClassVisitor cv) {
-        super(Opcodes.ASM5, cv);
+        super(Opcodes.ASM7, cv);
         this.mID = mID;
     }
 

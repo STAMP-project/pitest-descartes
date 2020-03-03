@@ -8,9 +8,9 @@ import org.pitest.reloc.asm.*;
  */
 public abstract class MethodRewriterAdapter extends MethodVisitor {
 
-    public MethodRewriterAdapter() { super(Opcodes.ASM5); }
+    public MethodRewriterAdapter() { super(Opcodes.ASM7); }
 
-    public MethodRewriterAdapter(MethodVisitor mv) { super(Opcodes.ASM5, mv); }
+    public MethodRewriterAdapter(MethodVisitor mv) { super(Opcodes.ASM7, mv); }
 
     @Override
     public abstract void visitCode();

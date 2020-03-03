@@ -15,7 +15,7 @@ public class MethodInspector extends MethodVisitor {
     private LineCounter lineCounter;
 
     public MethodInspector(ClassName className, Method method, MutationPointFinder finder) {
-        super(Opcodes.ASM5);
+        super(Opcodes.ASM7);
 
         this.method = method;
         this.finder = finder;
