@@ -29,7 +29,6 @@ public class StopMethodMatcherInterceptorFactory implements MutationInterceptorF
         availabeMatchers.put("hash_code", isHashCode());
         availabeMatchers.put("deprecated", isDeprecated());
         availabeMatchers.put("synthetic", isSynthetic());
-        availabeMatchers.put("lambda", isLambda());
         availabeMatchers.put("getter", isSimpleGetter());
         availabeMatchers.put("setter", isSimpleSetter());
         availabeMatchers.put("constant", returnsAConstant());

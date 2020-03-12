@@ -1,7 +1,5 @@
 package eu.stamp_project.mutationtest.test.input;
 
-import java.util.function.Function;
-
 public class StopMethods {
 
     static {
@@ -202,6 +200,4 @@ public class StopMethods {
     }
 
     public void delegateToStatic() { emptyStatic(); }
-
-	Function<String, Integer> fct = str -> str.length();
 }

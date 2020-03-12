@@ -49,10 +49,6 @@ public interface StopMethodMatchers {
 		return (classTree, methodTree) -> methodTree.isSynthetic() && !methodTree.rawNode().name.startsWith("lambda$");
 	}
 
-	static StopMethodMatcher isLambda() {
-		return (classTree, methodTree) -> methodTree.isSynthetic() && methodTree.rawNode().name.startsWith("lambda$");
-	}
-
     static Match<AbstractInsnNode> opCodeBetween(int lower, int upper) {
         return new Match<AbstractInsnNode>() {
             @Override
