@@ -45,9 +45,9 @@ public interface StopMethodMatchers {
         return forBody(QueryStart.match(opCode(RETURN)));
     }
 
-	static StopMethodMatcher isSynthetic() {
-		return (classTree, methodTree) -> methodTree.isSynthetic() && !methodTree.rawNode().name.startsWith("lambda$");
-	}
+    static StopMethodMatcher isSynthetic() {
+        return (classTree, methodTree) -> methodTree.isSynthetic() && !methodTree.rawNode().name.startsWith("lambda$");
+    }
 
     static Match<AbstractInsnNode> opCodeBetween(int lower, int upper) {
         return new Match<AbstractInsnNode>() {
