@@ -200,5 +200,4 @@ public class StopMethods {
     }
 
     public void delegateToStatic() { emptyStatic(); }
-
 }
