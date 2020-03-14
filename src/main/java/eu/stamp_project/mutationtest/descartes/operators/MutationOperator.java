@@ -25,13 +25,16 @@ public abstract class MutationOperator {
 
     public abstract String getDescription();
 
+    public abstract boolean canReturnSelfObject(Method method);
+
     public static MutationOperator fromID(String id) {
         OperatorParser parser = new OperatorParser(id);
         Object value = parser.parse();
         if(parser.hasErrors())
             throw new WrongOperatorException("Invalid operator id: " + parser.getErrors().get(0));
-        if(value == null)
+        if(value == null) {
             return new NullMutationOperator();
+        }
         if (value.equals(Token.NEW.getData())) {
         	return new NewInstanceMutationOperator();
         }
