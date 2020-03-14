@@ -23,7 +23,11 @@ public abstract class MutationOperator {
 
     public abstract String getID();
 
+    public abstract String getID(Method mv);
+
     public abstract String getDescription();
+    
+    public abstract String getDescription(Method mv);
 
     public abstract boolean canReturnSelfObject(Method method);
 

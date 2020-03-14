@@ -34,6 +34,7 @@ public class NullMutationOperator extends MutationOperator{
             return false;
         return false;
     }
+    
     @Override
     public void generateCode(Method method, MethodVisitor mv) {
         assert canMutate(method);
@@ -45,13 +46,19 @@ public class NullMutationOperator extends MutationOperator{
     }
 
     @Override
-    public String getID() {
-        return "null";
+    public String getID(Method method) {
+        if(canReturnSelfObject(method))
+            return "this";
+        else 
+            return "null";
     }
 
     @Override
-    public String getDescription(){
-        return "All method instructions replaced by: return null;";
+    public String getDescription(Method method){
+        if(canReturnSelfObject(method))
+            return "All method instructions replaced by: return this;";
+        else 
+            return "All method instructions replaced by: return null;";
     }
 
 }
