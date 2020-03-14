@@ -1,3 +1,30 @@
-../.DS_Store/
-.DS_Store
-operators/.DS_Store
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# IDE files
+.idea/
+*.iml
+
+# Build files
+target/
+
+# Generated files
+gen/
+
+# VSCode
+.vscode/
+
+# Eclipse
+.settings/
+.classpath
+.project
