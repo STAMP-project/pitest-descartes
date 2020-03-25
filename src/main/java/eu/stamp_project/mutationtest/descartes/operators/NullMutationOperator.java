@@ -1,7 +1,6 @@
 package eu.stamp_project.mutationtest.descartes.operators;
 
-import java.lang.annotation.Retention;
-
+import org.pitest.classinfo.ClassName;
 import org.pitest.reloc.asm.MethodVisitor;
 import org.pitest.reloc.asm.Opcodes;
 import org.pitest.reloc.asm.Type;
@@ -22,43 +21,29 @@ public class NullMutationOperator extends MutationOperator{
     @Override
     public boolean canMutate(Method method) {
         int target = method.getReturnType().getSort();
-        return target == Type.OBJECT || target == Type.ARRAY;
+        return  target == Type.OBJECT || target == Type.ARRAY;
     }
 
     @Override
-    public boolean canReturnSelfObject(Method method) {
-        int target = method.getReturnType().getSort();
-        if (target == Type.OBJECT)
-            return true;
-        if (target == Type.ARRAY)
-            return false;
-        return false;
+    public boolean canMutate(ClassName className, Method method) {
+       int target = method.getReturnType().getSort();
+        return  target == Type.OBJECT || target == Type.ARRAY;
     }
-    
+
     @Override
     public void generateCode(Method method, MethodVisitor mv) {
-        assert canMutate(method);
-        if(canReturnSelfObject(method))
-            mv.visitVarInsn(Opcodes.ALOAD, 0);
-        else
-            mv.visitInsn(Opcodes.ACONST_NULL);
+        mv.visitInsn(Opcodes.ACONST_NULL);
         mv.visitInsn(Opcodes.ARETURN);
     }
 
     @Override
-    public String getID(Method method) {
-        if(canReturnSelfObject(method))
-            return "this";
-        else 
-            return "null";
+    public String getID() {
+        return "null";
     }
 
     @Override
-    public String getDescription(Method method){
-        if(canReturnSelfObject(method))
-            return "All method instructions replaced by: return this;";
-        else 
-            return "All method instructions replaced by: return null;";
+    public String getDescription(){
+        return "All method instructions replaced by: return null;";
     }
 
 }

@@ -40,7 +40,7 @@ public class DescartesEngineFactoryTest {
         DescartesMutationEngine descartes = (DescartesMutationEngine) factory.createEngine(EngineArguments.arguments().withExcludedMethods(Arrays.asList("*Something")));
         Optional<Method> excluded = TestUtils.getMethods(Calculator.class).stream().filter(m -> m.getName().equals("getSomething")).findFirst();
         assertTrue("Method getSomething not in Calculator class.", excluded.isPresent());
-        assertTrue("Obtained operators for an excluded method", descartes.getOperatorsFor(excluded.get()).isEmpty());
+        assertTrue("Obtained operators for an excluded method", descartes.getOperatorsFor(ClassName.fromString("eu.stamp_project.mutationtest.test.input.Calculator"), excluded.get()).isEmpty());
     }
 
     @Test

@@ -56,7 +56,7 @@ public class MutationPointFinder extends ClassVisitor {
 
         Method method = new Method(name, desc);
         //Check if there are available operators for this method
-        if(engine.getOperatorsFor(method).isEmpty())
+        if(engine.getOperatorsFor(className, method).isEmpty())
             return null;
 
         return new MethodInspector(className, method, this);
@@ -64,7 +64,7 @@ public class MutationPointFinder extends ClassVisitor {
 
     public void registerMutations(Method method, int start, int end) {
         for (MutationOperator operator :
-                engine.getOperatorsFor(method)) {
+                engine.getOperatorsFor(className, method)) {
             mutationPoints.add(getMutationDetails(method, operator, start, end));
         }
     }

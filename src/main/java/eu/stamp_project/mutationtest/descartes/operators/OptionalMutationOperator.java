@@ -1,5 +1,6 @@
 package eu.stamp_project.mutationtest.descartes.operators;
 
+import org.pitest.classinfo.ClassName;
 import org.pitest.reloc.asm.MethodVisitor;
 import org.pitest.reloc.asm.Opcodes;
 import org.pitest.reloc.asm.commons.Method;
@@ -15,6 +16,11 @@ public class OptionalMutationOperator extends MutationOperator {
         return method.getReturnType().equals(getType(Optional.class));
     }
 
+    @Override
+    public boolean canMutate(ClassName className, Method method) {
+        return method.getReturnType().equals(getType(Optional.class));
+    }
+    
     @Override
     public void generateCode(Method method, MethodVisitor mv) {
         String internalName = getType(Optional.class).getInternalName();

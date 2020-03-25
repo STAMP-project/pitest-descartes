@@ -1,5 +1,6 @@
 package eu.stamp_project.mutationtest.descartes.operators;
 
+import org.pitest.classinfo.ClassName;
 import org.pitest.reloc.asm.MethodVisitor;
 import org.pitest.reloc.asm.Opcodes;
 import org.pitest.reloc.asm.Type;
@@ -14,6 +15,11 @@ public class EmptyArrayMutationOperator extends MutationOperator {
      * @return A boolean value indicating if the mutation can be performed
      */
     public boolean canMutate(Method method) {
+        return method.getReturnType().getSort() == Type.ARRAY;
+    }
+
+    @Override
+    public boolean canMutate(ClassName className, Method method) {
         return method.getReturnType().getSort() == Type.ARRAY;
     }
 

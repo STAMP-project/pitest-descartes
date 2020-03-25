@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
+import org.pitest.classinfo.ClassName;
 import org.pitest.reloc.asm.MethodVisitor;
 import org.pitest.reloc.asm.Opcodes;
 import org.pitest.reloc.asm.Type;
@@ -40,6 +41,28 @@ public class NewInstanceMutationOperator extends MutationOperator {
      */
     @Override
     public boolean canMutate(Method method) {
+        try {
+            Class<?> returnClass = getAppropriateReturnClass(method);
+
+            if(returnClass.equals(String.class)
+                    || !belongsToJavaPackages(returnClass)
+                    || Modifier.isAbstract(returnClass.getModifiers())) {
+                return false;
+            }
+            for (Constructor<?> publicConstructor : returnClass.getConstructors()) {
+                if (publicConstructor.getParameters().length == 0) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean canMutate(ClassName className, Method method) {
         try {
             Class<?> returnClass = getAppropriateReturnClass(method);
 
@@ -91,7 +114,6 @@ public class NewInstanceMutationOperator extends MutationOperator {
 
     @Override
     public void generateCode(Method method, MethodVisitor mv) {
-        assert canMutate(method);
 
         Class<?> appropriateReturnClass = null;
 

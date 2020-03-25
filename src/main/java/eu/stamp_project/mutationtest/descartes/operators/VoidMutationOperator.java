@@ -1,5 +1,6 @@
 package eu.stamp_project.mutationtest.descartes.operators;
 
+import org.pitest.classinfo.ClassName;
 import org.pitest.reloc.asm.MethodVisitor;
 import org.pitest.reloc.asm.Opcodes;
 import org.pitest.reloc.asm.Type;
@@ -22,6 +23,12 @@ public final class VoidMutationOperator extends MutationOperator {
      */
     @Override
     public boolean canMutate(Method method) {
+        //TODO: Detect methods that contain only calls to logging classes or System.out
+        return !isConstructor(method.getName()) && method.getReturnType().equals(Type.VOID_TYPE);
+    }
+
+    @Override
+    public boolean canMutate(ClassName className, Method method) {
         //TODO: Detect methods that contain only calls to logging classes or System.out
         return !isConstructor(method.getName()) && method.getReturnType().equals(Type.VOID_TYPE);
     }

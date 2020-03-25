@@ -1,6 +1,8 @@
 package eu.stamp_project.mutationtest.descartes.operators;
 
 import eu.stamp_project.utils.TypeHelper;
+
+import org.pitest.classinfo.ClassName;
 import org.pitest.reloc.asm.MethodVisitor;
 import org.pitest.reloc.asm.Opcodes;
 import org.pitest.reloc.asm.Type;
@@ -60,6 +62,22 @@ public class ConstantMutationOperator extends MutationOperator {
                 methodType.equals(unwrapType(constant.getClass()));
     }
 
+    @Override
+    public boolean canMutate(ClassName className, Method method) {
+        Type methodType = method.getReturnType();
+        int typeSort = methodType.getSort();
+        Type constantType = Type.getType(constant.getClass());
+
+        if(typeSort == Type.ARRAY || typeSort == Type.METHOD)
+            return false;
+
+        if(typeSort == Type.OBJECT)
+            return constantType.equals(methodType);
+
+        return methodType.equals(constantType) ||
+                methodType.equals(unwrapType(constant.getClass()));
+    }
+
     /**
      * Generates the code associated with the mutation.
      * @param method Method to which the mutation should be applied
@@ -67,7 +85,6 @@ public class ConstantMutationOperator extends MutationOperator {
      */
     @Override
     public void generateCode(Method method, MethodVisitor mv) {
-        assert canMutate(method);
         mv.visitLdcInsn(constant);
 
         Type methodType = method.getReturnType();
