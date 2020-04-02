@@ -26,7 +26,8 @@ public class DescartesEngineFactoryTest {
 
     @Test
     public void shouldCreateEngineWithMutators() throws Exception {
-        String[] operators = {"void", "3", "null", "\"string\"", "'a'"};
+        //Check here why this -> null (this is mapped to null)
+        String[] operators = {"void", "this", "3", "null", "\"string\"", "'a'"};
         DescartesEngineFactory factory = new DescartesEngineFactory();
         MutationEngine engine = factory.createEngine( EngineArguments.arguments().withMutators(Arrays.asList(operators)));
         Collection<String> collectedOperators = engine.getMutatorNames();
@@ -40,11 +41,11 @@ public class DescartesEngineFactoryTest {
         DescartesMutationEngine descartes = (DescartesMutationEngine) factory.createEngine(EngineArguments.arguments().withExcludedMethods(Arrays.asList("*Something")));
         Optional<Method> excluded = TestUtils.getMethods(Calculator.class).stream().filter(m -> m.getName().equals("getSomething")).findFirst();
         assertTrue("Method getSomething not in Calculator class.", excluded.isPresent());
-        assertTrue("Obtained operators for an excluded method", descartes.getOperatorsFor(ClassName.fromString("eu.stamp_project.mutationtest.test.input.Calculator"), excluded.get()).isEmpty());
+        assertTrue("Obtained operators for an excluded method", descartes.getOperatorsFor(ClassName.fromClass(Calculator.class),excluded.get()).isEmpty());
     }
 
     @Test
-    public void shouldFindMutatonsAndExclude() {
+    public void shouldFindMutationsAndExclude() {
         DescartesEngineFactory factory = new DescartesEngineFactory();
         MutationEngine engine = factory.createEngine(EngineArguments.arguments().withExcludedMethods(Arrays.asList("get*")));
         Mutater mutater = engine.createMutator(ClassloaderByteArraySource.fromContext());

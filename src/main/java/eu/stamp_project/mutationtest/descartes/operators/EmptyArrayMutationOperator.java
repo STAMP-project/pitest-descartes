@@ -14,11 +14,6 @@ public class EmptyArrayMutationOperator extends MutationOperator {
      * @param method Method to be tested by the operator
      * @return A boolean value indicating if the mutation can be performed
      */
-    public boolean canMutate(Method method) {
-        return method.getReturnType().getSort() == Type.ARRAY;
-    }
-
-    @Override
     public boolean canMutate(ClassName className, Method method) {
         return method.getReturnType().getSort() == Type.ARRAY;
     }

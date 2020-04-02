@@ -69,6 +69,7 @@ public class OperatorParser {
             if(lookaheadIsOneOf(
                     TokenType.NEW_KWD,
                     TokenType.NULL_KWD,
+                    TokenType.THIS_KWD,
                     TokenType.VOID_KWD,
                     TokenType.TRUE_KWD,
                     TokenType.FALSE_KWD,

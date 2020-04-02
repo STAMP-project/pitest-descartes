@@ -7,6 +7,7 @@ public enum TokenType {
     MINUS,
     NEW_KWD,
     NULL_KWD,
+    THIS_KWD,
     VOID_KWD,
     FALSE_KWD,
     TRUE_KWD,

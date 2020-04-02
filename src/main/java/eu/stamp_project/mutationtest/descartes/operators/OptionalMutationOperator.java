@@ -12,15 +12,10 @@ import static org.pitest.reloc.asm.Type.getType;
 public class OptionalMutationOperator extends MutationOperator {
 
     @Override
-    public boolean canMutate(Method method) {
-        return method.getReturnType().equals(getType(Optional.class));
+    public boolean canMutate(ClassName className, Method method) {
+        return method.getReturnType().equals(getType(Optional.class)) || false;
     }
 
-    @Override
-    public boolean canMutate(ClassName className, Method method) {
-        return method.getReturnType().equals(getType(Optional.class));
-    }
-    
     @Override
     public void generateCode(Method method, MethodVisitor mv) {
         String internalName = getType(Optional.class).getInternalName();

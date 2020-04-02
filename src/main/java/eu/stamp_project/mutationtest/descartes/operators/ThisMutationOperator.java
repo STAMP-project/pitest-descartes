@@ -7,40 +7,31 @@ import org.pitest.reloc.asm.Type;
 import org.pitest.reloc.asm.commons.Method;
 
 /**
- * Replaces the method body with a <code>return this</code> statement
+ * Replaces the method body with a <code>return null</code> statement
  */
 public class ThisMutationOperator extends MutationOperator{
 
     /**
      * Returns a value indicating whether the operator can transform the given method.
-     * In this case whether <code>this</code> could be assigned to the return type.
+     * In this case whether <code>null</code> could be assigned to the return type.
      *
      * @param method Method to be tested by the operator
-     * @return A boolean value indicating if this can be assigned to the return type
+     * @return A boolean value indicating if null can be assigned to the return type
      */
-
-    @Override
-    public boolean canMutate(Method method) {
-        return true;
-    }
-
     @Override
     public boolean canMutate(ClassName className, Method method) {
-        int target = method.getReturnType().getSort();
         String[] objArr = method.getReturnType().toString().split("/");
         String[] classArr = className.asJavaName().split("\\.");
         int check = objArr[objArr.length - 1].indexOf(classArr[classArr.length - 1]);
-        
         if(check != -1){
-            return  target == Type.OBJECT || target == Type.ARRAY;
+            return  true;
         }
-        return true;
+        return false;
     }
 
     @Override
     public void generateCode(Method method, MethodVisitor mv) {
-        assert canMutate(method);
-        mv.visitVarInsn(Opcodes.ALOAD, 0);
+        mv.visitInsn(Opcodes.ACONST_NULL);
         mv.visitInsn(Opcodes.ARETURN);
     }
 

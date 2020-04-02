@@ -39,6 +39,7 @@ public class DescartesEngineFactory implements MutationEngineFactory{
     public static Collection<String> getDefaultOperators() {
         return Arrays.asList(
                 "void",
+                "this",
                 "null",
                 "empty",
                 "true", "false",

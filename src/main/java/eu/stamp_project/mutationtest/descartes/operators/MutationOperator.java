@@ -12,14 +12,6 @@ import eu.stamp_project.mutationtest.descartes.operators.parsing.Token;
  */
 public abstract class MutationOperator {
 
-    /**
-     * Returns a value indicating whether the operator can transform the given method.
-     *
-     * @param method Method to be tested by the operator
-     * @return A boolean value indicating if the mutation can be performed
-     */
-    public abstract boolean canMutate(Method method);
-
     public abstract boolean canMutate(ClassName className, Method method);
 
     public abstract void generateCode(Method method, MethodVisitor mv);
@@ -35,6 +27,9 @@ public abstract class MutationOperator {
             throw new WrongOperatorException("Invalid operator id: " + parser.getErrors().get(0));
         if(value == null)
             return new NullMutationOperator();
+        if(value.equals(Token.THIS.getData())){
+            return new ThisMutationOperator();
+        }
         if (value.equals(Token.NEW.getData())) {
         	return new NewInstanceMutationOperator();
         }

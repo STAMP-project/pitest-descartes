@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
+import org.pitest.classinfo.ClassName;
 import org.pitest.reloc.asm.commons.Method;
 
 import java.util.Arrays;
@@ -61,11 +62,10 @@ public class MutationOperatorTest {
     @Test
     public void shouldFilterMethods() {
         MutationOperator operator = MutationOperator.fromID(operatorID);
-
         assertThat("Wrong mutation operator", operator.getClass(), is(equalTo(expectedClass)));
 
         List<String> targets = classMethods.stream()
-                .filter(operator::canMutate)
+                .filter(method -> operator.canMutate(ClassName.fromClass(Calculator.class), method))
                 .map(Method::getName)
                 .collect(Collectors.toList());
 

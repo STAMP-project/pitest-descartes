@@ -22,12 +22,6 @@ public final class VoidMutationOperator extends MutationOperator {
      * @return True if the given method is void, false otherwise
      */
     @Override
-    public boolean canMutate(Method method) {
-        //TODO: Detect methods that contain only calls to logging classes or System.out
-        return !isConstructor(method.getName()) && method.getReturnType().equals(Type.VOID_TYPE);
-    }
-
-    @Override
     public boolean canMutate(ClassName className, Method method) {
         //TODO: Detect methods that contain only calls to logging classes or System.out
         return !isConstructor(method.getName()) && method.getReturnType().equals(Type.VOID_TYPE);

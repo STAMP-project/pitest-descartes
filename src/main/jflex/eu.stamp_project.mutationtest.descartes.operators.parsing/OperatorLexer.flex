@@ -141,6 +141,7 @@ Exponent = [eE] [+-]? \d+
 /*Lexical rules*/
 <YYINITIAL> {
     null     { return Token.NULL; }
+    this     { return Token.THIS; }
     void     { return Token.VOID; }
     false    { return Token.FALSE; }
     true     { return Token.TRUE; }

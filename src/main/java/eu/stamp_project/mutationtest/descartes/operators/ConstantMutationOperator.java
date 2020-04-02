@@ -47,22 +47,6 @@ public class ConstantMutationOperator extends MutationOperator {
      * @return A boolean value indicating if the return type and the constant value type are the same
      */
     @Override
-    public boolean canMutate(Method method) {
-        Type methodType = method.getReturnType();
-        int typeSort = methodType.getSort();
-        Type constantType = Type.getType(constant.getClass());
-
-        if(typeSort == Type.ARRAY || typeSort == Type.METHOD)
-            return false;
-
-        if(typeSort == Type.OBJECT)
-            return constantType.equals(methodType);
-
-        return methodType.equals(constantType) ||
-                methodType.equals(unwrapType(constant.getClass()));
-    }
-
-    @Override
     public boolean canMutate(ClassName className, Method method) {
         Type methodType = method.getReturnType();
         int typeSort = methodType.getSort();
