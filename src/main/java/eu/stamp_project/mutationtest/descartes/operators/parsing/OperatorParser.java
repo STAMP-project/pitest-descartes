@@ -17,34 +17,35 @@ public class OperatorParser {
     private Token lookahead;
 
     private Object result;
+
     public Object getResult() {
         return result;
     }
 
     private final List<String> errors;
+
     public List<String> getErrors() {
         return errors;
     }
 
     public boolean hasErrors() {
-        return  errors.size() > 0;
+        return errors.size() > 0;
     }
 
-    private boolean match(TokenType token) throws IOException{
-        if(lookahead.getType() == token) {
-            try{
+    private boolean match(TokenType token) throws IOException {
+        if (lookahead.getType() == token) {
+            try {
                 next();
                 return true;
             }
 
-            catch(Throwable throwable) {
+            catch (Throwable throwable) {
                 errors.add(throwable.getMessage());
                 return false;
             }
         }
         return false;
     }
-
 
     private void next() throws Throwable {
         lookahead = lexer.nextToken();
@@ -55,8 +56,8 @@ public class OperatorParser {
     }
 
     private boolean lookaheadIsOneOf(TokenType... tokens) {
-        for(int i=0; i < tokens.length; i++ )
-            if(lookaheadIs(tokens[i]))
+        for (int i = 0; i < tokens.length; i++)
+            if (lookaheadIs(tokens[i]))
                 return true;
         return false;
     }
@@ -66,40 +67,25 @@ public class OperatorParser {
         result = null;
         try {
             next();
-            if(lookaheadIsOneOf(
-                    TokenType.NEW_KWD,
-                    TokenType.NULL_KWD,
-                    TokenType.THIS_KWD,
-                    TokenType.VOID_KWD,
-                    TokenType.TRUE_KWD,
-                    TokenType.FALSE_KWD,
-                    TokenType.EMPTY_KWD,
-                    TokenType.OPTIONAL_KWD,
-                    TokenType.CHAR_LITERAL,
-                    TokenType.STRING_LITERAL,
-                    TokenType.INT_LITERAL,
-                    TokenType.LONG_LITERAL,
-                    TokenType.FLOAT_LITERAL,
-                    TokenType.DOUBLE_LITERAL
-                    )) {
+            if (lookaheadIsOneOf(TokenType.NEW_KWD, TokenType.NULL_KWD, TokenType.THIS_KWD, TokenType.VOID_KWD,
+                    TokenType.TRUE_KWD, TokenType.FALSE_KWD, TokenType.EMPTY_KWD, TokenType.OPTIONAL_KWD,
+                    TokenType.CHAR_LITERAL, TokenType.STRING_LITERAL, TokenType.INT_LITERAL, TokenType.LONG_LITERAL,
+                    TokenType.FLOAT_LITERAL, TokenType.DOUBLE_LITERAL)) {
                 result = lookahead.getData();
-            }
-            else if(lookaheadIs(TokenType.MINUS)) {
+            } else if (lookaheadIs(TokenType.MINUS)) {
                 parseNegatedNumber();
-            }
-            else if(lookaheadIs(TokenType.LPAR)) {
+            } else if (lookaheadIs(TokenType.LPAR)) {
                 parseCastedInteger();
-            }
-            else {
+            } else {
                 unexpectedTokenError();
             }
             next();
-            if(!match(TokenType.EOF))
+            if (!match(TokenType.EOF))
                 unexpectedTokenError();
 
             lexer.yyclose();
 
-        } catch(Throwable exc) {
+        } catch (Throwable exc) {
             errors.add("Unexpected error: " + exc.getMessage());
             result = null;
         }
@@ -107,78 +93,69 @@ public class OperatorParser {
         return result;
     }
 
-    //TODO: More descriptive error messages
+    // TODO: More descriptive error messages
     private void unexpectedTokenError() {
         errors.add("Unexpected token type: " + lookahead.getType().name());
         result = null;
     }
 
-
-    private void parseNegatedNumber() throws IOException{
-        //TODO: Find a way to refactor this method
+    private void parseNegatedNumber() throws IOException {
+        // TODO: Find a way to refactor this method
 
         if (match(TokenType.MINUS)) {
-            if(lookaheadIs(TokenType.INT_LITERAL)) {
-                result = - (Integer)lookahead.getData();
-            }
-            else if(lookaheadIs(TokenType.LONG_LITERAL)) {
-                result = - (Long) lookahead.getData();
-            }
-            else if(lookaheadIs(TokenType.FLOAT_LITERAL)) {
-                result = - (Float) lookahead.getData();
-            }
-            else if(lookaheadIs(TokenType.DOUBLE_LITERAL)) {
-                result = - (Double) lookahead.getData();
-            }
-            else
+            if (lookaheadIs(TokenType.INT_LITERAL)) {
+                result = -(Integer) lookahead.getData();
+            } else if (lookaheadIs(TokenType.LONG_LITERAL)) {
+                result = -(Long) lookahead.getData();
+            } else if (lookaheadIs(TokenType.FLOAT_LITERAL)) {
+                result = -(Float) lookahead.getData();
+            } else if (lookaheadIs(TokenType.DOUBLE_LITERAL)) {
+                result = -(Double) lookahead.getData();
+            } else
                 unexpectedTokenError();
-        }
-        else
+        } else
             unexpectedTokenError();
     }
 
-    private void parseCastedInteger () throws Throwable {
-        //TODO: Find a way to refactor this method
-        if(match(TokenType.LPAR)) {
-            if(lookaheadIs(TokenType.BYTE_KWD)) {
+    private void parseCastedInteger() throws Throwable {
+        // TODO: Find a way to refactor this method
+        if (match(TokenType.LPAR)) {
+            if (lookaheadIs(TokenType.BYTE_KWD)) {
                 next();
-                if(match(TokenType.RPAR)) {
+                if (match(TokenType.RPAR)) {
                     boolean negate = false;
-                    if(negate = lookaheadIs(TokenType.MINUS)){ next(); }
-
-                    if(lookaheadIs(TokenType.INT_LITERAL)) {
-                        result = ((Integer)lookahead.getData()).byteValue();
-                        if(negate)
-                            result = (byte)(-((Byte)result));
+                    if (negate = lookaheadIs(TokenType.MINUS)) {
+                        next();
                     }
-                    else
+
+                    if (lookaheadIs(TokenType.INT_LITERAL)) {
+                        result = ((Integer) lookahead.getData()).byteValue();
+                        if (negate)
+                            result = (byte) (-((Byte) result));
+                    } else
                         unexpectedTokenError();
-                }
-                else
+                } else
                     unexpectedTokenError();
-            }
-            else if(lookaheadIs(TokenType.SHORT_KWD)) {
+            } else if (lookaheadIs(TokenType.SHORT_KWD)) {
                 next();
-                if(match(TokenType.RPAR)) {
+                if (match(TokenType.RPAR)) {
                     boolean negate = false;
-                    if(negate = lookaheadIs(TokenType.MINUS)) { next(); }
-
-                    if(lookaheadIs(TokenType.INT_LITERAL)) {
-                        result = ((Integer)lookahead.getData()).shortValue();
-                        if(negate)
-                            result = (short) (-(Short)result);
+                    if (negate = lookaheadIs(TokenType.MINUS)) {
+                        next();
                     }
-                    else
+
+                    if (lookaheadIs(TokenType.INT_LITERAL)) {
+                        result = ((Integer) lookahead.getData()).shortValue();
+                        if (negate)
+                            result = (short) (-(Short) result);
+                    } else
                         unexpectedTokenError();
-                }
-                else
+                } else
                     unexpectedTokenError();
 
-            }
-            else
+            } else
                 unexpectedTokenError();
-        }
-        else
+        } else
             unexpectedTokenError();
     }
 }
