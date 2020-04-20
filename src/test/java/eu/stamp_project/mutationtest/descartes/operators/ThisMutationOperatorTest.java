@@ -18,11 +18,9 @@ public class ThisMutationOperatorTest {
     @Test
     public void shouldFilterMethods() {
         MutationOperator operator = MutationOperator.fromID("this");
-        Collection<String> methods = TestUtils.getMethods(Calculator.class)
-                .stream()
-                .filter(method -> operator.canMutate(ClassName.fromClass(Calculator.class),method))
-                .map(Method::getName)
-                .collect(Collectors.toList());
-        assertThat(methods, containsInAnyOrder("getClone", "getSomeCalculators", "getSomeMore"));
+        Collection<String> methods = TestUtils.getMethods(Calculator.class).stream()
+                .filter(method -> operator.canMutate(ClassName.fromClass(Calculator.class), method))
+                .map(Method::getName).collect(Collectors.toList());
+        assertThat(methods, containsInAnyOrder("getClone"));
     }
 }
