@@ -23,10 +23,11 @@ public class ThisMutationOperator extends MutationOperator {
     public boolean canMutate(ClassName className, Method method) {
         String classNameAsInternal = className.asInternalName();
         String methodReturn = method.getReturnType().getInternalName();
-        if (classNameAsInternal.equals(methodReturn)) {
-            return true;
-        }
-        return false;
+        // if (classNameAsInternal.equals(methodReturn)) {
+        //     return true;
+        // }
+        // return false;
+        return classNameAsInternal.equals(methodReturn);
     }
 
     @Override
