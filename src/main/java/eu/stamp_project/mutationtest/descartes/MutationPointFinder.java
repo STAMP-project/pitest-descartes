@@ -50,7 +50,7 @@ public class MutationPointFinder extends ClassVisitor {
     public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 
         // Abstract methods and constructors are not a target.
-        // All optional targets has been implemented in the for of features.
+        // All optional targets are implemented as features.
         if(hasFlag(access, Opcodes.ACC_ABSTRACT | Opcodes.ACC_NATIVE) || isConstructor(name))
             return null;
 
