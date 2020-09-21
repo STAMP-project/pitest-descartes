@@ -20,8 +20,6 @@ In the `pom.xml` file include the following:
   <version>1.5.0</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
-    <!-- change the following into testng if that is your test framework -->
-    <testPlugin>junit</testPlugin>
   </configuration>
   <dependencies>
     <dependency>
@@ -47,7 +45,7 @@ mvn clean package # ensures clean state
 mvn org.pitest:pitest-maven:mutationCoverage -DmutationEngine=descartes
 ```
 
-For more information and other options, see section ["Running Descartes on your project"](#running-descartes-on-your-project). For multi module projects, take a look at [pitmp-maven-plugin](https://github.com/STAMP-project/pitmp-maven-plugin).
+For more information and other options, see section ["Running Descartes on your project"](#running-descartes-on-your-project). For multi module projects, take a look at [pitmp-maven-plugin](https://github.com/STAMP-project/pitmp-maven-plugin). For more configuration options, visit the [PIT's website](https://pitest.org/quickstart/maven/).
 
 ## Table of contents
   - [How does Descartes work?](#how-does-descartes-work)
