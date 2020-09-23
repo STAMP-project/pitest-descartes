@@ -45,7 +45,7 @@ mvn clean package # ensures clean state
 mvn org.pitest:pitest-maven:mutationCoverage -DmutationEngine=descartes
 ```
 
-For more information and other options, see section ["Running Descartes on your project"](#running-descartes-on-your-project).
+For all possible options, see section ["Running Descartes on your project"](#running-descartes-on-your-project). Descartes supports junit and testng and all flags of pitest, see [the pitest doc](https://pitest.org/quickstart/maven/#testplugin). For multi module projects, take a look at [pitmp-maven-plugin](https://github.com/STAMP-project/pitmp-maven-plugin).
 
 ## Table of contents
   - [How does Descartes work?](#how-does-descartes-work)
