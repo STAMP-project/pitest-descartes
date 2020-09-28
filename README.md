@@ -388,7 +388,7 @@ issues, see <http://pitest.org/quickstart/maven/>.
 
 ##### Configuring stop methods
 
-To configure the stop methods under consideration Descartes provide a `STOP_METHODS` [feature](http://pitest.org/quickstart/advanced/#mutation-interceptor").
+To configure the stop methods under consideration Descartes provide a `STOP_METHODS` [feature](http://pitest.org/quickstart/advanced/#mutation-interceptor).
 This feature is enabled by default. The parameter `exclude` can be used to prevent certain methods to be treated as stop methods and bring them back to the analysis. This parameter can take any of the following values:
 
 
