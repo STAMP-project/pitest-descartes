@@ -36,6 +36,7 @@ public abstract class Converter {
         }catch (NoSuchMethodException exc) {
             throw new RuntimeException(exc);
         }
+
     }
 
     private static <T extends Number> T valueOf(Class<T> type, Method method, Object... args) {
