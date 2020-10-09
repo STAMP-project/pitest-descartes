@@ -21,7 +21,7 @@ jobs:
         run: mvn versions:use-latest-releases -DgenerateBackupPoms=true
       - name: Checking if there was any updated dependency
         id: update-check
-        run: test -f pom.xml.versionsBackup  && echo "::set-output name=updated::true" || echo "No version was updated"
+        run: (test -f pom.xml.versionsBackup  && echo "::set-output name=updated::true") || echo "No version was updated"
       - name: Execute tests
         id: test-execution
         run: (mvn clean test && echo "::set-output name=result::\"Dependencies can be updated\"") || (echo "::set-output name=failed::true" && echo "::set-output name=result::\"Can not update dependencies\"")
