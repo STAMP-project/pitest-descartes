@@ -45,7 +45,7 @@ mvn clean package # ensures clean state
 mvn org.pitest:pitest-maven:mutationCoverage -DmutationEngine=descartes
 ```
 
-For more information and other options, see section ["Running Descartes on your project"](#running-descartes-on-your-project).
+For all possible options, see section ["Running Descartes on your project"](#running-descartes-on-your-project). Descartes supports junit and testng and all flags of pitest, see [the pitest doc](https://pitest.org/quickstart/maven/#testplugin). For multi module projects, take a look at [pitmp-maven-plugin](https://github.com/STAMP-project/pitmp-maven-plugin).
 
 ## Table of contents
   - [How does Descartes work?](#how-does-descartes-work)
@@ -388,7 +388,7 @@ issues, see <http://pitest.org/quickstart/maven/>.
 
 ##### Configuring stop methods
 
-To configure the stop methods under consideration Descartes provide a `STOP_METHODS` [feature](http://pitest.org/quickstart/advanced/#mutation-interceptor").
+To configure the stop methods under consideration Descartes provide a `STOP_METHODS` [feature](http://pitest.org/quickstart/advanced/#mutation-interceptor).
 This feature is enabled by default. The parameter `exclude` can be used to prevent certain methods to be treated as stop methods and bring them back to the analysis. This parameter can take any of the following values:
 
 
