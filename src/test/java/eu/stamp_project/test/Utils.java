@@ -1,7 +1,5 @@
 package eu.stamp_project.test;
 
-import eu.stamp_project.descartes.operators.MutationOperator;
-import net.bytebuddy.jar.asm.Type;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.tree.ClassNode;
 import org.pitest.bytecode.analysis.ClassTree;
@@ -9,6 +7,7 @@ import org.pitest.classinfo.ClassName;
 import org.pitest.mutationtest.engine.Location;
 import org.pitest.mutationtest.engine.MethodName;
 import org.pitest.mutationtest.engine.MutationIdentifier;
+import org.pitest.reloc.asm.Type;
 
 import java.io.IOException;
 import java.lang.reflect.Method;

@@ -1,8 +1,10 @@
 package eu.stamp_project.descartes.operators;
 
+import eu.stamp_project.descartes.annotations.Operator;
 import eu.stamp_project.descartes.codemanipulation.MethodInfo;
 import org.pitest.reloc.asm.commons.GeneratorAdapter;
 
+@Operator(identifier = "this", description = "Replaces the method by return this;")
 public class ThisMutationOperator extends MutationOperator {
     @Override
     public boolean canMutate(MethodInfo method) {

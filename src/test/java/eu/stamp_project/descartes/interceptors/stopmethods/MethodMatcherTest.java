@@ -1,6 +1,5 @@
 package eu.stamp_project.descartes.interceptors.stopmethods;
 
-import net.bytebuddy.jar.asm.Type;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
@@ -8,6 +7,7 @@ import org.pitest.bytecode.analysis.ClassTree;
 import org.pitest.bytecode.analysis.MethodTree;
 import org.pitest.mutationtest.engine.Location;
 import org.pitest.mutationtest.engine.MethodName;
+import org.pitest.reloc.asm.Type;
 
 import java.io.IOException;
 import java.lang.reflect.Method;

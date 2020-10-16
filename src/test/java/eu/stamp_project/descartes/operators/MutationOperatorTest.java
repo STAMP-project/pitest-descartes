@@ -33,13 +33,22 @@ abstract class MutationOperatorTest {
     Object newInstance(Class<?> type) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException { return type.getConstructor().newInstance(); }
 
     Object invoke(Method method) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        Object instance = newInstance(method.getDeclaringClass());
-        return method.invoke(instance, defaultsFor(method.getParameterTypes()));
+        return invokeOn(newInstance(method.getDeclaringClass()), method);
+    }
+
+    Object invokeOn(Object receiver, Method method) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        method = receiver.getClass().equals(method.getDeclaringClass())?
+                method
+                :
+                getCorrespondingMethod(receiver.getClass(), method);
+        return method.invoke(receiver, defaultsFor(method.getParameterTypes()));
+    }
+
+    Method getCorrespondingMethod(Class<?> type, Method query) throws NoSuchMethodException {
+        return type.getDeclaredMethod(query.getName(), query.getParameterTypes());
     }
 
     Object invoke(Class<?> type, Method method) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        Method methodToInvoke = type.getDeclaredMethod(method.getName(), method.getParameterTypes());
-        Object instance = newInstance(type);
-        return methodToInvoke.invoke(instance, defaultsFor(method.getParameterTypes()));
+        return invokeOn(newInstance(type), method);
     }
 }

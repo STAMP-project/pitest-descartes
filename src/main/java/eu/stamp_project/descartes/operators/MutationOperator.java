@@ -55,7 +55,8 @@ public abstract class MutationOperator {
             NullMutationOperator.class,
             OptionalMutationOperator.class,
             VoidMutationOperator.class,
-            ArgumentPropagationOperator.class
+            ArgumentPropagationOperator.class,
+            ThisMutationOperator.class
     };
 
     private final static Map<String, Class<?>> ID_2_CLASS;
