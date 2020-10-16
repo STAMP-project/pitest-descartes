@@ -2,8 +2,9 @@ package eu.stamp_project.descartes.operators;
 
 import eu.stamp_project.descartes.annotations.Operator;
 import eu.stamp_project.descartes.codemanipulation.MethodInfo;
-import org.pitest.reloc.asm.MethodVisitor;
-import org.pitest.reloc.asm.Opcodes;
+import org.pitest.reloc.asm.Type;
+import org.pitest.reloc.asm.commons.GeneratorAdapter;
+import org.pitest.reloc.asm.commons.Method;
 
 import java.util.Optional;
 
@@ -18,10 +19,10 @@ public class OptionalMutationOperator extends MutationOperator {
     }
 
     @Override
-    public void generateCode(MethodInfo method, MethodVisitor mv) {
-        String internalName = getType(Optional.class).getInternalName();
-        String emptyMethodDescriptor = String.format("()L%s;", internalName);
-        mv.visitMethodInsn(Opcodes.INVOKESTATIC, internalName, "empty", emptyMethodDescriptor, false);
-        mv.visitInsn(Opcodes.ARETURN);
+    protected void generateCode(MethodInfo method, GeneratorAdapter generator) {
+        Type optionalType = Type.getType(Optional.class);
+        Method emptyMethod = new Method("empty", "()L" + optionalType.getInternalName() + ";");
+        generator.invokeStatic(optionalType, emptyMethod);
+        generator.returnValue();
     }
 }

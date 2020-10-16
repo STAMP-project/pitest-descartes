@@ -20,7 +20,7 @@ public class Calculator {
     //void method
 
     public void clear() {
-        registry = 0;
+        registry = 2;
         lastOperatorSymbol = '\0';
     }
 

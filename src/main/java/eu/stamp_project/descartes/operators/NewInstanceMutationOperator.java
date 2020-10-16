@@ -14,9 +14,9 @@ import java.util.Set;
 
 import eu.stamp_project.descartes.annotations.Operator;
 import eu.stamp_project.descartes.codemanipulation.MethodInfo;
-import org.pitest.reloc.asm.MethodVisitor;
 import org.pitest.reloc.asm.Opcodes;
 import org.pitest.reloc.asm.Type;
+import org.pitest.reloc.asm.commons.GeneratorAdapter;
 
 /**
  * Replaces the method body with a return statement, which generates an instance of the specified return type.
@@ -92,9 +92,7 @@ public class NewInstanceMutationOperator extends MutationOperator {
     }
 
     @Override
-    public void generateCode(MethodInfo method, MethodVisitor mv) {
-        assert canMutate(method);
-
+    protected void generateCode(MethodInfo method, GeneratorAdapter mv) {
         Class<?> appropriateReturnClass = null;
 
         try {

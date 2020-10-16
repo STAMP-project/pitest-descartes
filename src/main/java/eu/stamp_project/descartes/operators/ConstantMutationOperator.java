@@ -2,9 +2,10 @@ package eu.stamp_project.descartes.operators;
 
 import eu.stamp_project.descartes.codemanipulation.MethodInfo;
 import eu.stamp_project.utils.TypeHelper;
-import org.pitest.reloc.asm.MethodVisitor;
 import org.pitest.reloc.asm.Opcodes;
 import org.pitest.reloc.asm.Type;
+import org.pitest.reloc.asm.commons.GeneratorAdapter;
+import org.pitest.reloc.asm.commons.Method;
 
 /**
  * A mutation operator that replaces the method body by a return instruction whose result is the given constant
@@ -66,24 +67,16 @@ public class ConstantMutationOperator extends MutationOperator {
      * @param mv MethodVisitor in charge of code generation.
      */
     @Override
-    public void generateCode(MethodInfo method, MethodVisitor mv) {
-        assert canMutate(method);
+    protected void generateCode(MethodInfo method, GeneratorAdapter mv) {
         mv.visitLdcInsn(constant);
-
-        Type methodType = method.getReturnType();
+        Type returnType = method.getReturnType();
         Type constantType = Type.getType(constant.getClass());
-        if(constant.getClass() != String.class && methodType.equals(constantType)) {
-            //Wrapper type, as the constant will always have the wrapper type
-
-            String target =  methodType.getInternalName();
-            String descriptor = String.format("(%s)L%s;", wrapperType().getInternalName(), target);
-            mv.visitMethodInsn(Opcodes.INVOKESTATIC, target, "valueOf", descriptor, false);
-            mv.visitInsn(Opcodes.ARETURN);
+        if(constant.getClass() != String.class && returnType.equals(constantType)) {
+            String descriptor = String.format("(%s)L%s;", wrapperType().getInternalName(), returnType.getInternalName());
+            Method valueOfMethod = new Method("valueOf", descriptor);
+            mv.invokeStatic(returnType, valueOfMethod);
         }
-        else {
-            //Primitive type or String
-            mv.visitInsn(methodType.getOpcode(Opcodes.IRETURN));
-        }
+        mv.returnValue();
     }
 
     private Type wrapperType() {

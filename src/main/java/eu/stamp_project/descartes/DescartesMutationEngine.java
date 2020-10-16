@@ -19,9 +19,7 @@ public class DescartesMutationEngine implements  MutationEngine {
 
     private final Collection<MutationOperator> operators;
 
-
     public DescartesMutationEngine(Collection<MutationOperator> operators) {
-
         this(m -> false, operators);
     }
 

@@ -14,6 +14,7 @@ public class TestValues {
     private static long DEFAULT_LONG;
     private static float DEFAULT_FLOAT;
     private static double DEFAULT_DOUBLE;
+    private static String DEFAULT_STRING = "default";
 
     public static Object defaultFor(Class<?> type) {
         Class<?> target = TypeHelper.wrap(type);
@@ -33,6 +34,8 @@ public class TestValues {
             return DEFAULT_FLOAT;
         if (target == Double.class)
             return DEFAULT_DOUBLE;
+        if(target == String.class)
+            return DEFAULT_STRING;
         return null;
     }
 

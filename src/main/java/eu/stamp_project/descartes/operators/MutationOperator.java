@@ -3,7 +3,7 @@ package eu.stamp_project.descartes.operators;
 import eu.stamp_project.descartes.annotations.Operator;
 import eu.stamp_project.descartes.codemanipulation.MethodInfo;
 import eu.stamp_project.descartes.operators.parsing.LiteralParser;
-import org.pitest.reloc.asm.MethodVisitor;
+import org.pitest.reloc.asm.commons.GeneratorAdapter;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -14,7 +14,14 @@ public abstract class MutationOperator {
 
     public abstract boolean canMutate(MethodInfo method);
 
-    public abstract void generateCode(MethodInfo method, MethodVisitor generator);
+    public void writeMutant(MethodInfo method, GeneratorAdapter code) {
+        if(!canMutate(method)) {
+            throw new IllegalArgumentException("Operator " + getIdentifier() + " can not mutate method " + method.getDescriptor());
+        }
+        generateCode(method, code);
+    }
+
+    protected abstract void generateCode(MethodInfo method, GeneratorAdapter generator);
 
     public String getIdentifier() {
         return getClass().getAnnotation(Operator.class).identifier();
@@ -47,7 +54,8 @@ public abstract class MutationOperator {
             NewInstanceMutationOperator.class,
             NullMutationOperator.class,
             OptionalMutationOperator.class,
-            VoidMutationOperator.class
+            VoidMutationOperator.class,
+            ArgumentPropagationOperator.class
     };
 
     private final static Map<String, Class<?>> ID_2_CLASS;

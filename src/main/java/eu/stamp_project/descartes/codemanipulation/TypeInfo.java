@@ -12,22 +12,22 @@ public class TypeInfo extends ElementInfo {
 
     private final int version;
 
+    private final Type type;
     private final Type superType;
     private final Set<Type> interfaces;
 
     public TypeInfo(Class<?> type) {
-        //TODO: generic string == signature?
-        super(type.getModifiers(), Type.getType(type).getDescriptor(), type.toGenericString());
+        super(type.getModifiers(), Type.getType(type).getInternalName(), type.toGenericString());
         version = UNKNOWN_VERSION;
+        this.type = Type.getType(type);
         superType = Type.getType(type.getSuperclass());
         interfaces = Stream.of(type.getInterfaces()).map(Type::getType).collect(Collectors.toSet());
     }
 
     public TypeInfo(int version, int access, String name, String signature, String superName, String[] interfaces) {
         super(access, name, signature);
-
         this.version = version;
-        //TODO: Validate
+        type = Type.getObjectType(name);
         superType = Type.getObjectType(superName);
         this.interfaces = toTypeSet(interfaces);
     }
@@ -37,5 +37,12 @@ public class TypeInfo extends ElementInfo {
     public Type getSuperType() {  return superType; }
 
     public Set<Type> getInterfaces() { return interfaces; }
+
+    public boolean canBeAssignedTo(Type other) {
+        return type.equals(other)
+                || superType.equals(other)
+                || interfaces.contains(other)
+                || other.equals(Type.getType(Object.class));
+    }
 
 }

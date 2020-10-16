@@ -36,7 +36,8 @@ public class MutationClassAdapter extends BaseClassVisitor {
         return new MethodRewritingVisitor(methodVisitor) {
             @Override
             protected void generateCode() {
-                operator.generateCode(method, mv);
+                GeneratorAdapter adapter = new GeneratorAdapter(mv, method.access, method.name, method.getDescriptor());
+                operator.writeMutant(method, adapter);
             }
         };
     }

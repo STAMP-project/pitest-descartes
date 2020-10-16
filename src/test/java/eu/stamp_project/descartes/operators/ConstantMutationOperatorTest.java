@@ -13,12 +13,14 @@ import java.lang.reflect.Method;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import static eu.stamp_project.test.Assertions.assertDifferent;
+import static eu.stamp_project.test.Assertions.assertResultEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 
 class ConstantMutationOperatorTest  extends MutationOperatorTest {
 
-    // In this test class we use MutationOperator.fromID to instanciate the operator, as the mutation requires a valid ID.
+    // In this test class we use MutationOperator.fromID to instantiate the operator, as the mutation requires a valid ID.
 
     private static Stream<Arguments> methodsToMutate() throws NoSuchMethodException {
         return Stream.of(
@@ -34,7 +36,6 @@ class ConstantMutationOperatorTest  extends MutationOperatorTest {
                 Arguments.of(Calculator.class.getDeclaredMethod("add", double.class), "3.3")
         );
     }
-
 
     @ParameterizedTest(name = "{1} for {0}")
     @MethodSource("methodsToMutate")
@@ -74,29 +75,6 @@ class ConstantMutationOperatorTest  extends MutationOperatorTest {
     void testCanNotMutate(Method method, String identifier) {
         ConstantMutationOperator operator = (ConstantMutationOperator)MutationOperator.fromID(identifier);
         assertFalse(operator.canMutate(new MethodInfo(method)));
-    }
-
-    private static final double delta = 0.00001;
-
-    private void assertDifferent(Object unexpected, Object actual) {
-        String message = "Original method returned the same value as the mutant should return.";
-        if(actual.getClass() == Double.class) {
-            assertNotEquals((double)unexpected, (double)actual, delta, message);
-        }
-        else if(actual.getClass() == Float.class) {
-            assertNotEquals((float)unexpected, (float)actual, (float)delta, message);
-        }
-        assertNotEquals(unexpected, actual, message);
-    }
-
-    private void assertResultEquals(Object expected, Object actual) {
-        if(actual.getClass() == Double.class) {
-            assertEquals((double)expected, (double)actual, delta);
-        }
-        else if(actual.getClass() == Float.class) {
-            assertEquals((float)expected, (float)actual, (float)delta);
-        }
-        assertEquals(expected, actual);
     }
 
     @Test
