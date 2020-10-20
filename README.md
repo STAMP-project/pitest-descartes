@@ -597,6 +597,24 @@ It can be removed by adding the following configuration:
 </features>
 ```
 
+From version *1.3* Descartes includes `SKIP_SHORT` as a feature to skip methods shorter than a given number of lines.
+The feature is not active by default. To activate add the following configuration:
+
+```xml
+<features>
+  <feature>
+    +SKIP_SHORT()
+  </feature>
+</features>
+```
+
+The number of lines can be configured as follows:
+
+```
++SKIP_SHORT(lines[3])
+```
+
+It is equal to 5 by default.
 
 ### Using Gradle
 Follow the [instructions](http://gradle-pitest-plugin.solidsoft.info/) to set up PIT for a project that uses [Gradle](https://gradle.org/).
