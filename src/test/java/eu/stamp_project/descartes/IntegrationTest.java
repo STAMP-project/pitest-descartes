@@ -57,7 +57,7 @@ class IntegrationTest {
     void shouldSkipMethodsWithPattern() throws IOException {
         Collection<MutationDetails> mutations = findMutations(Calculator.class, excludeMethods("get*"));
         Set<String> methods = methodsFrom(mutations);
-        assertTrue(methods.stream().allMatch( name -> !name.startsWith("get")), "No mutated method should start by 'get'.");
+        assertTrue(methods.stream().noneMatch(name -> name.startsWith("get")), "No mutated method should start by 'get'.");
     }
 
     @Test
