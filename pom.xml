@@ -58,7 +58,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <github.global.server>github</github.global.server>
         <pitest.version>1.5.2</pitest.version>
-        <java.version>11</java.version>
+        <java.version>9</java.version>
     </properties>
 
     <dependencies>
@@ -147,6 +147,7 @@
                 </configuration>
             </plugin>
 
+            <!-- Produces a jar including all dependencies -->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
