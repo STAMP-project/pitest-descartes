@@ -22,7 +22,7 @@ public class SkipDoNotMutateFilter extends MutationFilter {
             return isMutationAllowed(doNotMutateAnnotation.get(), mutator);
         }
         doNotMutateAnnotation = getDoNotMutateAnnotation(owner.annotations());
-        return doNotMutateAnnotation.isEmpty() || isMutationAllowed(doNotMutateAnnotation.get(), mutator);
+        return !doNotMutateAnnotation.isPresent() || isMutationAllowed(doNotMutateAnnotation.get(), mutator);
     }
 
     private Optional<AnnotationNode> getDoNotMutateAnnotation(List<AnnotationNode> annotations) {

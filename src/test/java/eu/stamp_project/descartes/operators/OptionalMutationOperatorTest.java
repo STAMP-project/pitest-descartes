@@ -13,6 +13,7 @@ import static eu.stamp_project.test.MethodStreamBuilder.fromClass;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class OptionalMutationOperatorTest extends ParameterlessOperatorTest<OptionalMutationOperator> {
 
@@ -44,7 +45,7 @@ class OptionalMutationOperatorTest extends ParameterlessOperatorTest<OptionalMut
     private void checkOriginalValueIsNotEmpty() {
         Calculator calc = new Calculator();
         Optional<Calculator> originalValue = calc.getOptionalCalculator();
-        assertFalse(originalValue.isEmpty(), "Method getOptionalCalculator in Calculator class must not return an empty Optional");
+        assertTrue(originalValue.isPresent(), "Method getOptionalCalculator in Calculator class must not return an empty Optional");
     }
 
     private void checkMutatedMethodReturnsEmptyOptional() throws NoSuchMethodException, IOException, IllegalAccessException, InstantiationException, InvocationTargetException {

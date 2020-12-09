@@ -25,7 +25,9 @@ public class StopMethodMatchers {
             String returnTypeDescription = "L" + classNode.name + ";";
             // Class valueOf(String) or  Class[] values()
             return matchesNameDesc(methodTree,"valueOf", "(Ljava/lang/String;)" + returnTypeDescription)
-                    || matchesNameDesc(methodTree, "values", "()[" + returnTypeDescription);
+                    || matchesNameDesc(methodTree, "values", "()[" + returnTypeDescription)
+                    // Compatibility with other JDKs
+                    || matchesNameDesc(methodTree, "$values", "()[" + returnTypeDescription);
         });
     }
 

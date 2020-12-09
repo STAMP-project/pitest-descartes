@@ -58,7 +58,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <github.global.server>github</github.global.server>
         <pitest.version>1.5.2</pitest.version>
-        <java.version>9</java.version>
     </properties>
 
     <dependencies>
@@ -121,8 +120,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <release>9</release>
                 </configuration>
             </plugin>
 

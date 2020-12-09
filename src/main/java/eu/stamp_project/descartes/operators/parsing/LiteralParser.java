@@ -24,7 +24,7 @@ public class LiteralParser {
         }
 
         public static Result error(String error) {
-            if(error == null || error.isEmpty() || error.isBlank())
+            if(isNullOrBlank(error))
                 throw new IllegalArgumentException("Resulting error message can not be null, empty or blank.");
             return new Result(null, error);
         }
@@ -47,7 +47,7 @@ public class LiteralParser {
     private LiteralLexer lexer;
 
     public Result parse(String line) {
-        if(line == null || line.isBlank())
+        if(isNullOrBlank(line))
             return Result.error("Input is null or blank");
         try {
 
@@ -152,5 +152,9 @@ public class LiteralParser {
         catch (InvocationTargetException exc) {
             throw new IllegalArgumentException("Error while obtaining value of type " + type.getName() + " from string " + value + " using radix " + radix, exc);
         }
+    }
+
+    private static boolean isNullOrBlank(String str) {
+        return str == null || str.trim().isEmpty();
     }
 }

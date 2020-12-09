@@ -37,7 +37,7 @@ public class DescartesMutater implements Mutater {
 
     public List<MutationDetails> findMutations(final ClassName classToMutate) {
         Optional<byte[]> classBytes = byteSource.getBytes(classToMutate.asInternalName());
-        if(classBytes.isEmpty())
+        if(!classBytes.isPresent())
             return Collections.emptyList();
         MutationPointFinder finder = new MutationPointFinder(excludedMethods, operators);
         ClassReader reader = new ClassReader(classBytes.get());

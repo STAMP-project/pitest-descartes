@@ -20,7 +20,7 @@ public class SkipShortMethodsFilter extends MutationFilter {
     @Override
     public boolean allows(MutationDetails details) {
         Optional<MethodTree> method = getMethod(details);
-        if(method.isEmpty())
+        if(!method.isPresent())
             return false;
         LineCounter counter = new LineCounter();
 
