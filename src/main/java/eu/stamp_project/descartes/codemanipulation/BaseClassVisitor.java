@@ -1,16 +1,13 @@
 package eu.stamp_project.descartes.codemanipulation;
 
-import org.pitest.reloc.asm.Opcodes;
+import static org.pitest.bytecode.ASMVersion.ASM_VERSION;
 import org.pitest.reloc.asm.ClassVisitor;
-
 
 public class BaseClassVisitor extends ClassVisitor {
 
-    public static final int ASM_API = Opcodes.ASM7;
+    public BaseClassVisitor() { super(ASM_VERSION); }
 
-    public BaseClassVisitor() { super(ASM_API); }
-
-    public BaseClassVisitor(ClassVisitor classVisitor) { super(ASM_API, classVisitor); }
+    public BaseClassVisitor(ClassVisitor classVisitor) { super(ASM_VERSION, classVisitor); }
 
     private TypeInfo classInfo;
 

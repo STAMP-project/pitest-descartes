@@ -1,13 +1,13 @@
 package eu.stamp_project.descartes.interceptors;
 
-import eu.stamp_project.descartes.codemanipulation.BaseClassVisitor;
-
 import eu.stamp_project.descartes.codemanipulation.LineCounter;
 import org.objectweb.asm.MethodVisitor;
 import org.pitest.bytecode.analysis.MethodTree;
 import org.pitest.mutationtest.engine.MutationDetails;
 
 import java.util.Optional;
+
+import static org.pitest.bytecode.ASMVersion.ASM_VERSION;
 
 public class SkipShortMethodsFilter extends MutationFilter {
 
@@ -25,7 +25,7 @@ public class SkipShortMethodsFilter extends MutationFilter {
         LineCounter counter = new LineCounter();
 
         //For some reason this MethodNode is using ASM's packages instead of the relocated PIT ASM's API
-        method.get().rawNode().accept(new MethodVisitor(BaseClassVisitor.ASM_API) {
+        method.get().rawNode().accept(new MethodVisitor(ASM_VERSION) {
             @Override
             public void visitLineNumber(int line, org.objectweb.asm.Label start) {
                 counter.registerLine(line);
