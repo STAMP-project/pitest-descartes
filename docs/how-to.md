@@ -10,7 +10,7 @@ This file contains configuration snippets for Maven and Gradle using different c
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.5.2</version>
+  <version>1.6.1</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
   </configuration>
@@ -30,7 +30,7 @@ This file contains configuration snippets for Maven and Gradle using different c
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.5.2</version>
+  <version>1.6.1</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
   </configuration>
@@ -55,7 +55,7 @@ This file contains configuration snippets for Maven and Gradle using different c
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.5.2</version>
+  <version>1.6.1</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
     <testPlugin>testng</testPlugin>
@@ -76,7 +76,7 @@ This file contains configuration snippets for Maven and Gradle using different c
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.5.2</version>
+  <version>1.6.1</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
     <mutators>
@@ -102,7 +102,7 @@ This file contains configuration snippets for Maven and Gradle using different c
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.5.2</version>
+  <version>1.6.1</version>
   <configuration>
     <outputFormats>
       <value>JSON</value>
@@ -127,7 +127,7 @@ This file contains configuration snippets for Maven and Gradle using different c
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.5.2</version>
+  <version>1.6.1</version>
   <configuration>
     <features>
         <feature>
@@ -152,7 +152,7 @@ This file contains configuration snippets for Maven and Gradle using different c
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.5.2</version>
+  <version>1.6.1</version>
   <configuration>
     <features>
         <feature>
@@ -193,7 +193,7 @@ dependencies {
 
 pitest {
   mutationEngine = "descartes"
-  pitestVersion = "1.5.2"
+  pitestVersion = "1.6.1"
 }
 ```
 
@@ -216,7 +216,7 @@ dependencies {
 
 pitest {
   mutationEngine = "descartes"
-  pitestVersion = "1.5.2"
+  pitestVersion = "1.6.1"
   junit5PluginVersion = '0.12'
 }
 ```
@@ -241,7 +241,7 @@ dependencies {
 
 pitest {
   mutationEngine = "descartes"
-  pitestVersion = "1.5.2"
+  pitestVersion = "1.6.1"
   testPlugin = "testng"
 }
 ```
@@ -266,7 +266,7 @@ dependencies {
 
 pitest {
   mutationEngine = "descartes"
-  pitestVersion = "1.5.2"
+  pitestVersion = "1.6.1"
   mutators = [ '1.2', 'true', 'optional', '"a"' ]
 }
 ```
@@ -291,7 +291,7 @@ dependencies {
 
 pitest {
   mutationEngine = "descartes"
-  pitestVersion = "1.5.2"
+  pitestVersion = "1.6.1"
   features = ['+STOP_METHODS()']
 }
 ```
@@ -316,7 +316,7 @@ dependencies {
 
 pitest {
   mutationEngine = "descartes"
-  pitestVersion = "1.5.2"
+  pitestVersion = "1.6.1"
   features = ['-DO_NOT_MUTATE()']
 }
 ```
