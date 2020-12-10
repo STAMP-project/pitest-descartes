@@ -98,6 +98,7 @@ This file contains configuration snippets for Maven and Gradle using different c
 
 ### Output formats
 
+```xml
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
@@ -118,9 +119,11 @@ This file contains configuration snippets for Maven and Gradle using different c
     </dependency>
   </dependencies>
 </plugin>
+```
 
 ### Including some stops methods in the analysis
 
+```xml
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
@@ -141,9 +144,11 @@ This file contains configuration snippets for Maven and Gradle using different c
     </dependency>
   </dependencies>
 </plugin>
+```
 
 ### Disabling `DO_NOT_MUTATE`
 
+```xml
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
@@ -164,6 +169,7 @@ This file contains configuration snippets for Maven and Gradle using different c
     </dependency>
   </dependencies>
 </plugin>
+```
 
 ## Gradle
 
@@ -314,4 +320,3 @@ pitest {
   features = ['-DO_NOT_MUTATE()']
 }
 ```
-

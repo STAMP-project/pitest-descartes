@@ -37,7 +37,15 @@ cd my-project-under-test
 mvn clean package org.pitest:pitest-maven:mutationCoverage
 ```
 
-All options from PIT can be used. For more details check the [the PIT documentation](https://pitest.org/quickstart/maven/). Check ["Running Descartes on your project"](#running-descartes-on-your-project) for additional Descartes configuration options. For Gradle support check [Using Gradle](#using-gradle). For quick configuration snippets showing to use other testing frameworks such as JUnit 5 or TestNG and how to change Descartes' behavior check [How to...](docs/how-to.md). If you use a multi-module project, be sure to take a look at [PitMP](https://github.com/STAMP-project/pitmp-maven-plugin).
+All options from PIT can be used. For more details check the [the PIT documentation](https://pitest.org/quickstart/maven/). 
+
+Check ["Running Descartes on your project"](#running-descartes-on-your-project) for additional Descartes configuration options. 
+
+For Gradle support check [Using Gradle](#using-gradle). 
+
+For quick configuration snippets showing how to use other testing frameworks such as JUnit 5 or TestNG and how to change Descartes' behavior check [How to...](docs/how-to.md). 
+
+If you use a multi-module project take a look at [PitMP](https://github.com/STAMP-project/pitmp-maven-plugin).
 
 ## Table of contents
   - [How does Descartes work?](#how-does-descartes-work)
@@ -333,7 +341,9 @@ Descartes will avoid using the `null` operators in methods annotated with `@NotN
 
 ### Skip methods using `@DoNotMutate`
 
-Since version 1.3, Descartes skips all method that are annotated with *any* annotation whose name is `DoNotMutate`. 
+*New in version 1.3*
+
+Descartes skips all method that are annotated with *any* annotation whose name is `DoNotMutate`. 
 For example, in the following fragment of code, the method `m` will not be mutated.
 
 ```Java
@@ -378,7 +388,7 @@ class A {
 
 will not mutate method `n` with `true`, as instructed in the class annotation. On the other hand, `m` will be mutated by `true` but not by `false`. 
 
-Descartes includes a definition of `DoNotMutate`. However, when the tools inspects the annotations of a class or method  it matches only the simple name of the annotation class and ignores the package. So, any `DoNotMutate` annotation will be considered. In this way a project does not need to add Descartes as a dependency, it can declare its own `DoNotMutate` and use it.
+Descartes includes a definition of `DoNotMutate`. However, when the tool inspects the annotations of a class or method  it matches only the simple name of the annotation class and ignores the package. So, any `DoNotMutate` annotation will be considered. In this way a project does not need to add Descartes as a dependency, it can declare its own `DoNotMutate` and use it.
 
 This feature is also configurable. See ["Running Descartes on your project"](#running-descartes-on-your-project) for more details.
 
@@ -427,7 +437,7 @@ The minimum configuration to use Descartes in a Maven project is the following:
 
 
 This actually configures PIT for the project, adds Descartes as a dependency of PIT and sets Descartes as the mutation engine to use.
-Later, one need to tun the mutation coverage goal provided by the PIT Maven plugin as follows:
+Later, one need to run the mutation coverage goal provided by the PIT Maven plugin as follows:
 
 ```
 cd my-project-under-test
@@ -436,9 +446,9 @@ mvn org.pitest:pitest-maven:mutationCoverage
 ```
 ##### Specifying operators
 
-The operators to be used must be specified in the `pom.xml` file. Each operator identifier should be added to the `mutators` element inside the `configuration` element. `void` and `null` operators are identified by `void` and `null` respectively.
-For the constant mutation operator, the values can be specified using the regular literal notation used in a Java program. For example `true`, `1`, `2L`, `3.0f`, `4.0`, `'a'`, `"literal"`, represent `boolean`, `int`, `long`, `float`, `double`, `char`, `string` constants.
-Negative values and binary, octal and hexadecimal bases for integer constants are also supported as stated by the [language specification](https://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.10).
+The operators must be specified in the `pom.xml` file. Each operator identifier should be added to the `mutators` element inside the `configuration` element. `void` and `null` operators are identified by `void` and `null` respectively.
+The values for the constant mutation operator can be specified using the regular literal notation used in a Java program. For example `true`, `1`, `2L`, `3.0f`, `4.0`, `'a'`, `"literal"`, represent `boolean`, `int`, `long`, `float`, `double`, `char`, `string` constants.
+Negative values and binary, octal and hexadecimal bases for integer constants are supported as stated by the [language specification](https://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.10).
 In order to specify a `byte` or `short` value, a cast-like notation can be used: `(short) -1`, `(byte)0x1A`.
 
 The following configuration:
@@ -614,7 +624,7 @@ The number of lines can be configured as follows:
 +SKIP_SHORT(lines[3])
 ```
 
-It is equal to 5 by default.
+The line threshold is equal to 5 by default.
 
 ### Using Gradle
 Follow the [instructions](http://gradle-pitest-plugin.solidsoft.info/) to set up PIT for a project that uses [Gradle](https://gradle.org/).
@@ -708,7 +718,7 @@ Descartes can be used when invoking PIT from the command line. To do this, follo
 
 ### Installing and building from source
 
-In a terminal clone the repository:
+In a terminal, clone the repository:
 ```
 git clone https://github.com/STAMP-project/pitest-descartes.git
 ```
@@ -727,7 +737,7 @@ After installing the package, PIT should be able to find the Descartes mutation 
 
 ### Performance
 
-A comparison on the number of mutants created and execution time between Descartes and Gregor, the default mutation engine for PITest is available [here](docs/performance-comparison.md).
+You can check [here](docs/performance-comparison.md) a comparison between Descartes and Gregor, the default mutation engine for PITest, considering the number of mutants both engines created for the same projects, and the total execution time.
 
 ### External Links
 
