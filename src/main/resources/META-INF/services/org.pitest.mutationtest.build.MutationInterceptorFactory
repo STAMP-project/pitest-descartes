@@ -1,3 +1,4 @@
 eu.stamp_project.descartes.interceptors.stopmethods.StopMethodMatcherInterceptorFactory
 eu.stamp_project.descartes.interceptors.AvoidNullInNotNullFilterFactory
 eu.stamp_project.descartes.interceptors.SkipDoNotMutateFilterFactory
+eu.stamp_project.descartes.interceptors.SkipShortMethodsFilterFactory
