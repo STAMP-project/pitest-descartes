@@ -91,8 +91,8 @@ class IntegrationTest {
         MutationEngine engine = engineFactory.createEngine(arguments);
         ClassByteArraySource source = ClassloaderByteArraySource.fromContext();
         CompoundInterceptorFactory interceptorFactory = factory.getInterceptor();
-        MutationInterceptor interceptor = interceptorFactory.createInterceptor(options, source);
-        Mutater mutater = engine.createMutator(source);
+        // Interceptors with no coverage information
+        MutationInterceptor interceptor = interceptorFactory.createInterceptor(options, null, source);     Mutater mutater = engine.createMutator(source);
         ClassName className = ClassName.fromClass(target);
         List<MutationDetails> mutations = mutater.findMutations(className);
         ClassTree classTree = getClassTree(target);
@@ -108,7 +108,7 @@ class IntegrationTest {
             }
 
             @Override
-            public Iterable<? extends ToolClasspathPlugin> findToolClasspathPlugins() {
+            public Collection<? extends ToolClasspathPlugin> findToolClasspathPlugins() {
                 return List.of(
                         //Interceptors
                         new AvoidNullInNotNullFilterFactory(),
