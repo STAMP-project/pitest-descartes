@@ -67,7 +67,8 @@ class IntegrationTest {
 
     @Test
     public void shouldNotFindAbstractMethods() throws IOException {
-        Set<String> methods = methodsFrom(findMutations(AbstractClass.class, noFeatures()));
+        Collection<MutationDetails> mutations = findMutations(AbstractClass.class, noFeatures());
+        Set<String> methods = methodsFrom(mutations);
         assertThat(methods, both(contains("nonAbstractMethod")).and(not(contains("abstractMethod"))));
     }
 
@@ -92,7 +93,8 @@ class IntegrationTest {
         ClassByteArraySource source = ClassloaderByteArraySource.fromContext();
         CompoundInterceptorFactory interceptorFactory = factory.getInterceptor();
         // Interceptors with no coverage information
-        MutationInterceptor interceptor = interceptorFactory.createInterceptor(options, null, source);     Mutater mutater = engine.createMutator(source);
+        MutationInterceptor interceptor = interceptorFactory.createInterceptor(options, null, source);
+        Mutater mutater = engine.createMutator(source);
         ClassName className = ClassName.fromClass(target);
         List<MutationDetails> mutations = mutater.findMutations(className);
         ClassTree classTree = getClassTree(target);
