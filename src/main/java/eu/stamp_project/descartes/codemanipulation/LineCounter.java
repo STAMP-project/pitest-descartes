@@ -44,6 +44,16 @@ public class LineCounter {
     public Collection<Integer> getShiftedRange() {
         if(empty())
             return Collections.emptyList();
+        //NOTE: MutationDetails has the following two methods:
+        //  getFirstIndex() { return this.id.getFirstIndex(); }
+        // which returns the first index included in the identifier
+        //  getInstructionIndex() { return getFirstIndex() - 1; }
+        //  which is used mostly for filters
+        // Returning 0 as the first index results in an index out of bound exception in the filters
+        // that's why I return 1 here. Anyways, it is really hard to create a method covered in the
+        // first bytecode instruction (0) and not the second one (1).
+        // Here, the first index is the one that really counts as all tests will execute it and this
+        // will determine the coverage.
         return IntStream.rangeClosed(1, lastLine - firstLine + 1).boxed().collect(Collectors.toList());
     }
 
