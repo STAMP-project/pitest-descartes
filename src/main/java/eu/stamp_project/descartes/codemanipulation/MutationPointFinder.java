@@ -74,6 +74,7 @@ public class MutationPointFinder extends BaseClassVisitor {
 
         return new BaseMethodVisitor() {
             LineCounter counter = new LineCounter();
+            org.pitest.mutationtest.engine.gregor.MutationContext ctx;
 
             @Override
             public void visitLineNumber(int line, Label start) { counter.registerLine(line); }
@@ -95,7 +96,7 @@ public class MutationPointFinder extends BaseClassVisitor {
                         source,
                         op.getDescription(),
                         lines.getFirstLine(),
-                        1
+                        0 // Top basic block
                 )).collect(Collectors.toSet())
         );
     }
