@@ -14,9 +14,13 @@ hs_err_pid*
 # IDE files
 .idea/
 *.iml
+*.iws
 
 # Build files
 target/
+
+# Logs
+log/
 
 # Generated files
 gen/
@@ -28,3 +32,6 @@ gen/
 .settings/
 .classpath
 .project
+
+# Mac
+.DS_Store
