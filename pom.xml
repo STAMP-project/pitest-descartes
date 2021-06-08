@@ -57,7 +57,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <github.global.server>github</github.global.server>
-        <pitest.version>1.6.6</pitest.version>
+        <pitest.version>1.6.4</pitest.version>
     </properties>
 
     <dependencies>
@@ -163,12 +163,28 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Generates the documentation observing the right versions -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <outputDirectory>${basedir}</outputDirectory>
+                    <resources>
+                        <resource>
+                            <directory>src/docgen</directory>
+                            <filtering>true</filtering>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
     <profiles>
         <profile>
-            <id>deploy-release</id>
+            <id>release</id>
             <!-- This profile should be used for deploy and release actions -->
             <!--
                  Having a dedicated profile avoids, among other things, the need
@@ -188,6 +204,9 @@
                         <version>2.5.3</version>
                         <configuration>
                             <tagNameFormat>descartes-@{version}</tagNameFormat>
+                            <preparationGoals>
+                                clean verify resources:resources
+                            </preparationGoals>
                         </configuration>
                     </plugin>
 
