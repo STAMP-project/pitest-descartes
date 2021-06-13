@@ -10,7 +10,7 @@ This file contains configuration snippets for Maven and Gradle using different c
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.6.4</version>
+  <version>1.6.6</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
   </configuration>
@@ -30,7 +30,7 @@ This file contains configuration snippets for Maven and Gradle using different c
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.6.4</version>
+  <version>1.6.6</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
   </configuration>
@@ -49,34 +49,13 @@ This file contains configuration snippets for Maven and Gradle using different c
 </plugin>
 ```
 
-### Using TestNG
-
-```xml
-<plugin>
-  <groupId>org.pitest</groupId>
-  <artifactId>pitest-maven</artifactId>
-  <version>1.6.4</version>
-  <configuration>
-    <mutationEngine>descartes</mutationEngine>
-    <testPlugin>testng</testPlugin>
-  </configuration>
-  <dependencies>
-    <dependency>
-      <groupId>eu.stamp-project</groupId>
-      <artifactId>descartes</artifactId>
-      <version>1.3.1</version>
-    </dependency>
-  </dependencies>
-</plugin>
-```
-
 ### Using a custom selection of operators
 
 ```xml
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.6.4</version>
+  <version>1.6.6</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
     <mutators>
@@ -102,7 +81,7 @@ This file contains configuration snippets for Maven and Gradle using different c
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.6.4</version>
+  <version>1.6.6</version>
   <configuration>
     <outputFormats>
       <value>JSON</value>
@@ -127,7 +106,7 @@ This file contains configuration snippets for Maven and Gradle using different c
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.6.4</version>
+  <version>1.6.6</version>
   <configuration>
     <features>
         <feature>
@@ -152,7 +131,7 @@ This file contains configuration snippets for Maven and Gradle using different c
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.6.4</version>
+  <version>1.6.6</version>
   <configuration>
     <features>
         <feature>
@@ -188,12 +167,12 @@ repositories {
 
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.13.1'
-    pitest 'eu.stamp-project:descartes:1.3.1'
+    pitest ''eu.stamp-project:descartes:1.3.1'
 }
 
 pitest {
   mutationEngine = "descartes"
-  pitestVersion = "1.6.4"
+  pitestVersion = "1.6.6"
 }
 ```
 
@@ -216,33 +195,8 @@ dependencies {
 
 pitest {
   mutationEngine = "descartes"
-  pitestVersion = "1.6.4"
+  pitestVersion = "1.6.6"
   junit5PluginVersion = '0.12'
-}
-```
-
-### Using TestNG
-
-```
-plugins {
-    id 'java'
-    id 'info.solidsoft.pitest' version '1.5.1'
-}
-
-repositories {
-    mavenCentral()
-    mavenLocal()
-}
-
-dependencies {
-    testImplementation group: 'junit', name: 'junit', version: '4.13.1'
-    pitest 'eu.stamp-project:descartes:1.3.1'
-}
-
-pitest {
-  mutationEngine = "descartes"
-  pitestVersion = "1.6.4"
-  testPlugin = "testng"
 }
 ```
 
@@ -266,7 +220,7 @@ dependencies {
 
 pitest {
   mutationEngine = "descartes"
-  pitestVersion = "1.6.4"
+  pitestVersion = "1.6.6"
   mutators = [ '1.2', 'true', 'optional', '"a"' ]
 }
 ```
@@ -291,7 +245,7 @@ dependencies {
 
 pitest {
   mutationEngine = "descartes"
-  pitestVersion = "1.6.4"
+  pitestVersion = "1.6.6"
   features = ['+STOP_METHODS()']
 }
 ```
@@ -316,7 +270,7 @@ dependencies {
 
 pitest {
   mutationEngine = "descartes"
-  pitestVersion = "1.6.4"
+  pitestVersion = "1.6.6"
   features = ['-DO_NOT_MUTATE()']
 }
 ```

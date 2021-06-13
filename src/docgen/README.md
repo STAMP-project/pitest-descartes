@@ -16,7 +16,7 @@ To use Descartes in a Maven project, add the following plugin configuration to y
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.6.4</version>
+  <version>${pitest.version}</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
   </configuration>

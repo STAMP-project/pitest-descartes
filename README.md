@@ -16,7 +16,7 @@ To use Descartes in a Maven project, add the following plugin configuration to y
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.6.4</version>
+  <version>1.6.6</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
   </configuration>
@@ -421,7 +421,7 @@ The minimum configuration to use Descartes in a Maven project is the following:
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.6.4</version>
+  <version>1.6.6</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
   </configuration>
@@ -561,7 +561,7 @@ They can be configured and combined as regular PIT report formats:
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.6.4</version>
+  <version>1.6.6</version>
   <configuration>
     <outputFormats>
       <value>JSON</value>
@@ -657,7 +657,7 @@ dependencies {
 
 pitest {
   mutationEngine = "descartes"
-  pitestVersion = "1.6.4"
+  pitestVersion = "1.6.6"
 }
 ```
 The `pitestVersion` property has to be specified to avoid version issues with the default version shipped with the Gradle plugin.
