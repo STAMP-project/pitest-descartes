@@ -10,7 +10,7 @@ This file contains configuration snippets for Maven and Gradle using different c
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.6.7</version>
+  <version>1.7.0</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
   </configuration>
@@ -18,7 +18,7 @@ This file contains configuration snippets for Maven and Gradle using different c
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.3.1</version>
+      <version>1.3.2</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -30,7 +30,7 @@ This file contains configuration snippets for Maven and Gradle using different c
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.6.7</version>
+  <version>1.7.0</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
   </configuration>
@@ -38,7 +38,7 @@ This file contains configuration snippets for Maven and Gradle using different c
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.3.1</version>
+      <version>1.3.2</version>
     </dependency>
     <dependency>
         <groupId>org.pitest</groupId>
@@ -55,7 +55,7 @@ This file contains configuration snippets for Maven and Gradle using different c
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.6.7</version>
+  <version>1.7.0</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
     <mutators>
@@ -69,7 +69,7 @@ This file contains configuration snippets for Maven and Gradle using different c
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.3.1</version>
+      <version>1.3.2</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -81,7 +81,7 @@ This file contains configuration snippets for Maven and Gradle using different c
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.6.7</version>
+  <version>1.7.0</version>
   <configuration>
     <outputFormats>
       <value>JSON</value>
@@ -94,7 +94,7 @@ This file contains configuration snippets for Maven and Gradle using different c
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.3.1</version>
+      <version>1.3.2</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -106,7 +106,7 @@ This file contains configuration snippets for Maven and Gradle using different c
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.6.7</version>
+  <version>1.7.0</version>
   <configuration>
     <features>
         <feature>
@@ -119,7 +119,7 @@ This file contains configuration snippets for Maven and Gradle using different c
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.3.1</version>
+      <version>1.3.2</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -131,7 +131,7 @@ This file contains configuration snippets for Maven and Gradle using different c
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.6.7</version>
+  <version>1.7.0</version>
   <configuration>
     <features>
         <feature>
@@ -144,7 +144,7 @@ This file contains configuration snippets for Maven and Gradle using different c
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.3.1</version>
+      <version>1.3.2</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -167,12 +167,12 @@ repositories {
 
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.13.1'
-    pitest ''eu.stamp-project:descartes:1.3.1'
+    pitest ''eu.stamp-project:descartes:1.3.2'
 }
 
 pitest {
   mutationEngine = "descartes"
-  pitestVersion = "1.6.7"
+  pitestVersion = "1.7.0"
 }
 ```
 
@@ -190,12 +190,12 @@ repositories {
 
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.13.1'
-    pitest 'eu.stamp-project:descartes:1.3.1'
+    pitest 'eu.stamp-project:descartes:1.3.2'
 }
 
 pitest {
   mutationEngine = "descartes"
-  pitestVersion = "1.6.7"
+  pitestVersion = "1.7.0"
   junit5PluginVersion = '0.12'
 }
 ```
@@ -215,12 +215,12 @@ repositories {
 
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.13.1'
-    pitest 'eu.stamp-project:descartes:1.3.1'
+    pitest 'eu.stamp-project:descartes:1.3.2'
 }
 
 pitest {
   mutationEngine = "descartes"
-  pitestVersion = "1.6.7"
+  pitestVersion = "1.7.0"
   mutators = [ '1.2', 'true', 'optional', '"a"' ]
 }
 ```
@@ -240,12 +240,12 @@ repositories {
 
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.13.1'
-    pitest 'eu.stamp-project:descartes:1.3.1'
+    pitest 'eu.stamp-project:descartes:1.3.2'
 }
 
 pitest {
   mutationEngine = "descartes"
-  pitestVersion = "1.6.7"
+  pitestVersion = "1.7.0"
   features = ['+STOP_METHODS()']
 }
 ```
@@ -265,12 +265,12 @@ repositories {
 
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.13.1'
-    pitest 'eu.stamp-project:descartes:1.3.1'
+    pitest 'eu.stamp-project:descartes:1.3.2'
 }
 
 pitest {
   mutationEngine = "descartes"
-  pitestVersion = "1.6.7"
+  pitestVersion = "1.7.0"
   features = ['-DO_NOT_MUTATE()']
 }
 ```
