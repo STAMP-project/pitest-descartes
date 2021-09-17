@@ -20,7 +20,7 @@ public class MutationClassAdapter extends BaseClassVisitor {
 
     private boolean shouldNotTarget(MethodInfo method) {
         Location location = mutation.getLocation();
-        return !location.getMethodDesc().equals(method.getDescriptor()) || !location.getMethodName().name().equals(method.getName());
+        return !location.getMethodDesc().equals(method.getDescriptor()) || !location.getMethodName().equals(method.getName());
     }
 
     @Override

@@ -3,7 +3,6 @@ package eu.stamp_project.descartes.codemanipulation;
 import eu.stamp_project.descartes.operators.MutationOperator;
 import org.pitest.classinfo.ClassName;
 import org.pitest.mutationtest.engine.Location;
-import org.pitest.mutationtest.engine.MethodName;
 import org.pitest.mutationtest.engine.MutationDetails;
 import org.pitest.mutationtest.engine.MutationIdentifier;
 import org.pitest.reloc.asm.ClassReader;
@@ -88,7 +87,7 @@ public class MutationPointFinder extends BaseClassVisitor {
     }
 
     private void registerMutations(MethodInfo method, Set<MutationOperator> operators, LineCounter lines) {
-        Location location = new Location(className, MethodName.fromString(method.getName()), method.getDescriptor());
+        Location location = new Location(className, method.getName(), method.getDescriptor());
         Collection<Integer> indexes = lines.getShiftedRange();
         mutationPoints.addAll(
                 operators.stream().map(op -> new MutationDetails(

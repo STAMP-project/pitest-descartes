@@ -74,11 +74,11 @@ public class MethodRecord {
     private void updateStatus(DetectionStatus status) {
         if(status == DetectionStatus.NO_COVERAGE) {
             if(classification != NOT_COVERED)
-                throw new IllegalArgumentException("Method " + location.getMethodName().name() + " has been marked as covered and can not accept a non-covered mutation.");
+                throw new IllegalArgumentException("Method " + location.getMethodName() + " has been marked as covered and can not accept a non-covered mutation.");
             return;
         }
         if(classification == NOT_COVERED)
-            throw new IllegalArgumentException("Method " + location.getMethodName().name() + " has been marked as non-covered and can not accept a covered mutation");
+            throw new IllegalArgumentException("Method " + location.getMethodName() + " has been marked as non-covered and can not accept a covered mutation");
         if((status.isDetected() && classification == PSEUDO_TESTED)
                 || (!status.isDetected() && classification == TESTED))
             classification = PARTIALLY_TESTED;
@@ -118,7 +118,7 @@ public class MethodRecord {
     }
 
     public String getName() {
-        return location.getMethodName().name();
+        return location.getMethodName();
     }
 
     public String getDesc() {
@@ -161,7 +161,7 @@ public class MethodRecord {
 
     public static String methodKey(MutationResult mutation) {
         String className = mutation.getDetails().getClassName().asJavaName();
-        String methodName = mutation.getDetails().getMethod().name();
+        String methodName = mutation.getDetails().getMethod();
         String methodDescription = mutation.getDetails().getId().getLocation().getMethodDesc();
 
         return className + "." + methodName + methodDescription;

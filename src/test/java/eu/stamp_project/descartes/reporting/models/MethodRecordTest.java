@@ -17,7 +17,6 @@ import static org.pitest.mutationtest.DetectionStatus.*;
 import org.pitest.mutationtest.MutationResult;
 import org.pitest.mutationtest.MutationStatusTestPair;
 import org.pitest.mutationtest.engine.Location;
-import org.pitest.mutationtest.engine.MethodName;
 import org.pitest.mutationtest.engine.MutationDetails;
 import org.pitest.mutationtest.engine.MutationIdentifier;
 
@@ -94,7 +93,7 @@ public class MethodRecordTest {
                         new MutationIdentifier(
                                 new Location(
                                         ClassName.fromString("AClass"),
-                                        MethodName.fromString("aMethod"),
+                                        "aMethod",
                                         "()I"),
                                 1,
                                 mutant),

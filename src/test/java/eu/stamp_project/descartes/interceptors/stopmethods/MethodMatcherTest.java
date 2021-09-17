@@ -6,7 +6,6 @@ import org.junit.jupiter.api.TestFactory;
 import org.pitest.bytecode.analysis.ClassTree;
 import org.pitest.bytecode.analysis.MethodTree;
 import org.pitest.mutationtest.engine.Location;
-import org.pitest.mutationtest.engine.MethodName;
 import org.pitest.reloc.asm.Type;
 
 import java.io.IOException;
@@ -57,7 +56,7 @@ abstract class MethodMatcherTest {
     }
 
     private MethodTree getMethodTree(ClassTree owner, Method target) {
-        Location methodLocation = Location.location(owner.name(), MethodName.fromString(target.getName()), Type.getMethodDescriptor(target));
+        Location methodLocation = Location.location(owner.name(), target.getName(), Type.getMethodDescriptor(target));
         Optional<MethodTree> potentialMethodTree = owner.method(methodLocation);
         assertTrue(potentialMethodTree.isPresent(), "Method " + target.toGenericString() + " not found, test can not continue");
         return potentialMethodTree.get();

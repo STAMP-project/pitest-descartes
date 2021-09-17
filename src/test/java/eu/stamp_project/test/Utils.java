@@ -5,7 +5,6 @@ import org.objectweb.asm.tree.ClassNode;
 import org.pitest.bytecode.analysis.ClassTree;
 import org.pitest.classinfo.ClassName;
 import org.pitest.mutationtest.engine.Location;
-import org.pitest.mutationtest.engine.MethodName;
 import org.pitest.mutationtest.engine.MutationIdentifier;
 import org.pitest.reloc.asm.Type;
 
@@ -19,8 +18,7 @@ public class Utils {
 
     public static MutationIdentifier toMutationIdentifier(Method method, String operator) {
         ClassName className = ClassName.fromClass(method.getDeclaringClass());
-        MethodName methodName = MethodName.fromString(method.getName());
-        Location location = new Location(className, methodName, Type.getMethodDescriptor(method));
+        Location location = new Location(className, method.getName(), Type.getMethodDescriptor(method));
         return new MutationIdentifier(location, 0, operator);
     }
 

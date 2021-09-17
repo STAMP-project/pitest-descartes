@@ -52,7 +52,7 @@ public class JSONReportListener implements MutationResultListener{
                 DetectionStatus status = result.getStatus();
 
                 MutationStatusTestPair pair = result.getStatusTestPair();
-                String method = details.getMethod().name();
+                String method = details.getMethod();
                 String methodDescription = details.getId().getLocation().getMethodDesc();
 
                 report.beginObject();
