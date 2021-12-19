@@ -12,9 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
-          java-version: 13
+          java-version: 17
+          distribution: 'temurin'
       - name: Finding dependency updates
         run:  mvn versions:display-dependency-updates -Dversions.outputFile=report.txt
       - name: Update dependencies to latest version
