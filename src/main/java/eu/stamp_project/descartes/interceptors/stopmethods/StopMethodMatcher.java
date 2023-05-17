@@ -52,9 +52,9 @@ public interface StopMethodMatcher {
                 );
         return (classTree, methodTree) -> {
             List<AbstractInsnNode> instructions = methodTree.instructions();
-            Context<AbstractInsnNode> context = Context.start(methodTree.instructions());
+            Context context = Context.start();
             // Ensure that matcher has found a match and that all instructions has been read.
-            return matcher.matches(instructions, context) && context.position() == instructions.size() - 1;
+            return matcher.matches(instructions, context);// && context.position() == instructions.size() - 1;
         };
     }
 

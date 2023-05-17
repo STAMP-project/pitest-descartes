@@ -18,6 +18,7 @@ import org.pitest.mutationtest.build.CompoundInterceptorFactory;
 import org.pitest.mutationtest.build.MutationInterceptor;
 import org.pitest.mutationtest.config.PluginServices;
 import org.pitest.mutationtest.config.ReportOptions;
+import org.pitest.mutationtest.config.ServicesFromClassLoader;
 import org.pitest.mutationtest.config.SettingsFactory;
 import org.pitest.mutationtest.engine.Mutater;
 import org.pitest.mutationtest.engine.MutationDetails;
@@ -93,7 +94,7 @@ class IntegrationTest {
         ClassByteArraySource source = ClassloaderByteArraySource.fromContext();
         CompoundInterceptorFactory interceptorFactory = factory.getInterceptor();
         // Interceptors with no coverage information
-        MutationInterceptor interceptor = interceptorFactory.createInterceptor(options, null, source);
+        MutationInterceptor interceptor = interceptorFactory.createInterceptor(options, null, source, null);
         Mutater mutater = engine.createMutator(source);
         ClassName className = ClassName.fromClass(target);
         List<MutationDetails> mutations = mutater.findMutations(className);
@@ -103,9 +104,9 @@ class IntegrationTest {
     }
 
     PluginServices stubPluginServices() {
-        return new PluginServices(getClass().getClassLoader()) {
+        return new PluginServices(new ServicesFromClassLoader(getClass().getClassLoader())) {
             @Override
-            public Iterable<? extends ClientClasspathPlugin> findClientClasspathPlugins() {
+            public List<? extends ClientClasspathPlugin> findClientClasspathPlugins() {
                 return List.of(new DescartesEngineFactory());
             }
 
