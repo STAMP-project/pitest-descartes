@@ -1,9 +1,7 @@
 package eu.stamp_project.test;
 
 import java.lang.reflect.Method;
-import java.sql.Array;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class MethodStreamBuilder {

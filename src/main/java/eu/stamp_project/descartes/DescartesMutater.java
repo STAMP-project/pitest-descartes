@@ -7,11 +7,12 @@ import eu.stamp_project.descartes.codemanipulation.MutationPointFinder;
 import eu.stamp_project.descartes.operators.MutationOperator;
 import org.pitest.classinfo.ClassByteArraySource;
 import org.pitest.classinfo.ClassName;
-import org.pitest.classpath.ClassloaderByteArraySource;
-import org.pitest.mutationtest.engine.*;
+import org.pitest.mutationtest.engine.Mutant;
+import org.pitest.mutationtest.engine.Mutater;
+import org.pitest.mutationtest.engine.MutationDetails;
+import org.pitest.mutationtest.engine.MutationIdentifier;
 import org.pitest.reloc.asm.ClassReader;
 import org.pitest.reloc.asm.ClassWriter;
-
 
 import java.util.*;
 import java.util.function.Predicate;

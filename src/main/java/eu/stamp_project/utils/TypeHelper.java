@@ -1,10 +1,8 @@
 package eu.stamp_project.utils;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import org.pitest.reloc.asm.Type;
 
 /**
  * Utility class to handle the interaction between primitive types and their wrappers
@@ -19,8 +17,8 @@ public final class TypeHelper {
     private static final Map<Class<?>,Class<?>> WRAPPER_TO_PRIMITIVE_MAP;
 
     static {
-        PRIMITIVE_TO_WRAPPER_MAP = new HashMap<Class<?>, Class<?>>(16);
-        WRAPPER_TO_PRIMITIVE_MAP = new HashMap<Class<?>, Class<?>>(16);
+        PRIMITIVE_TO_WRAPPER_MAP = new HashMap<>(16);
+        WRAPPER_TO_PRIMITIVE_MAP = new HashMap<>(16);
 
         add(boolean.class, Boolean.class);
         add(byte.class, Byte.class);

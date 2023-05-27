@@ -16,7 +16,7 @@ public class MethodTestingListener implements MutationResultListener {
         this.args = args;
     }
 
-    private ListenerArguments args;
+    private final ListenerArguments args;
 
     public ListenerArguments getArguments() { return args; }
 
@@ -66,7 +66,7 @@ public class MethodTestingListener implements MutationResultListener {
                             .map(TestInfo::getName).collect(Collectors.toList()));
 
             report.beginListAttribute("mutations");
-            method.getMutations().stream().forEach(this::writeMutationDetails);
+            method.getMutations().forEach(this::writeMutationDetails);
             report.endList();
 
             report.endObject();

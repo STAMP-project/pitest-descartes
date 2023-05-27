@@ -28,7 +28,7 @@ public abstract class Converter {
      * @param number String representation of the number.
      * @param radix Radix to use in the conversion.
      * @param <T> A type that extends {@link Number}.
-     * @return Returns an instance of the given type resulted form the conversion. If conversion did not succedd returns null.
+     * @return Returns an instance of the given type resulted form the conversion. If conversion did not succeed returns null.
      */
     public static <T extends Number> T valueOf(Class<T> type, String number, int radix) {
         try {

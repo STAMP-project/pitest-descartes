@@ -64,16 +64,17 @@ public class MutationPointFinder extends BaseClassVisitor {
     public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 
         MethodInfo method = createMethodInfo(access, name, desc, signature, exceptions);
-        if(canNotMutate(method))
+        if(canNotMutate(method)) {
             return null;
+        }
 
         final Set<MutationOperator> selectedOperators = getOperatorsFor(method);
-        if(selectedOperators.isEmpty())
+        if(selectedOperators.isEmpty()) {
             return null;
+        }
 
         return new BaseMethodVisitor() {
-            LineCounter counter = new LineCounter();
-            org.pitest.mutationtest.engine.gregor.MutationContext ctx;
+            final LineCounter counter = new LineCounter();
 
             @Override
             public void visitLineNumber(int line, Label start) { counter.registerLine(line); }

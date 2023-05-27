@@ -23,12 +23,10 @@ public class DescartesMutationEngine implements  MutationEngine {
         this(m -> false, operators);
     }
 
-    @SuppressWarnings("unchecked")
     public DescartesMutationEngine(MutationOperator... operators) {
         this(Arrays.<MutationOperator>asList(operators));
     }
 
-    @SuppressWarnings("unchecked")
     public DescartesMutationEngine(Predicate<MethodInfo> excludedMethods, MutationOperator...operators) {
         this(excludedMethods, Arrays.<MutationOperator>asList(operators));
     }

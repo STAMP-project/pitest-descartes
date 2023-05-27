@@ -1,6 +1,6 @@
 # How to...?
 
-This file contains configuration snippets for Maven and Gradle using different configurations.
+This file contains configuration snippets for Maven and Gradle using different settings.
 
 ## Maven
 

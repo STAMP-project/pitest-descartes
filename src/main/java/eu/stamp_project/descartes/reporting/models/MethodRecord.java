@@ -24,7 +24,7 @@ public class MethodRecord {
 
     private Location location;
     private MethodClassification classification;
-    private Set<MutationResult> mutationResults = new HashSet<>();
+    private final Set<MutationResult> mutationResults = new HashSet<>();
     private String fileName;
     private int lineNumber;
 
@@ -36,8 +36,9 @@ public class MethodRecord {
         if(mutations == null || mutations.length == 0)
             throw new IllegalArgumentException("At least one mutation result must be provided.");
         initialize(mutations[0]);
-        for (int i = 0; i <  mutations.length; i++)
-            add(mutations[i]);
+        for (MutationResult mutation : mutations) {
+            add(mutation);
+        }
     }
 
     public MethodRecord(Collection<MutationResult> mutations) {

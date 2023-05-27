@@ -16,9 +16,9 @@ import static eu.stamp_project.descartes.interceptors.stopmethods.StopMethodMatc
 
 public class StopMethodMatcherInterceptorFactory implements MutationInterceptorFactory {
 
-    private FeatureParameter EXCEPT;
+    private final FeatureParameter EXCEPT;
 
-    private Map<String, StopMethodMatcher> availableMatchers;
+    private final Map<String, StopMethodMatcher> availableMatchers;
 
     public StopMethodMatcherInterceptorFactory() {
 
@@ -50,13 +50,14 @@ public class StopMethodMatcherInterceptorFactory implements MutationInterceptorF
     public MutationInterceptor createInterceptor(InterceptorParameters interceptorParameters) {
         Set<String> matchers = availableMatchers.keySet();
         List<String> exclusions = interceptorParameters.getList(EXCEPT);
-        if(exclusions != null)
-            matchers.removeAll(exclusions);
+        if(exclusions != null) {
+            exclusions.forEach(matchers::remove);
+        }
 
         return new StopMethodInterceptor(
                 StopMethodMatcher.any(
                         matchers.stream()
-                                .map(key -> availableMatchers.get(key))
+                                .map(availableMatchers::get)
                                 .collect(Collectors.toList())
                 )
         );

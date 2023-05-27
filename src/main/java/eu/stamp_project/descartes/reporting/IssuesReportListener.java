@@ -20,14 +20,12 @@ import java.util.List;
 
 public class IssuesReportListener implements MutationResultListener {
 
-    private ListenerArguments arguments;
+    private final ListenerArguments arguments;
 
-    private VelocityEngine engine;
     private Template methodResportTemplate;
     private Template indexTemplate;
 
     private List<ClassIssues> findings;
-
 
     public IssuesReportListener(final ListenerArguments arguments) {
         this.arguments = arguments;
@@ -114,8 +112,8 @@ public class IssuesReportListener implements MutationResultListener {
     }
 
     public static class ClassIssues {
-        private String className;
-        private int issues;
+        private final String className;
+        private final int issues;
 
         public ClassIssues(String className, int issues) {
             this.className = className;
