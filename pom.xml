@@ -31,7 +31,6 @@
     <developers>
         <developer>
             <name>Oscar Luis Vera Pérez</name>
-            <email>oscar.vera-perez@inria.fr</email>
         </developer>
     </developers>
 
@@ -57,7 +56,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <github.global.server>github</github.global.server>
-        <pitest.version>1.7.0</pitest.version>
+        <pitest.version>1.14.1</pitest.version>
     </properties>
 
     <dependencies>

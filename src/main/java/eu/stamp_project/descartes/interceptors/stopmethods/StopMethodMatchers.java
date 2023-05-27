@@ -1,12 +1,14 @@
 package eu.stamp_project.descartes.interceptors.stopmethods;
 
 import org.objectweb.asm.tree.*;
-import org.pitest.sequence.*;
+import org.pitest.sequence.Match;
+import org.pitest.sequence.SequenceQuery;
 
 import static eu.stamp_project.descartes.interceptors.stopmethods.StopMethodMatcher.*;
 import static org.objectweb.asm.Opcodes.*;
 import static org.pitest.bytecode.analysis.InstructionMatchers.opCode;
 import static org.pitest.sequence.QueryStart.match;
+import static org.pitest.sequence.Result.result;
 
 public class StopMethodMatchers {
 
@@ -20,7 +22,7 @@ public class StopMethodMatchers {
                 return false;
             //Static
             MethodNode methodNode = methodTree.rawNode();
-            if((methodNode.access & ACC_STATIC) == 0) //Both methods are static, if it is not an static method, then false
+            if((methodNode.access & ACC_STATIC) == 0) //Both methods are static, if it is not a static method, then false
                 return false;
             String returnTypeDescription = "L" + classNode.name + ";";
             // Class valueOf(String) or  Class[] values()
@@ -45,7 +47,7 @@ public class StopMethodMatchers {
     }
 
     static StopMethodMatcher isEmptyVoid() {
-        return forBody(QueryStart.match(opCode(RETURN)));
+        return forBody(match(opCode(RETURN)));
     }
 
     static StopMethodMatcher isSynthetic() {
@@ -55,7 +57,7 @@ public class StopMethodMatchers {
     static Match<AbstractInsnNode> opCodeBetween(int lower, int upper) {
         return (c, abstractInsnNode) -> {
             int opcode = abstractInsnNode.getOpcode();
-            return opcode >= lower && opcode <= upper;
+            return result(opcode >= lower && opcode <= upper, c);
         };
     }
 
@@ -90,7 +92,7 @@ public class StopMethodMatchers {
         Match<AbstractInsnNode> returnOpcode = opCodeBetween(IRETURN, RETURN);
         Match<AbstractInsnNode> anyInvoke = (context, instructionNode) -> {
             int opcode = instructionNode.getOpcode();
-            return opcode == INVOKEVIRTUAL || opcode == INVOKESPECIAL || opcode == INVOKEINTERFACE;
+            return result(opcode == INVOKEVIRTUAL || opcode == INVOKESPECIAL || opcode == INVOKEINTERFACE, context);
         };
 
         return forBody((
@@ -123,57 +125,44 @@ public class StopMethodMatchers {
     }
 
     static StopMethodMatcher returnsThis() {
-
-        Match<AbstractInsnNode> ALOAD_0 = (context, instruction) -> {
-            if(!(instruction instanceof VarInsnNode)) {
-                return false;
-            }
-            return ((VarInsnNode) instruction).var == 0;
-        };
-
+        Match<AbstractInsnNode> ALOAD_0 = (context, instruction) ->
+                result((instruction instanceof VarInsnNode) && ((VarInsnNode) instruction).var == 0, context)
+        ;
         return forBody(match(ALOAD_0).then(opCode(ARETURN)));
     }
 
     static StopMethodMatcher returnsAParameter() {
-
         // ALOAD_X (DRETURN | FRETURN | IRETURN | LRETURN | ARETURN)
-
-        Match<AbstractInsnNode> ALOAD_X = (context, instruction) -> {
-            if(!(instruction instanceof VarInsnNode)) {
-                return false;
-            }
-            return ((VarInsnNode) instruction).var > 0;
-        };
-
+        Match<AbstractInsnNode> ALOAD_X = (context, instruction) ->
+                result(instruction instanceof VarInsnNode && ((VarInsnNode) instruction).var > 0, context)
+        ;
         return forBody(match(ALOAD_X).then(opCodeBetween(IRETURN, ARETURN)));
     }
 
     static Match<AbstractInsnNode> aload(int var) {
         return (context, instruction) -> {
             if(!(instruction instanceof VarInsnNode)) {
-                return false;
+                return result(false, context);
             }
             VarInsnNode node = (VarInsnNode) instruction;
-            return node.getOpcode() == ALOAD && node.var == var;
+            return result(node.getOpcode() == ALOAD && node.var == var, context);
         };
     }
 
     static StopMethodMatcher isKotlinGeneratedSetter() {
-
         Match<AbstractInsnNode> ALOAD_1 = aload(1);
-
         Match<AbstractInsnNode> INVOKE_CHECK = (context, instruction) -> {
             if(!(instruction instanceof MethodInsnNode)) {
-                return false;
+                return result(false, context);
             }
-
             MethodInsnNode node = (MethodInsnNode) instruction;
-
-            return node.getOpcode() == INVOKESTATIC &&
+            return result(
+                    node.getOpcode() == INVOKESTATIC &&
                     node.name.equals("checkParameterIsNotNull") &&
                     node.owner.equals("kotlin/jvm/internal/Intrinsics") &&
-                    node.desc.equals("(Ljava/lang/Object;Ljava/lang/String;)V");
-
+                    node.desc.equals("(Ljava/lang/Object;Ljava/lang/String;)V"),
+                    context
+            );
         };
 
         return forBody(

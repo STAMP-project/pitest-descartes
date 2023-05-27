@@ -1,11 +1,5 @@
 package eu.stamp_project.descartes;
 
-import eu.stamp_project.descartes.interceptors.AvoidNullInNotNullFilterFactory;
-import eu.stamp_project.descartes.interceptors.SkipDoNotMutateFilterFactory;
-import eu.stamp_project.descartes.interceptors.stopmethods.StopMethodMatcherInterceptorFactory;
-import eu.stamp_project.descartes.reporting.IssuesReportFactory;
-import eu.stamp_project.descartes.reporting.JSONReportFactory;
-import eu.stamp_project.descartes.reporting.MethodTestingFactory;
 import eu.stamp_project.test.input.*;
 import org.junit.jupiter.api.Test;
 import org.pitest.bytecode.analysis.ClassTree;
@@ -22,12 +16,9 @@ import org.pitest.mutationtest.config.SettingsFactory;
 import org.pitest.mutationtest.engine.Mutater;
 import org.pitest.mutationtest.engine.MutationDetails;
 import org.pitest.mutationtest.engine.MutationEngine;
-import org.pitest.plugin.ClientClasspathPlugin;
-import org.pitest.plugin.ToolClasspathPlugin;
 import tests.Person;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -42,15 +33,23 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class IntegrationTest {
 
     @Test
-    void testShouldNotFindMutationsInKotlinDataClass() throws NoSuchMethodException, InstantiationException, IllegalAccessException, IOException, InvocationTargetException {
-        Collection<MutationDetails> mutations = findMutationsWithDefaultOptions(Person.class);
-        assertThat(mutations, empty());
+    void testShouldNotFindMutationsInKotlinDataClass() throws IOException {
+        assertThat(findMutationsWithDefaultOptions(Person.class), empty());
     }
 
     @Test
-    void testShouldNotFinAnyStopMethod() throws NoSuchMethodException, InstantiationException, IllegalAccessException, IOException, InvocationTargetException {
-        Collection<MutationDetails> mutations = findMutationsWithDefaultOptions(StopMethods.class);
-        assertThat(mutations, empty());
+    void testShouldNotFinAnyStopMethod() throws IOException {
+        assertThat(findMutationsWithDefaultOptions(StopMethods.class), empty());
+    }
+
+    @Test
+    void shouldNotFindNativeMethods() throws IOException  {
+        assertThat(findMutations(NativeMethodClass.class, noFeatures()), empty());
+    }
+
+    @Test
+    void shouldNotFindAnyMutationPointInInterface() throws IOException {
+        assertThat(findMutationsWithDefaultOptions(Interface.class), empty());
     }
 
     @Test
@@ -61,39 +60,29 @@ class IntegrationTest {
     }
 
     @Test
-    public void shouldNotFindNativeMethods() throws IOException  {
-        assertThat(findMutations(NativeMethodClass.class, noFeatures()), empty());
-    }
-
-    @Test
-    public void shouldNotFindAbstractMethods() throws IOException {
+    void shouldNotFindAbstractMethods() throws IOException {
         Collection<MutationDetails> mutations = findMutations(AbstractClass.class, noFeatures());
         Set<String> methods = methodsFrom(mutations);
         assertThat(methods, both(contains("nonAbstractMethod")).and(not(contains("abstractMethod"))));
     }
 
-    @Test
-    public void shouldNotFindAnyMutationPointInInterface() throws IOException {
-        assertThat(findMutationsWithDefaultOptions(Interface.class), empty());
+    private static Set<String> methodsFrom(Collection<MutationDetails> mutations) {
+        return mutations.stream().map(MutationDetails::getMethod).collect(Collectors.toSet());
     }
 
-    Set<String> methodsFrom(Collection<MutationDetails> mutations) {
-        return mutations.stream().map(details -> details.getMethod().toString()).collect(Collectors.toSet());
-    }
-
-    Collection<MutationDetails> findMutationsWithDefaultOptions(Class<?> target) throws IOException {
+    private static Collection<MutationDetails> findMutationsWithDefaultOptions(Class<?> target) throws IOException {
         return findMutations(target, defaultOptions());
     }
 
-    Collection<MutationDetails> findMutations(Class<?> target, ReportOptions options) throws IOException {
-        SettingsFactory factory = new SettingsFactory(options, stubPluginServices());
+    private static Collection<MutationDetails> findMutations(Class<?> target, ReportOptions options) throws IOException {
+        SettingsFactory factory = new SettingsFactory(options, PluginServices.makeForContextLoader());
         EngineArguments arguments = new EngineArguments(options.getMutators(), options.getExcludedMethods());
         MutationEngineFactory engineFactory = factory.createEngine();
         MutationEngine engine = engineFactory.createEngine(arguments);
         ClassByteArraySource source = ClassloaderByteArraySource.fromContext();
         CompoundInterceptorFactory interceptorFactory = factory.getInterceptor();
-        // Interceptors with no coverage information
-        MutationInterceptor interceptor = interceptorFactory.createInterceptor(options, null, source);
+        // Interceptors with no coverage information and no test prioritization
+        MutationInterceptor interceptor = interceptorFactory.createInterceptor(options, null, source, null);
         Mutater mutater = engine.createMutator(source);
         ClassName className = ClassName.fromClass(target);
         List<MutationDetails> mutations = mutater.findMutations(className);
@@ -102,55 +91,24 @@ class IntegrationTest {
         return interceptor.intercept(mutations, mutater);
     }
 
-    PluginServices stubPluginServices() {
-        return new PluginServices(getClass().getClassLoader()) {
-            @Override
-            public Iterable<? extends ClientClasspathPlugin> findClientClasspathPlugins() {
-                return List.of(new DescartesEngineFactory());
-            }
-
-            @Override
-            public Collection<? extends ToolClasspathPlugin> findToolClasspathPlugins() {
-                return List.of(
-                        //Interceptors
-                        new AvoidNullInNotNullFilterFactory(),
-                        new SkipDoNotMutateFilterFactory(),
-                        new StopMethodMatcherInterceptorFactory(),
-                        //Reporters
-                        new IssuesReportFactory(),
-                        new JSONReportFactory(),
-                        new MethodTestingFactory()
-                );
-            }
-        };
-    }
-
-    ReportOptions defaultOptions() {
+    private static ReportOptions defaultOptions() {
         ReportOptions options = new ReportOptions();
         options.setMutationEngine("descartes");
         return options;
     }
 
-    ReportOptions useFeatures(String... features) {
+    private static ReportOptions useFeatures(String... features) {
         ReportOptions options = defaultOptions();
         options.setFeatures(Arrays.asList(features));
         return options;
     }
 
-    ReportOptions noFeatures() {
-        ReportOptions options = defaultOptions();
-        options.setFeatures(List.of("-DO_NOT_MUTATE()", "-AVOID_NULL", "-STOP_METHODS()"));
-        return options;
+    private static ReportOptions noFeatures() {
+        return useFeatures("-DO_NOT_MUTATE()", "-AVOID_NULL", "-STOP_METHODS()");
     }
 
-    ReportOptions excludeMethods(String... methods) {
+    private static ReportOptions excludeMethods(String... methods) {
         ReportOptions options = defaultOptions();
-        options.setExcludedMethods(Arrays.asList(methods));
-        return options;
-    }
-
-    ReportOptions options(String[] features, String[] methods) {
-        ReportOptions options = useFeatures(features);
         options.setExcludedMethods(Arrays.asList(methods));
         return options;
     }

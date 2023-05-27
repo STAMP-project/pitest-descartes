@@ -56,36 +56,42 @@ public class JSONReportListener implements MutationResultListener{
                 String methodDescription = details.getId().getLocation().getMethodDesc();
 
                 report.beginObject();
-                    report.writeAttribute("detected", status.isDetected());
-                    report.writeAttribute("status", status.name());
-                    report.writeAttribute("mutator", details.getMutator());
-                    report.writeAttribute("line", details.getLineNumber());
-                    report.writeAttribute("block", details.getBlock());
-                    report.writeAttribute("file", details.getFilename());
-                    report.writeAttribute("index", details.getFirstIndex()); // Saving only the first index
+                report.writeAttribute("detected", status.isDetected());
+                report.writeAttribute("status", status.name());
+                report.writeAttribute("mutator", details.getMutator());
+                report.writeAttribute("line", details.getLineNumber());
 
-                    report.beginObjectAttribute("method");
-                        report.writeAttribute("name", method);
-                        report.writeAttribute("description", methodDescription);
-                        report.writeAttribute("class", details.getClassName().getNameWithoutPackage().asJavaName());
-                        report.writeAttribute("package", details.getClassName().getPackage().asJavaName());
-                    report.endObject();
+                report.beginAttribute("blocks");
+                report.beginList();
+                for (Integer block : details.getBlocks()) {
+                    report.write(block);
+                }
+                report.endList();
 
-                    report.beginObjectAttribute("tests");
-                        report.writeAttribute("run", result.getNumberOfTestsRun());
+                report.writeAttribute("file", details.getFilename());
+                report.writeAttribute("index", details.getFirstIndex()); // Saving only the first index
 
-                        report.writeStringListAttribute("ordered",
-                            details.getTestsInOrder().stream().map(TestInfo::getName).collect(Collectors.toList()));
+                report.beginObjectAttribute("method");
+                report.writeAttribute("name", method);
+                report.writeAttribute("description", methodDescription);
+                report.writeAttribute("class", details.getClassName().getNameWithoutPackage().asJavaName());
+                report.writeAttribute("package", details.getClassName().getPackage().asJavaName());
+                report.endObject();
 
-                        report.writeStringListAttribute("killing", pair.getKillingTests());
-                        report.writeStringListAttribute("succeeding", pair.getSucceedingTests());
+                report.beginObjectAttribute("tests");
+                report.writeAttribute("run", result.getNumberOfTestsRun());
 
-                    report.endObject();
+                report.writeStringListAttribute("ordered",
+                        details.getTestsInOrder().stream().map(TestInfo::getName).collect(Collectors.toList()));
+
+                report.writeStringListAttribute("killing", pair.getKillingTests());
+                report.writeStringListAttribute("succeeding", pair.getSucceedingTests());
+
+                report.endObject();
 
                 report.endObject();
             }
-        }
-        catch (IOException exc) {
+        } catch (IOException exc) {
             throw Unchecked.translateCheckedException(exc);
         }
     }

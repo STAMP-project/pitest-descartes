@@ -3,13 +3,11 @@ package eu.stamp_project.descartes.interceptors.stopmethods;
 import org.objectweb.asm.tree.*;
 import org.pitest.bytecode.analysis.ClassTree;
 import org.pitest.bytecode.analysis.MethodTree;
-import org.pitest.sequence.Context;
 import org.pitest.sequence.QueryParams;
 import org.pitest.sequence.SequenceMatcher;
 import org.pitest.sequence.SequenceQuery;
 
 import java.util.Collection;
-import java.util.List;
 
 import static org.pitest.bytecode.analysis.InstructionMatchers.isA;
 
@@ -17,7 +15,7 @@ import static org.pitest.bytecode.analysis.InstructionMatchers.isA;
 public interface StopMethodMatcher {
 
     //MethodTree does not contain a reference to ClassTree.
-    //Some matchers require the class class context to classify the method
+    //Some matchers require the class context to classify the method
     boolean matches(ClassTree classTree, MethodTree methodTree);
 
     static boolean matchesNameDesc(MethodTree methodTree, String name, String desc) {
@@ -42,7 +40,7 @@ public interface StopMethodMatcher {
     }
 
     static StopMethodMatcher forBody(SequenceQuery<AbstractInsnNode> body) {
-        final SequenceMatcher<AbstractInsnNode>  matcher =
+        final SequenceMatcher<AbstractInsnNode> matcher =
                 body.compile(
                         QueryParams.<AbstractInsnNode>params()
                         .withIgnores(
@@ -50,12 +48,7 @@ public interface StopMethodMatcher {
                                         .or(isA(FrameNode.class))
                                         .or(isA(LineNumberNode.class)))
                 );
-        return (classTree, methodTree) -> {
-            List<AbstractInsnNode> instructions = methodTree.instructions();
-            Context<AbstractInsnNode> context = Context.start(methodTree.instructions());
-            // Ensure that matcher has found a match and that all instructions has been read.
-            return matcher.matches(instructions, context) && context.position() == instructions.size() - 1;
-        };
+        return (classTree, methodTree) -> matcher.matches(methodTree.instructions());
     }
 
     static  StopMethodMatcher any(Collection<StopMethodMatcher> matchers) {
