@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<ruleset name="Descartes Coding Rules"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+
+    <description>
+        Rules enforcing an accepted set of coding styles and best practices taken from PMD predefined rules.
+        This file customizes some of the rules to avoid false positives.
+    </description>
+
+    <rule ref="category/java/bestpractices.xml" />
+
+</ruleset>

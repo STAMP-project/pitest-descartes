@@ -7,20 +7,22 @@ import org.pitest.plugin.Feature;
 
 public class SkipDoNotMutateFilterFactory implements MutationInterceptorFactory {
 
-    private static final String DESCRIPTION = "Skips any method annotated with an annotation whose simple name is DoNotMutate or declared in a class likewise annotated.";
+  private static final String DESCRIPTION =
+      "Skips any method having an annotation whose simple name is DoNotMutate "
+          + "or any method declared in a class with such annotation.";
 
-    @Override
-    public MutationInterceptor createInterceptor(InterceptorParameters interceptorParameters) {
-        return new SkipDoNotMutateFilter();
-    }
+  @Override
+  public MutationInterceptor createInterceptor(InterceptorParameters interceptorParameters) {
+    return new SkipDoNotMutateFilter();
+  }
 
-    @Override
-    public Feature provides() {
-        return Feature.named("DO_NOT_MUTATE").withDescription(DESCRIPTION).withOnByDefault(true);
-    }
+  @Override
+  public Feature provides() {
+    return Feature.named("DO_NOT_MUTATE").withDescription(DESCRIPTION).withOnByDefault(true);
+  }
 
-    @Override
-    public String description() {
-        return DESCRIPTION;
-    }
+  @Override
+  public String description() {
+    return DESCRIPTION;
+  }
 }

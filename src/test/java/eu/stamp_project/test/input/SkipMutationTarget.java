@@ -5,11 +5,7 @@ import eu.stamp_project.descartes.annotations.DoNotMutate;
 @DoNotMutate
 public class SkipMutationTarget {
 
-    public void methodToSkip() {
-        throw new IllegalArgumentException();
-    }
-
+  public void methodToSkip() {
+    throw new IllegalArgumentException();
+  }
 }
-
-
-

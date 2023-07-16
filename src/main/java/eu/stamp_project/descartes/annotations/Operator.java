@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Operator {
-    String identifier();
-    String description();
+  String identifier();
+
+  String description();
 }

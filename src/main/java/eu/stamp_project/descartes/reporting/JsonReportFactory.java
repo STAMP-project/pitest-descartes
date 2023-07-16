@@ -5,20 +5,21 @@ import org.pitest.mutationtest.ListenerArguments;
 import org.pitest.mutationtest.MutationResultListener;
 import org.pitest.mutationtest.MutationResultListenerFactory;
 
-public class IssuesReportFactory implements MutationResultListenerFactory {
-  @Override
+public class JsonReportFactory implements MutationResultListenerFactory {
+
   public MutationResultListener getListener(
       Properties properties, ListenerArguments listenerArguments) {
-    return new IssuesReportListener(listenerArguments);
+    return new JsonReportListener(
+        listenerArguments.getStartTime(),
+        listenerArguments.getEngine().getMutatorNames(),
+        listenerArguments.getOutputStrategy());
   }
 
-  @Override
   public String name() {
-    return "ISSUES";
+    return "JSON";
   }
 
-  @Override
   public String description() {
-    return "Pseudo and partially-tested methods HTML report";
+    return "JSON report plugin";
   }
 }
