@@ -1,46 +1,43 @@
-
 package eu.stamp_project.descartes.interceptors;
 
-import org.junit.jupiter.api.Test;
-import org.pitest.mutationtest.engine.MutationDetails;
-import tests.Person;
-
-import java.io.IOException;
-import java.lang.reflect.Method;
-
-import static eu.stamp_project.test.Utils.getClassTree;
-import static eu.stamp_project.test.Utils.toMutationIdentifier;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class AvoidNullInNotNullFilterTest extends MutationFilterTest<AvoidNullInNotNullFilter> {
+import java.io.IOException;
+import java.lang.reflect.Method;
+import org.junit.jupiter.api.Test;
+import tests.Person;
 
-    //NOTE: Not using parameterized tests to make explicit the intention of each test case.
+class AvoidNullInNotNullFilterTest extends MutationFilterTest<AvoidNullInNotNullFilter> {
 
-    @Override
-    public AvoidNullInNotNullFilter getFilter() { return new AvoidNullInNotNullFilter(); }
+  // NOTE: Not using parameterized tests to make explicit the intention of each test case.
 
-    private Method method(String name, Class<?>... params) throws NoSuchMethodException {
-        return tests.PersonKt.class.getDeclaredMethod(name, params);
-    }
+  @Override
+  public AvoidNullInNotNullFilter getFilter() {
+    return new AvoidNullInNotNullFilter();
+  }
 
-    @Test
-    public void testNullOperatorNonNullResult() throws IOException, NoSuchMethodException {
-        assertFalse(allows(method("getNonNullString"), "null"));
-    }
+  private Method method(String name, Class<?>... params) throws NoSuchMethodException {
+    return tests.PersonKt.class.getDeclaredMethod(name, params);
+  }
 
-    @Test
-    public void testNullOperatorPotentialNullResult() throws NoSuchMethodException, IOException {
-        assertTrue(allows(method("getPossiblyNullString", Person.class), "null"));
-    }
+  @Test
+  void testNullOperatorNonNullResult() throws IOException, NoSuchMethodException {
+    assertFalse(allows(method("getNonNullString"), "null"));
+  }
 
-    @Test
-    public void testNonNullOperatorNonNullResult() throws NoSuchMethodException, IOException {
-        assertTrue(allows(method("getNonNullString"), "\"A\""));
-    }
+  @Test
+  void testNullOperatorPotentialNullResult() throws NoSuchMethodException, IOException {
+    assertTrue(allows(method("getPossiblyNullString", Person.class), "null"));
+  }
 
-    @Test
-    public void testNonNullOperatorPotentiallyNulResult() throws NoSuchMethodException, IOException {
-        assertTrue(allows(method("getPossiblyNullString", Person.class), "\"A\""));
-    }
+  @Test
+  void testNonNullOperatorNonNullResult() throws NoSuchMethodException, IOException {
+    assertTrue(allows(method("getNonNullString"), "\"A\""));
+  }
+
+  @Test
+  void testNonNullOperatorPotentiallyNulResult() throws NoSuchMethodException, IOException {
+    assertTrue(allows(method("getPossiblyNullString", Person.class), "\"A\""));
+  }
 }

@@ -1,0 +1,129 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/AnalysisReport",
+  "definitions": {
+    "AnalysisReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "analysis": {
+          "$ref": "#/definitions/AnalysisDetails"
+        },
+        "methods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MethodReport"
+          }
+        },
+        "time": {
+          "type": "integer"
+        },
+        "mutators": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "methods",
+        "time",
+        "mutators"
+      ],
+      "title": "AnalysisReport"
+    },
+    "MethodClassification": {
+      "enum": ["error", "tested", "pseudo-tested", "partially-tested", "not-covered"]
+    },
+    "MethodReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "details": {
+          "$ref": "#/definitions/MethodDetails"
+        },
+        "classification": {
+          "$ref": "#/definitions/MethodClassification"
+        },
+        "mutations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Mutation"
+          }
+        },
+        "tests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "classification",
+        "details",
+        "mutations",
+        "tests"
+      ],
+      "title": "Method"
+    },
+    "MethodDetails": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "desc": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "class": {
+          "type": "string"
+        },
+        "file": {
+          "type": "string"
+        },
+        "line": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "class",
+        "desc",
+        "file",
+        "line",
+        "name",
+        "package"
+      ],
+      "title": "MethodDetails"
+    },
+    "Mutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operator": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/MutationResult"
+        },
+        "detected-by": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "operator",
+        "result"
+      ],
+      "title": "Mutation"
+    },
+    "MutationResult": {
+      "enum": ["detected", "not-detected", "not-covered", "error"]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+        "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
+        "https://checkstyle.org/dtds/suppressions_1_2.dtd">
+
+<suppressions>
+    <!-- Allow eu.stamp_project -->
+    <suppress checks="PackageName" files="eu[\\/]stamp_project[\\/]"/>
+    <!-- No Javadoc -->
+    <suppress checks="MissingJavadoc*" files=".*"/>
+    <!-- Don't check generated files -->
+    <suppress files="[/\\]target[/\\]" checks=".*"/>
+    <!-- Avoid too many import in StopMethodMatcher related classes -->
+    <suppress files="StopMethodMatcher*" checks="AvoidStarImport" />
+</suppressions>

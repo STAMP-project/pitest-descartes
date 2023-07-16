@@ -1,0 +1,129 @@
+{
+  "schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/Report",
+  "definitions":{
+    "Report": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mutators": {
+          "type":"array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mutations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Mutation"
+          }
+        },
+        "time": {
+          "type":"integer"
+        }
+      },
+      "required": [
+        "mutators", "mutations", "time"
+      ]
+    },
+    "Mutation": {
+      "type": "object",
+      "properties": {
+        "detected": {
+          "type": "boolean"
+        },
+        "status": {
+          "enum": ["KILLED", "SURVIVED", "TIMED_OUT", "NON_VIABLE", "MEMORY_ERROR", "RUN_ERROR", "NO_COVERAGE"]
+        },
+        "mutator": {
+          "type": "string"
+        },
+        "line": {
+          "type": "integer"
+        },
+        "blocks": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "file": {
+          "type": "string"
+        },
+        "index": {
+          "type": "integer"
+        },
+        "method": {
+          "$ref": "#/definitions/Method"
+        },
+        "tests": {
+          "$ref": "#/definitions/TestExecution"
+        }
+      },
+      "required": [
+        "detected",
+        "status",
+        "mutator",
+        "line",
+        "blocks",
+        "file",
+        "index",
+        "method",
+        "tests"
+      ]
+    },
+    "Method": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "class": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "class",
+        "package"
+      ]
+    },
+    "TestExecution":{
+      "type": "object",
+      "properties": {
+        "run": {
+          "type": "number"
+        },
+        "ordered": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "killing": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "succeeding": {
+          "type": "array",
+          "items": {}
+        }
+      },
+      "required": [
+        "run",
+        "ordered",
+        "killing",
+        "succeeding"
+      ]
+    }
+  }
+}

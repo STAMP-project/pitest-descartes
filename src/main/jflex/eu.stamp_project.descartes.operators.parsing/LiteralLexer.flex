@@ -1,8 +1,10 @@
 package eu.stamp_project.descartes.operators.parsing;
 
 import static eu.stamp_project.descartes.operators.parsing.TokenType.*;
+@SuppressWarnings("PMD")
 %%
 
+%no_suppress_warnings
 %class LiteralLexer
 
 %unicode

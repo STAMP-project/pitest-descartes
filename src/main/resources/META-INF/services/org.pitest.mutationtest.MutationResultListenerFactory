@@ -1,3 +1,3 @@
-eu.stamp_project.descartes.reporting.JSONReportFactory
-eu.stamp_project.descartes.reporting.MethodTestingFactory
-eu.stamp_project.descartes.reporting.IssuesReportFactory
+eu.stamp_project.descartes.reporting.JsonReportListener$Factory
+eu.stamp_project.descartes.reporting.MethodTestingListener$Factory
+eu.stamp_project.descartes.reporting.IssuesReportListener$Factory

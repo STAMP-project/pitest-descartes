@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>eu.stamp-project</groupId>
@@ -38,8 +39,8 @@
         <connection>scm:git:git://github.com:STAMP-project/pitest-descartes.git</connection>
         <developerConnection>scm:git:git@github.com:STAMP-project/pitest-descartes.git</developerConnection>
         <url>https://github.com/STAMP-project/pitest-descartes</url>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>descartes-1.3.3</tag>
+    </scm>
 
     <distributionManagement>
         <snapshotRepository>
@@ -56,7 +57,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <github.global.server>github</github.global.server>
-        <pitest.version>1.14.1</pitest.version>
+        <pitest.version>1.16.0</pitest.version>
+        <maven.plugin.validation>BRIEF</maven.plugin.validation>
     </properties>
 
     <dependencies>
@@ -75,15 +77,29 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity</artifactId>
-            <version>1.7</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.14.0</version>
+            <!-- Provided by PIT -->
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.32</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.17.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.6.2</version>
+            <version>5.10.2</version>
             <scope>test</scope>
         </dependency>
 
@@ -93,19 +109,56 @@
             <version>1.3</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>1.4.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+            <version>2.1.0-alpha1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.4.1</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.9</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+
+            </plugin>
 
             <!-- Generate code from jFlex files -->
             <plugin>
                 <groupId>de.jflex</groupId>
                 <artifactId>jflex-maven-plugin</artifactId>
-                <version>1.7.0</version>
+                <version>1.9.1</version>
                 <executions>
                     <execution>
-                        <goals><goal>generate</goal></goals>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
                         <configuration>
                             <outputDirectory>target/generated-sources/jflex</outputDirectory>
                         </configuration>
@@ -117,23 +170,78 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.13.0</version>
                 <configuration>
                     <release>9</release>
                 </configuration>
             </plugin>
 
+            <!-- Static analysis -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <failOnViolation>true</failOnViolation>
+                    <violationSeverity>warning</violationSeverity>
+                    <configLocation>google_checks.xml</configLocation>
+                    <suppressionsLocation>configuration/checkstyle-suppressions.xml</suppressionsLocation>
+                    <outputEncoding>UTF-8</outputEncoding>
+                    <linkXRef>false</linkXRef>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>10.15.0</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.21.2</version>
+                <configuration>
+                    <failOnViolation>true</failOnViolation>
+                    <printFailingErrors>true</printFailingErrors>
+                    <rulesets>
+                        <ruleset>
+                            configuration/pmd-rules.xml
+                        </ruleset>
+                    </rulesets>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>
+                                check
+                            </goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- Testing -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>3.2.5</version>
             </plugin>
 
             <!-- Include metadata in manifest file -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.3.0</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -146,7 +254,9 @@
 
             <!-- Produces a jar including all dependencies -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.7.1</version>
                 <configuration>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -167,7 +277,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.3.1</version>
                 <executions>
                     <execution>
                         <!-- This execution avoids conflicts with the test resources -->
@@ -201,13 +311,13 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-deploy-plugin</artifactId>
-                        <version>2.8.1</version>
+                        <version>3.1.1</version>
                     </plugin>
 
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-release-plugin</artifactId>
-                        <version>2.5.3</version>
+                        <version>3.0.1</version>
                         <configuration>
                             <tagNameFormat>descartes-@{version}</tagNameFormat>
                             <preparationGoals>
@@ -219,13 +329,13 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.1.1</version>
+                        <version>3.6.3</version>
                     </plugin>
 
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.8</version>
+                        <version>1.6.13</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>ossrh</serverId>
@@ -244,7 +354,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
+                        <version>3.2.2</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>

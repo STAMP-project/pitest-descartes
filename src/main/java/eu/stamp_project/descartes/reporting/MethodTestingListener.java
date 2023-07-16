@@ -1,121 +1,81 @@
 package eu.stamp_project.descartes.reporting;
 
-import eu.stamp_project.descartes.reporting.models.MethodRecord;
-import org.pitest.coverage.TestInfo;
-import org.pitest.mutationtest.*;
-
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import eu.stamp_project.descartes.reporting.models.ClassReport;
+import eu.stamp_project.descartes.reporting.models.MethodReport;
+import java.io.IOException;
+import java.util.Properties;
+import org.pitest.mutationtest.ClassMutationResults;
+import org.pitest.mutationtest.ListenerArguments;
+import org.pitest.mutationtest.MutationResultListener;
+import org.pitest.mutationtest.MutationResultListenerFactory;
 import org.pitest.util.Unchecked;
 
-import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
+public class MethodTestingListener extends BaseMutationResultListener {
 
-public class MethodTestingListener implements MutationResultListener {
+  public MethodTestingListener(final ListenerArguments args) {
+    super(args);
+  }
 
-    public MethodTestingListener(final ListenerArguments args) {
-        this.args = args;
+  private JsonGenerator generator;
+
+  @Override
+  public void runStart() {
+    try {
+      JsonFactory factory = JsonFactory.builder().build();
+      generator = factory.createGenerator(
+          createWriterFor("methods.json")
+      );
+      generator.setCodec(new ObjectMapper(factory));
+
+      generator.writeStartObject();
+      generator.writeArrayFieldStart("methods");
+    } catch (IOException exc) {
+      throw Unchecked.translateCheckedException(exc);
+    }
+  }
+
+  @Override
+  public void handleMutationResult(ClassMutationResults results) {
+    ClassReport classReport = new ClassReport(results);
+    try {
+      for (MethodReport methodReport : classReport.getMethods()) {
+        generator.writeObject(methodReport);
+      }
+    } catch (IOException exc) {
+      throw Unchecked.translateCheckedException(exc);
+    }
+  }
+
+  @Override
+  public void runEnd() {
+    try {
+      generator.writeEndArray();
+      generator.writeNumberField("time", getElapsedMilliseconds());
+      generator.writeObjectField("mutators", getMutatorNames());
+      generator.close();
+    } catch (IOException exc) {
+      throw Unchecked.translateCheckedException(exc);
+    }
+  }
+
+  public static class Factory implements MutationResultListenerFactory {
+
+    @Override
+    public MutationResultListener getListener(Properties props, ListenerArguments args) {
+      return new MethodTestingListener(args);
     }
 
-    private final ListenerArguments args;
-
-    public ListenerArguments getArguments() { return args; }
-
-    private JSONWriter report;
-
-    public void runStart() {
-        try {
-            report = new JSONWriter(args.getOutputStrategy().createWriterForFile("methods.json"));
-            report.beginObject();
-
-            report.beginListAttribute("methods");
-
-        }catch(IOException exc) {
-            throw Unchecked.translateCheckedException(exc);
-        }
+    @Override
+    public String name() {
+      return "METHODS";
     }
 
-    public void handleMutationResult(ClassMutationResults results) {
-            MethodRecord.getRecords(results).forEach(this::writeMethod);
+    @Override
+    public String description() {
+      return "Pseudo and partially-tested methods JSON report";
     }
-
-    private Collection<String> getMutators(Collection<MutationResult> mutations) {
-        return mutations.stream().map(mutation -> mutation.getDetails().getMutator()).collect(Collectors.toList());
-    }
-
-    private void writeMethod(MethodRecord method) {
-        try {
-
-            report.beginObject();
-
-            report.writeAttribute("name", method.getName());
-            report.writeAttribute("description", method.getDesc());
-            report.writeAttribute("class", method.getClassName());
-            report.writeAttribute("package", method.getPackageName());
-            report.writeAttribute("file-name", method.getFileName());
-            report.writeAttribute("line-number", method.getLineNumber());
-
-
-            report.writeAttribute("classification", method.getClassification().toString());
-            report.writeStringListAttribute("detected", getMutators(method.getDetectedMutations()));
-            report.writeStringListAttribute("not-detected", getMutators(method.getUndetectedMutations()));
-
-
-            report.writeStringListAttribute(
-                    "tests",
-                    method.getTests().stream()
-                            .map(TestInfo::getName).collect(Collectors.toList()));
-
-            report.beginListAttribute("mutations");
-            method.getMutations().forEach(this::writeMutationDetails);
-            report.endList();
-
-            report.endObject();
-        }
-        catch (IOException exc) {
-            throw Unchecked.translateCheckedException(exc);
-        }
-
-    }
-
-    private void writeMutationDetails(MutationResult mutation) {
-        try {
-
-            report.beginObject();
-
-                report.writeAttribute("status", mutation.getStatus().name());
-                report.writeAttribute("mutator", mutation.getDetails().getMutator());
-                report.writeAttribute("tests-run", mutation.getNumberOfTestsRun());
-
-                report.writeStringListAttribute("tests",
-                    mutation.getDetails().getTestsInOrder().stream().map(TestInfo::getName).collect(Collectors.toList()));
-
-                report.writeStringListAttribute("killing-tests", mutation.getKillingTests());
-                report.writeStringListAttribute("succeeding-tests", mutation.getSucceedingTests());
-
-            report.endObject();
-        }
-        catch (IOException exc) {
-            throw Unchecked.translateCheckedException(exc);
-        }
-    }
-
-    public void runEnd() {
-        try {
-
-            report.endList();
-
-            report.beginObjectAttribute("analysis");
-            report.writeAttribute("time", System.currentTimeMillis() - args.getStartTime());
-            report.writeStringListAttribute("mutators", args.getEngine().getMutatorNames());
-            report.endObject();
-
-            report.endObject();
-            report.close();
-
-        }
-        catch(IOException exc) {
-            throw Unchecked.translateCheckedException(exc);
-        }
-    }
+  }
 }
-

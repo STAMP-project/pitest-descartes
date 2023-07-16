@@ -1,208 +1,262 @@
 package eu.stamp_project.test.input;
 
-
 /*
- This class contains examples of methods that should be detected by mutation filters
- */
+This class contains examples of methods that should be detected by mutation filters
+*/
 
 public class StopMethods {
 
-    static {
-        System.out.println("Static initializer");
-    }
+  static {
+    // Useless action
+    System.setIn(System.in);
 
-    public void emptyVoidMethod() {}
+    assert System.currentTimeMillis() > 0;
+  }
 
-    public boolean returnTrue () { return true; }
+  public void emptyVoidMethod() {}
 
-    public byte returnByte() { return (byte)11; }
+  public boolean returnTrue() {
+    return true;
+  }
 
-    public short returnShort() { return (short)12; }
+  public byte returnByte() {
+    return (byte) 11;
+  }
 
-    public int returnNegativeInt() { return -11; }
+  public short returnShort() {
+    return (short) 12;
+  }
 
-    public int returnPositiveInt() { return  11; }
+  public int returnNegativeInt() {
+    return -11;
+  }
 
-    public int returnOne() { return 1; }
+  public int returnPositiveInt() {
+    return 11;
+  }
 
-    public long returnPositiveLong() { return 1234567890L; }
+  public int returnOne() {
+    return 1;
+  }
 
-    public long returnNegativeLong() { return -1234567890L; }
+  public long returnPositiveLong() {
+    return 1234567890L;
+  }
 
-    public float returnPositiveFloat() { return 3.14f; }
+  public long returnNegativeLong() {
+    return -1234567890L;
+  }
 
-    public float returnNegativeFloat() { return -3.14f; }
+  public float returnPositiveFloat() {
+    return 3.14f;
+  }
 
-    public double returnPositiveDouble() { return 6.28; }
+  public float returnNegativeFloat() {
+    return -3.14f;
+  }
 
-    public double returnNegativeDouble() { return -6.28; }
+  public double returnPositiveDouble() {
+    return 6.28;
+  }
 
-    public char returnChar() { return 'A'; }
+  public double returnNegativeDouble() {
+    return -6.28;
+  }
 
-    public String returnString() {  return "A"; }
+  public char returnChar() {
+    return 'A';
+  }
 
-    public Object returnNull() { return null; }
+  public String returnString() {
+    return "A";
+  }
 
+  public Object returnNull() {
+    return null;
+  }
 
-    public int[] emptyIntArray() {
-        return new int[0];
+  public int[] emptyIntArray() {
+    return new int[0];
+  }
 
-    }
+  // The actually produces the same bytecode for this method as the code produced for the previous
+  // version
+  public int[] emptyInt2Array() {
+    return new int[] {};
+  }
 
-    //The actually produces the same bytecode for this method as the code produced for the previous version
-    public int[] emptyInt2Array() {
-        return new int[]{};
-    }
+  public int[][] emptyMatrix() {
+    return new int[0][];
+  }
 
-    public int[][] emptyMatrix() { return new int[0][]; }
+  public String[] emptyStringArray() {
+    return new String[0];
+  }
 
-    public String[] emptyStringArray() { return new String[0]; }
+  public String[][] emptyStringMatrix() {
+    return new String[0][];
+  }
 
-    public String[][] emptyStringMatrix() { return new String[0][]; }
+  boolean aBoolean;
+  byte aByte;
+  short aShort;
+  int anInt;
+  long aLong;
+  float aFloat;
+  double aDouble;
+  char aChar;
+  String aString;
+  Object anObject;
 
+  public void setABoolean(boolean aBoolean) {
+    this.aBoolean = aBoolean;
+  }
 
-    boolean aBoolean;
-    byte aByte;
-    short aShort;
-    int anInt;
-    long aLong;
-    float aFloat;
-    double aDouble;
-    char aChar;
-    String aString;
-    Object anObject;
+  public void setAByte(byte aByte) {
+    this.aByte = aByte;
+  }
 
-    public void setABoolean(boolean aBoolean) {
-        this.aBoolean = aBoolean;
-    }
+  public void setAChar(char aChar) {
+    this.aChar = aChar;
+  }
 
-    public void setAByte(byte aByte) {
-        this.aByte = aByte;
-    }
+  public void setADouble(double aDouble) {
+    this.aDouble = aDouble;
+  }
 
-    public void setAChar(char aChar) {
-        this.aChar = aChar;
-    }
+  public void setAFloat(float aFloat) {
+    this.aFloat = aFloat;
+  }
 
-    public void setADouble(double aDouble) {
-        this.aDouble = aDouble;
-    }
+  public void setALong(long aLong) {
+    this.aLong = aLong;
+  }
 
-    public void setAFloat(float aFloat) {
-        this.aFloat = aFloat;
-    }
+  public void setAnInt(int anInt) {
+    this.anInt = anInt;
+  }
 
-    public void setALong(long aLong) {
-        this.aLong = aLong;
-    }
+  public void setAShort(short aShort) {
+    this.aShort = aShort;
+  }
 
-    public void setAnInt(int anInt) {
-        this.anInt = anInt;
-    }
+  public void setAString(String aString) {
+    this.aString = aString;
+  }
 
-    public void setAShort(short aShort) {
-        this.aShort = aShort;
-    }
+  public void setAnObject(Object anObject) {
+    this.anObject = anObject;
+  }
 
-    public void setAString(String aString) {
-        this.aString = aString;
-    }
+  public byte getAByte() {
+    return aByte;
+  }
 
-    public void setAnObject(Object anObject) {
-        this.anObject = anObject;
-    }
+  public char getAChar() {
+    return aChar;
+  }
 
-    public byte getAByte() {
-        return aByte;
-    }
+  public double getADouble() {
+    return aDouble;
+  }
 
-    public char getAChar() {
-        return aChar;
-    }
+  public float getAFloat() {
+    return aFloat;
+  }
 
-    public double getADouble() {
-        return aDouble;
-    }
+  public int getAnInt() {
+    return anInt;
+  }
 
-    public float getAFloat() {
-        return aFloat;
-    }
+  public long getALong() {
+    return aLong;
+  }
 
-    public int getAnInt() {
-        return anInt;
-    }
+  public short getAShort() {
+    return aShort;
+  }
 
-    public long getALong() {
-        return aLong;
-    }
+  public String getAString() {
+    return aString;
+  }
 
-    public short getAShort() {
-        return aShort;
-    }
+  public Object getAnObject() {
+    return anObject;
+  }
 
-    public String getAString() {
-        return aString;
-    }
+  public StopMethods setFluent(int value) {
+    this.anInt = value;
+    return this;
+  }
 
-    public Object getAnObject() {
-        return anObject;
-    }
+  public StopMethods onlyReturnsThis() {
+    return this;
+  }
 
-    public StopMethods setFluent(int value) {
-        this.anInt = value;
-        return this;
-    }
+  public int onlyReturnsAPrimitiveParameter(int a, int b, int c) {
+    return b;
+  }
 
-    public StopMethods onlyReturnsThis() { return this; }
+  public String onlyReturnsAReferenceParameter(int a, int b, String c) {
+    return c;
+  }
 
-    public int onlyReturnsAPrimitiveParameter(int a, int b, int c) { return b;  }
+  @Deprecated
+  public boolean isDeprecated() {
+    return Boolean.valueOf("tr " + "ue");
+  }
 
-    public String onlyReturnsAReferenceParameter(int a, int b, String c) { return c; }
+  static int staticField;
 
-    @Deprecated
-    public boolean isDeprecated() { return  Boolean.valueOf("tr " + "ue"); }
+  public int getStaticField() {
+    return staticField;
+  }
 
-    static int staticField;
+  public void setStaticField(int value) {
+    staticField = value;
+  }
 
-    public int getStaticField() { return staticField; }
+  @Override
+  public int hashCode() {
+    return "1234".length() << 2;
+  }
 
-    public void setStaticField(int value) { staticField = value; }
+  @Override
+  public String toString() {
+    return this.getClass().getName();
+  }
 
-    @Override
-    public int hashCode() { return "1234".length() << 2; }
+  public void delegateSelfStaticVoid(int value) {
+    this.setStaticField(value);
+  }
 
-    @Override
-    public String toString() { return this.getClass().getName(); }
+  public void delegateSelfVoid(int value) {
+    this.setAnInt(value);
+  }
 
-    public void delegateSelfStaticVoid(int value) {
-        this.setStaticField(value);
-    }
+  public String delegateSelfValue(String that, int start, int end) {
+    return this.delegateParameterValue(that, start, end);
+  }
 
-    public void delegateSelfVoid(int value) {
-        this.setAnInt(value);
-    }
+  public String delegateParameterValue(String that, int start, int end) {
+    return that.substring(start, end);
+  }
 
-    public String delegateSelfValue(String that, int start, int end) {
-        return this.delegateParameterValue(that, start, end);
-    }
+  public String delegateFieldValue(int start, int end) {
+    return aString.substring(start, end);
+  }
 
-    public String delegateParameterValue(String that, int start, int end) {
-        return that.substring(start, end);
-    }
+  public static void delegateToExternalClass(String message) {
+    Calculator.defaultCalculator.setLastOperatorSymbol(message);
+  }
 
-    public String delegateFieldValue(int start, int end) {
-        return aString.substring(start, end);
-    }
+  public static void emptyStatic() {}
 
-    public static void delegateToExternalClass(String message) {
-        System.out.println(message);
-    }
+  public void delegateToStatic(String message) {
+    delegateToExternalClass(message);
+  }
 
-    public static void emptyStatic() {}
-
-    public void delegateToStatic (String message) {
-        delegateToExternalClass(message);
-    }
-
-    public void delegateToStatic() { emptyStatic(); }
+  public void delegateToStatic() {
+    emptyStatic();
+  }
 }
