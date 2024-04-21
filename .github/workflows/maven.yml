@@ -12,7 +12,7 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v4
       with:
-        distribution: 'oracle'
+        distribution: 'corretto'
         java-version: 13
     - name: Execute tests and compute coverage
       run: mvn clean test
