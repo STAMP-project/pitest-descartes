@@ -5,11 +5,15 @@ import eu.stamp_project.descartes.reporting.models.ProjectReport;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Writer;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 import org.pitest.mutationtest.ClassMutationResults;
 import org.pitest.mutationtest.ListenerArguments;
@@ -33,8 +37,10 @@ public class IssuesReportListener extends BaseMutationResultListener {
     findings = new ArrayList<>();
     try {
       Configuration freemarkerConfig = new Configuration(Configuration.VERSION_2_3_32);
+      ClassLoader resourceClassLoader = IssuesReportListener.class.getClassLoader();
+      dumpStyleFile(resourceClassLoader);
       freemarkerConfig.setClassLoaderForTemplateLoading(
-          IssuesReportListener.class.getClassLoader(),
+          resourceClassLoader,
           "templates"
       );
       indexTemplate = freemarkerConfig.getTemplate("html-report-index.ftlh");
@@ -44,9 +50,21 @@ public class IssuesReportListener extends BaseMutationResultListener {
     }
   }
 
+  private void dumpStyleFile(ClassLoader resourceClassLoader) throws IOException {
+    try (BufferedReader reader = new BufferedReader(new InputStreamReader(
+        Objects.requireNonNull(resourceClassLoader.getResourceAsStream("files/style.css"))))) {
+      try (BufferedWriter writer = new BufferedWriter(createFile("style.css"))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+          writer.write(line);
+          writer.newLine();
+        }
+      }
+    }
+  }
+
   private Writer createFile(String path) {
-    String filePath = Paths.get("issues", path).toString();
-    return createWriterFor(filePath);
+    return createWriterFor(Paths.get("issues", path).toString());
   }
 
   @Override

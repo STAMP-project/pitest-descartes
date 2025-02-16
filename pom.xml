@@ -13,7 +13,7 @@
     <url>https://github.com/STAMP-project/pitest-descartes.git</url>
 
     <organization>
-        <name>STAMP-Project</name>
+        <name>eu.stamp-project</name>
         <url>http://github.com/STAMP-project</url>
     </organization>
 
@@ -57,8 +57,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <github.global.server>github</github.global.server>
-        <pitest.version>1.16.0</pitest.version>
-        <maven.plugin.validation>BRIEF</maven.plugin.validation>
+        <pitest.version>1.18.1</pitest.version>
+        <maven.plugin.validation>VERBOSE</maven.plugin.validation>
+        <linkXRef>false</linkXRef> <!-- Remove PMD warnings about reference links-->
     </properties>
 
     <dependencies>
@@ -76,18 +77,11 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.14.0</version>
-            <!-- Provided by PIT -->
-            <scope>provided</scope>
-        </dependency>
-
+        <!-- Reporting -->
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
-            <version>2.3.32</version>
+            <version>2.3.34</version>
         </dependency>
 
         <dependency>
@@ -96,6 +90,7 @@
             <version>2.17.0</version>
         </dependency>
 
+        <!-- Test dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -146,7 +141,6 @@
                         </configuration>
                     </execution>
                 </executions>
-
             </plugin>
 
             <!-- Generate code from jFlex files -->
@@ -172,7 +166,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
-                    <release>9</release>
+                    <release>11</release>
                 </configuration>
             </plugin>
 
@@ -273,27 +267,27 @@
                 </executions>
             </plugin>
 
-            <!-- Generates the documentation observing the right versions -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.3.1</version>
-                <executions>
-                    <execution>
-                        <!-- This execution avoids conflicts with the test resources -->
-                        <!-- Invoke as mvn resources:resources@gendoc -->
-                        <id>gendoc</id>
-                        <configuration>
-                            <outputDirectory>${basedir}</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>src/docgen</directory>
-                                    <filtering>true</filtering>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.21.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-module-markdown</artifactId>
+                        <version>2.0.0</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.maven.skins</groupId>
+                        <artifactId>maven-fluido-skin</artifactId>
+                        <version>2.0.0</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <generateProjectInfo>false</generateProjectInfo>
+                    <generateReports>false</generateReports>
+                    <generateSitemap>false</generateSitemap>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -321,7 +315,7 @@
                         <configuration>
                             <tagNameFormat>descartes-@{version}</tagNameFormat>
                             <preparationGoals>
-                                clean verify resources:resources@gendoc
+                                clean verify
                             </preparationGoals>
                         </configuration>
                     </plugin>

@@ -1,0 +1,168 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: whitesmoke;
+}
+
+section#page-content {
+  margin: 16px;
+}
+
+div.item .item-content {
+  border: 0.8px solid rgb(208, 215, 222);
+  border-radius: 6px;
+  padding: 8px 8px;
+  background-color: white;
+}
+
+table {
+  font-size: 90%;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr:last-child {
+  border-bottom: none;
+}
+
+tr {
+  border-bottom: solid .8px rgb(211, 214, 218);
+}
+
+thead {
+  vertical-align: middle;
+}
+
+td,
+th {
+  padding: 10px;
+  margin: 0;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+#index-report-summary {
+    width: 70%;
+    margin: 0 auto;
+}
+
+#index-report-summary th {
+  width: 20%;
+}
+
+header {
+  color: rgb(31, 35, 40);
+  background-color: white;
+  box-shadow: rgb(208, 215, 222) 0px -1px 0px 0px inset;
+  box-sizing: border-box;
+  background-origin: padding-box;
+  line-height: 21px;
+  padding: 16px;
+}
+
+section#page-content {
+  margin: 20px;
+}
+
+ul#method-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.method-report {
+  background-color: white;
+  margin: 16px 16px 16px 32px;
+  padding: 8px 16px;
+  box-shadow: inset;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+report-item {
+  margin: 5px;
+  font-size: 90%;
+}
+
+.method-header {
+  display: inline-block;
+  margin: 3px;
+}
+
+.method-report summary .method-classification {
+  font-size: small;
+  margin: 0 .5em;
+  display: inline-block;
+  width: 8em;
+  background-color: blue;
+  padding: .3em;
+  color: whitesmoke;
+  border-radius: .5em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.method-report summary .method-classification.pseudo-tested {
+  background-color: rgb(194, 106, 119);
+}
+
+.method-report summary .method-classification.tested {
+  background-color: rgb(51, 117, 56);
+}
+
+.method-report summary .method-classification.partially-tested {
+  background-color: rgb(220, 205, 125);
+}
+
+.method-report summary .method-classification.not-covered {
+  background-color: rgb(221, 221, 221);
+}
+
+.method-report summary .method-classification.error {
+  background-color: #a37;
+}
+
+.method-summary {
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  padding: 10px;
+  width: 80%;
+  margin: 25px auto;
+  text-align: center;
+}
+
+
+.method-summary .method-classification.pseudo-tested {
+  color: rgb(194, 106, 119);
+}
+
+.method-summary .method-classification.tested {
+  color: rgb(51, 117, 56);
+}
+
+.method-summary .method-classification.partially-tested {
+  color: rgb(220, 205, 125);
+}
+
+.method-summary .method-classification.not-covered {
+  color: rgb(221, 221, 221);
+}
+
+.method-summary .method-classification.error {
+  color: #a37;
+}
+
+.report-item h3 {
+  padding: 5px 0;
+  border-bottom: 0.9px solid lightgray;
+}
+
+code {
+  word-wrap: break-word;
+}
