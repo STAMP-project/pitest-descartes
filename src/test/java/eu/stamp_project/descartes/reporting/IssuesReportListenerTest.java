@@ -44,9 +44,5 @@ class IssuesReportListenerTest extends ListenerTest<IssuesReportListener.Factory
             "A report was generated for a class with no issues: " + classReport.getClassName());
       }
     }
-
-
-
   }
-
 }

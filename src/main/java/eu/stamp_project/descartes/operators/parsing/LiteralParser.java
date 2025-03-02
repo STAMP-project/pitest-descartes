@@ -14,7 +14,6 @@ import static eu.stamp_project.descartes.operators.parsing.TokenType.getNumericT
 import static eu.stamp_project.descartes.operators.parsing.TokenType.getRadix;
 import static eu.stamp_project.descartes.operators.parsing.TokenType.typeToLiteral;
 import static java.util.Objects.requireNonNull;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -40,7 +39,7 @@ public class LiteralParser {
     }
 
     public static Result error(String error) {
-      if (isBlank(error)) {
+      if (isBlankOrNull(error)) {
         throw new IllegalArgumentException(
             "Resulting error message can not be null, empty or blank.");
       }
@@ -68,7 +67,7 @@ public class LiteralParser {
   private LiteralLexer lexer;
 
   public Result parse(String line) {
-    if (isBlank(line)) {
+    if (isBlankOrNull(line)) {
       return Result.error("Input is null or blank");
     }
     try {
@@ -184,5 +183,21 @@ public class LiteralParser {
               + radix,
           exc);
     }
+  }
+
+  private static boolean isBlankOrNull(CharSequence sequence) {
+    if (sequence == null || sequence.length() == 0) {
+      return true;
+    }
+    int length = sequence.length();
+    if (length == 0) {
+      return true;
+    }
+    for (int index = 0; index < length; index++) {
+      if (!Character.isWhitespace(sequence.charAt(index))) {
+        return false;
+      }
+    }
+    return true;
   }
 }

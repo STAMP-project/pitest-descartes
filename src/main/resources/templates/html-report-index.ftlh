@@ -5,29 +5,7 @@
 <html lang="en">
   <head>
     <title>Testing issues report</title>
-    <style>
-      body { padding: 0; margin: 0; font-family: Arial, Helvetica, sans-serif; }
-      header
-      {
-        color: rgb(31, 35, 40);
-        background-color: rgb(246, 248, 250);
-        box-shadow: rgb(208, 215, 222) 0px -1px 0px 0px inset;
-        box-sizing: border-box;
-        background-origin: padding-box;
-        font-size: 10px;
-        line-height: 21px;
-        padding: 16px;;
-      }
-      section#page-content { margin: 16px; }
-      div.item .item-content { border: 0.8px solid rgb(208, 215, 222); border-radius: 6px; padding: 8px 8px; }
-      table { font-size: 90%; width: 100%; border-collapse: collapse; }
-      tr:last-child { border-bottom: none; }
-      tr { border-bottom: solid .8px rgb(211, 214, 218); }
-      thead { vertical-align: middle; }
-      td, th { padding: 10px; margin: 0; }
-      .left { text-align: left; }
-      .right { text-align: right; }
-    </style>
+    <link href="style.css" rel="stylesheet" />
   </head>
   <body>
     <header>
@@ -36,7 +14,7 @@
     <section id="page-content">
       <div class="item">
         <h2>Summary</h2>
-        <div class="item-content">
+        <div id="index-report-summary" class="item-content">
           <table>
             <tr>
               <th class="right">Total time</th>
@@ -70,7 +48,7 @@
               <tr><th class="left">Class</th><th class="right">Issues</th></tr>
             </thead>
              <#list findings as finding>
-               <tr><td class="left"><code><a href="${finding.className}.html">${finding.className}</a></code></td><td class="right">${finding.issues}</td></tr>
+               <tr><td class="left"><code><a href="${finding.className}.html">${finding.className}</a></code></td><td class="right">${finding.numberOfIssues}</td></tr>
              </#list>
           </table>
           </#if>

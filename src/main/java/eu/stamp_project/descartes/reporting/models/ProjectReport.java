@@ -31,7 +31,7 @@ public class ProjectReport {
 
   public int getTotalNumberOfIssues() {
     return findings.stream()
-        .mapToInt(ClassReport::getIssues)
+        .mapToInt(ClassReport::getNumberOfIssues)
         .sum();
   }
 }

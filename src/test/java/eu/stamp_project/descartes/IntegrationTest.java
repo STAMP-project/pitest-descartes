@@ -87,7 +87,7 @@ class IntegrationTest {
     CompoundInterceptorFactory interceptorFactory = factory.getInterceptor();
     // Interceptors with no coverage information and no test prioritization
     MutationInterceptor interceptor =
-        interceptorFactory.createInterceptor(options, null, source, null);
+        interceptorFactory.createInterceptor(options, null, source, null, null);
     Mutater mutater = engine.createMutator(source);
     ClassName className = ClassName.fromClass(target);
     List<MutationDetails> mutations = mutater.findMutations(className);

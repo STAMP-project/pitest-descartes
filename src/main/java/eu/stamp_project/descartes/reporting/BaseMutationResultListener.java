@@ -19,7 +19,7 @@ public abstract class BaseMutationResultListener implements MutationResultListen
   }
 
   public long getElapsedMilliseconds() {
-    return System.currentTimeMillis() - arguments.getStartTime();
+    return (System.nanoTime() - arguments.getStartTime()) / 1000000;
   }
 
   public Duration getElapsedTime() {

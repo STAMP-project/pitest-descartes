@@ -1,0 +1,35 @@
+<site xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         name="Descartes"
+         xmlns="http://maven.apache.org/SITE/2.0.0"
+         xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>2.0.0</version>
+    </skin>
+    <body>
+        <menu name="Descartes">
+            <item name="Overview" href="/index.html"/>
+            <item name="How does it work?" href="/how-does-it-work.html"/>
+            <item name="What can it find?" href="/examples.html"/>
+        </menu>
+        <menu name="How to use it?">
+            <item name="Running Descartes" href="/running-on-your-project.html"/>
+            <item name="Frequent configurations" href="/frequent-configurations.html"/>
+            <item name="Output formats" href="/output-formats.html"/>
+        </menu>
+        <menu name="More information">
+            <item name="Performance comparison" href="performance-comparison.html"/>
+            <item name="Papers and presentations" href="/papers-and-presentations.html"/>
+        </menu>
+    </body>
+    <custom>
+        <fluidoSkin>
+            <gitHub>
+                <projectId>STAMP-Project/pitest-descartes</projectId>
+                <ribbonOrientation>right</ribbonOrientation>
+                <ribbonColor>black</ribbonColor>
+            </gitHub>
+        </fluidoSkin>
+    </custom>
+</site>

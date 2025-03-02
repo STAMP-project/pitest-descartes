@@ -1,0 +1,231 @@
+# Papers and presentations
+
+This page contains links to papers and presentations about Descartes and how it is used to evaluate the quality of test suites in real software projects.
+
+#[[##]]# Refereed papers
+
+* [A Comprehensive Study of Pseudo-tested Methods](https://hal.inria.fr/hal-01867423/file/main.pdf) (Empirical Software Engineering, [doi:10.1007/s10664-018-9653-2](https://doi.org/10.1007/s10664-018-9653-2))
+
+* [Descartes: a PITest engine to detect pseudo-tested methods - Tool Demonstration](https://hal.inria.fr/hal-01870976/file/main.pdf) (Proceedings of ASE, [doi:10.1145/3238147.3240474](https://doi.org/10.1145/3238147.3240474))
+
+#[[##]]# Blog posts and other articles mentioning Descartes
+
+* [Mutation testing with PIT and Descartes](http://massol.myxwiki.org/xwiki/bin/view/Blog/MutationTestingDescartes) by [Vincent Massol](https://massol.myxwiki.org/xwiki/bin/view/XWiki/VincentMassol)
+
+* [Controlling Test Quality](http://massol.myxwiki.org/xwiki/bin/view/Blog/ControllingTestQuality) [Vincent Massol](https://massol.myxwiki.org/xwiki/bin/view/XWiki/VincentMassol)
+
+* [An intro to Mutation Testing - or why coverage sucks](https://pedrorijo.com/blog/intro-mutation/) by [Pedro Rijo](https://pedrorijo.com/about/).
+
+* [Extreme mutation testing](https://adictosaltrabajo.com/2021/08/24/extreme-mutation-testing/) by [Dionisio Cortés Fernández](https://adictosaltrabajo.com/author/dionisio-cortes-fernandez/).
+
+* [Les Cast Codeurs Podcast - Episode 189](https://lescastcodeurs.com/2018/05/18/lcc-189-conferences-et-tests-par-mutation/) by [Vincent Massol](https://massol.myxwiki.org/xwiki/bin/view/XWiki/VincentMassol). [Audio](http://traffic.libsyn.com/lescastcodeurs/LesCastCodeurs-Episode-189.mp3)
+
+#[[##]]# Presentations
+
+#set($presentations = [
+{
+    "event": "4\u00e8me Journ\u00e9e du Groupe G\u00e9nie Logiciel Empirique",
+    "location": "Paris, France",
+    "date": "2017-04-12",
+    "title": "Descartes: A PIT extension for extreme mutation",
+    "speaker": "Oscar L. Vera",
+    "links": [
+        {
+            "name": "Program",
+            "url": "http://gdr-gpl.cnrs.fr/node/275"
+        },
+        {
+            "name": "Video",
+            "url": "http://univ-lille1.gforge.inria.fr/empirical-se/AirMo_8.mp4"
+        }
+    ]
+},
+{
+    "event": "EclipseCon Europe 2017",
+    "location": "Ludwigsburg, Germany",
+    "date": "2017-10-25",
+    "title": "Mutate and test your tests",
+    "speaker": "Benoit Baudry.",
+    "links": [
+        {
+            "name": "Abstract",
+            "url": "https://www.eclipsecon.org/europe2017/news/mutate-and-test-your-tests"
+        },
+        {
+            "name": "Video",
+            "url": "https://www.youtube.com/embed/rlfcGUDkSjQ"
+        }
+    ]
+},
+{
+    "event": "Open Source Summit",
+    "location": "Paris, France",
+    "title": "Mutate and test your tests",
+    "date": "2017-12-07",
+    "speaker": "Caroline Landry",
+    "links": []
+},
+{
+    "event": "FOSDEM 2018",
+    "location": "Brussels, Belgium",
+    "date": "2018-02-04",
+    "title": "Advanced testing in action on a Java project",
+    "speaker": "Vincent Massol",
+    "links": [
+        {
+            "name": "Abstract",
+            "url": "https://fosdem.org/2018/schedule/event/advanced_testing_java/"
+        },
+        {
+            "name": "Video",
+            "url": "http://ftp.belnet.be/mirror/FOSDEM/2018/H.2213/advanced_testing_java.webm"
+        }
+    ]
+},
+{
+    "event": "Devoxx 2018",
+    "location": "Paris, France",
+    "date": "2018-04-19",
+    "title": "Nouvelle g\u00e9n\u00e9ration de tests pour projets Java",
+    "speaker": "Vincent Massol",
+    "links": [
+        {
+            "name": "Abstract",
+            "url": "https://cfp.devoxx.fr/2018/talk/OCF-8843/Nouvelle_generation_de_tests_pour_projets_Java"
+        },
+        {
+            "name": "Video",
+            "url": "https://www.youtube.com/watch?v=ZNDzDucCn4o"
+        }
+    ]
+},
+{
+    "event": "Special session at Spotify",
+    "location": "Stockholm, Sweden",
+    "date": "2018-05-25",
+    "title": "Mutation@Spotify",
+    "speaker": "Benoit Baudry",
+    "links": [
+        {
+            "name": "Slides",
+            "url": "https://www.slideshare.net/slideshow/mutation-spotify/98641495"
+        }
+    ]
+},
+{
+    "event": "OW2con'18, Paris Ch\u00e2tillon",
+    "location": "Paris, France",
+    "date": "2018-06-08",
+    "title": "STAMP or Test Amplification to DevTestOps Service",
+    "speaker": "Daniele Gagliardi",
+    "links": [
+        {
+            "name": "Abstract",
+            "url": "http://sched.co/EdjB"
+        },
+        {
+            "name": "Video",
+            "url": "https://www.youtube.com/embed/Y_B6prCmS2w"
+        }
+    ]
+},
+{
+    "event": "BreizhJUG",
+    "location": "Rennes, France",
+    "date": "2018-06-21",
+    "title": "Mutation Testing in Java and Github",
+    "speaker": "Benout Baudry",
+    "links": [
+        {
+            "name": "Abstract",
+            "url": "http://www.breizhjug.org/#/events?q=Mutation%20Testing%20for%20Java"
+        },
+        {
+            "name": "Video",
+            "url": "https://www.youtube.com/embed/cxDiBOXLU84"
+        }
+    ]
+},
+{
+    "event": "SophiaConf 2018",
+    "location": "Sophia Antipolis, France",
+    "date": "2018-07-05",
+    "title": "Test Amplification for DevOps",
+    "speaker": "Pascal Urso",
+    "links": [
+        {
+            "name": "Video",
+            "url": "https://www.youtube.com/embed/8Jx-tvoqqqo"
+        }
+    ]
+},
+{
+    "event": "ASE 2018 Tutorials",
+    "location": "Montpellier, France",
+    "date": "2018-09-03",
+    "title": "Let the CI spot the holes in tested code with the Descartes tool",
+    "speaker": "Oscar L. Vera",
+    "links": [
+        {
+            "name": "Program",
+            "url": "http://www.ase2018.com/?p=tutorials#descartes"
+        },
+        {
+            "name": "Slides",
+            "url": "https://www.slideshare.net/OscarLuisVeraPrez/let-the-ci-spot-the-holes-in-tested-code-with-the-descartes-tool-122306608"
+        }
+    ]
+},
+{
+    "event": "BreizhCamp 2019",
+    "location": "Rennes, France",
+    "date": "2019-03-21",
+    "title": "The CI as a partner for test improvement suggestions",
+    "speaker": "Caroline Landry",
+    "links": [
+        {
+            "name": "Video",
+            "url": "https://www.youtube.com/watch?v=DtvRMi63w10"
+        }
+    ]
+},
+{
+    "event": "Mutation Testing Workshop at Ericsson",
+    "location": "Stockholm, Sweden",
+    "date": "2019-04-12",
+    "title": "Finding the worst tested methods in a test suite",
+    "speaker": "Oscar L. Vera",
+    "links": [
+        {
+            "name": "Abstract",
+            "url": "https://www.stamp-project.eu/view/Blog/April_Mutation_Testing"
+        },
+        {
+            "name": "Slides",
+            "url": "https://www.slideshare.net/stamp-project/mutation-testing-workshop-at-ericsson-kista-sweden"
+        }
+    ]
+},
+{
+    "event": "Devoxx 2019",
+    "location": "Paris, France",
+    "date": "2019-04-19",
+    "title": "The CI as a partner for test improvement suggestions",
+    "speaker": "Caroline Landry",
+    "links": [
+        {
+            "name": "Video",
+            "url": "https://www.youtube.com/watch?v=ttCPppGC1Pk"
+        }
+    ]
+}
+])
+
+#foreach ($presentation in $presentations)
+- *${presentation.title}* by ${presentation.speaker}\
+  ${presentation.event}, ${presentation.location}, ${presentation.date}\
+  #foreach ($link in $presentation.links)
+  [${link.name}](${link.url})
+  #end
+
+#end

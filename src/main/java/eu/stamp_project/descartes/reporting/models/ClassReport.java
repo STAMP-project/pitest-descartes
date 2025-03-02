@@ -27,17 +27,21 @@ public class ClassReport {
     return className;
   }
 
-  public int getIssues() {
+  public int getNumberOfIssues() {
     // The number of methods in one class is limited to 65535
     return (int) methods.stream().filter(MethodReport::hasIssues).count();
   }
 
   public boolean hasIssues() {
-    return getIssues() > 0;
+    return getNumberOfIssues() > 0;
   }
 
   public Collection<MethodReport> getMethods() {
     return Collections.unmodifiableCollection(methods);
+  }
+
+  public Collection<MethodReport> getMethodsWithIssues() {
+    return methods.stream().filter(MethodReport::hasIssues).collect(Collectors.toList());
   }
 
 }
