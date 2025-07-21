@@ -57,7 +57,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <github.global.server>github</github.global.server>
-        <pitest.version>1.16.0</pitest.version>
+        <pitest.version>1.20.0</pitest.version>
         <maven.plugin.validation>BRIEF</maven.plugin.validation>
     </properties>
 
