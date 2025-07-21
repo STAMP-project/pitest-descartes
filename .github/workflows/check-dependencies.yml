@@ -14,7 +14,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 13
+          java-version: 17
       - name: Finding dependency updates
         run:  mvn versions:display-dependency-updates -Dversions.outputFile=report.txt
       - name: Update dependencies to latest version
