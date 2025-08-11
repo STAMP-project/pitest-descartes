@@ -13,7 +13,7 @@
     <url>https://github.com/STAMP-project/pitest-descartes.git</url>
 
     <organization>
-        <name>STAMP-Project</name>
+        <name>eu.stamp-project</name>
         <url>http://github.com/STAMP-project</url>
     </organization>
 
@@ -57,7 +57,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <github.global.server>github</github.global.server>
-        <pitest.version>1.16.0</pitest.version>
+        <pitest.version>1.20.0</pitest.version>
         <maven.plugin.validation>BRIEF</maven.plugin.validation>
     </properties>
 
