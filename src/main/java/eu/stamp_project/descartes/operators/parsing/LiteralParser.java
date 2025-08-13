@@ -14,7 +14,6 @@ import static eu.stamp_project.descartes.operators.parsing.TokenType.getNumericT
 import static eu.stamp_project.descartes.operators.parsing.TokenType.getRadix;
 import static eu.stamp_project.descartes.operators.parsing.TokenType.typeToLiteral;
 import static java.util.Objects.requireNonNull;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -184,5 +183,16 @@ public class LiteralParser {
               + radix,
           exc);
     }
+  }
+
+  private static boolean isBlank(CharSequence cs) {
+    if (cs != null && cs.length() > 0) {
+      for (int i = 0; i < cs.length(); ++i) {
+        if (!Character.isWhitespace(cs.charAt(i))) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }
