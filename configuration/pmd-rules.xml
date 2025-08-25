@@ -10,13 +10,13 @@
     </description>
 
     <rule ref="category/java/bestpractices.xml">
-            <exclude name="AbstractClassWithoutAbstractMethod" />
+        <exclude name="AbstractClassWithoutAbstractMethod" />
         <!-- Temporary disabled as it produces too many false positives with hamcrest -->
-        <exclude name="JUnitAssertionsShouldIncludeMessage"/>
-        <exclude name="JUnitTestsShouldIncludeAssert" />
+        <exclude name="UnitTestAssertionsShouldIncludeMessage"/>
+        <exclude name="UnitTestShouldUseTestAnnotation" />
         <exclude name="UseVarargs"/>
     </rule>
-    <rule ref="category/java/bestpractices.xml/JUnitTestContainsTooManyAsserts">
+    <rule ref="category/java/bestpractices.xml/UnitTestContainsTooManyAsserts">
         <properties>
             <property name="maximumAsserts" value="3" />
         </properties>
