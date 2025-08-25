@@ -24,7 +24,6 @@ import org.pitest.reloc.asm.commons.GeneratorAdapter;
  * This is currently working for classes with parameterless constructors and a few well-known Java
  * interfaces.
  */
-@SuppressWarnings("PMD.LooseCoupling")
 @Operator(
     identifier = "new",
     description =

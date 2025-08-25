@@ -51,7 +51,7 @@ public class SkipDoNotMutateFilter extends MutationFilter {
       return Set.of((String) parameter);
     }
     if (parameter instanceof List) {
-      HashSet<String> result = new HashSet<>();
+      Set<String> result = new HashSet<>();
       for (Object val : (List<?>) parameter) {
         if (val instanceof String) {
           result.add((String) val);
