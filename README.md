@@ -47,6 +47,10 @@ For quick configuration snippets showing how to use other testing frameworks suc
 
 If you use a multi-module project take a look at [PitMP](https://github.com/STAMP-project/pitmp-maven-plugin).
 
+You can also see how Pitest and Descartes are used in the following example projects:
+- [An example of effective mutation testing in Spring Boot 3 projects with Maven](https://github.com/ismail2ov/mutation-testing-with-maven)
+- [An example of effective mutation testing in Spring Boot 3 projects with Gradle](https://github.com/ismail2ov/mutation-testing-with-gradle)
+
 ## Table of contents
   - [How does Descartes work?](#how-does-descartes-work)
   - [Descartes Output](#descartes-output)
