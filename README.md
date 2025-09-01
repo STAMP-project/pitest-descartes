@@ -16,7 +16,7 @@ To use Descartes in a Maven project, add the following plugin configuration to y
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.7.0</version>
+  <version>1.20.2</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
   </configuration>
@@ -24,7 +24,7 @@ To use Descartes in a Maven project, add the following plugin configuration to y
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.3.2</version>
+      <version>1.3.3</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -421,7 +421,7 @@ The minimum configuration to use Descartes in a Maven project is the following:
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.7.0</version>
+  <version>1.20.2</version>
   <configuration>
     <mutationEngine>descartes</mutationEngine>
   </configuration>
@@ -429,7 +429,7 @@ The minimum configuration to use Descartes in a Maven project is the following:
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.3.2</version>
+      <version>1.3.3</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -442,7 +442,7 @@ Later, one need to run the mutation coverage goal provided by the PIT Maven plug
 ```
 cd my-project-under-test
 mvn clean package # ensures clean state
-mvn org.pitest:pitest-maven:mutationCoverage
+mvn pitest:mutationCoverage
 ```
 ##### Specifying operators
 
@@ -561,7 +561,7 @@ They can be configured and combined as regular PIT report formats:
 <plugin>
   <groupId>org.pitest</groupId>
   <artifactId>pitest-maven</artifactId>
-  <version>1.7.0</version>
+  <version>1.20.2</version>
   <configuration>
     <outputFormats>
       <value>JSON</value>
@@ -574,7 +574,7 @@ They can be configured and combined as regular PIT report formats:
     <dependency>
       <groupId>eu.stamp-project</groupId>
       <artifactId>descartes</artifactId>
-      <version>1.3.2</version>
+      <version>1.3.3</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -631,7 +631,7 @@ Follow the [instructions](http://gradle-pitest-plugin.solidsoft.info/) to set up
 Add Descartes as a dependency of the `pitest` task
 
 ```
-pitest 'eu.stamp-project:descartes:1.3.2'
+pitest 'eu.stamp-project:descartes:1.3.3'
 ```
 
 then specify `descartes` in the `mutationEngine` option inside the plugin configuration.
@@ -640,7 +640,7 @@ An example of the final configuration could be:
 ```
 plugins {
     id 'java'
-    id 'info.solidsoft.pitest' version '1.5.1'
+    id 'info.solidsoft.pitest' version '1.15.0'
 }
 
 // Other configurations
@@ -652,12 +652,12 @@ repositories {
 
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.13.1'
-    pitest 'eu.stamp-project:descartes:1.3.2'
+    pitest 'eu.stamp-project:descartes:1.3.3'
 }
 
 pitest {
   mutationEngine = "descartes"
-  pitestVersion = "1.7.0"
+  pitestVersion = "1.20.2"
 }
 ```
 The `pitestVersion` property has to be specified to avoid version issues with the default version shipped with the Gradle plugin.
