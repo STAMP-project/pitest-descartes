@@ -1,0 +1,259 @@
+
+<html lang="en">
+
+<head>
+  <title>org.apache.commons.cli.Option</title>
+  <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <header>
+    <a href="index.html">[Back to Index]</a>
+    <h1>org.apache.commons.cli.Option</h1>
+    <p><span>1 issue(s)</span></p>
+  </header>
+  <section id="class-report">
+    <ul id="method-list">
+      <li>
+        <details class="method-report">
+          <summary open><span class="method-classification partially-tested">partially-tested</span><h2 class="method-header"><code>hasValueSeparator()</code></h2></summary>
+          <div class="report-item">
+            <p class="method-summary">
+                This method is <strong class="method-classification partially-tested">partially-tested</strong>.
+                    It is exercised by the test suite, some body transformations are not
+                    detected by the test suite while others are detected.
+            </p>
+          </div>
+          <div class="report-item">
+            <h3>Transformations</h3>
+                <p>No test case failed when the entire body of the method was replaced by:</p>
+                <ul>
+                  <li><code>{ return true; }</code></li>
+                </ul>
+                  <p>At least one test case failed when the entire body of the method was replaced by:</p>
+                  <ul>
+                    <li>
+                      <p><code>{ return false; }</code></p>
+                      <p>This transformation was detected by the following test case(s):</p>
+                      <ul>
+                        <li><code>org.apache.commons.cli.bug.BugCLI325Test.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugCLI325Test]/[method:testCli325()]</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+          </div>
+          <div class="report-item">
+            <h3>Tests</h3>
+            <p>The method is executed by the following tests:</p>
+            <ul class="test-list">
+                <li><code>org.apache.commons.cli.OptionTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.OptionTest]/[method:testClear()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugCLI325Test.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugCLI325Test]/[method:testCli325()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testPropertyOptionSingularValue()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testArgumentStartingWithHyphen()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testMultipleWithLong()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugCLI265Test.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugCLI265Test]/[method:testShouldParseShortOptionWithValue()]</code></li>
+                <li><code>org.apache.commons.cli.BasicParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.BasicParserTest]/[method:testPropertyOptionMultipleValues()]</code></li>
+                <li><code>org.apache.commons.cli.ValuesTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValuesTest]/[method:testShortArgsWithValue()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testShortOptionQuoteHandling()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testSingleDash()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testNegativeArgument()]</code></li>
+                <li><code>org.apache.commons.cli.ApplicationTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ApplicationTest]/[method:testNLT()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testStopAtExpectedArg()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testShortWithoutEqual()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testMultiple()]</code></li>
+                <li><code>org.apache.commons.cli.PatternOptionBuilderTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PatternOptionBuilderTest]/[method:testExistingFilePattern()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalNoValueWithOption(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#2]</code></li>
+                <li><code>org.apache.commons.cli.CommandLineTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.CommandLineTest]/[method:testGetParsedOptionValueWithOption()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testOptionalArgsOptionDotBuilder()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testOptionalArgsOptionDotBuilder()]</code></li>
+                <li><code>org.apache.commons.cli.BasicParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.BasicParserTest]/[method:testLongOptionQuoteHandling()]</code></li>
+                <li><code>org.apache.commons.cli.ValuesTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValuesTest]/[method:testMultipleArgValues()]</code></li>
+                <li><code>org.apache.commons.cli.BasicParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.BasicParserTest]/[method:testPropertyOptionFlags()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testLongOptionWithEqualsQuoteHandling()]</code></li>
+                <li><code>org.apache.commons.cli.ValuesTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValuesTest]/[method:testCharSeparator()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalArgValuesWithOption(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.ValuesTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValuesTest]/[method:testExtraArgs()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testShortWithEqual()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testStopBursting2()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testLongOptionQuoteHandling()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugCLI71Test.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugCLI71Test]/[method:testMistakenArgument()]</code></li>
+                <li><code>org.apache.commons.cli.BasicParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.BasicParserTest]/[method:testArgumentStartingWithHyphen()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testPropertyOptionFlags()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalNoValueWithOption(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugsTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugsTest]/[method:test11680()]</code></li>
+                <li><code>org.apache.commons.cli.BasicParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.BasicParserTest]/[method:testPropertyOverrideValues()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testShortOptionalArgNoValueWithOption(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testPropertiesOption2()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testUnlimitedArgs()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testLongWithEqualDoubleDash()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testOptionAndRequiredOption()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testMultipleWithLong()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testStopAtExpectedArg()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testPropertyOverrideValues()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testNegativeArgument()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugsTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugsTest]/[method:test15648()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalNArgValues(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testBursting()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[method:testShortWithArgWithOption()]</code></li>
+                <li><code>org.apache.commons.cli.ValuesTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValuesTest]/[method:testComplexValues()]</code></li>
+                <li><code>org.apache.commons.cli.BasicParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.BasicParserTest]/[method:testStopAtExpectedArg()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testMultiple()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testUnlimitedArgs()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testArgumentStartingWithHyphen()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testSimpleLong()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugCLI148Test.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugCLI148Test]/[method:testWorkaround1()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testSimpleLong()]</code></li>
+                <li><code>org.apache.commons.cli.ValuesTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValuesTest]/[method:testShortArgs()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalNArgValues(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#2]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testShortOptionalArgNoValueWithOption(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#2]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testPropertiesOption2()]</code></li>
+                <li><code>org.apache.commons.cli.BasicParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.BasicParserTest]/[method:testUnlimitedArgs()]</code></li>
+                <li><code>org.apache.commons.cli.BasicParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.BasicParserTest]/[method:testMultiple()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testSingleDash()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testShortOptionalArgValues(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testLongOptionWithEqualsQuoteHandling()]</code></li>
+                <li><code>org.apache.commons.cli.CommandLineTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.CommandLineTest]/[method:testGetOptionPropertiesWithOption()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugCLI71Test.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugCLI71Test]/[method:testBasic()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testWithRequiredOption()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[method:testLongWithArgWithOption()]</code></li>
+                <li><code>org.apache.commons.cli.DisablePartialMatchingTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DisablePartialMatchingTest]/[method:testDisablePartialMatching()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testStopBursting2()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testShortOptionQuoteHandlingWithStrip()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testShortWithEqual()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testNegativeArgument()]</code></li>
+                <li><code>org.apache.commons.cli.PatternOptionBuilderTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PatternOptionBuilderTest]/[method:testObjectPattern()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[method:testShortWithArg()]</code></li>
+                <li><code>org.apache.commons.cli.BasicParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.BasicParserTest]/[method:testSimpleLong()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugCLI312Test.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugCLI312Test]/[method:testPropertyStyleOption_withGetOptionProperties()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testLongOptionWithEqualsQuoteHandlingWithoutStrip()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugCLI148Test.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugCLI148Test]/[method:testWorkaround2()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testLongWithEqualSingleDash()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugsTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugsTest]/[method:test11456()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testPropertyOverrideValues()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugsTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugsTest]/[method:test31148()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testWithRequiredOption()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalArgValues(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testWithRequiredOption()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testPropertiesOption1()]</code></li>
+                <li><code>org.apache.commons.cli.BasicParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.BasicParserTest]/[method:testShortOptionQuoteHandling()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testPropertyOptionSingularValue()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugsTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugsTest]/[method:test15046()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testPropertiesOption1()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[method:testLongNoArg()]</code></li>
+                <li><code>org.apache.commons.cli.CommandLineTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.CommandLineTest]/[method:testGetParsedOptionValueWithChar()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testShortOptionalArgValues(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#2]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testPropertyOptionFlags()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testOptionalArgsOptionBuilder()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testOptionalArgsOptionBuilder()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testLongWithEqualDoubleDash()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testOptionAndRequiredOption()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalArgValues(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#2]</code></li>
+                <li><code>org.apache.commons.cli.BasicParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.BasicParserTest]/[method:testMultipleWithLong()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testLongWithoutEqualSingleDash()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testPropertyOptionMultipleValues()]</code></li>
+                <li><code>org.apache.commons.cli.PatternOptionBuilderTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PatternOptionBuilderTest]/[method:testURLPattern()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testPropertyOptionMultipleValues()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testLongOptionWithEqualsQuoteHandlingWithStrip()]</code></li>
+                <li><code>org.apache.commons.cli.ArgumentIsOptionTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ArgumentIsOptionTest]/[method:testOptionWithArgument()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testOptionalArgsOptionBuilder()]</code></li>
+                <li><code>org.apache.commons.cli.CommandLineTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.CommandLineTest]/[method:testNullOption()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testShortOptionalArgNoValue(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#2]</code></li>
+                <li><code>org.apache.commons.cli.PatternOptionBuilderTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PatternOptionBuilderTest]/[method:testSimplePattern()]</code></li>
+                <li><code>org.apache.commons.cli.BasicParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.BasicParserTest]/[method:testOptionalArgsOptionDotBuilder()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testShortOptionalArgValue(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testPropertiesOption2()]</code></li>
+                <li><code>org.apache.commons.cli.BasicParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.BasicParserTest]/[method:testWithRequiredOption()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testShortOptionConcatenatedQuoteHandling()]</code></li>
+                <li><code>org.apache.commons.cli.ApplicationTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ApplicationTest]/[method:testLs()]</code></li>
+                <li><code>org.apache.commons.cli.PatternOptionBuilderTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PatternOptionBuilderTest]/[method:testNumberPattern()]</code></li>
+                <li><code>org.apache.commons.cli.OptionTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.OptionTest]/[method:testClone()]</code></li>
+                <li><code>org.apache.commons.cli.CommandLineTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.CommandLineTest]/[method:testGetParsedOptionValue()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testShortOptionalArgValue(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#2]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testArgumentStartingWithHyphen()]</code></li>
+                <li><code>org.apache.commons.cli.ApplicationTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ApplicationTest]/[method:testAnt()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalArgValueWithOption(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#2]</code></li>
+                <li><code>org.apache.commons.cli.PatternOptionBuilderTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PatternOptionBuilderTest]/[method:testClassPattern()]</code></li>
+                <li><code>org.apache.commons.cli.ArgumentIsOptionTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ArgumentIsOptionTest]/[method:testOptionAndOptionWithArgument()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalNArgValuesWithOption(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testLongOptionQuoteHandlingWithStrip()]</code></li>
+                <li><code>org.apache.commons.cli.ApplicationTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ApplicationTest]/[method:testGroovy()]</code></li>
+                <li><code>org.apache.commons.cli.OptionTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.OptionTest]/[method:testGetValue()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testShortOptionQuoteHandlingWithoutStrip()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testShortOptionalNArgValues(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#2]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testShortWithoutEqual()]</code></li>
+                <li><code>org.apache.commons.cli.ValuesTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValuesTest]/[method:testTwoArgValues()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testShortOptionalArgValuesWithOption(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.DisablePartialMatchingTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DisablePartialMatchingTest]/[method:testRegularPartialMatching()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalArgValueWithOption(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testShortOptionConcatenatedQuoteHandling()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalNoValue(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#2]</code></li>
+                <li><code>org.apache.commons.cli.BasicParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.BasicParserTest]/[method:testOptionAndRequiredOption()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugCLI312Test.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugCLI312Test]/[method:testPropertyStyleOption_withGetOptions()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testShortOptionalArgNoValue(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testAmbiguousLongWithoutEqualSingleDash2()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testShortOptionalNArgValues(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testShortOptionalArgValuesWithOption(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#2]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testPropertyOptionMultipleValues()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testSimpleShort()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testNegativeOption()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testMultipleWithLong()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testLongOptionQuoteHandling()]</code></li>
+                <li><code>org.apache.commons.cli.BasicParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.BasicParserTest]/[method:testPropertyOptionSingularValue()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalNoValue(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testUnambiguousPartialLongOption3()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[method:testShortNoArg()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugsTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugsTest]/[method:test11458()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testShortOptionConcatenatedQuoteHandling()]</code></li>
+                <li><code>org.apache.commons.cli.CommandLineTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.CommandLineTest]/[method:testGetOptionProperties()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testOptionalArgsOptionDotBuilder()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testLongOptionQuoteHandling()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testShortWithoutEqual()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[method:testShortNoArgWithOption()]</code></li>
+                <li><code>org.apache.commons.cli.BasicParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.BasicParserTest]/[method:testOptionalArgsOptionBuilder()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testSimpleLong()]</code></li>
+                <li><code>org.apache.commons.cli.PatternOptionBuilderTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PatternOptionBuilderTest]/[method:testExistingFilePatternFileNotExist()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testShortOptionQuoteHandling()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[method:testShortOptionalNArgValuesSeparated()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testPropertyOptionSingularValue()]</code></li>
+                <li><code>org.apache.commons.cli.BasicParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.BasicParserTest]/[method:testSimpleShort()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testPropertyOptionFlags()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugCLI71Test.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugCLI71Test]/[method:testGetsDefaultIfOptional()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testUnlimitedArgs()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalNArgValuesWithOption(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#2]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugCLI13Test.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugCLI13Test]/[method:testCLI13()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalArgValue(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#2]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testUnambiguousPartialLongOption3()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testPropertiesOption1()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testShortOptionalArgValueWithOption(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#2]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testLongWithEqualSingleDash()]</code></li>
+                <li><code>org.apache.commons.cli.BasicParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.BasicParserTest]/[method:testNegativeArgument()]</code></li>
+                <li><code>org.apache.commons.cli.BasicParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.BasicParserTest]/[method:testSingleDash()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalArgValuesWithOption(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#2]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testUnambiguousPartialLongOption4()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testSingleDash()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalArgValue(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[method:testShortOptionalNArgValuesWithOption()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testShortOptionalArgValueWithOption(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testLongWithEqualDoubleDash()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testLongOptionQuoteHandlingWithoutStrip()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testOptionAndRequiredOption()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testAmbiguousLongWithoutEqualSingleDash()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testStopAtExpectedArg()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testSimpleShort()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testShortOptionQuoteHandling()]</code></li>
+                <li><code>org.apache.commons.cli.CommandLineTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.CommandLineTest]/[method:testGetParsedOptionValueUsingDefault()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[method:testLongNoArgWithOption()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testMultiple()]</code></li>
+                <li><code>org.apache.commons.cli.PosixParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.PosixParserTest]/[method:testBursting()]</code></li>
+                <li><code>org.apache.commons.cli.GnuParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.GnuParserTest]/[method:testLongOptionWithEqualsQuoteHandling()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testPropertyOverrideValues()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testSimpleShort()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[method:testLongWithArg()]</code></li>
+            </ul>
+          </div>
+        </details>
+      </li>
+    </ul>
+  </section>
+</body>
+
+</html>

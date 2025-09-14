@@ -1,0 +1,102 @@
+
+<html lang="en">
+
+<head>
+  <title>org.apache.commons.cli.DefaultParser</title>
+  <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <header>
+    <a href="index.html">[Back to Index]</a>
+    <h1>org.apache.commons.cli.DefaultParser</h1>
+    <p><span>1 issue(s)</span></p>
+  </header>
+  <section id="class-report">
+    <ul id="method-list">
+      <li>
+        <details class="method-report">
+          <summary open><span class="method-classification partially-tested">partially-tested</span><h2 class="method-header"><code>isLongOption(java.lang.String)</code></h2></summary>
+          <div class="report-item">
+            <p class="method-summary">
+                This method is <strong class="method-classification partially-tested">partially-tested</strong>.
+                    It is exercised by the test suite, some body transformations are not
+                    detected by the test suite while others are detected.
+            </p>
+          </div>
+          <div class="report-item">
+            <h3>Transformations</h3>
+                <p>No test case failed when the entire body of the method was replaced by:</p>
+                <ul>
+                  <li><code>{ return false; }</code></li>
+                </ul>
+                  <p>At least one test case failed when the entire body of the method was replaced by:</p>
+                  <ul>
+                    <li>
+                      <p><code>{ return true; }</code></p>
+                      <p>This transformation was detected by the following test case(s):</p>
+                      <ul>
+                        <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testShortOptionQuoteHandlingWithoutStrip()]</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+          </div>
+          <div class="report-item">
+            <h3>Tests</h3>
+            <p>The method is executed by the following tests:</p>
+            <ul class="test-list">
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testNegativeOption()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testMultipleWithLong()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugCLI325Test.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugCLI325Test]/[method:testCli325()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testUnlimitedArgs()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugCLI265Test.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugCLI265Test]/[method:testShouldParseShortOptionWithValue()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testShortOptionalArgValues(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalNArgValuesWithOption(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testLongOptionQuoteHandlingWithStrip()]</code></li>
+                <li><code>org.apache.commons.cli.CommandLineTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.CommandLineTest]/[method:testNullOption()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testSingleDash()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testStopAtExpectedArg()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testShortOptionalArgValue(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalArgValue(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testMultiple()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testShortOptionalArgValueWithOption(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalNArgValues(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testShortOptionQuoteHandlingWithoutStrip()]</code></li>
+                <li><code>org.apache.commons.cli.CommandLineTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.CommandLineTest]/[method:testGetParsedOptionValueWithOption()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalArgValues(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testOptionalArgsOptionDotBuilder()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testLongOptionQuoteHandling()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testShortOptionalArgValuesWithOption(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testShortOptionQuoteHandlingWithStrip()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testLongOptionQuoteHandlingWithoutStrip()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testOptionAndRequiredOption()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalArgValueWithOption(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testArgumentStartingWithHyphen()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testSimpleLong()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testWithRequiredOption()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testAmbiguousLongWithoutEqualSingleDash()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugCLI265Test.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugCLI265Test]/[method:testShouldParseConcatenatedShortOptions()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testPropertiesOption1()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testShortOptionQuoteHandling()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugCLI265Test.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugCLI265Test]/[method:testShouldParseShortOptionWithoutValue()]</code></li>
+                <li><code>org.apache.commons.cli.CommandLineTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.CommandLineTest]/[method:testGetParsedOptionValueUsingDefault()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testNegativeArgument()]</code></li>
+                <li><code>org.apache.commons.cli.CommandLineTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.CommandLineTest]/[method:testGetParsedOptionValueWithChar()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugCLI312Test.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugCLI312Test]/[method:testPropertyStyleOption_withGetOptions()]</code></li>
+                <li><code>org.apache.commons.cli.CommandLineTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.CommandLineTest]/[method:testGetParsedOptionValue()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugCLI312Test.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugCLI312Test]/[method:testNoOptionValues()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testLongOptionalArgValuesWithOption(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testOptionalArgsOptionBuilder()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testPropertyOverrideValues()]</code></li>
+                <li><code>org.apache.commons.cli.DefaultParserTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.DefaultParserTest]/[method:testSimpleShort()]</code></li>
+                <li><code>org.apache.commons.cli.bug.BugCLI312Test.[engine:junit-jupiter]/[class:org.apache.commons.cli.bug.BugCLI312Test]/[method:testPropertyStyleOption_withGetOptionProperties()]</code></li>
+                <li><code>org.apache.commons.cli.ValueTest.[engine:junit-jupiter]/[class:org.apache.commons.cli.ValueTest]/[test-template:testShortOptionalNArgValues(org.apache.commons.cli.CommandLineParser)]/[test-template-invocation:#1]</code></li>
+            </ul>
+          </div>
+        </details>
+      </li>
+    </ul>
+  </section>
+</body>
+
+</html>
