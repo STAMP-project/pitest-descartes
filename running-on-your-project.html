@@ -31,7 +31,7 @@
           <ul class="breadcrumb">
         <li id="publishDate">Last Published: 2025-09-19<span class="divider">|</span>
 </li>
-          <li id="projectVersion">Version: 1.3.4-SNAPSHOT</li>
+          <li id="projectVersion">Version: 1.3.4</li>
           </ul>
         </div>
       </header>
@@ -83,7 +83,7 @@ PIT integrates with majors test and build tools such as <a href="https://maven.a
     &lt;dependency&gt;
       &lt;groupId&gt;eu.stamp-project&lt;/groupId&gt;
       &lt;artifactId&gt;descartes&lt;/artifactId&gt;
-      &lt;version&gt;1.3.4-SNAPSHOT&lt;/version&gt;
+      &lt;version&gt;1.3.4&lt;/version&gt;
     &lt;/dependency&gt;
   &lt;/dependencies&gt;
 &lt;/plugin&gt;
@@ -257,7 +257,7 @@ This feature is enabled by default. The parameter <code>exclude</code> can be us
     &lt;dependency&gt;
       &lt;groupId&gt;eu.stamp-project&lt;/groupId&gt;
       &lt;artifactId&gt;descartes&lt;/artifactId&gt;
-      &lt;version&gt;1.3.4-SNAPSHOT&lt;/version&gt;
+      &lt;version&gt;1.3.4&lt;/version&gt;
     &lt;/dependency&gt;
   &lt;/dependencies&gt;
 &lt;/plugin&gt;
@@ -301,7 +301,7 @@ The feature is not active by default. To activate add the following configuratio
 <p>Follow the <a href="http://gradle-pitest-plugin.solidsoft.info/" class="externalLink">instructions</a> to set up PIT for a project that uses <a href="https://gradle.org/" class="externalLink">Gradle</a>.
 Add Descartes as a dependency of the <code>pitest</code> task</p>
 
-<pre class="prettyprint"><code class="nohighlight nocode">pitest 'eu.stamp-project:descartes:1.3.4-SNAPSHOT'
+<pre class="prettyprint"><code class="nohighlight nocode">pitest 'eu.stamp-project:descartes:1.3.4'
 </code></pre>
 <p>then specify <code>descartes</code> in the <code>mutationEngine</code> option inside the plugin configuration.</p>
 <p>An example of the final configuration could be:</p>
@@ -320,7 +320,7 @@ repositories {
 
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.13.1'
-    pitest 'eu.stamp-project:descartes:1.3.4-SNAPSHOT'
+    pitest 'eu.stamp-project:descartes:1.3.4'
 }
 
 pitest {
